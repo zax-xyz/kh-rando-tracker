@@ -5,7 +5,7 @@
 body {
   margin: 0;
   background-image: url("Background.jpg");
-  background-color: #cccccc;
+  background-color: #cccccc;  /* fallbak */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,6 +27,7 @@ body {
 }
 
 table {
+  /* To prevent the table from shrinking on smaller widths */
   width: max-content;
   padding: 10px;
   background-color: white;
@@ -35,9 +36,11 @@ table {
 }
 
 td {
+  /* So the number images can use absolute positioning */
   position: relative;
   width: 115px;
   height: 115px;
+  /* Center the image within the cell */
   display: inline-flex;
   align-items: center;
   justify-content: center;
