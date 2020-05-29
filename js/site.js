@@ -32,17 +32,17 @@ var tranquilCounter = 0;
 
 function displayRox() {
   if (roxCounter % 2 == 0) {
-    $("#Roxas").removeClass("opaque");
+    $("#Roxas").addClass("opaque");
   }
   else if (roxCounter % 2 == 1) {
-    $("#Roxas").addClass("opaque");
+    $("#Roxas").removeClass("opaque");
   }
   roxCounter++;
 }
 
 function displayTwilight() {
   if (twilightCounter % 4 == 0) {
-    $("#twilight").removeClass("opaque");
+    $("#twilight").addClass("opaque");
   }
   else if (twilightCounter % 4 == 1) {
     $("#twilight2").removeClass("hidden");
@@ -53,14 +53,14 @@ function displayTwilight() {
   }
   else if (twilightCounter % 4 == 3) {
     $("#twilight3").addClass("hidden");
-    $("#twilight").addClass("opaque");
+    $("#twilight").removeClass("opaque");
   }
   twilightCounter++;
 }
 
 function displayHollow() {
   if (hollowCounter % 4 == 0) {
-    $("#hollow").removeClass("opaque");
+    $("#hollow").addClass("opaque");
   }
   else if (hollowCounter % 4 == 1) {
     $("#hollow2").removeClass("hidden");
@@ -71,146 +71,146 @@ function displayHollow() {
   }
   else if (hollowCounter % 4 == 3) {
     $("#hollow3").addClass("hidden");
-    $("#hollow").addClass("opaque");
+    $("#hollow").removeClass("opaque");
   }
   hollowCounter++;
 }
 
 function displayLod() {
   if (lodCounter % 3 == 0) {
-    $("#lod").removeClass("opaque");
+    $("#lod").addClass("opaque");
   }
   else if (lodCounter % 3 == 1) {
     $("#lod2").removeClass("hidden");
   }
   else if (lodCounter % 3 == 2) {
     $("#lod2").addClass("hidden");
-    $("#lod").addClass("opaque");
+    $("#lod").removeClass("opaque");
   }
   lodCounter++;
 }
 
 function displayOlympus() {
   if (olympusCounter % 3 == 0) {
-    $("#olympus").removeClass("opaque");
+    $("#olympus").addClass("opaque");
   }
   else if (olympusCounter % 3 == 1) {
     $("#olympus2").removeClass("hidden");
   }
   else if (olympusCounter % 3 == 2) {
     $("#olympus2").addClass("hidden");
-    $("#olympus").addClass("opaque");
+    $("#olympus").removeClass("opaque");
   }
   olympusCounter++;
 }
 
 function displayCastle() {
   if (beastCounter % 3 == 0) {
-    $("#beastCastle").removeClass("opaque");
+    $("#beastCastle").addClass("opaque");
   }
   else if (beastCounter % 3 == 1) {
     $("#beastCastle2").removeClass("hidden");
   }
   else if (beastCounter % 3 == 2) {
     $("#beastCastle2").addClass("hidden");
-    $("#beastCastle").addClass("opaque");
+    $("#beastCastle").removeClass("opaque");
   }
   beastCounter++;
 }
 
 function displayPort() {
   if (portCounter % 3 == 0) {
-    $("#portRoyale").removeClass("opaque");
+    $("#portRoyale").addClass("opaque");
   }
   else if (portCounter % 3 == 1) {
     $("#portRoyale2").removeClass("hidden");
   }
   else if (portCounter % 3 == 2) {
     $("#portRoyale2").addClass("hidden");
-    $("#portRoyale").addClass("opaque");
+    $("#portRoyale").removeClass("opaque");
   }
   portCounter++;
 }
 
 function displayAgrabah() {
   if (agrabahCounter % 3 == 0) {
-    $("#agrabah").removeClass("opaque");
+    $("#agrabah").addClass("opaque");
   }
   else if (agrabahCounter % 3 == 1) {
     $("#agrabah2").removeClass("hidden");
   }
   else if (agrabahCounter % 3 == 2) {
     $("#agrabah2").addClass("hidden");
-    $("#agrabah").addClass("opaque");
+    $("#agrabah").removeClass("opaque");
   }
   agrabahCounter++;
 }
 
 function displayHalloween() {
   if (halloweenCounter % 3 == 0) {
-    $("#halloweenTown").removeClass("opaque");
+    $("#halloweenTown").addClass("opaque");
   }
   else if (halloweenCounter % 3 == 1) {
     $("#halloweenTown2").removeClass("hidden");
   }
   else if (halloweenCounter % 3 == 2) {
     $("#halloweenTown2").addClass("hidden");
-    $("#halloweenTown").addClass("opaque");
+    $("#halloweenTown").removeClass("opaque");
   }
   halloweenCounter++;
 }
 
 function displayPride() {
   if (prideCounter % 3 == 0) {
-    $("#prideLands").removeClass("opaque");
+    $("#prideLands").addClass("opaque");
   }
   else if (prideCounter % 3 == 1) {
     $("#prideLands2").removeClass("hidden");
   }
   else if (prideCounter % 3 == 2) {
     $("#prideLands2").addClass("hidden");
-    $("#prideLands").addClass("opaque");
+    $("#prideLands").removeClass("opaque");
   }
   prideCounter++;
 }
 
 function displayDisney() {
   if (disneyCounter % 2 == 0) {
-    $("#disneyCastle").removeClass("opaque");
+    $("#disneyCastle").addClass("opaque");
   }
   else if (disneyCounter % 2 == 1) {
-    $("#disneyCastle").addClass("opaque");
+    $("#disneyCastle").removeClass("opaque");
   }
   disneyCounter++;
 }
 
 function displaySpace() {
   if (spaceCounter % 3 == 0) {
-    $("#spaceParanoids").removeClass("opaque");
+    $("#spaceParanoids").addClass("opaque");
   }
   else if (spaceCounter % 3 == 1) {
     $("#spaceParanoids2").removeClass("hidden");
   }
   else if (spaceCounter % 3 == 2) {
     $("#spaceParanoids2").addClass("hidden");
-    $("#spaceParanoids").addClass("opaque");
+    $("#spaceParanoids").removeClass("opaque");
   }
   spaceCounter++;
 }
 
 function displayTwtnw() {
   if (twtnwCounter % 2 == 0) {
-    $("#twtnw").removeClass("opaque");
+    $("#twtnw").addClass("opaque");
   }
   else if (twtnwCounter % 2 == 1) {
-    $("#twtnw").addClass("opaque");
+    $("#twtnw").removeClass("opaque");
   }
   twtnwCounter++;
 }
 
 function displayAtlantica() {
   if (atlanticaCounter % 6 == 0) {
-    $("#atlantica").removeClass("opaque");
+    $("#atlantica").addClass("opaque");
   }
   else if (atlanticaCounter % 6 == 1) {
     $("#atlantica2").removeClass("hidden");
@@ -229,14 +229,14 @@ function displayAtlantica() {
   }
   else if (atlanticaCounter % 6 == 5) {
     $("#atlantica5").addClass("hidden");
-    $("#atlantica").addClass("opaque");
+    $("#atlantica").removeClass("opaque");
   }
   atlanticaCounter++;
 }
 
 function displayHundred() {
   if (hundredCounter % 7 == 0) {
-    $("#hundredAcres").removeClass("opaque");
+    $("#hundredAcres").addClass("opaque");
   }
   else if (hundredCounter % 7 == 1) {
     $("#hundredAcres2").removeClass("hidden");
@@ -259,64 +259,64 @@ function displayHundred() {
   }
   else if (hundredCounter % 7 == 6) {
     $("#hundredAcres6").addClass("hidden");
-    $("#hundredAcres").addClass("opaque");
+    $("#hundredAcres").removeClass("opaque");
   }
   hundredCounter++;
 }
 
 function displayValor() {
   if (valorCounter % 2 == 0) {
-    $("#valorForm").removeClass("opaque");
+    $("#valorForm").addClass("opaque");
   }
   else if (valorCounter % 2 == 1) {
-    $("#valorForm").addClass("opaque");
+    $("#valorForm").removeClass("opaque");
   }
   valorCounter++;
 }
 
 function displayWisdom() {
   if (wisdomCounter % 2 == 0) {
-    $("#wisdomForm").removeClass("opaque");
+    $("#wisdomForm").addClass("opaque");
   }
   else if (wisdomCounter % 2 == 1) {
-    $("#wisdomForm").addClass("opaque");
+    $("#wisdomForm").removeClass("opaque");
   }
   wisdomCounter++;
 }
 
 function displayLimit() {
   if (limitCounter % 2 == 0) {
-    $("#limitForm").removeClass("opaque");
+    $("#limitForm").addClass("opaque");
   }
   else if (limitCounter % 2 == 1) {
-    $("#limitForm").addClass("opaque");
+    $("#limitForm").removeClass("opaque");
   }
   limitCounter++;
 }
 
 function displayMaster() {
   if (masterCounter % 2 == 0) {
-    $("#masterForm").removeClass("opaque");
+    $("#masterForm").addClass("opaque");
   }
   else if (masterCounter % 2 == 1) {
-    $("#masterForm").addClass("opaque");
+    $("#masterForm").removeClass("opaque");
   }
   masterCounter++;
 }
 
 function displayFinal() {
   if (finalCounter % 2 == 0) {
-    $("#finalForm").removeClass("opaque");
+    $("#finalForm").addClass("opaque");
   }
   else if (finalCounter % 2 == 1) {
-    $("#finalForm").addClass("opaque");
+    $("#finalForm").removeClass("opaque");
   }
   finalCounter++;
 }
 
 function displayFire() {
   if (fireCounter % 4 == 0) {
-    $("#fire").removeClass("opaque");
+    $("#fire").addClass("opaque");
   }
   else if (fireCounter % 4 == 1) {
     $("#fire2").removeClass("hidden");
@@ -327,14 +327,14 @@ function displayFire() {
   }
   else if (fireCounter % 4 == 3) {
     $("#fire3").addClass("hidden");
-    $("#fire").addClass("opaque");
+    $("#fire").removeClass("opaque");
   }
   fireCounter++;
 }
 
 function displayBlizzard() {
   if (blizzardCounter % 4 == 0) {
-    $("#blizzard").removeClass("opaque");
+    $("#blizzard").addClass("opaque");
   }
   else if (blizzardCounter % 4 == 1) {
     $("#blizzard2").removeClass("hidden");
@@ -345,14 +345,14 @@ function displayBlizzard() {
   }
   else if (blizzardCounter % 4 == 3) {
     $("#blizzard3").addClass("hidden");
-    $("#blizzard").addClass("opaque");
+    $("#blizzard").removeClass("opaque");
   }
   blizzardCounter++;
 }
 
 function displayThunder() {
   if (thunderCounter % 4 == 0) {
-    $("#thunder").removeClass("opaque");
+    $("#thunder").addClass("opaque");
   }
   else if (thunderCounter % 4 == 1) {
     $("#thunder2").removeClass("hidden");
@@ -363,14 +363,14 @@ function displayThunder() {
   }
   else if (thunderCounter % 4 == 3) {
     $("#thunder3").addClass("hidden");
-    $("#thunder").addClass("opaque");
+    $("#thunder").removeClass("opaque");
   }
   thunderCounter++;
 }
 
 function displayCure() {
   if (cureCounter % 4 == 0) {
-    $("#cure").removeClass("opaque");
+    $("#cure").addClass("opaque");
   }
   else if (cureCounter % 4 == 1) {
     $("#cure2").removeClass("hidden");
@@ -381,14 +381,14 @@ function displayCure() {
   }
   else if (cureCounter % 4 == 3) {
     $("#cure3").addClass("hidden");
-    $("#cure").addClass("opaque");
+    $("#cure").removeClass("opaque");
   }
   cureCounter++;
 }
 
 function displayReflect() {
   if (reflectCounter % 4 == 0) {
-    $("#reflect").removeClass("opaque");
+    $("#reflect").addClass("opaque");
   }
   else if (reflectCounter % 4 == 1) {
     $("#reflect2").removeClass("hidden");
@@ -399,14 +399,14 @@ function displayReflect() {
   }
   else if (reflectCounter % 4 == 3) {
     $("#reflect3").addClass("hidden");
-    $("#reflect").addClass("opaque");
+    $("#reflect").removeClass("opaque");
   }
   reflectCounter++;
 }
 
 function displayMagnet() {
   if (magnetCounter % 4 == 0) {
-    $("#magnet").removeClass("opaque");
+    $("#magnet").addClass("opaque");
   }
   else if (magnetCounter % 4 == 1) {
     $("#magnet2").removeClass("hidden");
@@ -417,47 +417,47 @@ function displayMagnet() {
   }
   else if (magnetCounter % 4 == 3) {
     $("#magnet3").addClass("hidden");
-    $("#magnet").addClass("opaque");
+    $("#magnet").removeClass("opaque");
   }
   magnetCounter++;
 }
 
 function displayNonExistent() {
   if (nonExistingCounter % 2 == 0) {
-    $("#nonExistent").removeClass("opaque");
+    $("#nonExistent").addClass("opaque");
   }
   else if (nonExistingCounter % 2 == 1) {
-    $("#nonExistent").addClass("opaque");
+    $("#nonExistent").removeClass("opaque");
   }
   nonExistingCounter++;
 }
 
 function displayPromise() {
   if (promiseCounter % 2 == 0) {
-    $("#promise").removeClass("opaque");
+    $("#promise").addClass("opaque");
   }
   else if (promiseCounter % 2 == 1) {
-    $("#promise").addClass("opaque");
+    $("#promise").removeClass("opaque");
   }
   promiseCounter++;
 }
 
 function displayConnections() {
   if (connectionsCounter % 2 == 0) {
-    $("#connections").removeClass("opaque");
+    $("#connections").addClass("opaque");
   }
   else if (connectionsCounter % 2 == 1) {
-    $("#connections").addClass("opaque");
+    $("#connections").removeClass("opaque");
   }
   connectionsCounter++;
 }
 
 function displayTranquil() {
   if (tranquilCounter % 2 == 0) {
-    $("#tranquil").removeClass("opaque");
+    $("#tranquil").addClass("opaque");
   }
   else if (tranquilCounter % 2 == 1) {
-    $("#tranquil").addClass("opaque");
+    $("#tranquil").removeClass("opaque");
   }
   tranquilCounter++;
 }
