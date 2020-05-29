@@ -1,9 +1,9 @@
 ﻿document.querySelectorAll(".toggle").forEach(element => {
   element.onclick = (event) => {
-    let elem = event.target.parentElement;
+    const elem = event.target.parentElement;
 
-    let total = elem.dataset.total;
-    let icon = elem.querySelector(".icon");
+    const total = elem.dataset.total;
+    const icon = elem.querySelector(".icon");
 
     if (total === undefined) {
       // If there is no "total" data attribute, then it is a simple toggle
@@ -23,7 +23,7 @@
     elem.dataset.level = level;
 
     // Set the number element source to the corresponding image
-    let number = elem.querySelector(".number");
+    const number = elem.querySelector(".number");
     if (level !== 0) {
       number.setAttribute("src", `img/${level}.png`);
     }
