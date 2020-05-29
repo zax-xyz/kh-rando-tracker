@@ -58,92 +58,68 @@ html {
 }
 
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    background-image: url("Background.jpg");
-    background-color: #cccccc;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* Margin bottom by footer height */
+  margin: 0;
+  background-image: url("Background.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
+  padding: 15px 25px;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
   background-color: white;
 }
 
 img.pic {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
 }
 
 table {
-    margin-top: 12%;
-    margin-left: 25%;
-    background-color: white;
+  background-color: white;
 }
 tr {
-    /*border: 1px solid black;*/
+  /*border: 1px solid black;*/
 }
 td {
-    /*border: 1px solid black;*/
-    width: 115px;
-    height: 115px;
+  /*border: 1px solid black;*/
+  width: 115px;
+  height: 115px;
 }
 img {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
+  transition: opacity 150ms;
 }
 .images {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    max-width: 100px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  max-width: 100px;
 }
-.two {
-    width: 50px;
-    height: 50px;
-    margin-top: -75px;
-    margin-left: 40px;
-    z-index: 1;
-}
-.three {
-    width: 50px;
-    height: 50px;
-    margin-top: -75px;
-    margin-left: 40px;
-    z-index: 1;
-}
-.four {
-    width: 50px;
-    height: 50px;
-    margin-top: -75px;
-    margin-left: 40px;
-    z-index: 1;
-}
-.five {
-    width: 50px;
-    height: 50px;
-    margin-top: -75px;
-    margin-left: 40px;
-    z-index: 1;
-}
-.six {
-    width: 50px;
-    height: 50px;
-    margin-top: -75px;
-    margin-left: 40px;
-    z-index: 1;
+.number {
+  width: 50px;
+  height: 50px;
+  margin-top: -75px;
+  margin-left: 40px;
+  z-index: 1;
 }
 .hidden {
-    display: none;
+  display: none;
 }
 .opaque {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 h1 {
-    text-align: left;
+  text-align: left;
 }
