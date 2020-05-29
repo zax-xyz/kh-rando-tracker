@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kingdom Hearts Item Tracker</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    
+    <div class="container">
+        <div id="Worlds">
+            <table>
+                <tr>
+                    <!--Contains Roxas World-->
+                    <td>
+                        <div class="images" onclick="displayRox()">
+                            <img class="opaque" id="Roxas" src="Images/Worlds/Roxas World (1).png" />
+                        </div>
+                    </td>
+
+                    <!--Contains Twilight Town-->
+                    <td>
+                        <div class="images" onclick="displayTwilight()">
+                            <img class="opaque" id="twilight" src="Images/Worlds/Twilight Town (3).png" />
+                            <div class="hidden" id="twilight2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="twilight3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Hollow Bastion-->
+                    <td>
+                        <div class="images" onclick="displayHollow()">
+                            <img class="opaque" id="hollow" src="Images/Worlds/Hollow Bastion (3).png" />
+                            <div class="hidden" id="hollow2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="hollow3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Land of Dragons-->
+                    <td>
+                        <div class="images" onclick="displayLod()">
+                            <img class="opaque" id="lod" src="Images/Worlds/The Land of Dragons (2).png" />
+                            <div class="hidden" id="lod2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Olympus-->
+                    <td>
+                        <div class="images" onclick="displayOlympus()">
+                            <img class="opaque" id="olympus" src="Images/Worlds/Olympus Coliseum (2).png" />
+                            <div class="hidden" id="olympus2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--Contains Beasts Castle-->
+                    <td>
+                        <div class="images" onclick="displayCastle()">
+                            <img class="opaque" id="beastCastle" src="Images/Worlds/Beast_s Castle (2).png" />
+                            <div class="hidden" id="beastCastle2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Port Royale-->
+                    <td>
+                        <div class="images" onclick="displayPort()">
+                            <img class="opaque" id="portRoyale" src="Images/Worlds/Port Royal (2).png" />
+                            <div class="hidden" id="portRoyale2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Agrabah-->
+                    <td>
+                        <div class="images" onclick="displayAgrabah()">
+                            <img class="opaque" id="agrabah" src="Images/Worlds/Agrabah (2).png" />
+                            <div class="hidden" id="agrabah2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Halloween Town-->
+                    <td>
+                        <div class="images" onclick="displayHalloween()">
+                            <img class="opaque" id="halloweenTown" src="Images/Worlds/Halloween Town (2).png" />
+                            <div class="hidden" id="halloweenTown2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Pride Lands-->
+                    <td>
+                        <div class="images" onclick="displayPride()">
+                            <img class="opaque" id="prideLands" src="Images/Worlds/Pride Lands (2).png" />
+                            <div class="hidden" id="prideLands2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--Contains Disney Castle-->
+                    <td>
+                        <div class="images" onclick="displayDisney()">
+                            <img class="opaque" id="disneyCastle" src="Images/Worlds/Disney Castle (1).png" />
+                        </div>
+                    </td>
+
+                    <!--Contains Space Paranoids-->
+                    <td>
+                        <div class="images" onclick="displaySpace()">
+                            <img class="opaque" id="spaceParanoids" src="Images/Worlds/Space Paranoids (2).png" />
+                            <div class="hidden" id="spaceParanoids2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains The World That Never Was-->
+                    <td>
+                        <div class="images" onclick="displayTwtnw()">
+                            <img class="opaque" id="twtnw" src="Images/Worlds/The World That Never Was (1).png" />
+                        </div>
+                    </td>
+
+                    <!--Contains Atlantica-->
+                    <td>
+                        <div class="images" onclick="displayAtlantica()">
+                            <img class="opaque" id="atlantica" src="Images/Worlds/Atlantica (5).png" />
+                            <div class="hidden" id="atlantica2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="atlantica3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                            <div class="hidden" id="atlantica4">
+                                <img class="four" src="Images/four.png" />
+                            </div>
+                            <div class="hidden" id="atlantica5">
+                                <img class="five" src="Images/five.png" />
+                            </div>
+                        </div>
+                    </td>
+
+                    <!--Contains Hundred Acre Woods-->
+                    <td>
+                        <div class="images" onclick="displayHundred()">
+                            <img class="opaque" id="hundredAcres" src="Images/Worlds/100 Acre Wood (6).png" />
+                            <div class="hidden" id="hundredAcres2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="hundredAcres3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                            <div class="hidden" id="hundredAcres4">
+                                <img class="four" src="Images/four.png" />
+                            </div>
+                            <div class="hidden" id="hundredAcres5">
+                                <img class="five" src="Images/five.png" />
+                            </div>
+                            <div class="hidden" id="hundredAcres6">
+                                <img class="six" src="Images/six.png" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--Contains Drive Forms-->
+                    <td>
+                        <div class="images" onclick="displayValor()">
+                            <img class="opaque" id="valorForm" src="Images/Drive Forms/Valor Form.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayWisdom()">
+                            <img class="opaque" id="wisdomForm" src="Images/Drive Forms/Wisdom Form.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayLimit()">
+                            <img class="opaque" id="limitForm" src="Images/Drive Forms/Limit Form.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayMaster()">
+                            <img class="opaque" id="masterForm" src="Images/Drive Forms/Master Form.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayFinal()">
+                            <img class="opaque" id="finalForm" src="Images/Drive Forms/Final Form.png" />
+                        </div>
+                    </td>
+
+                </tr>
+                <!--Contains Magic-->
+                <tr>
+                    <!--Contains Fire-->
+                    <td>
+                        <div class="images" onclick="displayFire()">
+                            <img class="opaque" id="fire" src="Images/Magic Spells/Fire (3).png" />
+                            <div class="hidden" id="fire2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="fire3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                    <!--Contains Blizzard-->
+                    <td>
+                        <div class="images" onclick="displayBlizzard()">
+                            <img class="opaque" id="blizzard" src="Images/Magic Spells/Blizzard (3).png" />
+                            <div class="hidden" id="blizzard2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="blizzard3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                    <!--Contains Thunder-->
+                    <td>
+                        <div class="images" onclick="displayThunder()">
+                            <img class="opaque" id="thunder" src="Images/Magic Spells/Thunder (3).png" />
+                            <div class="hidden" id="thunder2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="thunder3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                    <!--Contains Cure-->
+                    <td>
+                        <div class="images" onclick="displayCure()">
+                            <img class="opaque" id="cure" src="Images/Magic Spells/Cure (3).png" />
+                            <div class="hidden" id="cure2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="cure3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                    <!--Contains Reflect-->
+                    <td>
+                        <div class="images" onclick="displayReflect()">
+                            <img class="opaque" id="reflect" src="Images/Magic Spells/Reflect (3).png" />
+                            <div class="hidden" id="reflect2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="reflect3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--Contains Magnet-->
+                    <td>
+                        <div class="images" onclick="displayMagnet()">
+                            <img class="opaque" id="magnet" src="Images/Magic Spells/Magnet (3).png" />
+                            <div class="hidden" id="magnet2">
+                                <img class="two" src="Images/two.png" />
+                            </div>
+                            <div class="hidden" id="magnet3">
+                                <img class="three" src="Images/three.png" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayNonExistent()">
+                            <img class="opaque" id="nonExistent" src="Images/Proofs and Promise Charm/Non-existent Proof.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayPromise()">
+                            <img class="opaque" id="promise" src="Images/Proofs and Promise Charm/Promise Charm.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayConnections()">
+                            <img class="opaque" id="connections" src="Images/Proofs and Promise Charm/Proof of Connections.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="images" onclick="displayTranquil()">
+                            <img class="opaque" id="tranquil" src="Images/Proofs and Promise Charm/Tranquil Proof.png" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            2020 - Kingdom Hearts Item Tracker - Version 1.0 Developed by Kokemon198
+        </div>
+    </footer>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/site.js" asp-append-version="true"></script>
+</body>
+
+<script>
+    var roxCounter = 0;
+    var twilightCounter = 0;
+    var hollowCounter = 0;
+    var lodCounter = 0;
+    var olympusCounter = 0;
+    var beastCounter = 0;
+    var portCounter = 0;
+    var agrabahCounter = 0;
+    var halloweenCounter = 0;
+    var prideCounter = 0;
+    var disneyCounter = 0;
+    var spaceCounter = 0;
+    var twtnwCounter = 0;
+    var atlanticaCounter = 0;
+    var hundredCounter = 0;
+    var valorCounter = 0;
+    var wisdomCounter = 0;
+    var limitCounter = 0;
+    var masterCounter = 0;
+    var finalCounter = 0;
+    var fireCounter = 0;
+    var blizzardCounter = 0;
+    var thunderCounter = 0;
+    var cureCounter = 0;
+    var reflectCounter = 0;
+    var magnetCounter = 0;
+    var nonExistingCounter = 0;
+    var promiseCounter = 0;
+    var connectionsCounter = 0;
+    var tranquilCounter = 0;
+
+
+    function displayRox() {
+        if (roxCounter % 2 == 0) {
+            $("#Roxas").removeClass("opaque");
+        }
+        else if (roxCounter % 2 == 1) {
+            $("#Roxas").addClass("opaque");
+        }
+        roxCounter++;
+    }
+
+    function displayTwilight() {
+        if (twilightCounter % 4 == 0) {
+            $("#twilight").removeClass("opaque");
+        }
+        else if (twilightCounter % 4 == 1) {
+            $("#twilight2").removeClass("hidden");
+        }
+        else if (twilightCounter % 4 == 2) {
+            $("#twilight2").addClass("hidden");
+            $("#twilight3").removeClass("hidden");
+        }
+        else if (twilightCounter % 4 == 3) {
+            $("#twilight3").addClass("hidden");
+            $("#twilight").addClass("opaque");
+        }
+        twilightCounter++;
+    }
+
+    function displayHollow() {
+        if (hollowCounter % 4 == 0) {
+            $("#hollow").removeClass("opaque");
+        }
+        else if (hollowCounter % 4 == 1) {
+            $("#hollow2").removeClass("hidden");
+        }
+        else if (hollowCounter % 4 == 2) {
+            $("#hollow2").addClass("hidden");
+            $("#hollow3").removeClass("hidden");
+        }
+        else if (hollowCounter % 4 == 3) {
+            $("#hollow3").addClass("hidden");
+            $("#hollow").addClass("opaque");
+        }
+        hollowCounter++;
+    }
+
+    function displayLod() {
+        if (lodCounter % 3 == 0) {
+            $("#lod").removeClass("opaque");
+        }
+        else if (lodCounter % 3 == 1) {
+            $("#lod2").removeClass("hidden");
+        }
+        else if (lodCounter % 3 == 2) {
+            $("#lod2").addClass("hidden");
+            $("#lod").addClass("opaque");
+        }
+        lodCounter++;
+    }
+
+    function displayOlympus() {
+        if (olympusCounter % 3 == 0) {
+            $("#olympus").removeClass("opaque");
+        }
+        else if (olympusCounter % 3 == 1) {
+            $("#olympus2").removeClass("hidden");
+        }
+        else if (olympusCounter % 3 == 2) {
+            $("#olympus2").addClass("hidden");
+            $("#olympus").addClass("opaque");
+        }
+        olympusCounter++;
+    }
+
+    function displayCastle() {
+        if (beastCounter % 3 == 0) {
+            $("#beastCastle").removeClass("opaque");
+        }
+        else if (beastCounter % 3 == 1) {
+            $("#beastCastle2").removeClass("hidden");
+        }
+        else if (beastCounter % 3 == 2) {
+            $("#beastCastle2").addClass("hidden");
+            $("#beastCastle").addClass("opaque");
+        }
+        beastCounter++;
+    }
+
+    function displayPort() {
+        if (portCounter % 3 == 0) {
+            $("#portRoyale").removeClass("opaque");
+        }
+        else if (portCounter % 3 == 1) {
+            $("#portRoyale2").removeClass("hidden");
+        }
+        else if (portCounter % 3 == 2) {
+            $("#portRoyale2").addClass("hidden");
+            $("#portRoyale").addClass("opaque");
+        }
+        portCounter++;
+    }
+
+    function displayAgrabah() {
+        if (agrabahCounter % 3 == 0) {
+            $("#agrabah").removeClass("opaque");
+        }
+        else if (agrabahCounter % 3 == 1) {
+            $("#agrabah2").removeClass("hidden");
+        }
+        else if (agrabahCounter % 3 == 2) {
+            $("#agrabah2").addClass("hidden");
+            $("#agrabah").addClass("opaque");
+        }
+        agrabahCounter++;
+    }
+
+    function displayHalloween() {
+        if (halloweenCounter % 3 == 0) {
+            $("#halloweenTown").removeClass("opaque");
+        }
+        else if (halloweenCounter % 3 == 1) {
+            $("#halloweenTown2").removeClass("hidden");
+        }
+        else if (halloweenCounter % 3 == 2) {
+            $("#halloweenTown2").addClass("hidden");
+            $("#halloweenTown").addClass("opaque");
+        }
+        halloweenCounter++;
+    }
+
+    function displayPride() {
+        if (prideCounter % 3 == 0) {
+            $("#prideLands").removeClass("opaque");
+        }
+        else if (prideCounter % 3 == 1) {
+            $("#prideLands2").removeClass("hidden");
+        }
+        else if (prideCounter % 3 == 2) {
+            $("#prideLands2").addClass("hidden");
+            $("#prideLands").addClass("opaque");
+        }
+        prideCounter++;
+    }
+
+    function displayDisney() {
+        if (disneyCounter % 2 == 0) {
+            $("#disneyCastle").removeClass("opaque");
+        }
+        else if (disneyCounter % 2 == 1) {
+            $("#disneyCastle").addClass("opaque");
+        }
+        disneyCounter++;
+    }
+
+    function displaySpace() {
+        if (spaceCounter % 3 == 0) {
+            $("#spaceParanoids").removeClass("opaque");
+        }
+        else if (spaceCounter % 3 == 1) {
+            $("#spaceParanoids2").removeClass("hidden");
+        }
+        else if (spaceCounter % 3 == 2) {
+            $("#spaceParanoids2").addClass("hidden");
+            $("#spaceParanoids").addClass("opaque");
+        }
+        spaceCounter++;
+    }
+
+    function displayTwtnw() {
+        if (twtnwCounter % 2 == 0) {
+            $("#twtnw").removeClass("opaque");
+        }
+        else if (twtnwCounter % 2 == 1) {
+            $("#twtnw").addClass("opaque");
+        }
+        twtnwCounter++;
+    }
+
+    function displayAtlantica() {
+        if (atlanticaCounter % 6 == 0) {
+            $("#atlantica").removeClass("opaque");
+        }
+        else if (atlanticaCounter % 6 == 1) {
+            $("#atlantica2").removeClass("hidden");
+        }
+        else if (atlanticaCounter % 6 == 2) {
+            $("#atlantica2").addClass("hidden");
+            $("#atlantica3").removeClass("hidden");
+        }
+        else if (atlanticaCounter % 6 == 3) {
+            $("#atlantica3").addClass("hidden");
+            $("#atlantica4").removeClass("hidden");
+        }
+        else if (atlanticaCounter % 6 == 4) {
+            $("#atlantica4").addClass("hidden");
+            $("#atlantica5").removeClass("hidden");
+        }
+        else if (atlanticaCounter % 6 == 5) {
+            $("#atlantica5").addClass("hidden");
+            $("#atlantica").addClass("opaque");
+        }
+        atlanticaCounter++;
+    }
+
+    function displayHundred() {
+        if (hundredCounter % 7 == 0) {
+            $("#hundredAcres").removeClass("opaque");
+        }
+        else if (hundredCounter % 7 == 1) {
+            $("#hundredAcres2").removeClass("hidden");
+        }
+        else if (hundredCounter % 7 == 2) {
+            $("#hundredAcres2").addClass("hidden");
+            $("#hundredAcres3").removeClass("hidden");
+        }
+        else if (hundredCounter % 7 == 3) {
+            $("#hundredAcres3").addClass("hidden");
+            $("#hundredAcres4").removeClass("hidden");
+        }
+        else if (hundredCounter % 7 == 4) {
+            $("#hundredAcres4").addClass("hidden");
+            $("#hundredAcres5").removeClass("hidden");
+        }
+        else if (hundredCounter % 7 == 5) {
+            $("#hundredAcres5").addClass("hidden");
+            $("#hundredAcres6").removeClass("hidden");
+        }
+        else if (hundredCounter % 7 == 6) {
+            $("#hundredAcres6").addClass("hidden");
+            $("#hundredAcres").addClass("opaque");
+        }
+        hundredCounter++;
+    }
+
+    function displayValor() {
+        if (valorCounter % 2 == 0) {
+            $("#valorForm").removeClass("opaque");
+        }
+        else if (valorCounter % 2 == 1) {
+            $("#valorForm").addClass("opaque");
+        }
+        valorCounter++;
+    }
+
+    function displayWisdom() {
+        if (wisdomCounter % 2 == 0) {
+            $("#wisdomForm").removeClass("opaque");
+        }
+        else if (wisdomCounter % 2 == 1) {
+            $("#wisdomForm").addClass("opaque");
+        }
+        wisdomCounter++;
+    }
+
+    function displayLimit() {
+        if (limitCounter % 2 == 0) {
+            $("#limitForm").removeClass("opaque");
+        }
+        else if (limitCounter % 2 == 1) {
+            $("#limitForm").addClass("opaque");
+        }
+        limitCounter++;
+    }
+
+    function displayMaster() {
+        if (masterCounter % 2 == 0) {
+            $("#masterForm").removeClass("opaque");
+        }
+        else if (masterCounter % 2 == 1) {
+            $("#masterForm").addClass("opaque");
+        }
+        masterCounter++;
+    }
+
+    function displayFinal() {
+        if (finalCounter % 2 == 0) {
+            $("#finalForm").removeClass("opaque");
+        }
+        else if (finalCounter % 2 == 1) {
+            $("#finalForm").addClass("opaque");
+        }
+        finalCounter++;
+    }
+
+    function displayFire() {
+        if (fireCounter % 4 == 0) {
+            $("#fire").removeClass("opaque");
+        }
+        else if (fireCounter % 4 == 1) {
+            $("#fire2").removeClass("hidden");
+        }
+        else if (fireCounter % 4 == 2) {
+            $("#fire2").addClass("hidden");
+            $("#fire3").removeClass("hidden");
+        }
+        else if (fireCounter % 4 == 3) {
+            $("#fire3").addClass("hidden");
+            $("#fire").addClass("opaque");
+        }
+        fireCounter++;
+    }
+
+    function displayBlizzard() {
+        if (blizzardCounter % 4 == 0) {
+            $("#blizzard").removeClass("opaque");
+        }
+        else if (blizzardCounter % 4 == 1) {
+            $("#blizzard2").removeClass("hidden");
+        }
+        else if (blizzardCounter % 4 == 2) {
+            $("#blizzard2").addClass("hidden");
+            $("#blizzard3").removeClass("hidden");
+        }
+        else if (blizzardCounter % 4 == 3) {
+            $("#blizzard3").addClass("hidden");
+            $("#blizzard").addClass("opaque");
+        }
+        blizzardCounter++;
+    }
+
+    function displayThunder() {
+        if (thunderCounter % 4 == 0) {
+            $("#thunder").removeClass("opaque");
+        }
+        else if (thunderCounter % 4 == 1) {
+            $("#thunder2").removeClass("hidden");
+        }
+        else if (thunderCounter % 4 == 2) {
+            $("#thunder2").addClass("hidden");
+            $("#thunder3").removeClass("hidden");
+        }
+        else if (thunderCounter % 4 == 3) {
+            $("#thunder3").addClass("hidden");
+            $("#thunder").addClass("opaque");
+        }
+        thunderCounter++;
+    }
+
+    function displayCure() {
+        if (cureCounter % 4 == 0) {
+            $("#cure").removeClass("opaque");
+        }
+        else if (cureCounter % 4 == 1) {
+            $("#cure2").removeClass("hidden");
+        }
+        else if (cureCounter % 4 == 2) {
+            $("#cure2").addClass("hidden");
+            $("#cure3").removeClass("hidden");
+        }
+        else if (cureCounter % 4 == 3) {
+            $("#cure3").addClass("hidden");
+            $("#cure").addClass("opaque");
+        }
+        cureCounter++;
+    }
+
+    function displayReflect() {
+        if (reflectCounter % 4 == 0) {
+            $("#reflect").removeClass("opaque");
+        }
+        else if (reflectCounter % 4 == 1) {
+            $("#reflect2").removeClass("hidden");
+        }
+        else if (reflectCounter % 4 == 2) {
+            $("#reflect2").addClass("hidden");
+            $("#reflect3").removeClass("hidden");
+        }
+        else if (reflectCounter % 4 == 3) {
+            $("#reflect3").addClass("hidden");
+            $("#reflect").addClass("opaque");
+        }
+        reflectCounter++;
+    }
+
+    function displayMagnet() {
+        if (magnetCounter % 4 == 0) {
+            $("#magnet").removeClass("opaque");
+        }
+        else if (magnetCounter % 4 == 1) {
+            $("#magnet2").removeClass("hidden");
+        }
+        else if (magnetCounter % 4 == 2) {
+            $("#magnet2").addClass("hidden");
+            $("#magnet3").removeClass("hidden");
+        }
+        else if (magnetCounter % 4 == 3) {
+            $("#magnet3").addClass("hidden");
+            $("#magnet").addClass("opaque");
+        }
+        magnetCounter++;
+    }
+
+    function displayNonExistent() {
+        if (nonExistingCounter % 2 == 0) {
+            $("#nonExistent").removeClass("opaque");
+        }
+        else if (nonExistingCounter % 2 == 1) {
+            $("#nonExistent").addClass("opaque");
+        }
+        nonExistingCounter++;
+    }
+
+    function displayPromise() {
+        if (promiseCounter % 2 == 0) {
+            $("#promise").removeClass("opaque");
+        }
+        else if (promiseCounter % 2 == 1) {
+            $("#promise").addClass("opaque");
+        }
+        promiseCounter++;
+    }
+
+    function displayConnections() {
+        if (connectionsCounter % 2 == 0) {
+            $("#connections").removeClass("opaque");
+        }
+        else if (connectionsCounter % 2 == 1) {
+            $("#connections").addClass("opaque");
+        }
+        connectionsCounter++;
+    }
+
+    function displayTranquil() {
+        if (tranquilCounter % 2 == 0) {
+            $("#tranquil").removeClass("opaque");
+        }
+        else if (tranquilCounter % 2 == 1) {
+            $("#tranquil").addClass("opaque");
+        }
+        tranquilCounter++;
+    }
+</script>
+</html>
+
+
