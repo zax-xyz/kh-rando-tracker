@@ -4,12 +4,7 @@
 
 body {
   margin: 0;
-  background-image: url("Background.jpg");
-  background-color: #cccccc;  /* fallbak */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  background: #cccccc url("Background.jpg") no-repeat fixed center / cover;
   font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
 }
 
@@ -31,7 +26,7 @@ table {
   width: max-content;
   padding: 10px;
   background-color: white;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, .5);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .3);
   border-radius: 3px 3px 0 0;
 }
 
