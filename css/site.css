@@ -19,14 +19,10 @@ body {
   font-size: 14px;
 }
 
-img.pic {
-  width: 100px;
-}
-
 #main {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 25px;
   overflow-x: auto;
 }
 
@@ -39,6 +35,7 @@ table {
 }
 
 td {
+  position: relative;
   width: 115px;
   height: 115px;
   display: inline-flex;
@@ -48,15 +45,14 @@ td {
 
 img {
   width: 100px;
-  height: 100px;
   transition: opacity 150ms;
 }
 
 .number {
+  position: absolute;
+  right: 0;
+  bottom: 0;
   width: 50px;
-  margin-top: -75px;
-  margin-left: 40px;
-  z-index: 1;
 }
 
 .hidden {
