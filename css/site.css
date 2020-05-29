@@ -3,7 +3,6 @@
 }
 
 body {
-  /* Margin bottom by footer height */
   margin: 0;
   background-image: url("Background.jpg");
   background-color: #cccccc;
