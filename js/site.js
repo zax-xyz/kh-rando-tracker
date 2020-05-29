@@ -11,32 +11,32 @@
       return;
     }
 
-    // Current is the number associated - like 2nd/3rd visits or lvl 2 drive
-    let current = Number(elem.dataset.current);
-    if (Number.isNaN(current)) {
-      // Initialise current to 0 if not found
-      current = 0;
+    // Level is the number associated - like 2nd/3rd visits or lvl 2 drive
+    let level = Number(elem.dataset.level);
+    if (Number.isNaN(level)) {
+      // Initialise level to 0 if not found
+      level = 0;
     }
 
-    // Increase current, resetting to 0 if it reaches the max
-    let new_current = (current + 1) % (Number(total) + 1);
-    elem.dataset.current = new_current;
+    // Increase level, resetting to 0 if it reaches the max
+    level = (level + 1) % (Number(total) + 1);
+    elem.dataset.level = level;
 
     // Set the number element source to the corresponding image
     let number = elem.querySelector(".number");
-    if (new_current !== 0) {
-      number.setAttribute("src", `img/${new_current}.png`);
+    if (level !== 0) {
+      number.setAttribute("src", `img/${level}.png`);
     }
 
     // Set CSS classes if necessary
-    if (new_current === 0) {
+    if (level === 0) {
       // Disabled
       icon.classList.remove("opaque");
       number.classList.remove("opaque");
-    } else if (new_current === 1) {
+    } else if (level === 1) {
       // First state, don't show number yet
       icon.classList.add("opaque");
-    } else if (new_current === 2) {
+    } else if (level === 2) {
       // Show number
       number.classList.add("opaque");
     }
