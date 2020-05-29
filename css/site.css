@@ -48,6 +48,7 @@ img {
 }
 
 .number {
+  /* Position number in bottom right of cell */
   position: absolute;
   right: 0;
   bottom: 0;
