@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kingdom Hearts Item Tracker</title>
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <div id="main">
+      <table>
+        <tr>
+          <!--Contains Roxas World-->
+          <td>
+            <div class="images" onclick="displayRox()">
+              <img class="opaque" id="Roxas" src="img/worlds/roxas_world.png" />
+            </div>
+          </td>
+
+          <!--Contains Twilight Town-->
+          <td>
+            <div class="images" onclick="displayTwilight()">
+              <img class="opaque" id="twilight" src="img/worlds/twilight_town.png" />
+              <div class="hidden" id="twilight2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="twilight3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Hollow Bastion-->
+          <td>
+            <div class="images" onclick="displayHollow()">
+              <img class="opaque" id="hollow" src="img/worlds/hollow_bastion.png" />
+              <div class="hidden" id="hollow2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="hollow3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Land of Dragons-->
+          <td>
+            <div class="images" onclick="displayLod()">
+              <img class="opaque" id="lod" src="img/worlds/the_land_of_dragons.png" />
+              <div class="hidden" id="lod2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Olympus-->
+          <td>
+            <div class="images" onclick="displayOlympus()">
+              <img class="opaque" id="olympus" src="img/worlds/olympus_coliseum.png" />
+              <div class="hidden" id="olympus2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <!--Contains Beasts Castle-->
+          <td>
+            <div class="images" onclick="displayCastle()">
+              <img class="opaque" id="beastCastle" src="img/worlds/beast_castle.png" />
+              <div class="hidden" id="beastCastle2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Port Royale-->
+          <td>
+            <div class="images" onclick="displayPort()">
+              <img class="opaque" id="portRoyale" src="img/worlds/port_royal.png" />
+              <div class="hidden" id="portRoyale2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Agrabah-->
+          <td>
+            <div class="images" onclick="displayAgrabah()">
+              <img class="opaque" id="agrabah" src="img/worlds/agrabah.png" />
+              <div class="hidden" id="agrabah2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Halloween Town-->
+          <td>
+            <div class="images" onclick="displayHalloween()">
+              <img class="opaque" id="halloweenTown" src="img/worlds/halloween_town.png" />
+              <div class="hidden" id="halloweenTown2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Pride Lands-->
+          <td>
+            <div class="images" onclick="displayPride()">
+              <img class="opaque" id="prideLands" src="img/worlds/pride_lands.png" />
+              <div class="hidden" id="prideLands2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <!--Contains Disney Castle-->
+          <td>
+            <div class="images" onclick="displayDisney()">
+              <img class="opaque" id="disneyCastle" src="img/worlds/disney_castle.png" />
+            </div>
+          </td>
+
+          <!--Contains Space Paranoids-->
+          <td>
+            <div class="images" onclick="displaySpace()">
+              <img class="opaque" id="spaceParanoids" src="img/worlds/space_paranoids.png" />
+              <div class="hidden" id="spaceParanoids2">
+                <img class="two" src="img/2.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains The World That Never Was-->
+          <td>
+            <div class="images" onclick="displayTwtnw()">
+              <img class="opaque" id="twtnw" src="img/worlds/the_world_that_never_was.png" />
+            </div>
+          </td>
+
+          <!--Contains Atlantica-->
+          <td>
+            <div class="images" onclick="displayAtlantica()">
+              <img class="opaque" id="atlantica" src="img/worlds/atlantica.png" />
+              <div class="hidden" id="atlantica2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="atlantica3">
+                <img class="three" src="img/3.png" />
+              </div>
+              <div class="hidden" id="atlantica4">
+                <img class="four" src="img/4.png" />
+              </div>
+              <div class="hidden" id="atlantica5">
+                <img class="five" src="img/5.png" />
+              </div>
+            </div>
+          </td>
+
+          <!--Contains Hundred Acre Woods-->
+          <td>
+            <div class="images" onclick="displayHundred()">
+              <img class="opaque" id="hundredAcres" src="img/worlds/100_acre_wood.png" />
+              <div class="hidden" id="hundredAcres2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="hundredAcres3">
+                <img class="three" src="img/3.png" />
+              </div>
+              <div class="hidden" id="hundredAcres4">
+                <img class="four" src="img/4.png" />
+              </div>
+              <div class="hidden" id="hundredAcres5">
+                <img class="five" src="img/5.png" />
+              </div>
+              <div class="hidden" id="hundredAcres6">
+                <img class="six" src="img/6.png" />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <!--Contains Drive Forms-->
+          <td>
+            <div class="images" onclick="displayValor()">
+              <img class="opaque" id="valorForm" src="img/drive/valor.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayWisdom()">
+              <img class="opaque" id="wisdomForm" src="img/drive/wisdom.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayLimit()">
+              <img class="opaque" id="limitForm" src="img/drive/limit.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayMaster()">
+              <img class="opaque" id="masterForm" src="img/drive/master.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayFinal()">
+              <img class="opaque" id="finalForm" src="img/drive/final.png" />
+            </div>
+          </td>
+
+        </tr>
+        <!--Contains Magic-->
+        <tr>
+          <!--Contains Fire-->
+          <td>
+            <div class="images" onclick="displayFire()">
+              <img class="opaque" id="fire" src="img/magic/fire.png" />
+              <div class="hidden" id="fire2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="fire3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+          <!--Contains Blizzard-->
+          <td>
+            <div class="images" onclick="displayBlizzard()">
+              <img class="opaque" id="blizzard" src="img/magic/blizzard.png" />
+              <div class="hidden" id="blizzard2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="blizzard3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+          <!--Contains Thunder-->
+          <td>
+            <div class="images" onclick="displayThunder()">
+              <img class="opaque" id="thunder" src="img/magic/thunder.png" />
+              <div class="hidden" id="thunder2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="thunder3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+          <!--Contains Cure-->
+          <td>
+            <div class="images" onclick="displayCure()">
+              <img class="opaque" id="cure" src="img/magic/cure.png" />
+              <div class="hidden" id="cure2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="cure3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+          <!--Contains Reflect-->
+          <td>
+            <div class="images" onclick="displayReflect()">
+              <img class="opaque" id="reflect" src="img/magic/reflect.png" />
+              <div class="hidden" id="reflect2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="reflect3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <!--Contains Magnet-->
+          <td>
+            <div class="images" onclick="displayMagnet()">
+              <img class="opaque" id="magnet" src="img/magic/magnet.png" />
+              <div class="hidden" id="magnet2">
+                <img class="two" src="img/2.png" />
+              </div>
+              <div class="hidden" id="magnet3">
+                <img class="three" src="img/3.png" />
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayNonExistent()">
+              <img class="opaque" id="nonExistent" src="img/proofs_promise/non-existent.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayPromise()">
+              <img class="opaque" id="promise" src="img/proofs_promise/promise.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayConnections()">
+              <img class="opaque" id="connections" src="img/proofs_promise/connections.png" />
+            </div>
+          </td>
+          <td>
+            <div class="images" onclick="displayTranquil()">
+              <img class="opaque" id="tranquil" src="img/proofs_promise/tranquil.png" />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <footer class="border-top footer text-muted">
+      <div class="container">
+        2020 - Kingdom Hearts Item Tracker - Version 1.0 Developed by Kokemon198
+      </div>
+    </footer>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/site.js" asp-append-version="true"></script>
+  </body>
+</html>
