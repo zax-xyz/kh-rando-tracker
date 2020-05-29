@@ -1,17 +1,4 @@
-﻿var theme = document.cookie
-  .split("; ")
-  .find(row => row.startsWith("theme"));
-
-if (theme) {
-  theme = theme.split("=")[1];
-}
-
-if (theme === "dark") {
-  document.documentElement.setAttribute("theme", "dark");
-} else {
-  theme = "light";
-}
-
+﻿// Icon clicking
 document.querySelectorAll(".toggle").forEach(element => {
   element.onclick = (event) => {
     const elem = event.target.parentElement;
@@ -57,6 +44,7 @@ document.querySelectorAll(".toggle").forEach(element => {
   };
 })
 
+// Dark/light theme button
 document.getElementById("theme-btn").onclick = (event) => {
   if (theme === "light") {
     theme = "dark"
@@ -67,4 +55,5 @@ document.getElementById("theme-btn").onclick = (event) => {
   }
 
   document.documentElement.setAttribute("theme", theme);
+  document.cookie = `theme=${theme}`;
 }
