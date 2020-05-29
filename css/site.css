@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background: #ccc url("bg.jpg") no-repeat fixed center / cover;
+  background: #ccc url("../img/bg.jpg") no-repeat fixed center / cover;
   font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
 }
 
