@@ -4,15 +4,15 @@
 
 body {
   margin: 0;
-  background: #ccc url("../img/bg.jpg") no-repeat fixed center / cover;
   font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
+  background: #ccc url("../img/bg.jpg") no-repeat fixed center / cover;
 }
 
 .footer {
   padding: 15px 25px;
-  background-color: white;
   font-size: 14px;
   line-height: 1.4;
+  background-color: white;
 }
 
 #main {
