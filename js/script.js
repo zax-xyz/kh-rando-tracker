@@ -1,4 +1,18 @@
-﻿document.querySelectorAll(".toggle").forEach(element => {
+﻿var theme = document.cookie
+  .split("; ")
+  .find(row => row.startsWith("theme"));
+
+if (theme) {
+  theme = theme.split("=")[1];
+}
+
+if (theme === "dark") {
+  document.documentElement.setAttribute("theme", "dark");
+} else {
+  theme = "light";
+}
+
+document.querySelectorAll(".toggle").forEach(element => {
   element.onclick = (event) => {
     const elem = event.target.parentElement;
 
@@ -42,3 +56,15 @@
     }
   };
 })
+
+document.getElementById("theme-btn").onclick = (event) => {
+  if (theme === "light") {
+    theme = "dark"
+    event.target.innerHTML = "Light Theme";
+  } else {
+    theme = "light"
+    event.target.innerHTML = "Dark Theme";
+  }
+
+  document.documentElement.setAttribute("theme", theme);
+}

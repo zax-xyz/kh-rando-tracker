@@ -1,0 +1,119 @@
+﻿* {
+  box-sizing: border-box;
+}
+
+:root {
+  --font-color: black;
+  --body-bg-color: #ccc;
+  --main-bg-color: white;
+  --shadow-opacity: 0.3;
+}
+
+:root[theme="dark"] {
+  --font-color: white;
+  --body-bg-color: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),;
+  --main-bg-color: #212121;
+  --shadow-opacity: 0.5;
+}
+
+body {
+  margin: 0;
+  font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
+  color: var(--font-color);
+  background: var(--body-bg-color) url("../img/bg.jpg") no-repeat fixed center / cover;
+  transition: color .1s;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+  overflow-x: auto;
+}
+
+table {
+  /* To prevent the table from shrinking on smaller widths */
+  width: max-content;
+  padding: 10px;
+  background-color: var(--main-bg-color);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, var(--shadow-opacity));
+  border-radius: 4px 4px 0 0;
+  transition: background-color .1s, box-shadow .1s;
+}
+
+td {
+  /* So the number images can use absolute positioning */
+  position: relative;
+  width: 115px;
+  height: 115px;
+  /* Center the image within the cell */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 100px;
+  opacity: 0.35;
+  transition: opacity 150ms;
+}
+
+.number {
+  /* Position number in bottom right of cell */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  opacity: 0;
+}
+
+.opaque {
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px 25px;
+  font-size: 14px;
+  line-height: 1.4;
+  background-color: var(--main-bg-color);
+  transition: background-color .1s;
+}
+
+.footer > .container {
+  display: flex;
+  flex-basis: 1200px;
+}
+
+.version, .theme {
+  display: flex;
+  align-items: center;
+}
+
+.version {
+  flex: 1;
+}
+
+.theme {
+  justify-content: center;
+  padding-left: 20px;
+}
+
+button {
+  background: hsl(210, 70%, 60%);
+  color: hsl(210, 100%, 98%);
+  box-shadow: 0 2px 5px hsla(210, 70%, 60%, 0.3);
+  padding: 6px 18px;
+  border-radius: 4px;
+  outline: 0;
+  box-shadow: 0;
+  border: 0;
+  cursor: pointer;
+  transition: background-color .2s, transform .2s;
+}
+
+button:hover {
+  background: hsl(210, 70%, 55%);
+  transform: translateY(-2px);
+}
