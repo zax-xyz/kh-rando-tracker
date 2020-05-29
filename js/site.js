@@ -1,5 +1,4 @@
-﻿/ Write your JavaScript code.
-var roxCounter = 0;
+﻿var roxCounter = 0;
 var twilightCounter = 0;
 var hollowCounter = 0;
 var lodCounter = 0;
