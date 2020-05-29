@@ -32,14 +32,12 @@ table {
   background-color: white;
 }
 
-tr {
-  /*border: 1px solid black;*/
-}
-
 td {
-  /*border: 1px solid black;*/
   width: 115px;
   height: 115px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 img {
