@@ -5,58 +5,6 @@ for details on configuring this project to bundle and minify static web assets. 
   box-sizing: border-box;
 }
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   /* Margin bottom by footer height */
   margin: 0;
@@ -67,11 +15,13 @@ body {
   background-size: cover;
   font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
 }
+
 .footer {
   padding: 15px 25px;
   width: 100%;
   white-space: nowrap;
   background-color: white;
+  font-size: 14px;
 }
 
 img.pic {
@@ -88,25 +38,30 @@ img.pic {
 table {
   background-color: white;
 }
+
 tr {
   /*border: 1px solid black;*/
 }
+
 td {
   /*border: 1px solid black;*/
   width: 115px;
   height: 115px;
 }
+
 img {
   width: 100px;
   height: 100px;
   transition: opacity 150ms;
 }
+
 .images {
   width: 100px;
   height: 100px;
   position: relative;
   max-width: 100px;
 }
+
 .number {
   width: 50px;
   height: 50px;
@@ -114,12 +69,11 @@ img {
   margin-left: 40px;
   z-index: 1;
 }
+
 .hidden {
   display: none;
 }
+
 .opaque {
   opacity: 0.5;
-}
-h1 {
-  text-align: left;
 }
