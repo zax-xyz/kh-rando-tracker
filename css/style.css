@@ -7,7 +7,6 @@
   --body-bg-color: #ccc;
   --main-bg-color: white;
   --shadow-opacity: 0.3;
-  --image-opacity: 0.4;
 }
 
 :root[theme="dark"] {
@@ -15,7 +14,6 @@
   --body-bg-color: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),;
   --main-bg-color: #212121;
   --shadow-opacity: 0.5;
-  --image-opacity: 0.4;
 }
 
 body {
@@ -60,7 +58,7 @@ td {
 
 img {
   width: 100px;
-  opacity: var(--image-opacity);
+  opacity: 0.4;
   transition: opacity 150ms;
 }
 
