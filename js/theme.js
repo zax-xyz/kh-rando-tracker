@@ -9,6 +9,9 @@ if (theme) {
 
 if (theme === "dark") {
   document.documentElement.setAttribute("theme", "dark");
+  // Update cookie expiry date
+  const cookieAge = 60 * 60 * 24 * 365;  // One year
+  document.cookie = `theme=dark; max-age=${cookieAge}`;
 } else {
   theme = "light";
 }
