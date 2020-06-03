@@ -1,5 +1,5 @@
 ﻿// Icon clicking
-document.querySelectorAll(".toggle").forEach(element => {
+document.querySelectorAll(".grid > div").forEach(element => {
   element.onclick = (event) => {
     const elem = event.target.parentElement;
 

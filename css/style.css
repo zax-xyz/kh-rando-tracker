@@ -49,7 +49,7 @@ body {
   transition: background-color .1s, box-shadow .1s;
 }
 
-.toggle {
+.grid > div {
   /* So the number images can use absolute positioning */
   position: relative;
 
