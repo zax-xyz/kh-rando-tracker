@@ -34,7 +34,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template: repeat(6, 115px) / repeat(5, 115px);
+  grid-template: repeat(7, 115px) / repeat(5, 115px);
 
   max-width: 100%;
   padding: 15px;
@@ -124,13 +124,15 @@ img {
 
 button {
   padding: 6px 18px;
+
   color: hsl(210, 100%, 98%);
+
   background: hsl(210, 70%, 60%);
-  box-shadow: 0 2px 5px hsla(210, 70%, 60%, 0.3);
   border-radius: 4px;
-  outline: 0;
-  box-shadow: 0;
   border: 0;
+  outline: 0;
+  box-shadow: 0 2px 5px hsla(210, 70%, 60%, 0.3);
+
   cursor: pointer;
   transition: background-color .2s, transform .2s;
 }
