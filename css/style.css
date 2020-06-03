@@ -65,29 +65,23 @@ img {
   transition: opacity 150ms;
 }
 
-.number {
-  /* Position number in bottom right of cell */
+.number, .nobody {
   position: absolute;
+  width: 50px;
+  opacity: 0;
+  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, .35));
+}
+
+.number {
+  /* Position in bottom right */
   right: 0;
   bottom: 0;
-
-  width: 50px;
-
-  opacity: 0;
 }
 
 .nobody {
-  position: absolute;
+  /* Position in top left */
   top: 0;
   left: 0;
-
-  width: 50px;
-
-  opacity: 0;
-}
-
-.number, .nobody {
-  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, .35));
 }
 
 .opaque {
