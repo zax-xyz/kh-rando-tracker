@@ -62,6 +62,7 @@ body {
 img {
   width: 100px;
   opacity: 0.4;
+  z-index: -1;  /* Prevent it from become the onclick event target */
   transition: opacity 150ms;
 }
 
