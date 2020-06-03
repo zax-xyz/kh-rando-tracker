@@ -54,5 +54,6 @@ document.getElementById("theme-btn").onclick = (event) => {
   }
 
   document.documentElement.setAttribute("theme", theme);
-  document.cookie = `theme=${theme}`;
+  const cookieAge = 60 * 60 * 24 * 365;  // One year
+  document.cookie = `theme=${theme}; max-age=${cookieAge}`;
 }
