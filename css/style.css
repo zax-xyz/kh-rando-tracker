@@ -3,6 +3,7 @@
 }
 
 :root {
+  --font: Lato, Roboto, Arial, Helvetica, sans-serif;
   --font-color: black;
   --body-bg-color: #ccc;
   --main-bg-color: white;
@@ -27,7 +28,7 @@ body {
   padding-top: 25px;
   margin: 0;
 
-  font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
+  font-family: var(--font);
   color: var(--font-color);
   background: var(--body-bg-color) url("../img/bg.jpg") no-repeat fixed center / cover;
 
@@ -127,6 +128,7 @@ img {
 button {
   padding: 6px 18px;
 
+  font-family: var(--font);
   color: hsl(210, 100%, 98%);
 
   background: hsl(210, 70%, 60%);
