@@ -20,38 +20,42 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  min-height: 100vh;
   padding-top: 25px;
   margin: 0;
+
   font-family: Lato, Roboto, Arial, Helvetica, sans-serif;
   color: var(--font-color);
   background: var(--body-bg-color) url("../img/bg.jpg") no-repeat fixed center / cover;
+
   transition: color .1s;
 }
 
-#main {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 115px);
+  grid-template-rows: repeat(6, 115px);
+
+  max-width: 100%;
+  padding: 15px;
+  margin-top: auto;
+
   background-color: var(--main-bg-color);
   box-shadow: 0 5px 25px rgba(0, 0, 0, var(--shadow-opacity));
   border-radius: 4px 4px 0 0;
+
   overflow-x: auto;
   z-index: 0;
   transition: background-color .1s, box-shadow .1s;
 }
 
-table {
-  /* To prevent the table from shrinking on smaller widths */
-  width: max-content;
-}
-
-td {
+.grid > div {
   /* So the number images can use absolute positioning */
   position: relative;
-  width: 115px;
-  height: 115px;
+
   /* Center the image within the cell */
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -67,7 +71,9 @@ img {
   position: absolute;
   right: 0;
   bottom: 0;
+
   width: 50px;
+
   opacity: 0;
 }
 
@@ -78,11 +84,14 @@ img {
 .footer {
   display: flex;
   justify-content: center;
+
   width: 100%;
   padding: 15px 25px;
+
   font-size: 14px;
   line-height: 1.4;
   background-color: var(--main-bg-color);
+
   z-index: 2;
   transition: background-color .1s;
 }
@@ -107,10 +116,10 @@ img {
 }
 
 button {
-  background: hsl(210, 70%, 60%);
-  color: hsl(210, 100%, 98%);
-  box-shadow: 0 2px 5px hsla(210, 70%, 60%, 0.3);
   padding: 6px 18px;
+  color: hsl(210, 100%, 98%);
+  background: hsl(210, 70%, 60%);
+  box-shadow: 0 2px 5px hsla(210, 70%, 60%, 0.3);
   border-radius: 4px;
   outline: 0;
   box-shadow: 0;
