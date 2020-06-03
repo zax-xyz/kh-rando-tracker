@@ -1,6 +1,6 @@
 ﻿// Icon clicking
 document.querySelectorAll(".grid > div").forEach(element => {
-  element.onclick = (event) => {
+  element.onmousedown = (event) => {
     const elem = event.currentTarget;
     const icon = elem.querySelector(".icon");
     const nobody = elem.querySelector(".nobody");
