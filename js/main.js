@@ -1,4 +1,4 @@
-﻿// Icon clicking
+﻿// Item clicking
 document.querySelectorAll(".grid > div").forEach(element => {
   element.onmousedown = (event) => {
     const elem = event.currentTarget;
@@ -31,6 +31,7 @@ document.querySelectorAll(".grid > div").forEach(element => {
       number && number.classList.remove("opaque");
       nobody && nobody.classList.remove("opaque");
     } else if (addNobody) {
+      // Show nobody symbol
       nobody.classList.add("opaque");
     } else if (level === 1) {
       // First state, don't show number yet
