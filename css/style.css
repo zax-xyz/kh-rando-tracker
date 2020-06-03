@@ -34,8 +34,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 115px);
-  grid-template-rows: repeat(6, 115px);
+  grid-template: repeat(6, 115px) / repeat(5, 115px);
 
   max-width: 100%;
   padding: 15px;
@@ -75,6 +74,20 @@ img {
   width: 50px;
 
   opacity: 0;
+}
+
+.nobody {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 50px;
+
+  opacity: 0;
+}
+
+.number, .nobody {
+  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, .5));
 }
 
 .opaque {

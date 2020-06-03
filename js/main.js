@@ -3,29 +3,29 @@ document.querySelectorAll(".toggle").forEach(element => {
   element.onclick = (event) => {
     const elem = event.target.parentElement;
 
-    const total = elem.dataset.total;
+    let total = elem.dataset.total || 1;
     const icon = elem.querySelector(".icon");
 
-    if (total === undefined) {
-      // If there is no "total" data attribute, then it is a simple toggle
-      icon.classList.toggle("opaque");
-      return;
-    }
-
     // Level is the number associated - like 2nd/3rd visits or lvl 2 drive
-    let level = Number(elem.dataset.level);
-    if (Number.isNaN(level)) {
-      // Initialise level to 0 if not found
-      level = 0;
+    let level = Number(elem.dataset.level) || 0;
+
+    const nobody = elem.querySelector(".nobody");
+
+    if (nobody) {
+      total = Number(total) + 2;
+    } else {
+      total = Number(total) + 1;
     }
 
     // Increase level, resetting to 0 if it reaches the max
-    level = (level + 1) % (Number(total) + 1);
+    level = (level + 1) % (total);
     elem.dataset.level = level;
+
+    const addNobody = nobody && level === total - 1;
 
     // Set the number element source to the corresponding image
     const number = elem.querySelector(".number");
-    if (level !== 0) {
+    if (number && level > 0 && !addNobody) {
       number.setAttribute("src", `img/${level}.png`);
     }
 
@@ -33,7 +33,10 @@ document.querySelectorAll(".toggle").forEach(element => {
     if (level === 0) {
       // Disabled
       icon.classList.remove("opaque");
-      number.classList.remove("opaque");
+      number && number.classList.remove("opaque");
+      nobody && nobody.classList.remove("opaque");
+    } else if (addNobody) {
+      nobody.classList.add("opaque");
     } else if (level === 1) {
       // First state, don't show number yet
       icon.classList.add("opaque");
