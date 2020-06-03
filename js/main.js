@@ -1,7 +1,7 @@
 ﻿// Icon clicking
 document.querySelectorAll(".grid > div").forEach(element => {
   element.onclick = (event) => {
-    const elem = event.target;
+    const elem = event.currentTarget;
 
     let total = elem.dataset.total || 1;
     const icon = elem.querySelector(".icon");
