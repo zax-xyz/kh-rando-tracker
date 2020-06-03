@@ -26,7 +26,7 @@ document.querySelectorAll(".toggle").forEach(element => {
     // Set the number element source to the corresponding image
     const number = elem.querySelector(".number");
     if (number && level > 0 && !addNobody) {
-      number.setAttribute("src", `img/${level}.png`);
+      number.setAttribute("src", `img/numbers/${level}.png`);
     }
 
     // Set CSS classes if necessary
