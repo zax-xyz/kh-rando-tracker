@@ -50,7 +50,7 @@ body {
 }
 
 .grid > div {
-  /* So the number images can use absolute positioning */
+  /* So the number/nobody images can use absolute positioning */
   position: relative;
 
   /* Center the image within the cell */
@@ -87,7 +87,7 @@ img {
 }
 
 .number, .nobody {
-  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, .5));
+  filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, .35));
 }
 
 .opaque {
