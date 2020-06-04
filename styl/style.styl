@@ -1,0 +1,152 @@
+﻿$font = Lato, Roboto, Arial, Helvetica, sans-serif
+
+$font-color = black
+$bg-color = white
+
+$dark-font-color = white
+$dark-bg-color = #212121
+
+$center-items
+  display flex
+  align-items center
+
+*
+  box-sizing border-box
+
+body
+  @extend $center-items
+  flex-direction column
+
+  min-height 100vh
+  padding-top 25px
+  margin 0
+
+  font-family $font
+  color $font-color
+  background #ccc no-repeat fixed center / cover
+  background-image url("../img/bg.jpg")
+
+  transition color .1s
+
+  /:root[theme="dark"] &
+    color $dark-font-color
+    background-image linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../img/bg.jpg")
+
+.grid
+  display grid
+  grid-template-columns repeat(5, 115px)
+  grid-template-rows repeat(7, 115px)
+
+  max-width 100%
+  padding 15px
+  margin-top auto
+
+  background-color $bg-color
+  box-shadow 0 5px 25px rgba(0, 0, 0, .3)
+  border-radius 4px 4px 0 0
+
+  overflow-x auto
+  z-index 0
+  transition background-color .1s, box-shadow .1s
+
+  /:root[theme="dark"] &
+    background-color $dark-bg-color
+    box-shadow 0 5px 25px rgba(0, 0, 0, .5)
+
+  > div
+    // So the number/nobody images can use absolute positioning
+    position relative
+
+    // Center the image within the cell
+    @extend $center-items
+    justify-content: center
+
+img
+  width 100px
+  opacity 0.4
+  transition opacity 150ms
+
+$additional-img
+  position absolute
+  width 50px
+  opacity 0
+  filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .15))
+
+  /:root[theme="dark"] &
+    filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
+
+.number
+  @extend $additional-img
+  // Position in bottom right
+  right 0
+  bottom 0
+
+.nobody
+  @extend $additional-img
+  // Position in top left
+  top 0
+  left 0
+
+.secondary
+  @extend $additional-img
+  // Position in top right
+  top 0
+  right 0
+  width 40px
+
+  &.drive
+    // Position in top left
+    top 10px
+    left 10px
+
+.opaque
+  opacity 1
+
+.footer
+  display flex
+  justify-content center
+
+  width 100%
+  padding 15px 25px
+
+  font-size 14px
+  line-height 1.4
+  background-color $bg-color
+
+  z-index 2
+  transition background-color .1s
+
+  /:root[theme="dark"] &
+    background-color $dark-bg-color
+
+  > .container
+    display flex
+    flex-basis 1200px
+
+.version
+  @extend $center-items
+  flex 1
+
+.theme
+  @extend $center-items
+  justify-content center
+  padding-left 20px
+
+button
+  padding 6px 18px
+
+  font-family $font
+  color hsl(210, 100%, 98%)
+
+  background hsl(210, 70%, 60%)
+  border-radius 4px
+  border 0
+  outline 0
+  box-shadow 0 2px 5px hsla(210, 70%, 60%, 0.3)
+
+  cursor pointer
+  transition background-color .2s, transform .2s
+
+  &:hover
+    background hsl(210, 70%, 55%)
+    transform translateY(-2px)
