@@ -1,8 +1,8 @@
 language: node_js
 install:
-  - sudo npm install stylus -g
-  - sudo npm install pug-cli -g
-  - sudo npm install uglifyjs -g
+  - npm install stylus -g
+  - npm install pug-cli -g
+  - npm install uglifyjs -g
 script: make
 deploy:
   provider: pages
