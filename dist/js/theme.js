@@ -1,0 +1,1 @@
+var theme=document.cookie.split("; ").find(e=>e.startsWith("theme"));if(theme&&(theme=theme.split("=")[1]),"dark"===theme){document.documentElement.setAttribute("theme","dark");const e=31536e3;document.cookie=`theme=dark; max-age=${e}`}else theme="light";
