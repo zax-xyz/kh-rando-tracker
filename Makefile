@@ -26,8 +26,11 @@ JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
 all: ${BUILDDIR} html css js img
 
 html: ${BUILDDIR}/index.html
+
 css: ${CSSBUILDDIR} ${CSSBUILDFILES}
+
 js: ${JSBUILDDIR} ${JSBUILDFILES}
+
 img:
 	cp -r img dist
 
