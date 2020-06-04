@@ -1,8 +1,8 @@
 HTMLC := pug
-HTMLFLAGS := 
+HTMLFLAGS := -s
 
 CSSC := stylus
-CSSFLAGS := -c
+CSSFLAGS := -c -q
 
 JSC := uglifyjs
 JSFLAGS := -c -m
