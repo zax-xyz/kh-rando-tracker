@@ -83,7 +83,7 @@ img {
 .opaque {
   opacity: 1;
 }
-.footer {
+footer {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -94,10 +94,10 @@ img {
   z-index: 2;
   transition: background-color 0.1s;
 }
-:root[theme="dark"] .footer {
+:root[theme="dark"] footer {
   background-color: #212121;
 }
-.footer > .container {
+footer > .container {
   display: flex;
   flex-basis: 1200px;
 }
