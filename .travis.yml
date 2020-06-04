@@ -1,4 +1,6 @@
 language: node_js
+node_js:
+  - 13
 install:
   - npm install stylus -g
   - npm install pug-cli -g
