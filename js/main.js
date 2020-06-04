@@ -48,7 +48,7 @@ function handleRightClick(event) {
 }
 
 // Item clicking
-document.querySelectorAll(".grid > div").forEach(element => {
+document.querySelectorAll(".grid > div").forEach((element) => {
   element.onmousedown = (event) => {
     switch (event.button) {
       case 0:
@@ -63,16 +63,18 @@ document.querySelectorAll(".grid > div").forEach(element => {
   element.oncontextmenu = (event) => {
     // We have our own events for right click and the context menu would be intrusive
     event.preventDefault();
-  }
-})
+  };
+});
+
+/* global theme:writable */
 
 // Dark/light theme button
 document.getElementById("theme-btn").onclick = (event) => {
   if (theme === "light") {
-    theme = "dark"
+    theme = "dark";
     event.target.innerHTML = "Light Theme";
   } else {
-    theme = "light"
+    theme = "light";
     event.target.innerHTML = "Dark Theme";
   }
 
