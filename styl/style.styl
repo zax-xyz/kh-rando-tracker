@@ -6,6 +6,9 @@ $bg-color = white
 $dark-font-color = white
 $dark-bg-color = #212121
 
+$bg-img = url("../img/bg.jpg")
+$dark-bg-over = rgba(0, 0, 0, .5)
+
 $center-items
   display flex
   align-items center
@@ -24,13 +27,13 @@ body
   font-family $font
   color $font-color
   background #ccc no-repeat fixed center / cover
-  background-image url("../img/bg.jpg")
+  background-image $bg-img
 
   transition color .1s
 
   /:root[theme="dark"] &
     color $dark-font-color
-    background-image linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url("../img/bg.jpg")
+    background-image linear-gradient($dark-bg-over, $dark-bg-over), $bg-img
 
 .grid
   display grid
