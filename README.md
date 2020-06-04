@@ -5,3 +5,7 @@ This is a tracker intended to be used for the randomised [Kingdom Hearts 2 Final
 The idea for this tracker came from [ViolinGamer](https://twitter.com/ViolinGamer), and was initially developed by [Kokemon198](https://twitter.com/jorgeoviedo1998). I decided to fork the code, refactor it, and put it on a site.
 
 You can find it [here](https://zaxutic.github.io/kh2fm-rando-tracker/).
+
+## Building
+
+To build the site, you should run `make` in the root of the repository. It will be built into the `dist` subdirectory. Alternatively, you can run the `pug` and `stylus` preprocessors manually, along with `uglifyjs` (or just copy the `js` folder directly if you don't care about minification), and copy the images.
