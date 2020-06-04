@@ -1,0 +1,13 @@
+install:
+  - sudo npm install stylus -g
+  - sudo npm install pug-cli -g
+  - sudo npm install uglifyjs -g
+script: make
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
+  local_dir: dist
