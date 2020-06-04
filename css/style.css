@@ -68,7 +68,7 @@ img {
   transition: opacity 150ms;
 }
 
-.number, .nobody {
+.number, .nobody, .secondary {
   position: absolute;
   width: 50px;
   opacity: 0;
@@ -85,6 +85,20 @@ img {
   /* Position in top left */
   top: 0;
   left: 0;
+}
+
+.secondary {
+  /* Position in top right */
+  top: 0;
+  right: 0;
+
+  width: 40px;
+}
+
+.secondary.drive {
+  /* Position in top left */
+  top: 10px;
+  left: 10px;
 }
 
 .opaque {
