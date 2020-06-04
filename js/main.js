@@ -1,6 +1,7 @@
 ﻿function handleLeftClick(event) {
   const elem = event.currentTarget;
   const icon = elem.querySelector(".icon");
+  const number = elem.querySelector(".number");
   const nobody = elem.querySelector(".nobody");
 
   // Level is the number associated - like 2nd/3rd visits or lvl 2 drive
@@ -16,7 +17,6 @@
   const addNobody = nobody && level === total - 1;
 
   // Set the number element source to the corresponding image
-  const number = elem.querySelector(".number");
   if (number && level > 0 && !addNobody) {
     // Update number if this isn't the nobody level
     number.setAttribute("src", `img/numbers/${level}.png`);
