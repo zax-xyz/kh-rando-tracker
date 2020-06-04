@@ -14,7 +14,7 @@
   elem.dataset.level = level;
 
   // Add nobody symbol on the last level
-  const addNobody = nobody && level === total - 1;
+  const addNobody = nobody && level === total;
 
   // Set the number element source to the corresponding image
   if (number && level > 0 && !addNobody) {
