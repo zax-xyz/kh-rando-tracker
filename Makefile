@@ -7,9 +7,13 @@ CSSFLAGS := -c
 JSC := uglifyjs
 JSFLAGS := -c -m
 
+IMGC := cp
+IMGFLAGS := -r
+
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
+IMGBUILDDIR := ${BUILDDIR}/img
 
 ###############################################
 
@@ -21,6 +25,10 @@ JSSRCDIR := js
 JSSRCFILES := $(wildcard ${JSSRCDIR}/*.js)
 JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
 
+IMGSRCDIR := img
+IMGSRCFILES := $(wildcard ${IMGSRCDIR}/*)
+IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
+
 ###############################################
 
 all: ${BUILDDIR} html css js img
@@ -31,8 +39,7 @@ css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
 js: ${JSBUILDDIR} ${JSBUILDFILES}
 
-img:
-	cp -r img dist
+img: ${IMGBUILDdIR} ${IMGBUILDFILES}
 
 .PHONY: all
 .PHONY: html
@@ -53,6 +60,9 @@ ${CSSBUILDDIR}:
 ${JSBUILDDIR}:
 	${MKDIR_P} ${JSBUILDDIR}
 
+${IMGBUILDDIR}:
+	${MKDIR_P} ${IMGBUILDDIR}
+
 ${BUILDDIR}/index.html: index.pug
 	${HTMLC} ${HTMLFLAGS} -o ${BUILDDIR} $^
 
@@ -61,6 +71,9 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSC} ${JSFLAGS} -o $@ $^
+
+${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
+	${IMGC} ${IMGFLAGS} $^ $@
 
 ###############################################
 
