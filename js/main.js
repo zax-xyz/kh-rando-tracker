@@ -9,8 +9,8 @@
   let total = elem.dataset.total || 1;
 
   // Increase level, resetting to 0 if it reaches the max
-  total = Number(total) + (nobody ? 2 : 1);
-  level = (level + 1) % (total);
+  total = Number(total) + Boolean(nobody);
+  level = (level + 1) % (total + 1);
   elem.dataset.level = level;
 
   // Add nobody symbol on the last level
