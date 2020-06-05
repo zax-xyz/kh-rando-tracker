@@ -20,32 +20,39 @@
   if (number && level > 0 && !addNobody) {
     // Update number if this isn't the nobody level
     number.setAttribute("src", `img/numbers/${level}.png`);
-  }
+  };
 
   // Set CSS classes if necessary
-  if (level === 0) {
-    // Disabled
-    icon.classList.remove("opaque");
-    number && number.classList.remove("opaque");
-    nobody && nobody.classList.remove("opaque");
-  } else if (addNobody) {
+  if (addNobody) {
     // Show nobody symbol
     nobody.classList.add("opaque");
-  } else if (level === 1) {
-    // First state, don't show number yet
-    icon.classList.add("opaque");
-  } else if (level === 2) {
-    // Show number
-    number.classList.add("opaque");
-  }
-}
+    return;
+  };
+
+  switch (level) {
+    case 0:
+      // Disabled
+      icon.classList.remove("opaque");
+      number && number.classList.remove("opaque");
+      nobody && nobody.classList.remove("opaque");
+      break;
+    case 1:
+      // First state, don't show number yet
+      icon.classList.add("opaque");
+      break;
+    case 2:
+      // Show number
+      number.classList.add("opaque");
+      break;
+  };
+};
 
 function handleRightClick(event) {
   const elem = event.currentTarget;
   const secondary = elem.querySelector(".secondary");
 
   secondary && secondary.classList.toggle("opaque");
-}
+};
 
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((element) => {
@@ -76,9 +83,9 @@ document.getElementById("theme-btn").onclick = (event) => {
   } else {
     theme = "light";
     event.target.innerHTML = "Dark Theme";
-  }
+  };
 
   document.documentElement.setAttribute("theme", theme);
   const cookieAge = 60 * 60 * 24 * 365;  // One year
   document.cookie = `theme=${theme}; max-age=${cookieAge}`;
-}
+};
