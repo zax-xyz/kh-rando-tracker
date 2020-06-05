@@ -45,14 +45,14 @@
       number.classList.add("opaque");
       break;
   }
-};
+}
 
 function handleRightClick(event) {
   const elem = event.currentTarget;
   const secondary = elem.querySelector(".secondary");
 
   secondary && secondary.classList.toggle("opaque");
-};
+}
 
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((element) => {
