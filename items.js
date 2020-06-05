@@ -14,10 +14,10 @@
     "Halloween Town": { file: "halloween_town", total: 2, },
     "Pride Lands": { file: "pride_lands", total: 2, },
     "Disney Castle": { file: "disney_castle", secondary: "terra", },
-    "Space Paranoids": { file: "space_paranoids", total: 2, },
+    "Space Paranoids": { file: "space_paranoids", total: 2, noData: true, },
     "The World That Never Was": { file: "the_world_that_never_was", },
     "Atlantica": { file: "atlantica", total: 5, },
-    "100 Acre Wood": { file: "100_acre_wood", total: 6, },
+    "100 Acre Wood": { file: "100_acre_wood", total: 6, noData: true, },
   },
 
   drives: [ "Valor", "Wisdom", "Limit", "Master", "Final", ],
