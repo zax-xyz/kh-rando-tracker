@@ -13,256 +13,41 @@ html(lang="en")
 
   body
     .grid
-      div
-        img.icon(
-          src="img/worlds/roxas_world.png"
-          alt="Roxas World" title="Roxas World"
-        )
-        img.nobody(src="img/nobody.png")
+      each item, name in worlds
+        div(data-total=item.total)
+          img.icon(
+            src=`${imgDir}/worlds/${item.file}.png`
+            alt=name
+            title=name
+          )
 
-      div(data-total="3")
-        img.icon(
-          src="img/worlds/twilight_town.png"
-          alt="Twilight Town" title="Twilight Town"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
+          if item.total > 1
+            img.number
 
-      div(data-total="3")
-        img.icon(
-          src="img/worlds/hollow_bastion.png"
-          alt="Hollow Bastion" title="Hollow Bastion"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-        img.secondary(src="img/secondary/fenrir.png")
+          unless item.noData
+            img.nobody(src=`${imgDir}/nobody.png`)
 
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/the_land_of_dragons.png"
-          alt="Land of Dragons" title="Land of Dragons"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
+          if item.secondary
+            img.secondary(src=`${imgDir}/${secondaryDir}/${item.secondary}.png`)
 
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/olympus_coliseum.png"
-          alt="Olympus Coliseum" title="Olympus Coliseum"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
+      each drive in drives
+        div(data-total=7)
+          img.icon(
+            src=`${imgDir}/drive/${drive.toLowerCase()}.png`
+            alt=`${drive} Form`
+            title=`${drive} Form`
+          )
+          img.number
+          img.secondary.drive(src=`${imgDir}/${secondaryDir}/triangle.png`)
 
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/beast_castle.png"
-          alt="Beast's Castle" title="Beast's Castle"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/port_royal.png"
-          alt="Port Royal" title="Port Royal"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/agrabah.png"
-          alt="Agrabah" title="Agrabah"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/halloween_town.png"
-          alt="Halloween Town" title="Halloween Town"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/pride_lands.png"
-          alt="Pride Lands" title="Pride Lands"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div
-        img.icon(
-          src="img/worlds/disney_castle.png"
-          alt="Disney Castle" title="Disney Castle"
-        )
-        img.nobody(src="img/nobody.png")
-        img.secondary(src="img/secondary/terra.png")
-
-      div(data-total="2")
-        img.icon(
-          src="img/worlds/space_paranoids.png"
-          alt="Space Paranoids" title="Space Paranoids"
-        )
-        img.number
-
-      div
-        img.icon(
-          src="img/worlds/the_world_that_never_was.png"
-          alt="The World That Never Was" title="The World That Never Was"
-        )
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="5")
-        img.icon(
-          src="img/worlds/atlantica.png"
-          alt="Atlantica" title="Atlantica"
-        )
-        img.number
-        img.nobody(src="img/nobody.png")
-
-      div(data-total="6")
-        img.icon(
-          src="img/worlds/100_acre_wood.png"
-          alt="100 Acre Wood" title="100 Acre Wood"
-        )
-        img.number
-
-      div(data-total="7")
-        img.icon(
-          src="img/drive/valor.png"
-          alt="Valor Form" title="Valor Form"
-        )
-        img.number
-        img.secondary.drive(src="img/ability.png")
-
-      div(data-total="7")
-        img.icon(
-          src="img/drive/wisdom.png"
-          alt="Wisdom Form" title="Wisdom Form"
-        )
-        img.number
-        img.secondary.drive(src="img/secondary/triangle.png")
-
-      div(data-total="7")
-        img.icon(
-          src="img/drive/limit.png"
-          alt="Limit Form" title="Limit Form"
-        )
-        img.number
-        img.secondary.drive(src="img/secondary/triangle.png")
-
-      div(data-total="7")
-        img.icon(
-          src="img/drive/master.png"
-          alt="Master Form" title="Master Form"
-        )
-        img.number
-        img.secondary.drive(src="img/secondary/triangle.png")
-
-      div(data-total="7")
-        img.icon(
-          src="img/drive/final.png"
-          alt="Final Form" title="Final Form"
-        )
-        img.number
-        img.secondary.drive(src="img/secondary/triangle.png")
-
-      div(data-total="3")
-        img.icon(src="img/magic/fire.png" alt="Fire" title="Fire")
-        img.number
-
-      div(data-total="3")
-        img.icon(
-          src="img/magic/blizzard.png"
-          alt="Blizzard" title="Blizzard"
-        )
-        img.number
-
-      div(data-total="3")
-        img.icon(
-          src="img/magic/thunder.png"
-          alt="Thunder" title="Thunder"
-        )
-        img.number
-
-      div(data-total="3")
-        img.icon(
-          src="img/magic/cure.png"
-          alt="Cure" title="Cure"
-        )
-        img.number
-
-      div(data-total="3")
-        img.icon(
-          src="img/magic/reflect.png"
-          alt="Reflect" title="Reflect"
-        )
-        img.number
-
-      div(data-total="3")
-        img.icon(
-          src="img/magic/magnet.png"
-          alt="Magnet" title="Magnet"
-        )
-        img.number
-
-      div
-        img.icon(
-          src="img/proofs_promise/promise.png"
-          alt="Promise Charm" title="Promise Charm"
-        )
-
-      div
-        img.icon(
-          src="img/proofs_promise/non-existent.png"
-          alt="Proof of Nonexistence" title="Proof of Nonexistence"
-        )
-
-      div
-        img.icon(
-          src="img/proofs_promise/connections.png"
-          alt="Proof of Connection" title="Proof of Connection"
-        )
-
-      div
-        img.icon(
-          src="img/proofs_promise/tranquil.png"
-          alt="Proof of Tranquility" title="Proof of Tranquility"
-        )
-
-      div
-        img.icon(
-          src="img/charms/baseball.png"
-          alt="Baseball Charm" title="Baseball Charm (Chicken Little)"
-        )
-
-      div
-        img.icon(
-          src="img/charms/lamp.png"
-          alt="Lamp Charm" title="Lamp Charm (Genie)"
-        )
-
-      div
-        img.icon(
-          src="img/charms/ukelele.png"
-          alt="Ukelele Charm" title="Ukelele Charm (Stitch)"
-        )
-
-      div
-        img.icon(
-          src="img/charms/feather.png"
-          alt="Feather Charm" title="Feather Charm (Peter Pan)"
-        )
-
-      div(data-total="4")
-        img.icon(
-          src="img/cup.png"
-          alt="Cup Tournaments" title="Cup Tournaments"
-        )
-        img.number
+      each item, name in other
+        div(data-total=item.total)
+          img.icon(
+            src=`${imgDir}/${item.file}.png`
+            alt=name
+            title=name
+          )
+          img.number
 
     footer
       .container

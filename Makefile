@@ -3,7 +3,7 @@
 ###############################################
 
 HTMLC := pug
-HTMLFLAGS := -s
+HTMLFLAGS := -s -O items.js
 
 CSSC := stylus
 CSSFLAGS := -c -q
