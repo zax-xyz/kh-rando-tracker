@@ -1,1 +1,1 @@
-var theme=document.cookie.split("; ").find(e=>e.startsWith("theme"));if(theme&&(theme=theme.split("=")[1]),"dark"===theme){document.documentElement.setAttribute("theme","dark");const e=31536e3;document.cookie=`theme=dark; max-age=${e}`}else theme="light";
+function setTheme(){document.documentElement.setAttribute("theme",theme);document.cookie=`theme=${theme}; max-age=31536000`}var theme=document.cookie.split("; ").find(e=>e.startsWith("theme"));theme&&(theme=theme.split("=")[1]),"dark"===theme?setTheme():theme="light";
