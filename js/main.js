@@ -62,12 +62,12 @@ document.querySelectorAll(".grid > div").forEach((element) => {
   };
 
   element.oncontextmenu = (event) => {
-    // We have our own events for right click and the context menu would be intrusive
+    // We have our own events for right click so the context menu would be intrusive
     event.preventDefault();
   };
 });
 
-/* global theme:writable */
+/* global theme:writable, setTheme */
 
 // Dark/light theme button
 document.getElementById("theme-btn").onclick = (event) => {
@@ -79,7 +79,5 @@ document.getElementById("theme-btn").onclick = (event) => {
     event.target.innerHTML = "Dark Theme";
   }
 
-  document.documentElement.setAttribute("theme", theme);
-  const cookieAge = 60 * 60 * 24 * 365;  // One year
-  document.cookie = `theme=${theme}; max-age=${cookieAge}`;
+  setTheme();
 };
