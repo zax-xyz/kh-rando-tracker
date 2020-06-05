@@ -20,14 +20,14 @@
   if (number && level > 0 && !addNobody) {
     // Update number if this isn't the nobody level
     number.setAttribute("src", `img/numbers/${level}.png`);
-  };
+  }
 
   // Set CSS classes if necessary
   if (addNobody) {
     // Show nobody symbol
     nobody.classList.add("opaque");
     return;
-  };
+  }
 
   switch (level) {
     case 0:
@@ -44,7 +44,7 @@
       // Show number
       number.classList.add("opaque");
       break;
-  };
+  }
 };
 
 function handleRightClick(event) {
@@ -83,7 +83,7 @@ document.getElementById("theme-btn").onclick = (event) => {
   } else {
     theme = "light";
     event.target.innerHTML = "Dark Theme";
-  };
+  }
 
   document.documentElement.setAttribute("theme", theme);
   const cookieAge = 60 * 60 * 24 * 365;  // One year
