@@ -13,32 +13,31 @@
   level = (level + 1) % (total + 1);
   elem.dataset.level = level;
 
-  const addNobody = nobody && level === total;
-
-  // Update number if this isn't the nobody level
-  if (number && level && !addNobody)
-    number.setAttribute("src", `img/numbers/${level}.png`);
-
-  if (addNobody) {
+  if (nobody && level === total) {
     // Show nobody symbol on last level
     nobody.classList.add("opaque");
-  } else {
-    switch (level) {
-      case 0:
-        // Disable
-        icon.classList.remove("opaque");
-        number && number.classList.remove("opaque");
-        nobody && nobody.classList.remove("opaque");
-        break;
-      case 1:
-        // First state, don't show number yet
-        icon.classList.add("opaque");
-        break;
-      case 2:
-        // Show number
-        number.classList.add("opaque");
-        break;
-    }
+    return;
+  }
+
+  // Update number if this isn't the nobody level
+  if (number && level)
+    number.setAttribute("src", `img/numbers/${level}.png`);
+
+  switch (level) {
+    case 0:
+      // Disable
+      icon.classList.remove("opaque");
+      number && number.classList.remove("opaque");
+      nobody && nobody.classList.remove("opaque");
+      break;
+    case 1:
+      // First state, don't show number yet
+      icon.classList.add("opaque");
+      break;
+    case 2:
+      // Show number
+      number.classList.add("opaque");
+      break;
   }
 }
 
