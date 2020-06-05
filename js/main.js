@@ -13,37 +13,32 @@
   level = (level + 1) % (total + 1);
   elem.dataset.level = level;
 
-  // Add nobody symbol on the last level
   const addNobody = nobody && level === total;
 
-  // Set the number element source to the corresponding image
-  if (number && level > 0 && !addNobody) {
-    // Update number if this isn't the nobody level
+  // Update number if this isn't the nobody level
+  if (number && level && !addNobody)
     number.setAttribute("src", `img/numbers/${level}.png`);
-  }
 
-  // Set CSS classes if necessary
   if (addNobody) {
-    // Show nobody symbol
+    // Show nobody symbol on last level
     nobody.classList.add("opaque");
-    return;
-  }
-
-  switch (level) {
-    case 0:
-      // Disabled
-      icon.classList.remove("opaque");
-      number && number.classList.remove("opaque");
-      nobody && nobody.classList.remove("opaque");
-      break;
-    case 1:
-      // First state, don't show number yet
-      icon.classList.add("opaque");
-      break;
-    case 2:
-      // Show number
-      number.classList.add("opaque");
-      break;
+  } else {
+    switch (level) {
+      case 0:
+        // Disable
+        icon.classList.remove("opaque");
+        number && number.classList.remove("opaque");
+        nobody && nobody.classList.remove("opaque");
+        break;
+      case 1:
+        // First state, don't show number yet
+        icon.classList.add("opaque");
+        break;
+      case 2:
+        // Show number
+        number.classList.add("opaque");
+        break;
+    }
   }
 }
 
