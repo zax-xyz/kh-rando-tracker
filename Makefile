@@ -1,3 +1,7 @@
+###############################################
+# Compilers and flags
+###############################################
+
 HTMLC := pug
 HTMLFLAGS := -s
 
@@ -10,12 +14,14 @@ JSFLAGS := -c -m
 IMGC := cp
 IMGFLAGS := -r
 
+###############################################
+# Files/paths
+###############################################
+
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
 IMGBUILDDIR := ${BUILDDIR}/img
-
-###############################################
 
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
@@ -29,6 +35,8 @@ IMGSRCDIR := img
 IMGSRCFILES := $(wildcard ${IMGSRCDIR}/*)
 IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
+###############################################
+# Compile files
 ###############################################
 
 all: ${BUILDDIR} html css js img
@@ -48,6 +56,8 @@ img: ${IMGBUILDDIR} ${IMGBUILDFILES}
 .PHONY: img
 
 ###############################################
+# Create build directories as needed
+###############################################
 
 MKDIR_P := mkdir -p
 
@@ -63,6 +73,10 @@ ${JSBUILDDIR}:
 ${IMGBUILDDIR}:
 	${MKDIR_P} ${IMGBUILDDIR}
 
+###############################################
+# Build
+###############################################
+
 ${BUILDDIR}/index.html: index.pug
 	${HTMLC} ${HTMLFLAGS} -o ${BUILDDIR} $^
 
@@ -75,6 +89,8 @@ ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 ${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
 	${IMGC} ${IMGFLAGS} $^ $@
 
+###############################################
+# Cleanup
 ###############################################
 
 clean:
