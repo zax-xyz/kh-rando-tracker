@@ -13,7 +13,7 @@
   level = (level + 1) % (total + 1);
   elem.dataset.level = level;
 
-  if (nobody && level === total) {
+  if (nobody !== null && level === total) {
     // Show nobody symbol on last level
     nobody.classList.add("opaque");
     return;
