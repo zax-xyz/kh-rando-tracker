@@ -71,7 +71,7 @@ img
 
 $additional-img
   position absolute
-  width 50px
+  width 45px
   opacity 0
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .15))
 
@@ -83,24 +83,25 @@ $additional-img
   // Position in bottom right
   right 0
   bottom 0
+  width 50px
 
 .nobody
   @extend $additional-img
   // Position in top left
-  top 0
+  top 5px
   left 0
 
 .secondary
   @extend $additional-img
   // Position in top right
-  top 0
-  right 0
-  width 40px
+  top 5px
+  right 5px
 
   &.drive
     // Position in top left
     top 10px
     left 10px
+    width 40px
 
 .opaque
   opacity 1
