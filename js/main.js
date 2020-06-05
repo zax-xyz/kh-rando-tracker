@@ -19,8 +19,7 @@
     return;
   }
 
-  // Update number if this isn't the nobody level
-  if (number !== undefined && level > 1) {
+  if (number !== null && level > 1) {
     number.setAttribute("src", `img/numbers/${level}.png`);
   }
 
