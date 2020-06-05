@@ -16,7 +16,7 @@ html(lang="en")
       each item, name in worlds
         div(data-total=item.total)
           img.icon(
-            src=`${imgDir}/worlds/${item.file}.png`
+            src=`img/worlds/${item.file}.png`
             alt=name
             title=name
           )
@@ -25,25 +25,25 @@ html(lang="en")
             img.number
 
           unless item.noData
-            img.nobody(src=`${imgDir}/nobody.png`)
+            img.nobody(src=`img/nobody.png`)
 
           if item.secondary
-            img.secondary(src=`${imgDir}/${secondaryDir}/${item.secondary}.png`)
+            img.secondary(src=`img/secondary/${item.secondary}.png`)
 
       each drive in drives
         div(data-total=7)
           img.icon(
-            src=`${imgDir}/drive/${drive.toLowerCase()}.png`
+            src=`img/drive/${drive.toLowerCase()}.png`
             alt=`${drive} Form`
             title=`${drive} Form`
           )
           img.number
-          img.secondary.drive(src=`${imgDir}/${secondaryDir}/triangle.png`)
+          img.secondary.drive(src=`img/secondary/triangle.png`)
 
       each item, name in other
         div(data-total=item.total)
           img.icon(
-            src=`${imgDir}/${item.file}.png`
+            src=`img/${item.file}.png`
             alt=name
             title=name
           )

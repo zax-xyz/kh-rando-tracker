@@ -1,7 +1,4 @@
 {
-  imgDir: "img",
-  secondaryDir: "secondary",
-
   worlds: {
     "Roxas World": { file: "roxas_world", },
     "Twilight Town": { file: "twilight_town", total: 3, },
