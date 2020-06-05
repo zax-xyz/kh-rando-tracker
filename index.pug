@@ -11,7 +11,7 @@ html(lang="en")
   body
     .grid
       each item, name in worlds
-        div(data-total=item.total)
+        .item(data-total=item.total)
           img.icon(
             src=`img/worlds/${item.file}.png`
             alt=name
@@ -28,7 +28,7 @@ html(lang="en")
             img.secondary(src=`img/secondary/${item.secondary}.png`)
 
       each drive in drives
-        div(data-total=7)
+        .item(data-total=7)
           img.icon(
             src=`img/drive/${drive.toLowerCase()}.png`
             alt=`${drive} Form`
@@ -38,7 +38,7 @@ html(lang="en")
           img.secondary.drive(src=`img/secondary/triangle.png`)
 
       each item, name in other
-        div(data-total=item.total)
+        .item(data-total=item.total)
           img.icon(
             src=`img/${item.file}.png`
             alt=name
