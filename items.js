@@ -26,14 +26,14 @@
     "Cure": { file: "magic/cure", total: 3, },
     "Reflect": { file: "magic/reflect", total: 3, },
     "Magnet": { file: "magic/magnet", total: 3, },
-    "Promise Charm": { file: "proofs_promise/promise", },
-    "Proof of Nonexistence": { file: "proofs_promise/non-existent", },
-    "Proof of Connection": { file: "proofs_promise/connections", },
-    "Proof of Tranquility": { file: "proofs_promise/tranquil", },
     "Baseball Charm (Chicken Little)": { file: "charms/baseball", },
     "Lamp Charm (Genie)": { file: "charms/lamp", },
     "Ukelele Charm (Stitch)": { file: "charms/ukelele", },
     "Feather Charm (Peter Pan)": { file: "charms/feather", },
     "Cup Tournaments": { file: "cup", total: 4, },
+    "Promise Charm": { file: "proofs_promise/promise", },
+    "Proof of Nonexistence": { file: "proofs_promise/non-existent", },
+    "Proof of Connection": { file: "proofs_promise/connections", },
+    "Proof of Tranquility": { file: "proofs_promise/tranquil", },
   }
 }
