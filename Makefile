@@ -11,9 +11,6 @@ CSSFLAGS := -c -q
 JSC := uglifyjs
 JSFLAGS := -c -m
 
-IMGC := cp
-IMGFLAGS := -r
-
 ###############################################
 # Files/paths
 ###############################################
@@ -21,7 +18,6 @@ IMGFLAGS := -r
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
-IMGBUILDDIR := ${BUILDDIR}/img
 
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
@@ -30,10 +26,6 @@ CSSBUILDFILES := $(patsubst ${CSSSRCDIR}/%.styl, ${CSSBUILDDIR}/%.css, ${CSSSRCF
 JSSRCDIR := js
 JSSRCFILES := $(wildcard ${JSSRCDIR}/*.js)
 JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
-
-IMGSRCDIR := img
-IMGSRCFILES := $(wildcard ${IMGSRCDIR}/*)
-IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
 ###############################################
 # Compile files
@@ -47,7 +39,8 @@ css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
 js: ${JSBUILDDIR} ${JSBUILDFILES}
 
-img: ${IMGBUILDDIR} ${IMGBUILDFILES}
+img:
+	cp -r img dist/
 
 .PHONY: all
 .PHONY: html
@@ -70,9 +63,6 @@ ${CSSBUILDDIR}:
 ${JSBUILDDIR}:
 	${MKDIR_P} ${JSBUILDDIR}
 
-${IMGBUILDDIR}:
-	${MKDIR_P} ${IMGBUILDDIR}
-
 ###############################################
 # Build
 ###############################################
@@ -85,9 +75,6 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSC} ${JSFLAGS} -o $@ $^
-
-${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
-	${IMGC} ${IMGFLAGS} $^ $@
 
 ###############################################
 # Cleanup

@@ -13,7 +13,7 @@ html(lang="en")
       each item, name in worlds
         .item(data-total=item.total)
           img.icon(
-            src=`img/worlds/${item.file}.png`
+            src=`img/worlds/${name.toLowerCase()}.png`
             alt=name
             title=name
           )
