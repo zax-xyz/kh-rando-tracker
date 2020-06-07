@@ -22,7 +22,7 @@ html(lang="en")
             img.number
 
           unless item.noData
-            img.nobody(src=`img/nobody.png`)
+            img.nobody(src="img/nobody.png")
 
           if item.secondary
             img.secondary(src=`img/secondary/${item.secondary}.png`)
@@ -35,7 +35,7 @@ html(lang="en")
             title=`${drive} Form`
           )
           img.number
-          img.secondary.drive(src=`img/secondary/triangle.png`)
+          img.secondary.drive(src="img/secondary/triangle.png")
 
       each item, name in other
         .item(data-total=item.total)
