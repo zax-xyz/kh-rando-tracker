@@ -42,6 +42,7 @@
 }
 
 function handleRightClick(event) {
+  // Toggle secondary icons
   const elem = event.currentTarget;
   const secondary = elem.querySelector(".secondary");
 
@@ -66,6 +67,35 @@ document.querySelectorAll(".grid > div").forEach((element) => {
     event.preventDefault();
   };
 });
+
+document.querySelectorAll("footer .popup > button").forEach((element) => {
+  // Open relevant popup if its button is clicked
+  element.onclick = (event) => {
+    const content = element.nextElementSibling;
+    content.classList.toggle("active");
+  };
+});
+
+document.querySelectorAll("footer .popup > .content").forEach((element) => {
+  element.onclick = (event) => {
+    if (element !== event.target) {
+      // Child was clicked, ignore
+      return;
+    }
+
+    element.classList.remove("active");
+  }
+});
+
+document.onkeydown = (event) => {
+  if (event.key === "Escape") {
+    const activeElem = document.querySelector("footer .popup > .content.active");
+    if (activeElem !== null) {
+      // Hide popup if it is active
+      activeElem.classList.remove("active");
+    }
+  }
+};
 
 /* global theme:writable, setTheme */
 

@@ -29,13 +29,24 @@ body
   background #ccc no-repeat fixed center / cover
   background-image $bg-img
 
-  transition color .1s
+  transition color .25s
 
   /:root[theme="dark"] &
     color $dark-font-color
     background-image linear-gradient($dark-bg-over, $dark-bg-over), $bg-img
 
+a
+  color hsl(210, 90%, 68%)
+  text-decoration none
+  border-bottom 1px solid transparent
+  transition border-bottom-color .25s, color .25s
+
+  &:hover
+    color hsl(210, 90%, 73%)
+    border-bottom-color @color
+
 .grid
+  // 5 x 7 grid
   display grid
   grid-template-columns repeat(5, 115px)
   grid-template-rows repeat(7, 115px)
@@ -50,7 +61,7 @@ body
 
   overflow-x auto
   z-index 0
-  transition background-color .1s, box-shadow .1s
+  transition background-color .25s, box-shadow .25s
 
   /:root[theme="dark"] &
     background-color $dark-bg-color
@@ -67,13 +78,18 @@ body
 img
   width 100px
   opacity 0.35
-  transition opacity 150ms
+  transition opacity .25s
 
 $additional-img
   position absolute
   width 45px
   opacity 0
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .15))
+  transform translateY(4px)
+  transition opacity .25s, transform .25s
+
+  &.opaque
+    transform translateY(0)
 
   /:root[theme="dark"] &
     filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
@@ -114,11 +130,12 @@ footer
   padding 15px 30px
 
   font-size 14px
+  text-align center
   line-height 1.4
   background-color $bg-color
 
   z-index 1
-  transition background-color .1s
+  transition background-color .25s
 
   /:root[theme="dark"] &
     background-color $dark-bg-color
@@ -126,31 +143,75 @@ footer
   > .container
     display flex
     flex-basis 1200px
+    flex-direction column
 
-.version
-  @extend $center-items
-  flex 1
+    > *
+      padding 5px
 
-.theme
+  .popup .content
+    @extend $center-items
+    justify-content center
+
+    position fixed
+    top 0
+    right 0
+    bottom 0
+    left 0
+
+    padding 25px
+
+    background-color rgba(0, 0, 0, .45)
+
+    opacity 0
+    visibility hidden
+    transition opacity .25s, visibility .25s
+
+    .body
+      padding 20px
+      width 100%
+      max-width 500px
+      background-color $bg-color
+
+      border-radius 3px
+      box-shadow 0 5px 25px rgba(0, 0, 0, .3)
+      transform translateY(15px)
+      transition background-color .25s, box-shadow .25s, transform .25s
+
+      /:root[theme="dark"] &
+        background-color $dark-bg-color
+        box-shadow 0 5px 25px rgba(0, 0, 0, .5)
+
+    &.active
+      opacity 1
+      visibility visible
+
+      .body
+        opacity 1
+        transform translateY(0)
+
+.buttons
   @extend $center-items
   justify-content center
-  padding-left 20px
 
 button
-  padding 6px 18px
+  padding 7px 15px
+  margin 0 5px
 
   font-family $font
   color hsl(210, 100%, 98%)
 
-  background hsl(210, 70%, 60%)
-  border-radius 4px
+  background hsl(210, 70%, 55%)
+  border-radius 3px
   border 0
   outline 0
-  box-shadow 0 2px 5px hsla(210, 70%, 60%, 0.3)
+  box-shadow 0 2px 5px hsla(210, 70%, 60%, 0.4)
 
   cursor pointer
-  transition background-color .2s, transform .2s
+  transition background-color .25s, transform .25s
+
+  /:root[theme="dark"] &
+    box-shadow 0 2px 5px hsla(210, 70%, 60%, 0.2)
 
   &:hover
-    background hsl(210, 70%, 55%)
+    background hsl(210, 70%, 50%)
     transform translateY(-2px)
