@@ -6,7 +6,7 @@ The idea for this tracker came from [ViolinGamer](https://twitter.com/ViolinGame
 
 You can find it [here](https://tracker.zaxu.xyz).
 
-If you want to use the tracker locally offline, or change some of the images, you can find a pre-built zip on the [Releases](https://github.com/zaxutic/kh2fm-rando-tracker/releases/latest) page. To download the release, click the "**Source code** (zip)" link. Note that the releases are automatically generated and there is no guarantee of proper code style if you wish to edit these files directly.
+If you want to use the tracker locally offline, or change some of the images, you can find a pre-built zip on the [Releases](https://github.com/zaxutic/kh2fm-rando-tracker/releases/latest) page. To download the release, click the `tracker.zip` link. Note that the releases are automatically generated and there is no guarantee of proper code style if you wish to edit these files directly.
 
 The `gh-pages` branch of the repository also contains built, compressed/minified files for the site (the versions on the releases page contain uncompressed/pretty files for ease of editing).
 
