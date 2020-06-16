@@ -19,7 +19,7 @@ jobs:
           tags: true
         local_dir: dist
     - stage: deploy release
-      script: make pretty && zip -r tracker.zip dist
+      script: make pretty && mv dist tracker && zip -r tracker.zip tracker
       deploy:
         provider: releases
         file: tracker.zip
