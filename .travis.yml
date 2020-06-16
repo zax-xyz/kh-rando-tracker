@@ -5,12 +5,21 @@ install:
   - npm install stylus -g
   - npm install pug-cli -g
   - npm install uglify-es -g
-script: make
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
-  local_dir: dist
+jobs:
+  include:
+    - stage: deploy
+      script: make
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        keep_history: true
+        on:
+          branch: master
+        local_dir: dist
+    - stage: deploy pretty
+      script: make pretty
+      deploy:
+        provider: releases
+        skip_cleanup: true
+        api_key: $GITHUB_TOKEN
