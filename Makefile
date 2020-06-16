@@ -12,7 +12,7 @@ CSSPFLAGS := -q
 
 JSC := uglifyjs
 JSFLAGS := -c -m
-JSFLAGS := -m
+JSFLAGS := -b
 
 ###############################################
 # Files/paths
