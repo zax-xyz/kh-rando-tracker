@@ -11,6 +11,8 @@ var theme = document.cookie
 
 if (theme) {
   theme = theme.split("=")[1];
+} else {
+  theme = "dark";
 }
 
 if (theme === "dark") {

@@ -68,14 +68,15 @@ document.querySelectorAll(".grid > div").forEach((element) => {
   };
 });
 
+// Open relevant popup if its button is clicked
 document.querySelectorAll("footer .popup > button").forEach((element) => {
-  // Open relevant popup if its button is clicked
   element.onclick = (event) => {
     const content = element.nextElementSibling;
     content.classList.toggle("active");
   };
 });
 
+// Hide popup when clicking outside its area
 document.querySelectorAll("footer .popup > .content").forEach((element) => {
   element.onclick = (event) => {
     if (element !== event.target) {
@@ -87,6 +88,7 @@ document.querySelectorAll("footer .popup > .content").forEach((element) => {
   }
 });
 
+// Hide popups on Escape key
 document.onkeydown = (event) => {
   if (event.key === "Escape") {
     const activeElem = document.querySelector("footer .popup > .content.active");
@@ -100,13 +102,20 @@ document.onkeydown = (event) => {
 /* global theme:writable, setTheme */
 
 // Dark/light theme button
-document.getElementById("theme-btn").onclick = (event) => {
+const themeBtn = document.querySelector("#theme-btn");
+if (theme === "dark") {
+  themeBtn.innerHTML = "Light Theme";
+} else {
+  themeBtn.innerHTML = "Dark Theme";
+}
+
+themeBtn.onclick = (event) => {
   if (theme === "light") {
     theme = "dark";
-    event.target.innerHTML = "Light Theme";
+    themeBtn.innerHTML = "Light Theme";
   } else {
     theme = "light";
-    event.target.innerHTML = "Dark Theme";
+    themeBtn.innerHTML = "Dark Theme";
   }
 
   setTheme();
