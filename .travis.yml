@@ -16,6 +16,7 @@ jobs:
         keep_history: true
         on:
           branch: master
+          tags: true
         local_dir: dist
     - stage: deploy pretty
       script: make pretty
@@ -23,3 +24,6 @@ jobs:
         provider: releases
         skip_cleanup: true
         api_key: $GITHUB_TOKEN
+        on:
+          branch: master
+          tags: true
