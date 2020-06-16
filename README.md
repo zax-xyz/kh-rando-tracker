@@ -6,17 +6,17 @@ The idea for this tracker came from [ViolinGamer](https://twitter.com/ViolinGame
 
 You can find it [here](https://zaxutic.github.io/kh2fm-rando-tracker/).
 
+If you want to use the tracker locally offline, or change some of the images, you can find pre-built zips on the [Releases](https://github.com/zaxutic/kh2fm-rando-tracker/releases) page. The `gh-pages` branch of the repository also contains built, compressed/minified files for the site (the versions on the releases page contain uncompressed/pretty files for ease of editing). Note however that the releases are automatically generated and there is no guarantee of proper code style.
+
 ## Building
+
+This is for people who want to help develop the tracker, or build it from source.
 
 ```sh
 # Install dependencies
-npm install pug-cli -g
-npm install stylus -g
-npm install uglify-es -g
-```
-
-```sh
-make
+$ npm install pug-cli stylus uglify-es -g
+# Build
+$ make
 ```
 
 The site will be built into a `dist` subdirectory.
