@@ -18,6 +18,7 @@ jobs:
           branch: master
           tags: true
         local_dir: dist
+        fqdn: tracker.zaxu.xyz
     - stage: deploy release
       script: make pretty && mv dist tracker && zip -r tracker.zip tracker
       deploy:
