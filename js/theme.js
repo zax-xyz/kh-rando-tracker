@@ -1,1 +1,1 @@
-function setTheme(){document.documentElement.setAttribute("theme",theme);document.cookie=`theme=${theme}; max-age=31536000`}var theme=document.cookie.split("; ").find(e=>e.startsWith("theme"));theme&&(theme=theme.split("=")[1]),"dark"===theme?setTheme():theme="light";
+function setTheme(){document.documentElement.setAttribute("theme",theme);document.cookie=`theme=${theme}; max-age=31536000`}var theme=document.cookie.split("; ").find(e=>e.startsWith("theme"));"dark"===(theme=theme?theme.split("=")[1]:"dark")?setTheme():theme="light";
