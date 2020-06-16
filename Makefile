@@ -4,12 +4,15 @@
 
 HTMLC := pug
 HTMLFLAGS := -s -O items.js
+HTMLPFLAGS := -s -O items.js -P
 
 CSSC := stylus
 CSSFLAGS := -c -q
+CSSPFLAGS := -q
 
 JSC := uglifyjs
 JSFLAGS := -c -m
+JSFLAGS := -m
 
 ###############################################
 # Files/paths
@@ -42,11 +45,23 @@ js: ${JSBUILDDIR} ${JSBUILDFILES}
 img:
 	cp -r img dist/
 
+pretty: ${BUILDDIR} html_pretty css_pretty js_pretty img
+
+html_pretty: HTMLFLAGS := ${HTMLPFLAGS}
+html_pretty: html
+
+css_pretty: CSSFLAGS := ${CSSPFLAGS}
+css_pretty: css
+
+js_pretty: JSFLAGS := ${CSSPFLAGS}
+js_pretty: js
+
 .PHONY: all
 .PHONY: html
 .PHONY: css
 .PHONY: js
 .PHONY: img
+.PHONY: pretty
 
 ###############################################
 # Create build directories as needed
