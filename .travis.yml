@@ -18,7 +18,7 @@ jobs:
           branch: master
           tags: true
         local_dir: dist
-    - stage: deploy pretty
+    - stage: deploy release
       script: make pretty
       deploy:
         provider: releases
@@ -27,3 +27,4 @@ jobs:
         on:
           branch: master
           tags: true
+        local_dir: dist
