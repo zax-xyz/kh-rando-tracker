@@ -36,14 +36,19 @@ body
     background-image linear-gradient($dark-bg-over, $dark-bg-over), $bg-img
 
 a
-  color hsl(210, 90%, 68%)
-  text-decoration none
-  border-bottom 1px solid transparent
-  transition border-bottom-color .25s, color .25s
+  color hsl(210, 80%, 45%)
+  text-decoration-color transparent
+  transition text-decoration-color .25s, color .25s
 
   &:hover
-    color hsl(210, 90%, 73%)
-    border-bottom-color @color
+    color hsl(210, 80%, 40%)
+    text-decoration-color initial
+
+  /:root[theme="dark"] &
+    color hsl(210, 90%, 68%)
+
+    &:hover
+      color hsl(210, 90%, 73%)
 
 .grid
   // 5 x 7 grid
