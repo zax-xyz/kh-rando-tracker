@@ -19,12 +19,12 @@ jobs:
           tags: true
         local_dir: dist
     - stage: deploy release
-      script: make pretty
+      script: make pretty && zip -r tracker.zip dist
       deploy:
         provider: releases
+        file: tracker.zip
         skip_cleanup: true
         api_key: $GITHUB_TOKEN
         on:
           branch: master
           tags: true
-        local_dir: dist
