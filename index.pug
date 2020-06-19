@@ -19,10 +19,10 @@ html(lang="en")
 
   body
     .grid
-      each item, name in worlds
+      each item, name in items
         .item(data-total=item.total)
           img.icon(
-            src=`img/worlds/${name.toLowerCase()}.png`
+            src=`img/${item.file}.png`
             alt=name
             title=name
           )
@@ -30,30 +30,14 @@ html(lang="en")
           if item.total > 1
             img.number
 
-          unless item.noData
+          if item.data
             img.nobody(src="img/nobody.png")
 
           if item.secondary
-            img.secondary(src=`img/secondary/${item.secondary}.png`)
-
-      each drive in drives
-        .item(data-total=7)
-          img.icon(
-            src=`img/drive/${drive.toLowerCase()}.png`
-            alt=`${drive} Form`
-            title=`${drive} Form`
-          )
-          img.number
-          img.secondary.drive(src="img/secondary/triangle.png")
-
-      each item, name in other
-        .item(data-total=item.total)
-          img.icon(
-            src=`img/${item.file}.png`
-            alt=name
-            title=name
-          )
-          img.number
+            img.secondary(
+              src=`img/secondary/${item.secondary}.png`
+              class=item.secondaryClass
+            )
 
     footer
       .container
