@@ -51,10 +51,8 @@ a
       color hsl(210, 90%, 73%)
 
 .grid
-  // 5 x 7 grid
   display grid
-  grid-template-columns repeat(5, 115px)
-  grid-template-rows repeat(7, 115px)
+  grid-template-columns repeat(5, auto)
 
   max-width 100%
   padding 15px
@@ -80,6 +78,8 @@ a
   // Center the image within the cell
   @extend $center-items
   justify-content: center
+
+  padding 7.5px
 
 img
   width 100px
