@@ -169,8 +169,8 @@ footer
     background-color rgba(0, 0, 0, .45)
 
     opacity 0
-    visibility hidden
-    transition opacity .25s, visibility .25s
+    pointer-events none
+    transition opacity .25s
 
     .body
       padding 20px
@@ -189,7 +189,7 @@ footer
 
     &.active
       opacity 1
-      visibility visible
+      pointer-events auto
 
       .body
         opacity 1
