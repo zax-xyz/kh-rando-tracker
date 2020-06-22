@@ -17,7 +17,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install
+          sudo npm install stylus pug-cli uglify-es -g
           make
 
       - name: Deploy 🚀
