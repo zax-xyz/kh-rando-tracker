@@ -1,0 +1,24 @@
+{
+  "name": "2fm-rando",
+  "version": "1.2.6",
+  "description": "A tracker intended for use with the KH2FM randomiser",
+  "main": "index.pug",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaxutic/kh2fm-rando-tracker.git"
+  },
+  "author": "Zaxutic",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zaxutic/kh2fm-rando-tracker/issues"
+  },
+  "homepage": "https://github.com/zaxutic/kh2fm-rando-tracker#readme",
+  "dependencies": {
+    "pug-cli": "^1.0.0-alpha6",
+    "stylus": "^0.54.7",
+    "uglify-es": "^3.3.9"
+  }
+}
