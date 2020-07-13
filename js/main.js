@@ -52,12 +52,15 @@ function handleRightClick(event) {
   }
 
   // Get images
-  let files = JSON.parse(secondary.dataset.files);
-  if (!Array.isArray(files)) {
-    // Not an array, assume just single image
+  let files = secondary.dataset.files;
+  if (files === undefined) {
+    // A single image rather than an array
     secondary.classList.toggle("opaque");
     return;
   }
+
+  // Otherwise, parse JSON array
+  files = JSON.parse(secondary.dataset.files);
 
   // Increment image index
   let index = Number(secondary.dataset.index) + 1 || 1;
@@ -67,6 +70,7 @@ function handleRightClick(event) {
     secondary.setAttribute("src", `img/secondary/${files[index - 1]}.png`);
   }
 
+  // We toggle the opaque class for 0 (disable) and 1 (enable)
   if (index < 2) {
     secondary.classList.toggle("opaque");
   }

@@ -34,11 +34,16 @@ html(lang="en")
             img.nobody(src="img/nobody.png")
 
           if item.secondary
-            img.secondary(
-              data-files=JSON.stringify(item.secondary)
-              src=`img/secondary/${item.secondary}.png`
-              class=item.secondaryClass
-            )
+            if Array.isArray(item.secondary)
+              img.secondary(
+                data-files=JSON.stringify(item.secondary)
+                class=item.secondaryClass
+              )
+            else
+              img.secondary(
+                src=`img/secondary/${item.secondary}.png`
+                class=item.secondaryClass
+              )
 
     footer
       .container
