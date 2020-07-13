@@ -13,7 +13,7 @@
     "Pride Lands": { file: "worlds/pride lands", total: 2, data: true, },
     "Disney Castle": { file: "worlds/disney castle", data: true, secondary: "terra", },
     "Space Paranoids": { file: "worlds/space paranoids", total: 2, },
-    "The World That Never Was": { file: "worlds/the world that never was", data: true, secondary: [ "roxas", "luxord", "saix" ] },
+    "The World That Never Was": { file: "worlds/the world that never was", data: true, secondary: [ "roxas", "xigbar", "luxord", "saix" ] },
     "Atlantica": { file: "worlds/atlantica", total: 5, data: true, },
     "100 Acre Wood": { file: "worlds/100 acre wood", total: 6, },
 
