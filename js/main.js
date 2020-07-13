@@ -35,7 +35,24 @@ function handleLeftClick(event) {
 function handleRightClick(event) {
     const elem = event.currentTarget;
     const secondary = elem.querySelector(".secondary");
-    secondary && secondary.classList.toggle("opaque");
+    if (secondary === null) {
+        return;
+    }
+    let files = JSON.parse(secondary.dataset.files);
+    if (!Array.isArray(files)) {
+        secondary.classList.toggle("opaque");
+        return;
+    }
+    let index = Number(secondary.dataset.index) + 1 || 1;
+    if (index % (files.length + 1) === 0) {
+        index = 0;
+    } else {
+        secondary.setAttribute("src", `img/secondary/${files[index - 1]}.png`);
+    }
+    if (index < 2) {
+        secondary.classList.toggle("opaque");
+    }
+    secondary.dataset.index = index;
 }
 
 document.querySelectorAll(".grid > div").forEach(element => {
