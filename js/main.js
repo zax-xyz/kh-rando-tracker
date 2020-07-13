@@ -41,12 +41,37 @@
   }
 }
 
+// Handle secondary icons
 function handleRightClick(event) {
-  // Toggle secondary icons
   const elem = event.currentTarget;
   const secondary = elem.querySelector(".secondary");
 
-  secondary && secondary.classList.toggle("opaque");
+  if (secondary === null) {
+    // Cell has no secondary image
+    return;
+  }
+
+  // Get images
+  let files = JSON.parse(secondary.dataset.files);
+  if (!Array.isArray(files)) {
+    // Not an array, assume just single image
+    secondary.classList.toggle("opaque");
+    return;
+  }
+
+  // Increment image index
+  let index = Number(secondary.dataset.index) + 1 || 1;
+  if (index % (files.length + 1) === 0) {
+    index = 0;
+  } else {
+    secondary.setAttribute("src", `img/secondary/${files[index - 1]}.png`);
+  }
+
+  if (index < 2) {
+    secondary.classList.toggle("opaque");
+  }
+
+  secondary.dataset.index = index;
 }
 
 // Item clicking

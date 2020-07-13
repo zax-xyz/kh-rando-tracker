@@ -35,6 +35,7 @@ html(lang="en")
 
           if item.secondary
             img.secondary(
+              data-files=JSON.stringify(item.secondary)
               src=`img/secondary/${item.secondary}.png`
               class=item.secondaryClass
             )
