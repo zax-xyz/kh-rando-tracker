@@ -12,7 +12,7 @@ CSSPFLAGS := -q
 
 JSC := uglifyjs
 JSFLAGS := -c -m
-JSFLAGS := -b
+JSPFLAGS := -b
 
 ###############################################
 # Files/paths
@@ -53,7 +53,7 @@ html_pretty: html
 css_pretty: CSSFLAGS := ${CSSPFLAGS}
 css_pretty: css
 
-js_pretty: JSFLAGS := ${CSSPFLAGS}
+js_pretty: JSFLAGS := ${JSPFLAGS}
 js_pretty: js
 
 .PHONY: all
