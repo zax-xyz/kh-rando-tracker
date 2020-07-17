@@ -93,6 +93,13 @@ function handleMiddleClick(event) {
   elem.classList.toggle('disabled');
 }
 
+document.body.onmousedown = (event) => {
+  if (event.button === 1) {
+    // Prevent autoscroll on middle click
+    return false;
+  }
+}
+
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((element) => {
   element.onmousedown = (event) => {
