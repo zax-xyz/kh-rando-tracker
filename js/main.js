@@ -1,5 +1,10 @@
 ﻿function handleLeftClick(event) {
   const elem = event.currentTarget;
+  if (elem.classList.contains("disabled")) {
+    // If the world/item is disabled, don't do anything
+    return;
+  }
+
   const icon = elem.querySelector(".icon");
   const number = elem.querySelector(".number");
   const nobody = elem.querySelector(".nobody");
@@ -44,6 +49,11 @@
 // Handle secondary icons
 function handleRightClick(event) {
   const elem = event.currentTarget;
+  if (elem.classList.contains("disabled")) {
+    // If the world/item is disabled, don't do anything
+    return;
+  }
+
   const secondary = elem.querySelector(".secondary");
 
   if (secondary === null) {
@@ -78,6 +88,11 @@ function handleRightClick(event) {
   secondary.dataset.index = index;
 }
 
+function handleMiddleClick(event) {
+  const elem = event.currentTarget;
+  elem.classList.toggle('disabled');
+}
+
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((element) => {
   element.onmousedown = (event) => {
@@ -87,6 +102,9 @@ document.querySelectorAll(".grid > div").forEach((element) => {
         break;
       case 2:
         handleRightClick(event);
+        break;
+      case 1:
+        handleMiddleClick(event);
         break;
     }
   };

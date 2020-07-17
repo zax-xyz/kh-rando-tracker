@@ -81,6 +81,34 @@ a
 
   padding 7.5px
 
+  &:after
+    display flex
+    align-items center
+    justify-content center
+
+    position absolute
+
+    color red
+    font-size 100px
+    font-weight 300
+
+    opacity 0
+    transform translateY(10px)
+    transition opacity .25s, transform .25s
+
+    content "\d7"
+
+  &.disabled
+    .icon
+      opacity 0.18
+
+    &:after
+      opacity 0.6
+      transform scale(1.2)
+
+    img:not(.icon)
+      opacity 0
+
 img
   width 100px
   opacity 0.35
