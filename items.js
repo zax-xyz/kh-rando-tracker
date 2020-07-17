@@ -47,4 +47,9 @@
     "Proof of Connection": { file: "proofs_promise/connections", },
     "Proof of Tranquility": { file: "proofs_promise/tranquil", },
   },
+
+  preloadImages: [
+    ...[ ...Array(7).keys() ].map((i) => `numbers/${i + 1}.png`),
+    ...[ "roxas", "xigbar", "luxord", "saix" ].map((org) => `secondary/${org}.png`),
+  ],
 }
