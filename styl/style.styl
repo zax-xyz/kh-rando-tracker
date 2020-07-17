@@ -201,15 +201,28 @@ footer
     transition opacity .25s
 
     .body
-      padding 20px
-      width 100%
       max-width 500px
+      width 100%
+      max-height 100vh
+      padding 1em 2em
+
+      text-align left
       background-color $bg-color
 
       border-radius 3px
       box-shadow 0 5px 25px rgba(0, 0, 0, .3)
       transform translateY(15px) scale(0.98)
+      overflow-y auto
       transition background-color .25s, box-shadow .25s, transform .25s
+
+      ul
+        padding-left 2em
+        list-style none
+
+        li:before
+          position: absolute;
+          margin-left: -.75em;
+          content: '·';
 
       /:root[theme="dark"] &
         background-color $dark-bg-color

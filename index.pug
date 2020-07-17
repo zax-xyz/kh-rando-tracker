@@ -58,22 +58,37 @@ html(lang="en")
                 p The GitHub repository with the code for this site can be found 
                   a(href="https://github.com/zaxutic/kh2fm-rando-tracker" target="_blank") here
                   | .
-                p If you have any questions/issues you can reach out through Discord (ping me in the <a href="https://discord.gg/352TyvK">rando discord</a>), Twitter (<a href="https://twitter.com/zaxuwu">@Zaxuwu</a>), or GitHub.
+                p If you have any questions/issues you can reach out through Discord (ping me in the <a href="https://discord.gg/352TyvK">rando server</a>), Twitter (<a href="https://twitter.com/zaxuwu">@Zaxuwu</a>), or GitHub.
 
           .popup
             button Help
             .content
               .body
-                p Clicking on any item in the grid will activate it, lighting it up to full opacity.
-                p When clicking on a world more than once, if the world has multiple visits<sup>1</sup> then a number will appear in the bottom left indicating how many visits<sup>1</sup> have been completed. Drive forms and magic have similar numbering systems representing their level.
-                p After all visits to the world have been completed then clicking it again will either trigger a Nobody symbol in the top left, indicating defeat of the Data Org/Absent Sillhouette fight in that world, or simply reset the cell back to its original state.
-                p
-                  | Right-clicking on <em>Hollow Bastion</em> will toggle an icon representing completion of <em>Sephiroth</em>.
-                  | Right-clicking on <em>Disney Castle</em> will toggle an icon representing <em>Lingering Will/Terra</em>.
-                  | Right-clicking on any of the <em>drive forms</em> will toggle an icon representing its <em>auto ability</em> - Auto Valor, Auto Wisdom, etc.
-                  | Right-clicking on <em>The World That Never Was</em> will cycle through <em>Roxas, Xigbar, Luxord, and Saïx</em>.
-                p Middle clicking on an item will put a red cross over it. This can be used if an item is disabled in the randomiser settings, or if your teammate has completed a world in a co-op run. (Just use it however you want)
-                p.footnote <sup>1</sup> 'Visits' has different definitions for regular worlds and Atlantica/100 Acre Wood. Visits for the latter represent not whole world completion but segment completion. That is, song completion for Atlantica (including the tutorial), and pages for 100 Acre Wood.
+                h3 Left Click
+                p Item will become activated, lighting up to full opacity.
+                p When clicking on a world more than once, if applicable, a number will appear in the bottom right indicating how many visits have been completed. Drive forms and magic have similar systems for levels.
+                p After all visits have been completed, clicking again will either trigger a Nobody symbol in the top left, for defeat of the Data Org/Absent Sillhouette fight, or reset the cell back to its original state.
+                p.footnote Note: 'Visits' for Atlantica/100 Acre Wood represent not whole world completion but segment completion. That is, song completion for Atlantica (including the tutorial), and pages for 100 Acre Wood.
+                h3 Right Click
+                ul
+                  li
+                    strong Hollow Bastion
+                    |  - 
+                    em Sephiroth
+                  li
+                    strong Disney Castle
+                    |  - 
+                    em Lingering Will/Terra
+                  li
+                    strong Drive Forms
+                    |  - 
+                    em Auto Abilities (e.g. Auto Valor)
+                  li
+                    strong The World That Never Was
+                    |  - 
+                    em Roxas, Xigbar, Luxord, Saïx
+                h3 Middle Click
+                p A red cross will be put over the item. This can be used if a world/item is disabled in the seed, or if your teammate has completed a world in a co-op run. (Just use it however you want)
 
           .popup
             button Settings
