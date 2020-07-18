@@ -33,10 +33,10 @@
     "Magnet": { file: "magic/magnet", total: 3, },
 
     // Summons
-    "Baseball Charm (Chicken Little)": { file: "charms/baseball", total: 7, group: "summon", },
-    "Lamp Charm (Genie)": { file: "charms/lamp", total: 7, group: "summon", },
-    "Ukelele Charm (Stitch)": { file: "charms/ukelele", total: 7, group: "summon", },
-    "Feather Charm (Peter Pan)": { file: "charms/feather", total: 7, group: "summon", },
+    "Chicken Little": { file: "summons/chicken little", total: 7, group: "summon", },
+    "Genie": { file: "summons/genie", total: 7, group: "summon", },
+    "Stitch": { file: "summons/stitch", total: 7, group: "summon", },
+    "Peter Pan": { file: "summons/peter pan", total: 7, group: "summon", },
 
     // Cup
     "Cup Tournaments": { file: "cup", total: 4, },
