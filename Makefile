@@ -12,7 +12,7 @@ CSSPFLAGS := -q
 
 JSC := uglifyjs
 JSFLAGS := -c -m
-JSPFLAGS := -b
+JSCOM = ${JSC} ${JSFLAGS} -o $@ $^
 
 ###############################################
 # Files/paths
@@ -53,7 +53,7 @@ html_pretty: html
 css_pretty: CSSFLAGS := ${CSSPFLAGS}
 css_pretty: css
 
-js_pretty: JSFLAGS := ${JSPFLAGS}
+js_pretty: JSCOM = cp $^ $@
 js_pretty: js
 
 .PHONY: all
@@ -89,7 +89,7 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 	${CSSC} ${CSSFLAGS} -o $@ $^
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
-	${JSC} ${JSFLAGS} -o $@ $^
+	$(JSCOM)
 
 ###############################################
 # Cleanup
