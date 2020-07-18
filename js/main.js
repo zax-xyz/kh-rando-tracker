@@ -6,20 +6,16 @@
 
   const nobody = elem.querySelector(".nobody");
 
-  // Level is the number associated - like 2nd/3rd visits or lvl 2 drive
-  let level = Number(elem.dataset.level ?? 0);
-  let total = elem.dataset.total ?? 1;
-
-  total = Number(total) + Boolean(nobody);
-
-  // Increase level, resetting to 0 if it reaches the max
+  const total = Number(elem.dataset.total ?? 1) + Boolean(nobody);
   const end = total + 1;
-  level = (level + (end + offset) % end) % (end);
+
+  // Change level, resetting to 0 if >total, or wrapping to the end if <0
+  const level = (Number(elem.dataset.level ?? 0) + (end + offset) % end) % end;
   elem.dataset.level = level;
 
   if (nobody && level === total)
     // Show nobody symbol on last level
-    return nobody?.classList.add("opaque");
+    return nobody.classList.add("opaque");
 
   const group = elem.dataset.group;
   const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
@@ -61,24 +57,21 @@ function handleSecondary(event) {
     return;
 
   const secondary = elem.querySelector(".secondary");
-
-  if (secondary === null)
+  if (!secondary)
     // Cell has no secondary image
     return;
 
   // Get images
   let files = secondary.dataset.files;
-  if (files === undefined) {
+  if (!files)
     // A single image rather than an array
-    secondary.classList.toggle("opaque");
-    return;
-  }
+    return secondary.classList.toggle("opaque");
 
   // Otherwise, parse JSON array
   files = JSON.parse(secondary.dataset.files);
 
   // Increment image index
-  let index = Number(secondary.dataset.index) + 1 || 1;
+  let index = Number(secondary.dataset.index ?? 0) + 1;
   if (index % (files.length + 1) === 0)
     index = 0;
   else
@@ -92,8 +85,7 @@ function handleSecondary(event) {
 }
 
 function handleDisable(event) {
-  const elem = event.currentTarget;
-  elem.classList.toggle('disabled');
+  event.currentTarget.classList.toggle('disabled');
 }
 
 document.body.onmousedown = (event) => {
@@ -104,35 +96,29 @@ document.body.onmousedown = (event) => {
 
 function handleWheel(event) {
   event.preventDefault();
-  if (event.deltaY < 0)
-    handlePrimary(event);
-  else
-    handlePrimary(event, -1);
+
+  const offset = event.deltaY < 0 ? 1 : -1;
+  handlePrimary(event, offset);
 }
 
 const scrollElem = document.getElementById("scroll");
 
 scrollElem.checked = localStorage.scroll;
 scrollElem.onchange = (event) => {
-  let handler;
   const checked = event.target.checked;
-  if (checked === true)
-    handler = handleWheel;
-  else
-    handler = null;
+  const handler = checked ? handleWheel : null;
 
   localStorage.scroll = checked;
 
-  document.querySelectorAll(".grid > div").forEach((element) => {
-    element.onwheel = handler;
-  });
+  document.querySelectorAll(".grid > div").forEach((elem) => elem.onwheel = handler);
 };
+
 // Run once to use saved settings
 scrollElem.onchange({ target: scrollElem });
 
 // Item clicking
-document.querySelectorAll(".grid > div").forEach((element) => {
-  element.onmousedown = (event) => {
+document.querySelectorAll(".grid > div").forEach((elem) => {
+  elem.onmousedown = (event) => {
     switch (event.button) {
       case 0:
         handlePrimary(event);
@@ -146,28 +132,23 @@ document.querySelectorAll(".grid > div").forEach((element) => {
     }
   };
 
-  element.oncontextmenu = (event) => {
-    // We have our own events for right click so the context menu would be intrusive
-    event.preventDefault();
-  };
+  // We have our own events for right click so the context menu would be intrusive
+  elem.oncontextmenu = (event) => event.preventDefault();
 });
 
 // Open relevant popup if its button is clicked
-document.querySelectorAll("footer .popup > button").forEach((element) => {
-  element.onclick = (event) => {
-    const content = element.nextElementSibling;
-    content.classList.toggle("active");
-  };
+document.querySelectorAll("footer .popup > button").forEach((elem) => {
+  elem.onclick = (event) => {
+    elem.nextElementSibling.classList.toggle("active");
+  }
 });
 
 // Hide popup when clicking outside its area
-document.querySelectorAll("footer .popup > .content").forEach((element) => {
-  element.onclick = (event) => {
-    if (element !== event.target)
-      // Child was clicked, ignore
-      return;
-
-    element.classList.remove("active");
+document.querySelectorAll("footer .popup > .content").forEach((elem) => {
+  elem.onclick = (event) => {
+    // Remove active if target wasn't a child
+    if (elem === event.target)
+      elem.classList.remove("active");
   }
 });
 
@@ -175,23 +156,19 @@ document.querySelectorAll("footer .popup > .content").forEach((element) => {
 document.onkeydown = (event) => {
   if (event.key === "Escape") {
     const activeElem = document.querySelector("footer .popup > .content.active");
-    if (activeElem !== null)
-      // Hide popup if it is active
-      activeElem.classList.remove("active");
+    activeElem?.classList.remove("active");
   }
 };
 
 /* global theme:writable, setTheme */
 
 const themeElem = document.getElementById("theme");
+
 themeElem.checked = theme === "dark";
 themeElem.onchange = (event) => {
-  if (event.target.checked === true)
-    theme = "dark";
-  else
-    theme = "light";
-
+  theme = event.target.checked ? "dark" : "light";
   setTheme();
 };
+
 // Run once to use saved settings
 themeElem.onchange({ target: themeElem });
