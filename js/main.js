@@ -25,6 +25,7 @@
   const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
 
   elems.forEach((groupElem) => {
+    // Change state for each item in group
     groupElem.dataset.level = level;
 
     const icon = groupElem.querySelector(".icon");
@@ -59,15 +60,12 @@
 function handleSecondary(event) {
   const elem = event.currentTarget;
   if (elem.classList.contains("disabled"))
-    // If the world/item is disabled, don't do anything
     return;
 
   const secondary = elem.querySelector(".secondary");
   if (!secondary)
-    // Cell has no secondary image
     return;
 
-  // Get images
   let files = secondary.dataset.files;
   if (!files)
     // A single image rather than an array
@@ -94,34 +92,6 @@ function handleDisable(event) {
   event.currentTarget.classList.toggle('disabled');
 }
 
-document.body.onmousedown = (event) => {
-  if (event.button === 1)
-    // Prevent autoscroll on middle click
-    return false;
-}
-
-function handleWheel(event) {
-  event.preventDefault();
-
-  const offset = event.deltaY < 0 ? 1 : -1;
-  handlePrimary(event, offset);
-}
-
-const scrollElem = document.getElementById("scroll");
-
-scrollElem.checked = localStorage.scroll === "true";
-scrollElem.onchange = (event) => {
-  const checked = event.target.checked;
-  const handler = checked ? handleWheel : null;
-
-  localStorage.scroll = checked;
-
-  document.querySelectorAll(".grid > div").forEach((elem) => elem.onwheel = handler);
-};
-
-// Run once to use saved settings
-scrollElem.onchange({ target: scrollElem });
-
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((elem) => {
   elem.onmousedown = (event) => {
@@ -140,38 +110,24 @@ document.querySelectorAll(".grid > div").forEach((elem) => {
 
   // We have our own events for right click so the context menu would be intrusive
   elem.oncontextmenu = (event) => event.preventDefault();
-});
 
-// Open relevant popup if its button is clicked
-document.querySelectorAll("footer .popup > button").forEach((elem) => {
-  elem.onclick = (event) => {
-    elem.nextElementSibling.classList.toggle("active");
+  // Scroll to increment/decrement
+  elem.onwheel = (event) => {
+    // Check setting is on
+    if (localStorage.scroll !== "true")
+      return;
+
+    // Prevent page scroll
+    event.preventDefault();
+
+    // Increment/decrement
+    const offset = event.deltaY < 0 ? 1 : -1;
+    handlePrimary(event, offset);
   }
 });
 
-// Hide popup when clicking outside its area
-document.querySelectorAll("footer .popup > .content").forEach((elem) => {
-  elem.onclick = (event) => {
-    // Remove active if target wasn't a child
-    if (elem === event.target)
-      elem.classList.remove("active");
-  }
-});
-
-// Hide popups on Escape key
-document.onkeydown = (event) => {
-  if (event.key === "Escape") {
-    const activeElem = document.querySelector("footer .popup > .content.active");
-    activeElem?.classList.remove("active");
-  }
-};
-
-/* global theme:writable, setTheme */
-
-const themeElem = document.getElementById("theme");
-
-themeElem.checked = theme === "dark";
-themeElem.onchange = (event) => {
-  theme = event.target.checked ? "dark" : "light";
-  setTheme();
-};
+document.body.onmousedown = (event) => {
+  if (event.button === 1)
+    // Prevent autoscroll on middle click
+    return false;
+}
