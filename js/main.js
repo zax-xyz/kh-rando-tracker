@@ -98,7 +98,7 @@ document.body.onmousedown = (event) => {
 
 function handleWheel(event) {
   event.preventDefault();
-  if (event.deltaY > 0)
+  if (event.deltaY < 0)
     handlePrimary(event);
   else
     handlePrimary(event, -1);
