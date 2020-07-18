@@ -10,7 +10,11 @@
   const end = total + 1;
 
   // Change level, resetting to 0 if >total, or wrapping to the end if <0
-  const level = (Number(elem.dataset.level ?? 0) + (end + offset) % end) % end;
+  let level = Number(elem.dataset.level ?? 0)
+  if (level === 0 || elem.querySelector(".icon").classList.contains("opaque"))
+    // Only increase level if the summon isn't being unlocked for the first time
+    level = (level + (end + offset) % end) % end;
+
   elem.dataset.level = level;
 
   if (nobody && level === total)
@@ -21,6 +25,8 @@
   const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
 
   elems.forEach((groupElem) => {
+    groupElem.dataset.level = level;
+
     const icon = groupElem.querySelector(".icon");
     const number = groupElem.querySelector(".number");
     const nobody = groupElem.querySelector(".nobody");
