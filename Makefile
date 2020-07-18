@@ -32,11 +32,6 @@ JSSRCFILES := $(wildcard ${JSSRCDIR}/*.js)
 JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
 
 IMGSRCDIR := img
-IMGSRCDIRS := $(shell find ${IMGSRCDIR}/ -type d)
-IMGBUILDDIRS := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCDIRS})
-
-IMGSRCFILES := $(shell find ${IMGSRCDIR}/ -type f | sed 's: :\\ :g')
-IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
 ###############################################
 # Compile files
@@ -50,7 +45,8 @@ css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
 js: ${JSBUILDDIR} ${JSBUILDFILES}
 
-img: ${IMGBUILDDIR} ${IMGBUILDDIRS} ${IMGBUILDFILES}
+img:
+	cp -r ${IMGSRCDIR} ${IMGBUILDDIR}
 
 pretty: ${BUILDDIR} html_pretty css_pretty js_pretty img
 
@@ -85,12 +81,6 @@ ${CSSBUILDDIR}:
 ${JSBUILDDIR}:
 	${MKDIR_P} ${JSBUILDDIR}
 
-${IMGBUILDDIR}:
-	${MKDIR_P} ${IMGBUILDDIR}
-
-${IMGBUILDDIR}/%:
-	${MKDIR_P} $@
-
 ###############################################
 # Build
 ###############################################
@@ -103,12 +93,6 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSCOM}
-
-${IMGBUILDDIR}/%.png: ${IMGSRCDIR}/%.png
-	cp "$^" "$@"
-
-${IMGBUILDDIR}/%.jpg: ${IMGSRCDIR}/%.jpg
-	cp "$^" "$@"
 
 ###############################################
 # Cleanup
