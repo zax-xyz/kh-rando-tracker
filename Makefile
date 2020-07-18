@@ -10,9 +10,8 @@ CSSC := stylus
 CSSFLAGS := -c -q
 CSSPFLAGS := -q
 
-JSC := uglifyjs
-JSFLAGS := -c -m
-JSCOM = ${JSC} ${JSFLAGS} -o $@ $^
+JSC := minify
+JSCOM = ${JSC} -o $@ $^
 
 ###############################################
 # Files/paths
@@ -89,7 +88,7 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 	${CSSC} ${CSSFLAGS} -o $@ $^
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
-	$(JSCOM)
+	${JSCOM}
 
 ###############################################
 # Cleanup

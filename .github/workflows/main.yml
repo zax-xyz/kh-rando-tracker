@@ -17,7 +17,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          sudo npm install stylus pug-cli uglify-es -g
+          sudo npm install stylus pug-cli babel-minify -g
           make
 
       - name: Deploy 🚀
