@@ -42,7 +42,7 @@ html(lang="en")
 
     footer
       .container
-        .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.2.9
+        .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.2.10
         .buttons
           .popup
             button About
@@ -94,7 +94,15 @@ html(lang="en")
             button Settings
             .content
               .body
-                button#theme-btn Dark Theme
-                span (I plan to add more settings soon)
+                .row
+                  p Dark Theme
+                  label.switch
+                    input#theme(type="checkbox")
+                    span.slider
+                .row
+                  p Scroll Wheel Increment/Decrement
+                  label.switch
+                    input#scroll(type="checkbox")
+                    span.slider
 
     script(src="js/main.js")

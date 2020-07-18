@@ -1,9 +1,8 @@
-﻿function handleLeftClick(event) {
+﻿function handlePrimary(event, offset = 1) {
   const elem = event.currentTarget;
-  if (elem.classList.contains("disabled")) {
+  if (elem.classList.contains("disabled"))
     // If the world/item is disabled, don't do anything
     return;
-  }
 
   const icon = elem.querySelector(".icon");
   const number = elem.querySelector(".number");
@@ -15,7 +14,8 @@
 
   // Increase level, resetting to 0 if it reaches the max
   total = Number(total) + Boolean(nobody);
-  level = (level + 1) % (total + 1);
+  const end = total + 1;
+  level = (level + (end + offset) % end) % (end);
   elem.dataset.level = level;
 
   if (nobody !== null && level === total) {
@@ -24,9 +24,8 @@
     return;
   }
 
-  if (number !== null && level > 1) {
+  if (number !== null && level > 1)
     number.setAttribute("src", `img/numbers/${level}.png`);
-  }
 
   switch (level) {
     case 0:
@@ -38,28 +37,28 @@
     case 1:
       // First state, don't show number yet
       icon.classList.add("opaque");
+      number && number.classList.remove("opaque");
       break;
-    case 2:
+    default:
+      // For if 
+      icon.classList.add("opaque");
       // Show number
-      number.classList.add("opaque");
+      number && number.classList.add("opaque");
       break;
   }
 }
 
-// Handle secondary icons
-function handleRightClick(event) {
+function handleSecondary(event) {
   const elem = event.currentTarget;
-  if (elem.classList.contains("disabled")) {
+  if (elem.classList.contains("disabled"))
     // If the world/item is disabled, don't do anything
     return;
-  }
 
   const secondary = elem.querySelector(".secondary");
 
-  if (secondary === null) {
+  if (secondary === null)
     // Cell has no secondary image
     return;
-  }
 
   // Get images
   let files = secondary.dataset.files;
@@ -74,30 +73,52 @@ function handleRightClick(event) {
 
   // Increment image index
   let index = Number(secondary.dataset.index) + 1 || 1;
-  if (index % (files.length + 1) === 0) {
+  if (index % (files.length + 1) === 0)
     index = 0;
-  } else {
+  else
     secondary.setAttribute("src", `img/secondary/${files[index - 1]}.png`);
-  }
 
   // We toggle the opaque class for 0 (disable) and 1 (enable)
-  if (index < 2) {
+  if (index < 2)
     secondary.classList.toggle("opaque");
-  }
 
   secondary.dataset.index = index;
 }
 
-function handleMiddleClick(event) {
+function handleDisable(event) {
   const elem = event.currentTarget;
   elem.classList.toggle('disabled');
 }
 
 document.body.onmousedown = (event) => {
-  if (event.button === 1) {
+  if (event.button === 1)
     // Prevent autoscroll on middle click
     return false;
-  }
+}
+
+function handleWheel(event) {
+  event.preventDefault();
+  if (event.deltaY > 0)
+    handlePrimary(event);
+  else
+    handlePrimary(event, -1);
+}
+
+const scrollElem = document.getElementById("scroll");
+scrollElem.checked = localStorage.scroll;
+scrollElem.onchange = (event) => {
+  let handler;
+  const checked = event.target.checked;
+  if (checked === true)
+    handler = handleWheel;
+  else
+    handler = null;
+
+  localStorage.scroll = checked;
+
+  document.querySelectorAll(".grid > div").forEach((element) => {
+    element.onwheel = handler;
+  });
 }
 
 // Item clicking
@@ -105,13 +126,13 @@ document.querySelectorAll(".grid > div").forEach((element) => {
   element.onmousedown = (event) => {
     switch (event.button) {
       case 0:
-        handleLeftClick(event);
+        handlePrimary(event);
         break;
       case 2:
-        handleRightClick(event);
+        handleSecondary(event);
         break;
       case 1:
-        handleMiddleClick(event);
+        handleDisable(event);
         break;
     }
   };
@@ -133,10 +154,9 @@ document.querySelectorAll("footer .popup > button").forEach((element) => {
 // Hide popup when clicking outside its area
 document.querySelectorAll("footer .popup > .content").forEach((element) => {
   element.onclick = (event) => {
-    if (element !== event.target) {
+    if (element !== event.target)
       // Child was clicked, ignore
       return;
-    }
 
     element.classList.remove("active");
   }
@@ -146,31 +166,21 @@ document.querySelectorAll("footer .popup > .content").forEach((element) => {
 document.onkeydown = (event) => {
   if (event.key === "Escape") {
     const activeElem = document.querySelector("footer .popup > .content.active");
-    if (activeElem !== null) {
+    if (activeElem !== null)
       // Hide popup if it is active
       activeElem.classList.remove("active");
-    }
   }
 };
 
 /* global theme:writable, setTheme */
 
-// Dark/light theme button
-const themeBtn = document.querySelector("#theme-btn");
-if (theme === "dark") {
-  themeBtn.innerHTML = "Light Theme";
-} else {
-  themeBtn.innerHTML = "Dark Theme";
-}
-
-themeBtn.onclick = (event) => {
-  if (theme === "light") {
+const themeElem = document.getElementById("theme");
+themeElem.checked = theme === "dark";
+themeElem.onchange = (event) => {
+  if (event.target.checked === true)
     theme = "dark";
-    themeBtn.innerHTML = "Light Theme";
-  } else {
+  else
     theme = "light";
-    themeBtn.innerHTML = "Dark Theme";
-  }
 
   setTheme();
 };

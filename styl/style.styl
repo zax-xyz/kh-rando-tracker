@@ -265,3 +265,51 @@ button
   &:hover
     background hsl(210, 70%, 50%)
     transform translateY(-2px)
+
+.row
+  display flex
+  align-items center
+
+  p
+    flex 1
+    margin .5em 0
+
+.switch
+  display inline-block
+  width 3em
+  height 1.5em
+
+.switch input
+  display none
+
+.slider
+  display flex
+  align-items center
+
+  height 100%
+  padding-left .375em
+
+  background-color #ccc
+  border-radius 1em
+
+  cursor pointer
+  transition background-color .2s
+
+.slider:before
+  height 1em
+  width 1em
+
+  background-color white
+  border-radius 50%
+  content ""
+
+  transition margin-left .2s
+
+input:checked + .slider
+  background-color hsl(210, 70%, 55%)
+
+input:focus + .slider
+  box-shadow 0 0 1px hsl(210, 70%, 55%)
+
+input:checked + .slider:before
+  margin-left 1.25em
