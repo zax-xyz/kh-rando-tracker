@@ -103,7 +103,7 @@ function handleWheel(event) {
 
 const scrollElem = document.getElementById("scroll");
 
-scrollElem.checked = localStorage.scroll;
+scrollElem.checked = localStorage.scroll === "true";
 scrollElem.onchange = (event) => {
   const checked = event.target.checked;
   const handler = checked ? handleWheel : null;
@@ -169,6 +169,3 @@ themeElem.onchange = (event) => {
   theme = event.target.checked ? "dark" : "light";
   setTheme();
 };
-
-// Run once to use saved settings
-themeElem.onchange({ target: themeElem });
