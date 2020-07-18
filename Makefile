@@ -12,6 +12,7 @@ CSSPFLAGS := -q
 
 JSC := minify
 JSCOM = ${JSC} -o $@ $^
+JSPCOM = cp $^ $@
 
 ###############################################
 # Files/paths
@@ -20,6 +21,7 @@ JSCOM = ${JSC} -o $@ $^
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
+IMGBUILDDIR := ${BUILDDIR}/img
 
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
@@ -28,6 +30,13 @@ CSSBUILDFILES := $(patsubst ${CSSSRCDIR}/%.styl, ${CSSBUILDDIR}/%.css, ${CSSSRCF
 JSSRCDIR := js
 JSSRCFILES := $(wildcard ${JSSRCDIR}/*.js)
 JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
+
+IMGSRCDIR := img
+IMGSRCDIRS := $(shell find ${IMGSRCDIR}/ -type d)
+IMGBUILDDIRS := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCDIRS})
+
+IMGSRCFILES := $(shell find ${IMGSRCDIR}/ -type f | sed 's: :\\ :g')
+IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
 ###############################################
 # Compile files
@@ -41,8 +50,7 @@ css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
 js: ${JSBUILDDIR} ${JSBUILDFILES}
 
-img:
-	cp -r img dist/
+img: ${IMGBUILDDIR} ${IMGBUILDDIRS} ${IMGBUILDFILES}
 
 pretty: ${BUILDDIR} html_pretty css_pretty js_pretty img
 
@@ -52,7 +60,7 @@ html_pretty: html
 css_pretty: CSSFLAGS := ${CSSPFLAGS}
 css_pretty: css
 
-js_pretty: JSCOM = cp $^ $@
+js_pretty: JSCOM = ${JSPCOM}
 js_pretty: js
 
 .PHONY: all
@@ -77,6 +85,12 @@ ${CSSBUILDDIR}:
 ${JSBUILDDIR}:
 	${MKDIR_P} ${JSBUILDDIR}
 
+${IMGBUILDDIR}:
+	${MKDIR_P} ${IMGBUILDDIR}
+
+${IMGBUILDDIR}/%:
+	${MKDIR_P} $@
+
 ###############################################
 # Build
 ###############################################
@@ -89,6 +103,12 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSCOM}
+
+${IMGBUILDDIR}/%.png: ${IMGSRCDIR}/%.png
+	cp "$^" "$@"
+
+${IMGBUILDDIR}/%.jpg: ${IMGSRCDIR}/%.jpg
+	cp "$^" "$@"
 
 ###############################################
 # Cleanup
