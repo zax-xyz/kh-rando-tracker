@@ -16,7 +16,7 @@ This is for people who want to help develop the tracker, or build it from source
 
 ```sh
 # Install dependencies
-$ npm install stylus pug-cli uglify-es -g
+$ npm install stylus pug-cli babel-minify -g
 # Build
 $ make
 ```
