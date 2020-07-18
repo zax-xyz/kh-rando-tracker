@@ -4,48 +4,54 @@
     // If the world/item is disabled, don't do anything
     return;
 
-  const icon = elem.querySelector(".icon");
-  const number = elem.querySelector(".number");
   const nobody = elem.querySelector(".nobody");
 
   // Level is the number associated - like 2nd/3rd visits or lvl 2 drive
-  let level = Number(elem.dataset.level) || 0;
-  let total = elem.dataset.total || 1;
+  let level = Number(elem.dataset.level ?? 0);
+  let total = elem.dataset.total ?? 1;
+
+  total = Number(total) + Boolean(nobody);
 
   // Increase level, resetting to 0 if it reaches the max
-  total = Number(total) + Boolean(nobody);
   const end = total + 1;
   level = (level + (end + offset) % end) % (end);
   elem.dataset.level = level;
 
-  if (nobody !== null && level === total) {
+  if (nobody && level === total)
     // Show nobody symbol on last level
-    nobody.classList.add("opaque");
-    return;
-  }
+    return nobody?.classList.add("opaque");
 
-  if (number !== null && level > 1)
-    number.setAttribute("src", `img/numbers/${level}.png`);
+  const group = elem.dataset.group;
+  const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
 
-  switch (level) {
-    case 0:
-      // Disable
-      icon.classList.remove("opaque");
-      number && number.classList.remove("opaque");
-      nobody && nobody.classList.remove("opaque");
-      break;
-    case 1:
-      // First state, don't show number yet
-      icon.classList.add("opaque");
-      number && number.classList.remove("opaque");
-      break;
-    default:
-      // For if 
-      icon.classList.add("opaque");
-      // Show number
-      number && number.classList.add("opaque");
-      break;
-  }
+  elems.forEach((groupElem) => {
+    const icon = groupElem.querySelector(".icon");
+    const number = groupElem.querySelector(".number");
+    const nobody = groupElem.querySelector(".nobody");
+
+    if (level > 1)
+      number?.setAttribute("src", `img/numbers/${level}.png`);
+
+    switch (level) {
+      case 0:
+        // Disable
+        if (elem === groupElem) icon.classList.remove("opaque");
+        number?.classList.remove("opaque");
+        nobody?.classList.remove("opaque");
+        break;
+      case 1:
+        // First state, don't show number yet
+        if (elem === groupElem) icon.classList.add("opaque");
+        number?.classList.remove("opaque");
+        break;
+      default:
+        // For if 
+        if (elem === groupElem) icon.classList.add("opaque");
+        // Show number
+        number?.classList.add("opaque");
+        break;
+    }
+  })
 }
 
 function handleSecondary(event) {

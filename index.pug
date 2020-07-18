@@ -15,14 +15,17 @@ html(lang="en")
   body
     .grid
       each item, name in items
-        .item(data-total=item.total)
+        .item(
+          data-total=item.total
+          data-group=item.group
+        )
           img.icon(
             src=`img/${item.file}.png`
             alt=name
             title=name
           )
 
-          if item.total > 1
+          if item.total
             img.number
 
           if item.data
