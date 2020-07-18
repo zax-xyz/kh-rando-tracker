@@ -105,6 +105,7 @@ function handleWheel(event) {
 }
 
 const scrollElem = document.getElementById("scroll");
+
 scrollElem.checked = localStorage.scroll;
 scrollElem.onchange = (event) => {
   let handler;
@@ -119,7 +120,9 @@ scrollElem.onchange = (event) => {
   document.querySelectorAll(".grid > div").forEach((element) => {
     element.onwheel = handler;
   });
-}
+};
+// Run once to use saved settings
+scrollElem.onchange({ target: scrollElem });
 
 // Item clicking
 document.querySelectorAll(".grid > div").forEach((element) => {
@@ -184,3 +187,5 @@ themeElem.onchange = (event) => {
 
   setTheme();
 };
+// Run once to use saved settings
+themeElem.onchange({ target: themeElem });
