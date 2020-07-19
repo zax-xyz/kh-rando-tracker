@@ -1,1 +1,1 @@
-function setTheme(){document.documentElement.setAttribute("theme",theme),localStorage.theme=theme}var theme=localStorage.theme;theme===void 0&&(theme="dark"),"dark"===theme?setTheme():theme="light";
+"use strict";function setTheme(){document.documentElement.setAttribute("theme",theme);localStorage.theme=theme}var theme=localStorage.theme;if(theme===undefined){theme="dark"}if(theme==="dark"){setTheme()}else{theme="light"}
