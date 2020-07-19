@@ -7,7 +7,7 @@ document.querySelectorAll("footer .popup > button").forEach((elem) => {
 
 // Hide popup when clicking outside its area
 document.querySelectorAll("footer .popup > .content").forEach((elem) => {
-  elem.onclick = (event) => {
+  elem.onmousedown = (event) => {
     // Remove active if target wasn't a child
     if (elem === event.target)
       elem.classList.remove("active");
