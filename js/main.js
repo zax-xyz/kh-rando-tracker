@@ -17,7 +17,7 @@
 
   elem.dataset.level = level;
 
-  if (nobody && level === total)
+  if (nobody && level === total && offset > 0)
     // Show nobody symbol on last level
     return nobody.classList.add("opaque");
 
