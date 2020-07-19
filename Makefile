@@ -21,7 +21,7 @@ JSPFLAGS := --presets=@babel/preset-env
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
-IMGBUILDDIR := ${BUILDDIR}/img
+IMGBUILDDIR := ${BUILDDIR}/
 
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
