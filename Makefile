@@ -10,9 +10,9 @@ CSSC := stylus
 CSSFLAGS := -c -q
 CSSPFLAGS := -q
 
-JSC := minify
-JSCOM = ${JSC} -o $@ $^
-JSPCOM = cp $^ $@
+JSC := babel
+JSFLAGS := --minified --no-comments --presets=@babel/preset-env
+JSPFLAGS := --presets=@babel/preset-env
 
 ###############################################
 # Files/paths
@@ -56,7 +56,7 @@ html_pretty: html
 css_pretty: CSSFLAGS := ${CSSPFLAGS}
 css_pretty: css
 
-js_pretty: JSCOM = ${JSPCOM}
+js_pretty: JSFLAGS := ${JSPFLAGS}
 js_pretty: js
 
 .PHONY: all
@@ -92,7 +92,7 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 	${CSSC} ${CSSFLAGS} -o $@ $^
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
-	${JSCOM}
+	${JSC} ${JSFLAGS} -o $@ $^
 
 ###############################################
 # Cleanup
