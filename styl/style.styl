@@ -128,33 +128,34 @@ $additional-img
   /:root[theme="dark"] &
     filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
-.number
-  @extend $additional-img
-  // Position in bottom right
-  right 0
-  bottom 0
-  width 50px
+.grid
+  .number
+    @extend $additional-img
+    // Position in bottom right
+    right 0
+    bottom 0
+    width 50px
 
-.nobody
-  @extend $additional-img
-  // Position in top left
-  top 5px
-  left 0
-
-.secondary
-  @extend $additional-img
-  // Position in top right
-  top 5px
-  right 5px
-
-  &.drive
+  .nobody
+    @extend $additional-img
     // Position in top left
-    top 10px
-    left 10px
-    width 40px
+    top 5px
+    left 0
 
-.opaque
-  opacity 1
+  .secondary
+    @extend $additional-img
+    // Position in top right
+    top 5px
+    right 5px
+
+    &.drive
+      // Position in top left
+      top 10px
+      left 10px
+      width 40px
+
+  .opaque
+    opacity 1
 
 footer
   display flex
@@ -215,15 +216,6 @@ footer
       overflow-y auto
       transition background-color .25s, box-shadow .25s, transform .25s
 
-      ul
-        padding-left 2em
-        list-style none
-
-        li:before
-          position: absolute;
-          margin-left: -.75em;
-          content: '·';
-
       /:root[theme="dark"] &
         background-color $dark-bg-color
         box-shadow 0 5px 25px rgba(0, 0, 0, .5)
@@ -235,6 +227,30 @@ footer
       .body
         opacity 1
         transform none
+
+.definitions
+  padding-left 2em
+  list-style none
+
+  li
+    &:before
+      position: absolute;
+      margin-left: -.75em;
+      content: '·';
+
+    .base
+    .secondary
+      display inline-block
+
+    .base
+      font-weight bolder
+
+      &:after
+        content ' - '
+        white-space pre-wrap
+
+    .definition
+      font-style italic
 
 .footnote
   font-weight lighter
