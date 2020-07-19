@@ -15,9 +15,11 @@
   },
   "homepage": "https://github.com/zaxutic/kh2fm-rando-tracker#readme",
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.54.8"
-  }
+  },
+  "dependencies": {}
 }
