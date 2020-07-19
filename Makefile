@@ -2,15 +2,15 @@
 # Compilers and flags
 ###############################################
 
-HTMLC := pug
+HTMLC := npx pug
 HTMLFLAGS := -s -O items.js
 HTMLPFLAGS := -s -O items.js -P
 
-CSSC := stylus
+CSSC := npx stylus
 CSSFLAGS := -c -q
 CSSPFLAGS := -q
 
-JSC := babel
+JSC := npx babel
 JSFLAGS := --minified --no-comments --presets=@babel/preset-env
 JSPFLAGS := --presets=@babel/preset-env
 
