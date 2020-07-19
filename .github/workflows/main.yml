@@ -17,6 +17,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
+          sudo npm install pug-cli stylus -g
           npm install
           make
 

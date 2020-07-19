@@ -16,6 +16,7 @@ This is for people who want to help develop the tracker, or build it from source
 
 ```sh
 # Install dependencies
+$ npm install pug-cli stylus -g
 $ npm install
 # Build
 $ make
