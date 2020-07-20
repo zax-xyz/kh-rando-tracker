@@ -112,21 +112,21 @@ a
 img
   width 100px
   opacity 0.35
+  filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .2))
   transition opacity .25s
+
+  /:root[theme="dark"] &
+    filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
 $additional-img
   position absolute
   width 45px
   opacity 0
-  filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .15))
   transform translateY(4px)
   transition opacity .25s, transform .25s
 
   &.opaque
     transform translateY(0)
-
-  /:root[theme="dark"] &
-    filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
 .grid
   .number
