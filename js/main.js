@@ -12,14 +12,16 @@
   // Change level, resetting to 0 if >total, or wrapping to the end if <0
   let level = Number(elem.dataset.level ?? 0)
   if (level === 0 || elem.querySelector(".icon").classList.contains("opaque"))
-    // Only increase level if the summon isn't being unlocked for the first time
+    // When in group, don't increase level if item unlocked for first time but already levelled
     level = (level + (end + offset) % end) % end;
 
   elem.dataset.level = level;
 
-  if (nobody && level === total && offset > 0)
+  if (nobody && level === total)
     // Show nobody symbol on last level
-    return nobody.classList.add("opaque");
+    nobody.classList.add("opaque");
+
+  const imgNum = Math.min(level, total - Boolean(nobody))
 
   const group = elem.dataset.group;
   const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
@@ -28,29 +30,31 @@
     // Change state for each item in group
     groupElem.dataset.level = level;
 
-    const icon = groupElem.querySelector(".icon");
+    let icon = groupElem.querySelector(".icon");
     const number = groupElem.querySelector(".number");
     const nobody = groupElem.querySelector(".nobody");
 
-    if (level > 1)
-      number?.setAttribute("src", `img/numbers/${level}.png`);
+    icon = elem === groupElem ? icon : null;
+
+    if (imgNum > 1)
+      number?.setAttribute("src", `img/numbers/${imgNum}.png`);
 
     switch (level) {
       case 0:
         // Disable
-        if (elem === groupElem) icon.classList.remove("opaque");
+        icon?.classList.remove("opaque");
         number?.classList.remove("opaque");
         nobody?.classList.remove("opaque");
         break;
+
       case 1:
         // First state, don't show number yet
-        if (elem === groupElem) icon.classList.add("opaque");
+        icon?.classList.add("opaque");
         number?.classList.remove("opaque");
         break;
+
       default:
-        // For if 
-        if (elem === groupElem) icon.classList.add("opaque");
-        // Show number
+        icon?.classList.add("opaque");
         number?.classList.add("opaque");
         break;
     }
@@ -97,12 +101,17 @@ document.querySelectorAll(".grid > div").forEach((elem) => {
   elem.onmousedown = (event) => {
     switch (event.button) {
       case 0:
+        // Left click
         handlePrimary(event);
         break;
+
       case 2:
+        // Right click
         handleSecondary(event);
         break;
+
       case 1:
+        // Middle click
         handleDisable(event);
         break;
     }
