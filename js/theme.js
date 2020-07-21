@@ -1,1 +1,1 @@
-"use strict";function setTheme(){document.documentElement.setAttribute("theme",theme);localStorage.theme=theme}var theme=localStorage.theme;if(theme===undefined){theme="dark"}if(theme==="dark"){setTheme()}else{theme="light"}
+"use strict";function setTheme(){document.documentElement.setAttribute("theme",theme);localStorage.theme=theme}try{var theme=localStorage.theme}catch(_unused){console.error("Could not read localStorage, defaulting to dark theme");theme="dark"}if(theme===undefined){theme="dark"}if(theme==="dark"){setTheme()}else{theme="light"}
