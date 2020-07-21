@@ -30,13 +30,21 @@ themeElem.onchange = (event) => {
 };
 
 const scrollElem = document.getElementById("scroll");
-scrollElem.checked = localStorage.scroll === "true";
+try {
+  scrollElem.checked = localStorage.scroll === "true";
+} catch {
+  console.error("Could not read localStorage, using scroll setting");
+}
 scrollElem.onchange = (event) => {
   localStorage.scroll = event.target.checked;
 };
 
 const columnsElem = document.getElementById("columns");
-columnsElem.value = localStorage.columns ?? null;
+try {
+  columnsElem.value = localStorage.columns ?? null;
+} catch {
+  console.error("Could not read localStorage, using default columns");
+}
 columnsElem.oninput = (event) => {
   const columns = event.target.value;
   const grid = document.querySelector(".grid");

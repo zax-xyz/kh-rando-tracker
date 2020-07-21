@@ -4,7 +4,12 @@ function setTheme() {
   localStorage.theme = theme;
 }
 
-var theme = localStorage.theme;
+try {
+  var theme = localStorage.theme;
+} catch {
+  console.error("Could not read localStorage, defaulting to dark theme");
+  theme = "dark";
+}
 
 if (theme === undefined) {
   theme = "dark";

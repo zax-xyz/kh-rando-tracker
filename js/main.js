@@ -123,7 +123,7 @@ document.querySelectorAll(".grid > div").forEach((elem) => {
   // Scroll to increment/decrement
   elem.onwheel = (event) => {
     // Check setting is on
-    if (localStorage.scroll !== "true")
+    if (!scrollElem.checked)
       return;
 
     // Prevent page scroll
