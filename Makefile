@@ -21,7 +21,7 @@ JSPFLAGS := --presets=@babel/preset-env
 BUILDDIR := dist
 CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
-IMGBUILDDIR := ${BUILDDIR}/
+IMGBUILDDIR := ${BUILDDIR}/img
 
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
@@ -32,6 +32,8 @@ JSSRCFILES := $(wildcard ${JSSRCDIR}/*.js)
 JSBUILDFILES := $(patsubst ${JSSRCDIR}/%.js, ${JSBUILDDIR}/%.js, ${JSSRCFILES})
 
 IMGSRCDIR := img
+IMGSRCFILES := $(wildcard ${IMGSRCDIR}/*)
+IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
 ###############################################
 # Compile files
@@ -45,8 +47,7 @@ css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
 js: ${JSBUILDDIR} ${JSBUILDFILES}
 
-img:
-	cp -r ${IMGSRCDIR} ${IMGBUILDDIR}
+img: ${IMGBUILDDIR} ${IMGBUILDFILES}
 
 pretty: ${BUILDDIR} html_pretty css_pretty js_pretty img
 
@@ -81,6 +82,9 @@ ${CSSBUILDDIR}:
 ${JSBUILDDIR}:
 	${MKDIR_P} ${JSBUILDDIR}
 
+${IMGBUILDDIR}:
+	${MKDIR_P} ${IMGBUILDDIR}
+
 ###############################################
 # Build
 ###############################################
@@ -93,6 +97,9 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSC} ${JSFLAGS} -o $@ $^
+
+${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
+	cp -r $^ $@
 
 ###############################################
 # Cleanup
