@@ -11,8 +11,8 @@ CSSFLAGS := -c -q
 CSSPFLAGS := -q
 
 JSC := npx babel
-JSFLAGS := --minified --no-comments --presets=@babel/preset-env
-JSPFLAGS := --presets=@babel/preset-env
+JSENV := BABEL_ENV=production
+JSPENV := BABEL_ENV=pretty
 
 ###############################################
 # Files/paths
@@ -57,7 +57,7 @@ html_pretty: html
 css_pretty: CSSFLAGS := ${CSSPFLAGS}
 css_pretty: css
 
-js_pretty: JSFLAGS := ${JSPFLAGS}
+js_pretty: JSENV := ${JSPENV}
 js_pretty: js
 
 .PHONY: all
@@ -96,7 +96,7 @@ ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 	${CSSC} ${CSSFLAGS} -o $@ $^
 
 ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
-	${JSC} ${JSFLAGS} -o $@ $^
+	${JSENV} ${JSC} -o $@ $^
 
 ${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
 	cp -r $^ $@
