@@ -99,7 +99,7 @@ ${JSBUILDDIR}/%.js: ${JSSRCDIR}/%.js
 	${JSENV} ${JSC} -o $@ $^
 
 ${IMGBUILDDIR}/%: ${IMGSRCDIR}/%
-	cp -r $^ $@
+	cp -r $^ ${IMGBUILDDIR}
 
 ###############################################
 # Cleanup
