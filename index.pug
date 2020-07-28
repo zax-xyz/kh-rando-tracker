@@ -14,16 +14,12 @@ html(lang="en")
 
   body
     .grid
-      each item, name in items
+      each item, file in items
         .item(
           data-total=item.total
           data-group=item.group
         )
-          img.icon(
-            src=`img/${item.file}.png`
-            alt=name
-            title=name
-          )
+          img.icon(src=`img/${file}.png`)
 
           if item.total
             img.number
