@@ -30,26 +30,41 @@ themeElem.onchange = (event) => {
 };
 
 const scrollElem = document.getElementById("scroll");
-try {
-  scrollElem.checked = localStorage.scroll === "true";
-} catch {
-  console.error("Could not read localStorage, using scroll setting");
-}
+try { scrollElem.checked = localStorage.scroll === "true" }
+catch {}
 scrollElem.onchange = (event) => {
-  localStorage.scroll = event.target.checked;
+  try { localStorage.scroll = event.target.checked }
+  catch {}
 };
 
 const columnsElem = document.getElementById("columns");
-try {
-  columnsElem.value = localStorage.columns ?? null;
-} catch {
-  console.error("Could not read localStorage, using default columns");
-}
+try { columnsElem.value = localStorage.columns ?? null }
+catch {}
 columnsElem.oninput = (event) => {
   const columns = event.target.value;
   const grid = document.querySelector(".grid");
 
   grid.style.gridTemplateColumns = columns ? `repeat(${columns}, auto)`: null;
-  localStorage.columns = columns;
+
+  try { localStorage.columns = columns }
+  catch {}
 };
 columnsElem.oninput({ target: columnsElem });
+
+const bgInputElem = document.getElementById("background")
+try { bgInputElem.value = localStorage.bg ?? null }
+catch {}
+bgInputElem.oninput = (event) => {
+  const bg = event.target.value;
+
+  [ document.querySelector(".grid"), document.querySelector("footer") ].forEach((elem) => {
+    elem.style.background = bg;
+  });
+  
+  document.querySelectorAll("footer .popup .content .body").forEach((elem) => {
+    elem.style.background = bg;
+  });
+
+  try { localStorage.bg = bg }
+  catch {}
+};
