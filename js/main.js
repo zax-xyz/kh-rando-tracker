@@ -4,14 +4,14 @@
     // If the world/item is disabled, don't do anything
     return;
 
-  const nobody = elem.querySelector(".nobody");
+  const nobody = $(".nobody", elem);
 
   const total = Number(elem.dataset.total ?? 1) + Boolean(nobody);
   const end = total + 1;
 
   // Change level, resetting to 0 if >total, or wrapping to the end if <0
   let level = Number(elem.dataset.level ?? 0)
-  if (level === 0 || elem.querySelector(".icon").classList.contains("opaque"))
+  if (level === 0 || $(".icon", elem).classList.contains("opaque"))
     // When in group, don't increase level if item unlocked for first time but already levelled
     level = (level + (end + offset) % end) % end;
 
@@ -24,15 +24,15 @@
   const imgNum = Math.min(level, total - Boolean(nobody))
 
   const group = elem.dataset.group;
-  const elems = group ? document.querySelectorAll(`[data-group="${group}"]`) : [ elem ];
+  const elems = group ? $$(`[data-group="${group}"]`) : [ elem ];
 
   elems.forEach((groupElem) => {
     // Change state for each item in group
     groupElem.dataset.level = level;
 
-    let icon = groupElem.querySelector(".icon");
-    const number = groupElem.querySelector(".number");
-    const nobody = groupElem.querySelector(".nobody");
+    let icon = $(".icon", groupElem);
+    const number = $(".number", groupElem);
+    const nobody = $(".nobody", groupElem);
 
     icon = elem === groupElem ? icon : null;
 
@@ -66,7 +66,7 @@ function handleSecondary(event) {
   if (elem.classList.contains("disabled"))
     return;
 
-  const secondary = elem.querySelector(".secondary");
+  const secondary = $(".secondary", elem);
   if (!secondary)
     return;
 
@@ -97,7 +97,7 @@ function handleDisable(event) {
 }
 
 // Item clicking
-document.querySelectorAll(".grid > div").forEach((elem) => {
+$$(".grid > div").forEach((elem) => {
   elem.onmousedown = (event) => {
     switch (event.button) {
       case 0:
