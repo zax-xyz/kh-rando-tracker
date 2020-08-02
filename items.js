@@ -14,8 +14,8 @@
     "worlds/disney_castle": { data: true, secondary: "terra", },
     "worlds/space_paranoids": { total: 2, },
     "worlds/the_world_that_never_was": { data: true, secondary: [ "roxas", "xigbar", "luxord", "saix" ] },
-    "worlds/atlantica": { total: 5, data: true, },
-    "worlds/100_acre_wood": { total: 6, },
+    "worlds/atlantica": { total: 6, data: true, id: "atlantica", },
+    "worlds/100_acre_wood": { total: 6, id: "hundred_acre", },
 
     // Drives
     "drive/valor": { total: 7, secondary: "triangle", secondaryClass: "drive", },

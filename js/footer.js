@@ -50,7 +50,7 @@ columnsElem.oninput = (event) => {
 };
 columnsElem.oninput({ target: columnsElem });
 
-const bgInputElem = $("#background")
+const bgInputElem = $("#background");
 try { bgInputElem.value = localStorage.bg ?? null }
 catch {}
 bgInputElem.oninput = (event) => {
@@ -67,3 +67,18 @@ bgInputElem.oninput = (event) => {
   try { localStorage.bg = bg }
   catch {}
 };
+
+const atlantica100Acre = $("#atlantica_100_acre");
+try { atlantica100Acre.checked = localStorage.atlantica100Acre === "true" }
+catch {}
+atlantica100Acre.onchange = (event) => {
+  // Lower total if setting enabled
+  const value = event.target.checked ? 5 : 6;
+
+  [ $("#atlantica"), $("#hundred_acre") ].forEach((elem) => {
+    elem.dataset.total = value;
+  });
+
+  try { localStorage.atlantica100Acre = event.target.checked }
+  catch {}
+}

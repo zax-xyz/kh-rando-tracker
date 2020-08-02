@@ -17,6 +17,7 @@ html(lang="en")
     .grid
       each item, file in items
         .item(
+          id=item.id
           data-total=item.total
           data-group=item.group
         )
@@ -118,6 +119,15 @@ html(lang="en")
                     |  (default 
                     code #212121
                     | )
+
+                .row
+                  p Lower Atlantica/100 Acre Wood Total
+                  label.switch
+                    input#atlantica_100_acre(type="checkbox")
+                    span.slider
+
+                .row
+                  p.footnote By default the tutorial for Atlantica and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
 
                 .row
                   p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions
