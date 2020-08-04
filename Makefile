@@ -10,7 +10,7 @@ CSSC := npx stylus
 CSSFLAGS := -c -q
 CSSPFLAGS := -q
 
-JSC := npx babel
+JSC := npx babel --source-maps=true
 JSENV := BABEL_ENV=production
 JSPENV := BABEL_ENV=pretty
 
