@@ -14,14 +14,14 @@ CHARS = string.ascii_lowercase + string.digits
 
 
 async def dispatch(websocket, message):
-    for user in USERS[websocket]['room']['users']:
-        if user == websocket:
-            continue
-
+    """Relay a message from a user to all the other users in the room"""
+    for user in filter(USERS[websocket]['room']['users'],
+                       lambda u: u != websocket):
         await user.send(message)
 
 
-async def main(websocket, path):
+async def main(websocket, _):
+    """Handle client connection to server"""
     try:
         data = json.loads(await websocket.recv())
 
@@ -36,9 +36,7 @@ async def main(websocket, path):
                     'message': 'Room not found',
                 }))
 
-            num_users = len(room['users'])
-
-            if num_users >= room['size']:
+            if len(room['users']) >= room['size']:
                 return await websocket.send(json.dumps({
                     'type': 'error',
                     'message': 'Room is full',
@@ -46,8 +44,8 @@ async def main(websocket, path):
 
             room['users'].add(websocket)
 
+            # Generate random user id and save
             user_id = str(uuid.uuid4())
-
             USERS[websocket] = {
                 'room': room,
                 'id': user_id,
@@ -58,15 +56,14 @@ async def main(websocket, path):
                 'id': data['room'],
             }))
 
+            # Tell the other users in the room about the user joining
             await dispatch(websocket, json.dumps({
                 'type': 'user_joined',
                 'id': user_id,
             }))
 
-            for user in USERS:
-                if user == websocket:
-                    continue
-
+            for user in filter(USERS, lambda u: u != websocket):
+                # Tell the user about all the other users in the room
                 await websocket.send(json.dumps({
                     'type': 'user_joined',
                     'id': USERS[user]['id'],
@@ -80,11 +77,13 @@ async def main(websocket, path):
                 }))
 
             while True:
+                # Create random room id, making sure it doesn't already exist
                 room = ''.join(random.choice(CHARS) for _ in range(8))
                 if room not in ROOMS:
                     # imagine not having do-while loops
                     break
 
+            # Save room and user
             ROOMS[room] = {
                 'name': room,
                 'size': size,
@@ -101,28 +100,30 @@ async def main(websocket, path):
                 'id': room,
             }))
 
+        # Relay all subsequent messages to the other clients in the room
         async for message in websocket:
             message = json.loads(message)
             message['id'] = USERS[websocket]['id']
 
             await dispatch(websocket, json.dumps(message))
     finally:
-        room = USERS[websocket]['room']
-        room['users'].remove(websocket)
+        # Client disconnected from server
+        await dispatch(websocket, json.dumps({
+            'type': 'user_left',
+            'id': USERS[websocket]['id']
+        }))
 
-        user_id = USERS[websocket]['id']
+        room = USERS[websocket]['room']
+
+        # Remove user
+        room['users'].remove(websocket)
         del USERS[websocket]
 
         if not room['users']:
+            # If no more users in the room, close it
             name = room['name']
             del ROOMS[name]
             print('Room closed:', name)
-        else:
-            for user in room['users']:
-                await user.send(json.dumps({
-                    'type': 'user_left',
-                    'id': user_id,
-                }))
 
 
 loop = asyncio.get_event_loop()
