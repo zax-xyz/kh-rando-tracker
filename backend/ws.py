@@ -15,8 +15,8 @@ CHARS = string.ascii_lowercase + string.digits
 
 async def dispatch(websocket, message):
     """Relay a message from a user to all the other users in the room"""
-    for user in filter(USERS[websocket]['room']['users'],
-                       lambda u: u != websocket):
+    for user in filter(lambda u: u != websocket,
+                       USERS[websocket]['room']['users']):
         await user.send(message)
 
 
@@ -62,7 +62,7 @@ async def main(websocket, _):
                 'id': user_id,
             }))
 
-            for user in filter(USERS, lambda u: u != websocket):
+            for user in filter(lambda u: u != websocket, USERS):
                 # Tell the user about all the other users in the room
                 await websocket.send(json.dumps({
                     'type': 'user_joined',
