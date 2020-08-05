@@ -1,13 +1,13 @@
 // Open relevant popup if its button is clicked
-$$("footer .popup > button").forEach((elem) => {
-  elem.onclick = (event) => {
+$$("footer .popup > button").forEach(elem => {
+  elem.onclick = event => {
     elem.nextElementSibling.classList.toggle("active");
   }
 });
 
 // Hide popup when clicking outside its area
-$$("footer .popup > .content").forEach((elem) => {
-  elem.onmousedown = (event) => {
+$$("footer .popup > .content").forEach(elem => {
+  elem.onmousedown = event => {
     // Remove active if target wasn't a child
     if (elem === event.target)
       elem.classList.remove("active");
@@ -15,7 +15,7 @@ $$("footer .popup > .content").forEach((elem) => {
 });
 
 // Hide popups on Escape key
-document.onkeydown = (event) => {
+document.onkeydown = event => {
   if (event.key === "Escape") {
     $("footer .popup > .content.active")?.classList.remove("active");
   }
@@ -23,7 +23,7 @@ document.onkeydown = (event) => {
 
 const themeElem = $("#theme");
 themeElem.checked = theme === "dark";
-themeElem.onchange = (event) => {
+themeElem.onchange = event => {
   theme = event.target.checked ? "dark" : "light";
   setTheme();
 };
@@ -31,7 +31,7 @@ themeElem.onchange = (event) => {
 const scrollElem = $("#scroll");
 try { scrollElem.checked = localStorage.scroll === "true" }
 catch {}
-scrollElem.onchange = (event) => {
+scrollElem.onchange = event => {
   try { localStorage.scroll = event.target.checked }
   catch {}
 };
@@ -39,7 +39,7 @@ scrollElem.onchange = (event) => {
 const columnsElem = $("#columns");
 try { columnsElem.value = localStorage.columns ?? null }
 catch {}
-columnsElem.oninput = (event) => {
+columnsElem.oninput = event => {
   const columns = event.target.value;
   const grid = $(".grid");
 
@@ -53,14 +53,14 @@ columnsElem.oninput({ target: columnsElem });
 const bgInputElem = $("#background");
 try { bgInputElem.value = localStorage.bg ?? null }
 catch {}
-bgInputElem.oninput = (event) => {
+bgInputElem.oninput = event => {
   const bg = event.target.value;
 
-  [ $(".grid"), $("footer") ].forEach((elem) => {
+  [ $(".grid"), $("footer") ].forEach(elem => {
     elem.style.background = bg;
   });
   
-  $$("footer .popup .content .body").forEach((elem) => {
+  $$("footer .popup .content .body").forEach(elem => {
     elem.style.background = bg;
   });
 
@@ -71,14 +71,14 @@ bgInputElem.oninput = (event) => {
 const atlantica100Acre = $("#atlantica_100_acre");
 try { atlantica100Acre.checked = localStorage.atlantica100Acre === "true" }
 catch {}
-atlantica100Acre.onchange = (event) => {
+atlantica100Acre.onchange = event => {
   // Lower total if setting enabled
   const value = event.target.checked ? 5 : 6;
 
-  [ $("#atlantica"), $("#hundred_acre") ].forEach((elem) => {
+  [ $("#atlantica"), $("#hundred_acre") ].forEach(elem => {
     elem.dataset.total = value;
   });
 
   try { localStorage.atlantica100Acre = event.target.checked }
   catch {}
-}
+};

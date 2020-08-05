@@ -4,14 +4,16 @@
     // If the world/item is disabled, don't do anything
     return;
 
+  // Dispatch event to the other clients in co-op room
   const parentElem = elem.parentElement;
-  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-  if (socket && !parentElem.dataset.userId)
+  if (socket && !parentElem.dataset.userId) {
+    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
     socket.send(JSON.stringify({
       type: "user_primary",
       item: elemIndex,
       offset: offset,
     }));
+  }
 
   const nobody = $(".nobody", elem);
 
@@ -35,15 +37,13 @@
   const group = elem.dataset.group;
   const elems = group ? $$(`[data-group="${group}"]`, elem.parent) : [ elem ];
 
-  elems.forEach((groupElem) => {
+  elems.forEach(groupElem => {
     // Change state for each item in group
     groupElem.dataset.level = level;
 
-    let icon = $(".icon", groupElem);
+    const icon = elem === groupElem ? $(".icon", groupElem) : null;
     const number = $(".number", groupElem);
     const nobody = $(".nobody", groupElem);
-
-    icon = elem === groupElem ? icon : null;
 
     if (imgNum > 1)
       number?.setAttribute("src", `img/numbers/${imgNum}.png`);
@@ -67,7 +67,7 @@
         number?.classList.add("opaque");
         break;
     }
-  })
+  });
 }
 
 function handleSecondary(event) {
@@ -79,13 +79,15 @@ function handleSecondary(event) {
   if (!secondary)
     return;
 
+  // Dispatch event to the other clients in co-op room
   const parentElem = elem.parentElement;
-  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-  if (socket && !parentElem.dataset.userId)
+  if (socket && !parentElem.dataset.userId) {
+    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
     socket.send(JSON.stringify({
       type: "user_secondary",
       item: elemIndex,
     }));
+  }
 
   let files = secondary.dataset.files;
   if (!files)
@@ -113,19 +115,20 @@ function handleDisable(event) {
   const elem = event.currentTarget;
 
   const parentElem = elem.parentElement;
-  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-  if (socket && !parentElem.dataset.userId)
+  if (socket && !parentElem.dataset.userId) {
+    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
     socket.send(JSON.stringify({
       type: "user_secondary",
       item: elemIndex,
     }));
+  }
 
   elem.classList.toggle('disabled');
 }
 
 // Item clicking
-$$(".grid > div").forEach((elem) => {
-  elem.onmousedown = (event) => {
+$$(".grid > div").forEach(elem => {
+  elem.onmousedown = event => {
     switch (event.button) {
       case 0:
         // Left click
@@ -145,10 +148,10 @@ $$(".grid > div").forEach((elem) => {
   };
 
   // We have our own events for right click so the context menu would be intrusive
-  elem.oncontextmenu = (event) => event.preventDefault();
+  elem.oncontextmenu = event => event.preventDefault();
 
   // Scroll to increment/decrement
-  elem.onwheel = (event) => {
+  elem.onwheel = event => {
     // Check setting is on
     if (!scrollElem.checked)
       return;
@@ -162,7 +165,7 @@ $$(".grid > div").forEach((elem) => {
   }
 });
 
-document.body.onmousedown = (event) => {
+document.body.onmousedown = event => {
   if (event.button === 1)
     // Prevent autoscroll on middle click
     return false;

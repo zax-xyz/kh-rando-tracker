@@ -1,6 +1,6 @@
 var socket;
 
-const messageHandler = (event) => {
+function messageHandler(event) {
   const msg = JSON.parse(event.data);
 
   switch (msg.type) {
@@ -58,7 +58,7 @@ const messageHandler = (event) => {
   }
 }
 
-$("#co_op_join").onsubmit = (event) => {
+$("#co_op_join").onsubmit = () => {
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch {
@@ -68,7 +68,7 @@ $("#co_op_join").onsubmit = (event) => {
     return;
   }
 
-  socket.addEventListener("open", (event) => {
+  socket.addEventListener("open", () => {
     socket.send(JSON.stringify({
       type: "join_room",
       room: $("#co_op_join input").value,
@@ -78,9 +78,9 @@ $("#co_op_join").onsubmit = (event) => {
   socket.addEventListener("message", messageHandler);
 
   return false;
-}
+};
 
-$("#co_op_create").onsubmit = (event) => {
+$("#co_op_create").onsubmit = () => {
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch {
@@ -90,7 +90,7 @@ $("#co_op_create").onsubmit = (event) => {
     return;
   }
 
-  socket.addEventListener("open", (event) => {
+  socket.addEventListener("open", () => {
     let size = parseInt($("#co_op_create input").value);
     if (!size) {
       const msgElem = $("#co_op_message");
@@ -108,4 +108,4 @@ $("#co_op_create").onsubmit = (event) => {
   socket.addEventListener("message", messageHandler);
 
   return false;
-}
+};
