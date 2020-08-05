@@ -90,15 +90,15 @@ $("#co_op_create").onsubmit = () => {
     return;
   }
 
-  socket.addEventListener("open", () => {
-    let size = parseInt($("#co_op_create input").value);
-    if (!size) {
-      const msgElem = $("#co_op_message");
-      msgElem.classList.add("active");
-      msgElem.innerHTML = "Invalid or no size given, using default of 2."
-      size = 2;
-    }
+  let size = parseInt($("#co_op_create input").value);
+  if (!size) {
+    const msgElem = $("#co_op_message");
+    msgElem.classList.add("active");
+    msgElem.innerHTML = "Invalid or no size given, using default of 2."
+    size = 2;
+  }
 
+  socket.addEventListener("open", () => {
     socket.send(JSON.stringify({
       type: "create_room",
       size: size,
