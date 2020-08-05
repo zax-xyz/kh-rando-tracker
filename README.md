@@ -15,10 +15,15 @@ The `gh-pages` branch of the repository also contains built, compressed/minified
 This is for people who want to help develop the tracker, or build it from source.
 
 ```sh
+$ cd frontend
 # Install dependencies
 $ npm install
 # Build
-$ make
+$ WS_URL='[WEBSOCKET URL FOR CO-OP]' make
 ```
 
 The site will be built into a `dist` subdirectory.
+
+### Backend
+
+The Python websocket server can be run on localhost or on a public server. Install dependencies with `pip install -r requirements.txt` and run `ws.py`.

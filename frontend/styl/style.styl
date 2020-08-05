@@ -50,19 +50,23 @@ a
     &:hover
       color hsl(210, 90%, 73%)
 
-.grid
+main
   display grid
+  grid-template-columns repeat(2, auto)
+  overflow-x auto
+
+.grid
+  display inline-grid
   grid-template-columns repeat(5, auto)
 
   max-width 100%
   padding 15px
-  margin-top auto
+  margin 5px 5px 0
 
   background-color $bg-color
   box-shadow 0 5px 25px rgba(0, 0, 0, .3)
   border-radius 4px 4px 0 0
 
-  overflow-x auto
   z-index 0
   user-select none
   transition background-color .25s, box-shadow .25s
@@ -160,6 +164,7 @@ $additional-img
 footer
   display flex
   justify-content center
+  flex 1
 
   width 100%
   padding 15px 30px
@@ -287,8 +292,29 @@ button
   align-items center
 
   p
-    flex 1
     margin .5em 0
+
+  :last-child:not(:first-child)
+    margin-left auto
+
+  input
+    width 3em
+    padding 4px 6px
+    border 0
+    border-radius 3px
+    box-shadow 0 0 3px inset rgba(0, 0, 0, .35)
+
+    &:last-child
+      text-align right
+
+    &.long
+      width 9em
+
+#roomId
+  display none
+
+  &.active
+    display block
 
 .switch
   display inline-block
@@ -329,14 +355,3 @@ input:focus + .slider
 
 input:checked + .slider:before
   margin-left 1.25em
-
-.row input
-  width 3em
-  padding 4px 6px
-  text-align right
-  border 0
-  border-radius 3px
-  box-shadow 0 0 3px inset rgba(0, 0, 0, .35)
-
-  &#background
-    width 9em

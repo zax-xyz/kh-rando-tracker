@@ -1,7 +1,7 @@
 {
   items: {
     // Worlds
-    "worlds/roxas world": { data: true },
+    "worlds/roxas_world": { data: true },
     "worlds/twilight_town": { total: 3, data: true, },
     "worlds/hollow_bastion": { total: 3, data: true, secondary: "fenrir", },
     "worlds/land_of_dragons": { total: 2, data: true, },
@@ -14,8 +14,8 @@
     "worlds/disney_castle": { data: true, secondary: "terra", },
     "worlds/space_paranoids": { total: 2, },
     "worlds/the_world_that_never_was": { data: true, secondary: [ "roxas", "xigbar", "luxord", "saix" ] },
-    "worlds/atlantica": { total: 6, data: true, id: "atlantica", },
-    "worlds/100_acre_wood": { total: 6, id: "hundred_acre", },
+    "worlds/atlantica": { total: 6, data: true, cls: "atlantica", },
+    "worlds/100_acre_wood": { total: 6, cls: "hundred_acre", },
 
     // Drives
     "drive/valor": { total: 7, secondary: "triangle", secondaryClass: "drive", },

@@ -1,5 +1,12 @@
 // vim: ft=javascript
 {
+  "plugins": [
+    ["transform-inline-environment-variables", {
+      "include": [
+        "WS_URL",
+      ],
+    }],
+  ],
   "env": {
     "production": {
       "comments": false,

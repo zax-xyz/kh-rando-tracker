@@ -6,7 +6,7 @@ html(lang="en")
     meta(name="description" content="Tracker for the KH2FM Randomiser")
     title KH2FM Item Tracker
     link(rel="stylesheet" href="css/style.css")
-    link(href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet")
     script(src="js/utils.js")
     script(src="js/theme.js")
     // preload images so they appear faster on first visit
@@ -14,32 +14,33 @@ html(lang="en")
       link(rel="preload" href=`img/${img}` as="image")
 
   body
-    .grid
-      each item, file in items
-        .item(
-          id=item.id
-          data-total=item.total
-          data-group=item.group
-        )
-          img.icon(src=`img/${file}.png`)
+    main
+      .grid
+        each item, file in items
+          .item(
+            class=item.cls
+            data-total=item.total
+            data-group=item.group
+          )
+            img.icon(src=`img/${file}.png`)
 
-          if item.total
-            img.number
+            if item.total
+              img.number
 
-          if item.data
-            img.nobody(src="img/nobody.png")
+            if item.data
+              img.nobody(src="img/nobody.png")
 
-          if item.secondary
-            if Array.isArray(item.secondary)
-              img.secondary(
-                data-files=JSON.stringify(item.secondary)
-                class=item.secondaryClass
-              )
-            else
-              img.secondary(
-                src=`img/secondary/${item.secondary}.png`
-                class=item.secondaryClass
-              )
+            if item.secondary
+              if Array.isArray(item.secondary)
+                img.secondary(
+                  data-files=JSON.stringify(item.secondary)
+                  class=item.secondaryClass
+                )
+              else
+                img.secondary(
+                  src=`img/secondary/${item.secondary}.png`
+                  class=item.secondaryClass
+                )
 
     footer
       .container
@@ -87,7 +88,28 @@ html(lang="en")
                     .definition Roxas, Xigbar, Luxord, Saïx
 
                 h3 Middle Click
-                p A red cross will be put over the item. This can be used if a world/item is disabled in the seed, or if your teammate has completed a world in a co-op run. (Just use it however you want)
+                p A red cross will be put over the item, intended to be used if a world/item is disabled in the seed.
+
+          .popup
+            button Co-op
+            .content
+              .body
+                p.footnote This hasn't been rigorously tested yet. Use at your own risk.
+
+                h2 Join room
+                form#co_op_join
+                  .row
+                    input.long(placeholder="Room ID")
+                    button(type="submit") Join Room
+
+                h2 Create Room
+                form#co_op_create
+                  .row
+                    input.long(placeholder="Room Size")
+                    button(type="submit") Create Room
+
+                .row
+                  p#room_id
 
           .popup
             button Settings
@@ -111,7 +133,7 @@ html(lang="en")
 
                 .row
                   p Background
-                  input#background
+                  input#background.long
 
                 .row
                   p.footnote Background can be a colour or you can use an image url: 
@@ -134,3 +156,4 @@ html(lang="en")
 
     script(src="js/main.js")
     script(src="js/footer.js")
+    script(src="js/co_op.js")

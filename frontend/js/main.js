@@ -4,6 +4,15 @@
     // If the world/item is disabled, don't do anything
     return;
 
+  const parentElem = elem.parentElement;
+  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
+  if (socket && !parentElem.dataset.userId)
+    socket.send(JSON.stringify({
+      type: "user_primary",
+      item: elemIndex,
+      offset: offset,
+    }));
+
   const nobody = $(".nobody", elem);
 
   const total = Number(elem.dataset.total ?? 1) + Boolean(nobody);
@@ -24,7 +33,7 @@
   const imgNum = Math.min(level, total - Boolean(nobody))
 
   const group = elem.dataset.group;
-  const elems = group ? $$(`[data-group="${group}"]`) : [ elem ];
+  const elems = group ? $$(`[data-group="${group}"]`, elem.parent) : [ elem ];
 
   elems.forEach((groupElem) => {
     // Change state for each item in group
@@ -70,6 +79,14 @@ function handleSecondary(event) {
   if (!secondary)
     return;
 
+  const parentElem = elem.parentElement;
+  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
+  if (socket && !parentElem.dataset.userId)
+    socket.send(JSON.stringify({
+      type: "user_secondary",
+      item: elemIndex,
+    }));
+
   let files = secondary.dataset.files;
   if (!files)
     // A single image rather than an array
@@ -93,7 +110,17 @@ function handleSecondary(event) {
 }
 
 function handleDisable(event) {
-  event.currentTarget.classList.toggle('disabled');
+  const elem = event.currentTarget;
+
+  const parentElem = elem.parentElement;
+  const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
+  if (socket && !parentElem.dataset.userId)
+    socket.send(JSON.stringify({
+      type: "user_secondary",
+      item: elemIndex,
+    }));
+
+  elem.classList.toggle('disabled');
 }
 
 // Item clicking
