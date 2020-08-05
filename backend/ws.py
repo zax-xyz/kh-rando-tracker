@@ -28,15 +28,21 @@ async def main(websocket, path):
         if data['type'] == 'join_room':
             data['room'] = data['room'].strip()
 
-            room = ROOMS[data['room']]
+            try:
+                room = ROOMS[data['room']]
+            except KeyError:
+                return await websocket.send(json.dumps({
+                    'type': 'error',
+                    'message': 'Room not found',
+                }))
+
             num_users = len(room['users'])
 
             if num_users >= room['size']:
-                await websocket.send(json.dumps({
+                return await websocket.send(json.dumps({
                     'type': 'error',
-                    'message': 'Full room',
+                    'message': 'Room is full',
                 }))
-                return
 
             room['users'].add(websocket)
 
@@ -66,7 +72,13 @@ async def main(websocket, path):
                     'id': USERS[user]['id'],
                 }))
         elif data['type'] == 'create_room':
-            size = int(data['size'])
+            size = data['size']
+            if not isinstance(size, int):
+                return await websocket.send(json.dumps({
+                    'type': 'error',
+                    'message': 'Size must be of type integer'
+                }))
+
             while True:
                 room = ''.join(random.choice(CHARS) for _ in range(8))
                 if room not in ROOMS:

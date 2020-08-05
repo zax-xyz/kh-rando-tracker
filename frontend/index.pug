@@ -1,4 +1,9 @@
 doctype html
+mixin switch(id)
+  label.switch
+    input(type="checkbox" id=id)
+    span.slider
+
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -109,6 +114,9 @@ html(lang="en")
                     button(type="submit") Create Room
 
                 .row
+                  p#co_op_message
+
+                .row
                   p#room_id
 
           .popup
@@ -117,15 +125,11 @@ html(lang="en")
               .body
                 .row
                   p Dark Theme
-                  label.switch
-                    input#theme(type="checkbox")
-                    span.slider
+                  +switch("theme")
 
                 .row
                   p Scroll Wheel Increment/Decrement
-                  label.switch
-                    input#scroll(type="checkbox")
-                    span.slider
+                  +switch("scroll")
 
                 .row
                   p Custom Grid Columns
@@ -144,9 +148,7 @@ html(lang="en")
 
                 .row
                   p Lower Atlantica/100 Acre Wood Total
-                  label.switch
-                    input#atlantica_100_acre(type="checkbox")
-                    span.slider
+                  +switch("atlantica_100_acre")
 
                 .row
                   p.footnote By default the tutorial for Atlantica and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.

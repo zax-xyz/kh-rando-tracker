@@ -180,6 +180,9 @@ footer
   /:root[theme="dark"] &
     background-color $dark-bg-color
 
+  p
+    margin .5em 0
+
   > .container
     display flex
     flex-basis 1200px
@@ -291,9 +294,6 @@ button
   display flex
   align-items center
 
-  p
-    margin .5em 0
-
   :last-child:not(:first-child)
     margin-left auto
 
@@ -310,7 +310,8 @@ button
     &.long
       width 9em
 
-#roomId
+#room_id
+#co_op_message
   display none
 
   &.active
@@ -321,15 +322,15 @@ button
   width 3em
   height 1.5em
 
-.switch input
-  display none
+  input
+    display none
 
 .slider
   display flex
   align-items center
 
   height 100%
-  padding-left .375em
+  padding-left .25em
 
   background-color #ccc
   border-radius 1em
@@ -337,21 +338,19 @@ button
   cursor pointer
   transition background-color .2s
 
-.slider:before
-  height 1em
-  width 1em
+  input:checked + &
+    background-color hsl(210, 70%, 55%)
 
-  background-color white
-  border-radius 50%
-  content ""
+  &:before
+    height 1em
+    width 1em
 
-  transition margin-left .2s
+    background-color white
+    border-radius 50%
+    box-shadow 0 2px 5px -2px black
+    content ""
 
-input:checked + .slider
-  background-color hsl(210, 70%, 55%)
+    transition margin-left .2s
 
-input:focus + .slider
-  box-shadow 0 0 1px hsl(210, 70%, 55%)
-
-input:checked + .slider:before
-  margin-left 1.25em
+    input:checked + &
+      margin-left 1.5em

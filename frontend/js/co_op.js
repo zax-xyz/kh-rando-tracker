@@ -32,6 +32,12 @@ const messageHandler = (event) => {
       break;
     }
 
+    case "error": {
+      const msgElem = $("#co_op_message");
+      msgElem.classList.add("active");
+      msgElem.innerHTML = `Error: ${msg.message}`;
+    }
+
     case "user_primary": {
       const cell = $(`.grid[data-user-id="${msg.id}"]`).children[msg.item];
       handlePrimary({ currentTarget: cell }, msg.offset);
@@ -53,7 +59,14 @@ const messageHandler = (event) => {
 }
 
 $("#co_op_join").onsubmit = (event) => {
-  socket = new WebSocket(process.env.WS_URL);
+  try {
+    socket = new WebSocket(process.env.WS_URL);
+  } catch {
+    const msgElem = $("#co_op_message");
+    msgElem.classList.add("active");
+    msgElem.innerHTML = "Could not connect to websocket server. (Server may be down)";
+    return;
+  }
 
   socket.addEventListener("open", (event) => {
     socket.send(JSON.stringify({
@@ -68,12 +81,27 @@ $("#co_op_join").onsubmit = (event) => {
 }
 
 $("#co_op_create").onsubmit = (event) => {
-  socket = new WebSocket(process.env.WS_URL);
+  try {
+    socket = new WebSocket(process.env.WS_URL);
+  } catch {
+    const msgElem = $("#co_op_message");
+    msgElem.classList.add("active");
+    msgElem.innerHTML = "Could not connect to websocket server. (Server may be down)";
+    return;
+  }
 
   socket.addEventListener("open", (event) => {
+    let size = parseInt($("#co_op_create input").value);
+    if (!size) {
+      const msgElem = $("#co_op_message");
+      msgElem.classList.add("active");
+      msgElem.innerHTML = "Invalid or no size given, using default of 2."
+      size = 2;
+    }
+
     socket.send(JSON.stringify({
       type: "create_room",
-      size: $("#co_op_create input").value || 2,
+      size: size,
     }));
   });
 
