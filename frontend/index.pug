@@ -101,7 +101,7 @@ html(lang="en")
               .body
                 p.footnote This hasn't been rigorously tested yet. Use at your own risk.
 
-                h2 Join room
+                h2 Join Room
                 form#co_op_join
                   .row
                     input.long(placeholder="Room ID")
@@ -119,6 +119,14 @@ html(lang="en")
                 .row
                   p#room_id
 
+                .row
+                  p.footnote Note: Everyone should join the room BEFORE doing anything on the tracker as the server doesn't save anyone's state, it only tells others what you add to it.
+
+                h2 Display Settings
+                .row
+                  p Columns
+                  input#co_op_columns(placeholder="2")
+
           .popup
             button Settings
             .content
@@ -133,25 +141,22 @@ html(lang="en")
 
                 .row
                   p Custom Grid Columns
-                  input#columns
+                  input#columns(placeholder="5")
 
                 .row
                   p Background
-                  input#background.long
+                  input#background.long(placeholder="#212121")
 
                 .row
-                  p.footnote Background can be a colour or you can use an image url: 
+                  p.footnote To use an image for background, use a link: 
                     code url(https://...)
-                    |  (default 
-                    code #212121
-                    | )
 
                 .row
                   p Lower Atlantica/100 Acre Wood Total
                   +switch("atlantica_100_acre")
 
                 .row
-                  p.footnote By default the tutorial for Atlantica and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
+                  p.footnote By default the Atlantica tutorial and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
 
                 .row
                   p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions

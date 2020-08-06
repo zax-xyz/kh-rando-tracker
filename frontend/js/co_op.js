@@ -114,3 +114,17 @@ $("#co_op_create").onsubmit = () => {
 
   return false;
 };
+
+const coOpColumnsElem = $("#co_op_columns");
+try { coOpColumnsElem.value = localStorage.coOpColumns ?? null }
+catch {}
+coOpColumnsElem.oninput = event => {
+  const columns = event.target.value;
+  const main = $("main");
+
+  main.style.gridTemplateColumns = columns ? `repeat(${columns}, auto)`: null;
+
+  try { localStorage.coOpColumns = columns }
+  catch {}
+};
+coOpColumnsElem.oninput({ target: coOpColumnsElem });
