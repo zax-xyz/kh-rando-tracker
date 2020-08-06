@@ -62,7 +62,7 @@ async def main(websocket, _):
                 'id': user_id,
             }))
 
-            for user in filter(lambda u: u != websocket, USERS):
+            for user in filter(lambda u: u != websocket, room['users']):
                 # Tell the user about all the other users in the room
                 await websocket.send(json.dumps({
                     'type': 'user_joined',
