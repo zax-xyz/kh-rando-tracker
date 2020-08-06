@@ -1,14 +1,22 @@
 var socket;
 
-function messageHandler(event) {
+function createPRow(text) {
+  const row = document.createElement("div");
+  row.classList.add("row", "message");
+
+  const p = document.createElement("p");
+  p.textContent = text;
+  row.appendChild(p);
+
+  return row;
+}
+
+function messageHandler(event, elem) {
   const msg = JSON.parse(event.data);
 
   switch (msg.type) {
     case "room_created": {
-      const room_id = msg.id;
-
-      $("#room_id").innerHTML = `Created room with ID: <code>${room_id}</code> (Give this to your teammates!)`;
-
+      $("#room_id").innerHTML = `Created room with ID: <code>${msg.id}</code> (Give this to your teammates!)`;
       break;
     }
 
@@ -30,9 +38,8 @@ function messageHandler(event) {
     }
 
     case "error": {
-      const msgElem = $("#co_op_message");
-      msgElem.classList.add("active");
-      msgElem.innerHTML = `Error: ${msg.message}`;
+      elem.insertAdjacentElement("afterend", createPRow(`Error: ${msg.message}`));
+      break;
     }
 
     case "user_primary": {
@@ -55,15 +62,15 @@ function messageHandler(event) {
   }
 }
 
-$("#co_op_join").onsubmit = () => {
+$("#co_op_join").onsubmit = (event) => {
+  $(".row.message")?.remove();
+
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch (e) {
-    const msgElem = $("#co_op_message");
-    msgElem.classList.add("active");
-    msgElem.innerHTML = "Could not connect to websocket server. (Server may be down)";
+    event.target.insertAdjacentElement("afterend", createPRow("Could not connect to server. (Server may be down)"));
     console.error(e);
-    return;
+    return false;
   }
 
   socket.addEventListener("open", () => {
@@ -73,29 +80,27 @@ $("#co_op_join").onsubmit = () => {
     }));
   });
 
-  socket.addEventListener("message", messageHandler);
+  socket.addEventListener("message", e => messageHandler(e, event.target));
 
   return false;
 };
 
-$("#co_op_create").onsubmit = () => {
+$("#co_op_create").onsubmit = (event) => {
   if (socket) // Ensure old connections are closed
     socket.close(1000);
+
+  $(".row.message")?.remove();
 
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch {
-    const msgElem = $("#co_op_message");
-    msgElem.classList.add("active");
-    msgElem.innerHTML = "Could not connect to websocket server. (Server may be down)";
-    return;
+    event.target.insertAdjacentElement("afterend", createPRow("Could not connect to server. (Server may be down)"));
+    return false;
   }
 
   let size = parseInt($("#co_op_create input").value);
   if (!size) {
-    const msgElem = $("#co_op_message");
-    msgElem.classList.add("active");
-    msgElem.innerHTML = "Invalid or no size given, using default of 2."
+    event.target.insertAdjacentElement("afterend", createPRow("Invalid or no size given, using default of 2."));
     size = 2;
   }
 
@@ -110,7 +115,7 @@ $("#co_op_create").onsubmit = () => {
     }));
   });
 
-  socket.addEventListener("message", messageHandler);
+  socket.addEventListener("message", e => messageHandler(e, event.target));
 
   return false;
 };
