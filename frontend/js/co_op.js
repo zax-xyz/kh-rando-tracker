@@ -1,5 +1,20 @@
 var socket;
 
+function connectSocket(elem) {
+  if (socket) // Ensure old connections are closed
+    socket.close(1000)
+
+  $(".row.message")?.remove();
+
+  try {
+    socket = new WebSocket(process.env.WS_URL);
+  } catch (e) {
+    craetePRow(elem, "Could not connect to server. (Server may be down)");
+    console.error(e);
+    return false;
+  }
+}
+
 function createPRow(elem, text) {
   const row = document.createElement("div");
   row.classList.add("row", "message");
@@ -63,15 +78,7 @@ function messageHandler(event, elem) {
 }
 
 $("#co_op_join").onsubmit = (event) => {
-  $(".row.message")?.remove();
-
-  try {
-    socket = new WebSocket(process.env.WS_URL);
-  } catch (e) {
-    createPRow(event.target, "Could not connect to server. (Server may be down)");
-    console.error(e);
-    return false;
-  }
+  connectSocket(event.target);
 
   socket.addEventListener("open", () => {
     socket.send(JSON.stringify({
@@ -79,24 +86,13 @@ $("#co_op_join").onsubmit = (event) => {
       room: $("#co_op_join input").value,
     }));
   });
-
   socket.addEventListener("message", e => messageHandler(e, event.target));
 
   return false;
 };
 
 $("#co_op_create").onsubmit = (event) => {
-  if (socket) // Ensure old connections are closed
-    socket.close(1000);
-
-  $(".row.message")?.remove();
-
-  try {
-    socket = new WebSocket(process.env.WS_URL);
-  } catch {
-    createPRow(event.target, "Could not connect to server. (Server may be down)");
-    return false;
-  }
+  connectSocket(event.target);
 
   let size = parseInt($("#co_op_create input").value);
   if (!size) {
@@ -114,7 +110,6 @@ $("#co_op_create").onsubmit = (event) => {
       size: size,
     }));
   });
-
   socket.addEventListener("message", e => messageHandler(e, event.target));
 
   return false;
