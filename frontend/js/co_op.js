@@ -6,11 +6,8 @@ function messageHandler(event) {
   switch (msg.type) {
     case "room_created": {
       const room_id = msg.id;
-      console.log(`Room created with ID ${room_id}`);
 
-      const roomId = $("#room_id");
-      roomId.classList.add("active");
-      roomId.innerHTML = `Created room with ID: <code>${room_id}</code> (Give this to your teammates!)`
+      $("#room_id").innerHTML = `Created room with ID: <code>${room_id}</code> (Give this to your teammates!)`;
 
       break;
     }
@@ -61,10 +58,11 @@ function messageHandler(event) {
 $("#co_op_join").onsubmit = () => {
   try {
     socket = new WebSocket(process.env.WS_URL);
-  } catch {
+  } catch (e) {
     const msgElem = $("#co_op_message");
     msgElem.classList.add("active");
     msgElem.innerHTML = "Could not connect to websocket server. (Server may be down)";
+    console.error(e);
     return;
   }
 
@@ -81,6 +79,9 @@ $("#co_op_join").onsubmit = () => {
 };
 
 $("#co_op_create").onsubmit = () => {
+  if (socket) // Ensure old connections are closed
+    socket.close(1000);
+
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch {
@@ -97,6 +98,10 @@ $("#co_op_create").onsubmit = () => {
     msgElem.innerHTML = "Invalid or no size given, using default of 2."
     size = 2;
   }
+
+  const roomId = $("#room_id");
+  roomId.classList.add("active");
+  roomId.innerHTML = `Creating room...`;
 
   socket.addEventListener("open", () => {
     socket.send(JSON.stringify({
