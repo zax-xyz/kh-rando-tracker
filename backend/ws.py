@@ -3,6 +3,7 @@ import asyncio
 import json
 import random
 import string
+import traceback
 import uuid
 
 import websockets
@@ -106,8 +107,14 @@ async def main(websocket, _):
             message['id'] = USERS[websocket]['id']
 
             await dispatch(websocket, json.dumps(message))
+    except:
+        traceback.print_exc()
     finally:
         # Client disconnected from server
+        if websocket not in USERS:
+            # Connection closed before user saved
+            return
+
         await dispatch(websocket, json.dumps({
             'type': 'user_left',
             'id': USERS[websocket]['id']
