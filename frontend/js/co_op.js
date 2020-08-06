@@ -1,6 +1,6 @@
 var socket;
 
-function createPRow(text) {
+function createPRow(elem, text) {
   const row = document.createElement("div");
   row.classList.add("row", "message");
 
@@ -8,7 +8,7 @@ function createPRow(text) {
   p.textContent = text;
   row.appendChild(p);
 
-  return row;
+  elem.insertAdjacentElement("afterend", row);
 }
 
 function messageHandler(event, elem) {
@@ -38,7 +38,7 @@ function messageHandler(event, elem) {
     }
 
     case "error": {
-      elem.insertAdjacentElement("afterend", createPRow(`Error: ${msg.message}`));
+      createPRow(elem, `Error: ${msg.message}`);
       break;
     }
 
@@ -68,7 +68,7 @@ $("#co_op_join").onsubmit = (event) => {
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch (e) {
-    event.target.insertAdjacentElement("afterend", createPRow("Could not connect to server. (Server may be down)"));
+    createPRow(event.target, "Could not connect to server. (Server may be down)");
     console.error(e);
     return false;
   }
@@ -94,13 +94,13 @@ $("#co_op_create").onsubmit = (event) => {
   try {
     socket = new WebSocket(process.env.WS_URL);
   } catch {
-    event.target.insertAdjacentElement("afterend", createPRow("Could not connect to server. (Server may be down)"));
+    createPRow(event.target, "Could not connect to server. (Server may be down)");
     return false;
   }
 
   let size = parseInt($("#co_op_create input").value);
   if (!size) {
-    event.target.insertAdjacentElement("afterend", createPRow("Invalid or no size given, using default of 2."));
+    createPRow(event.target, "Invalid or no size given, using default of 2.");
     size = 2;
   }
 
