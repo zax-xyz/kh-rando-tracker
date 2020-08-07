@@ -1,19 +1,22 @@
-﻿function handlePrimary(event, offset = 1) {
+﻿function dispatchEvent(type, elem, offset) {
+  const parentElem = elem.parentElement;
+  if (socket && !parentElem.dataset.userId) {
+    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
+    socket.send(JSON.stringify({
+      type: type,
+      item: elemIndex,
+      offset: offset,
+    }));
+  }
+}
+
+function handlePrimary(event, offset = 1) {
   const elem = event.currentTarget;
   if (elem.classList.contains("disabled"))
     // If the world/item is disabled, don't do anything
     return;
 
-  // Dispatch event to the other clients in co-op room
-  const parentElem = elem.parentElement;
-  if (socket && !parentElem.dataset.userId) {
-    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-    socket.send(JSON.stringify({
-      type: "user_primary",
-      item: elemIndex,
-      offset: offset,
-    }));
-  }
+  dispatchEvent("user_primary", elem, offset);
 
   const nobody = $(".nobody", elem);
 
@@ -35,7 +38,7 @@
   const imgNum = Math.min(level, total - Boolean(nobody))
 
   const group = elem.dataset.group;
-  const elems = group ? $$(`[data-group="${group}"]`, elem.parent) : [ elem ];
+  const elems = group ? $$(`[data-group="${group}"]`, elem.parentElement) : [ elem ];
 
   elems.forEach(groupElem => {
     // Change state for each item in group
@@ -79,15 +82,7 @@ function handleSecondary(event) {
   if (!secondary)
     return;
 
-  // Dispatch event to the other clients in co-op room
-  const parentElem = elem.parentElement;
-  if (socket && !parentElem.dataset.userId) {
-    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-    socket.send(JSON.stringify({
-      type: "user_secondary",
-      item: elemIndex,
-    }));
-  }
+  dispatchEvent("user_secondary", elem);
 
   let files = secondary.dataset.files;
   if (!files)
@@ -113,16 +108,7 @@ function handleSecondary(event) {
 
 function handleDisable(event) {
   const elem = event.currentTarget;
-
-  const parentElem = elem.parentElement;
-  if (socket && !parentElem.dataset.userId) {
-    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
-    socket.send(JSON.stringify({
-      type: "user_secondary",
-      item: elemIndex,
-    }));
-  }
-
+  dispatchEvent("user_disable", elem);
   elem.classList.toggle('disabled');
 }
 
