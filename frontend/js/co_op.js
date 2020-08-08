@@ -6,13 +6,12 @@ function connectSocket(elem) {
 
   $(".row.message")?.remove();
 
-  try {
-    socket = new WebSocket(process.env.WS_URL);
-  } catch (e) {
-    craetePRow(elem, "Could not connect to server. (Server may be down)");
-    console.error(e);
-    return false;
-  }
+  socket = new WebSocket(process.env.WS_URL);
+  socket.addEventListener("error", e => {
+    const roomId = $("#room_id");
+    roomId.classList.add("active");
+    roomId.textContent = "Could not connect to server. (Server may be down)";
+  });
 }
 
 function createPRow(elem, text) {
@@ -102,7 +101,7 @@ $("#co_op_create").onsubmit = (event) => {
 
   const roomId = $("#room_id");
   roomId.classList.add("active");
-  roomId.innerHTML = `Creating room...`;
+  roomId.textContent = `Creating room...`;
 
   socket.addEventListener("open", () => {
     socket.send(JSON.stringify({
