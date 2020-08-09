@@ -21,10 +21,10 @@
     "worlds/underdrome_cups": { total: 5, },
     "worlds/replica_data": { total: 13, },
 
-    // Sora's Level
+    // Level
     "sora's_level": { total: 27, },
 
-    // Drive Forms
+    // Drives
     "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ], secondaryClass: "drive", },
     "drive/wisdom": { total: 7, secondary: [ "quick", "quick2", "quick3", "quick4" ], secondaryClass: "drive", },
     "drive/limit": { total: 7, secondary: [ "dodge", "dodge2", "dodge3", "dodge4" ], secondaryClass: "drive", },
