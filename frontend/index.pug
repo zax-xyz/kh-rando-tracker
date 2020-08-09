@@ -33,7 +33,7 @@ html(lang="en")
               img.number
 
             if item.data
-              img.nobody(src="img/nobody.png")
+              img.nobody(src=`img/nobody/${item.data}.png`)
 
             if item.secondary
               if Array.isArray(item.secondary)
@@ -49,7 +49,7 @@ html(lang="en")
 
     footer
       .container
-        .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.3.7
+        .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.3.7 (Televo's Build)
         .buttons
           .popup
             button About
@@ -58,39 +58,52 @@ html(lang="en")
                 p This is a tracker intended for use with the 
                   a(href="https://randomizer.valaxor.com" target="_blank") Kingdom Hearts 2 Final Mix Randomizer
                   |  by Valaxor, for the 
-                  a(href="https://docs.google.com/document/d/1GYjEnrM_TIk7qyO75clPLYD-_nP5wTR7K6SE-Wn-QCg/edit" target="_blank") Garden of Assemblage (GoA) mod
+                  a(href="https://docs.google.com/document/d/1GYjEnrM_TIk7qyO75clPLYD-_nP5wTR7K6SE-Wn-QCg/edit" target="_blank") Garden of Assemblage (GoA) Mod
                   |  by Sonicshadowsilver2.
                 p It allows the tracking of progress such as world completion, drive forms, magic, etc. For a more detailed explanation, see Help.
-                p It was initially developed by Kokemon198, however has since largely been rewritten by Zax with an entirely different codebase.
-                p The GitHub repository with the code for this site can be found 
+                p It was initially developed by Kokemon198, however has since largely been rewritten by Zax with an entirely different codebase. This alternate version was primarily made by Televo.
+                p The GitHub repository with the original code for this site can be found 
                   a(href="https://github.com/zaxutic/kh2fm-rando-tracker" target="_blank") here
                   | .
-                p If you have any questions/issues you can reach out through Discord (ping me in the <a href="https://discord.gg/GcJR7Fv" target="_blank">rando server</a>), Twitter (<a href="https://twitter.com/z_ax__" target="_blank">@Z_ax__</a>), or GitHub.
+                p If you have any questions/issues regarding this alternate version specifically, ping Televo or Zax in the <a href="https://discord.gg/GcJR7Fv" target="_blank">KH2FM Rando</a> Discord server, Twitter (<a href="https://twitter.com/z_ax__" target="_blank">@Z_ax__</a>), or GitHub.
 
           .popup
             button Help
             .content
               .body
                 h3 Left Click
-                p Item will become activated, lighting up to full opacity.
+                p The item will become activated, lighting up to full opacity.
                 p When clicking on a world more than once, if applicable, a number will appear in the bottom right indicating how many visits have been completed. Drive, magic, and summons have similar systems for levels.
-                p After all visits have been completed, clicking again will either trigger a Nobody symbol in the top left, for defeat of the Data Org/Absent Sillhouette fight, or reset the cell back to its original state.
+                p After all visits have been completed, clicking again will either trigger a symbol to appear in the top left, for defeat of the Data Org/Absent Sillhouette fight, or reset the cell back to its original state.
                 p.footnote Note: 'Visits' for Atlantica/100 Acre Wood represent not whole world completion but segment completion. That is, song completion for Atlantica (including the tutorial), and pages for 100 Acre Wood.
+                p.footnote Note: When clicking on Sora's Level the counter will increase in increments of +1 from LV1-15, then +5 from LV15-50 and +10 from LV50-99.
 
                 h3 Right Click
                 ul.definitions
                   li
                     .base Hollow Bastion
-                    .definition Sephiroth
+                    .definition Defeated Sephiroth
+                  li
+                    .base Olympus Coliseum
+                    .definition Cleared Pain and Panic Cup, Cerberus Cup, Titan Cup, Goddess of Fate Cup, Hades Paradox Cup
                   li
                     .base Disney Castle
-                    .definition Lingering Will/Terra
-                  li
-                    .base Drive Forms
-                    .definition Auto Abilities (e.g. Auto Valor)
+                    .definition Defeated Lingering Will/Terra
                   li
                     .base The World That Never Was
-                    .definition Roxas, Xigbar, Luxord, Saïx
+                    .definition Defeated Roxas, Xigbar, Luxord, Saïx, Xemnas
+                  li
+                    .base Cavern of Remembrance
+                    .definition Cleared Depths, Mining Area, Engine Chamber, Transport to Remembrance
+                  li
+                    .base 100 Acre Wood
+                    .definition Torn Page Counter
+                  li
+                    .base Drive Forms
+                    .definition Growth Ability Counter
+                  li
+                    .base The Three Proofs
+                    .definition Obtained Bronze Crown, Silver Crown, Gold Crown
 
                 h3 Middle Click
                 p A red cross will be put over the item, intended to be used if a world/item is disabled in the seed.
