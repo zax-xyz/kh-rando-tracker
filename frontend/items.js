@@ -22,7 +22,7 @@
     "worlds/replica_data": { total: 13, },
 
     // Level
-    "sora's_level": { total: 27, },
+    "other/sora's_level": { total: 27, },
 
     // Drives
     "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ], secondaryClass: "drive", },
@@ -46,11 +46,11 @@
     "summons/peter_pan": { total: 7, group: "summon", },
 
     // Other
-    "secret_reports": { total: 13, },
-    "promise_charm": {},
-    "proof_of_nonexistence": { secondary: [ "bronze", "silver", "gold" ] },
-    "proof_of_connection": { secondary: [ "bronze", "silver", "gold" ] },
-    "proof_of_tranquility": { secondary: [ "bronze", "silver", "gold" ] },
+    "other/secret_reports": { total: 13, },
+    "other/promise_charm": {},
+    "other/proof_of_nonexistence": { secondary: [ "bronze", "silver", "gold" ] },
+    "other/proof_of_connection": { secondary: [ "bronze", "silver", "gold" ] },
+    "other/proof_of_tranquility": { secondary: [ "bronze", "silver", "gold" ] },
   },
 
   preloadImages: [
