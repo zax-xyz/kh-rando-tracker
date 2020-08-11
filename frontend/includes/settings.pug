@@ -38,4 +38,19 @@ mixin switch(id)
   p.footnote All images in the tracker are displayed with a slight drop shadow. Disabling these can significantly improve performance on slower devices.
 
 .row
-  p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions
+  p Icon order
+  input#order.long(placeholder="1 2 3 4 5 6 ...")
+
+.row
+  p.footnote These settings for order and removable will be changed to be more convenient in the future. These are basic temporary settings. The input to these fields should be a series of indices. E.g. <code>4 7 1</code> corresponds to <em>4<sup>th</sup> icon, 7<sup>th</sup> icon, 1<sup>st</sup> icon.</em>
+
+.row
+  p Remove icons
+  input#remove.long()
+
+.row
+  p.footnote This should only be used if a custom order isn't used, as it can also be used to remove icons by simply not including them. (They also override each other)
+
+.row
+  p.footnote
+    em Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions

@@ -67,6 +67,7 @@ bgInputElem.oninput = event => {
   try { localStorage.bg = bg }
   catch {}
 };
+bgInputElem.oninput({ target: bgInputElem });
 
 const atlantica100Acre = $("#atlantica_100_acre");
 try { atlantica100Acre.checked = localStorage.atlantica100Acre === "true" }
@@ -82,6 +83,7 @@ atlantica100Acre.onchange = event => {
   try { localStorage.atlantica100Acre = event.target.checked }
   catch {}
 };
+atlantica100Acre.onchange({ target: atlantica100Acre });
 
 const disableShadows = $("#disable_shadows");
 try { disableShadows.checked = localStorage.disableShadows === "true" }
@@ -96,3 +98,41 @@ disableShadows.onchange = event => {
   try { localStorage.disableShadows = event.target.checked }
   catch {}
 };
+disableShadows.onchange({ target: disableShadows });
+
+const icons = Array.from($$(".item"));
+const grid = $(".grid");
+
+const iconOrder = $("#order");
+try { iconOrder.value = localStorage.order ?? null }
+catch {}
+iconOrder.oninput = event => {
+  const order = event.target.value.trim();
+  grid.innerHTML = "";
+
+  if (order)
+    order.split(" ").forEach(i => grid.appendChild(icons[i - 1]));
+  else
+    icons.forEach(icon => grid.appendChild(icon));
+
+  try { localStorage.order = event.target.value }
+  catch {}
+};
+if (iconOrder.value) iconOrder.oninput({ target: iconOrder });
+
+const iconRemove = $("#remove");
+try { iconRemove.value = localStorage.remove ?? null }
+catch {}
+iconRemove.oninput = event => {
+  const remove = event.target.value.trim().split(" ");
+  grid.innerHTML = "";
+
+  for (const [index, icon] of icons.entries()) {
+    if (!(index in remove))
+      grid.appendChild(icon);
+  }
+
+  try { localStorage.remove = event.target.value }
+  catch {}
+};
+if (iconRemove.value) iconRemove.oninput({ target: iconRemove });
