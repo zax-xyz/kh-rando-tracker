@@ -89,7 +89,7 @@ ${IMGBUILDDIR}:
 # Build
 ###############################################
 
-${BUILDDIR}/index.html: index.pug items.js
+${BUILDDIR}/index.html: index.pug items.js includes
 	${HTMLC} ${HTMLFLAGS} -o ${BUILDDIR} $^
 
 ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl

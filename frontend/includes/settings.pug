@@ -1,0 +1,34 @@
+mixin switch(id)
+  label.switch
+    input(type="checkbox" id=id)
+    span.slider
+
+.row
+  p Dark Theme
+  +switch("theme")
+
+.row
+  p Scroll Wheel Increment/Decrement
+  +switch("scroll")
+
+.row
+  p Custom Grid Columns
+  input#columns(placeholder="5")
+
+.row
+  p Background
+  input#background.long(placeholder="#212121")
+
+.row
+  p.footnote To use an image for background, use a link: 
+    code url(https://...)
+
+.row
+  p Lower Atlantica/100 Acre Wood Total
+  +switch("atlantica_100_acre")
+
+.row
+  p.footnote By default the Atlantica tutorial and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
+
+.row
+  p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions

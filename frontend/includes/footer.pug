@@ -1,0 +1,22 @@
+mixin popup(name)
+  .popup
+    button= name
+    .content
+      .body
+        block
+
+footer
+  .container
+    .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.3.7 (Televo's Build)
+    .buttons
+      +popup("About")
+        include about.pug
+
+      +popup("Help")
+        include help.pug
+
+      +popup("Co-op")
+        include co_op.pug
+
+      +popup("Settings")
+        include settings.pug
