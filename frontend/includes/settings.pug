@@ -17,39 +17,35 @@ mixin switch(id)
 
 .row
   p Background
+  .note
+    p To use an image, use a link:
+      | 
+      code url(https://...)
   input#background.long(placeholder="#212121")
 
 .row
-  p.footnote To use an image for background, use a link: 
-    code url(https://...)
-
-.row
   p Lower Atlantica/100 Acre Wood Total
+  .note
+    p By default the Atlantica tutorial and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
   +switch("atlantica_100_acre")
 
 .row
-  p.footnote By default the Atlantica tutorial and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
-
-.row
   p Disable image shadows
+  .note
+    p All images in the tracker are displayed with a slight drop shadow. Disabling these can significantly improve performance on slower devices.
   +switch("disable_shadows")
 
 .row
-  p.footnote All images in the tracker are displayed with a slight drop shadow. Disabling these can significantly improve performance on slower devices.
-
-.row
   p Icon order
+  .note
+    p These settings for order and removing will be changed to be more convenient in the future. These are basic temporary settings. The input to these fields should be a series of indices. E.g. <code>4 7 1</code> corresponds to <em>4<sup>th</sup> icon, 7<sup>th</sup> icon, 1<sup>st</sup> icon.</em>
   input#order.long(placeholder="1 2 3 4 5 6 ...")
 
 .row
-  p.footnote These settings for order and removable will be changed to be more convenient in the future. These are basic temporary settings. The input to these fields should be a series of indices. E.g. <code>4 7 1</code> corresponds to <em>4<sup>th</sup> icon, 7<sup>th</sup> icon, 1<sup>st</sup> icon.</em>
-
-.row
   p Remove icons
+  .note
+    p This should only be used if a custom order isn't used, as it can also be used to remove icons by simply not including them. (They also override each other) See reorder's notes for how to use this.
   input#remove.long()
-
-.row
-  p.footnote This should only be used if a custom order isn't used, as it can also be used to remove icons by simply not including them. (They also override each other)
 
 .row
   p.footnote
