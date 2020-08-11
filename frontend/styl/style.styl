@@ -53,8 +53,11 @@ a
 main
   display grid
   grid-template-columns repeat(2, auto)
-  grid-gap 10px
+  filter drop-shadow(0 3px 15px rgba(0, 0, 0, .3))
   overflow-x auto
+
+  /:root[theme="dark"] &
+    filter drop-shadow(0 3px 15px rgba(0, 0, 0, .5))
 
 .grid
   display inline-grid
@@ -62,9 +65,9 @@ main
 
   max-width 100%
   padding 15px
+  margin 5px 5px 0
 
   background-color $bg-color
-  box-shadow 0 5px 25px rgba(0, 0, 0, .3)
   border-radius 4px 4px 0 0
 
   z-index 0
@@ -116,6 +119,7 @@ main
       opacity 0
 
 img
+  max-width 100%
   width 100px
   opacity 0.35
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .2))
@@ -126,13 +130,13 @@ img
 
 $additional-img
   position absolute
-  width 45px
+  width 40%
   opacity 0
   transform translateY(4px)
   transition opacity .25s, transform .25s
 
   &.opaque
-    transform translateY(0)
+    transform none
 
 .grid
   .number
@@ -140,7 +144,7 @@ $additional-img
     // Position in bottom right
     right 0
     bottom 0
-    width 85px
+    width 80%
 
   .nobody
     @extend $additional-img
@@ -157,7 +161,7 @@ $additional-img
     &.drive
       // Position in top left
       left 0
-      width 90px
+      width 85%
 
   .opaque
     opacity 1
@@ -211,7 +215,7 @@ footer
     transition opacity .25s
 
     .body
-      max-width 500px
+      max-width 850px
       width 100%
       max-height 100vh
       padding 1em 2em
@@ -238,6 +242,7 @@ footer
         transform none
 
 .definitions
+  position relative
   padding-left 2em
   list-style none
 
