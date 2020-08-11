@@ -144,33 +144,33 @@ $additional-img
   &.opaque
     transform none
 
-.grid
-  .number
-    @extend $additional-img
-    // Position in bottom right
-    right 0
-    bottom 0
-    width 80%
+.number
+  @extend $additional-img
+  // Position in bottom right
+  right 0
+  bottom 0
+  width 80%
 
-  .nobody
-    @extend $additional-img
+.nobody
+  @extend $additional-img
+  // Position in top left
+  top 5px
+  left 0
+
+.secondary
+  @extend $additional-img
+  // Position in top right
+  top 5px
+  right 0
+
+  /.drive &
+  /.hundred_acre &
     // Position in top left
-    top 5px
     left 0
+    width 85%
 
-  .secondary
-    @extend $additional-img
-    // Position in top right
-    top 5px
-    right 0
-
-    &.drive
-      // Position in top left
-      left 0
-      width 85%
-
-  .opaque
-    opacity 1
+.opaque
+  opacity 1
 
 footer
   display flex
