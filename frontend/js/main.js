@@ -1,10 +1,8 @@
 ﻿function dispatchEvent(type, elem, offset) {
-  const parentElem = elem.parentElement;
-  if (socket && !parentElem.dataset.userId) {
-    const elemIndex = Array.prototype.indexOf.call(parentElem.children, elem);
+  if (socket && !elem.parentElement.dataset.userId) {
     socket.send(JSON.stringify({
       type: type,
-      item: elemIndex,
+      item: $(".icon", elem).getAttribute("src"),
       offset: offset,
     }));
   }

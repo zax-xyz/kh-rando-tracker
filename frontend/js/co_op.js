@@ -25,6 +25,10 @@ function createPRow(elem, text) {
   elem.insertAdjacentElement("afterend", row);
 }
 
+function findCell(msg) {
+  return $(`[src="${msg.item}"]`, $(`.grid[data-user-id="${msg.id}"]`)).parentElement;
+}
+
 function messageHandler(event, elem) {
   const msg = JSON.parse(event.data);
 
@@ -57,20 +61,17 @@ function messageHandler(event, elem) {
     }
 
     case "user_primary": {
-      const cell = $(`.grid[data-user-id="${msg.id}"]`).children[msg.item];
-      handlePrimary({ currentTarget: cell }, msg.offset);
+      handlePrimary({ currentTarget: findCell(msg) }, msg.offset);
       break;
     }
 
     case "user_secondary": {
-      const cell = $(`.grid[data-user-id="${msg.id}"]`).children[msg.item];
-      handleSecondary({ currentTarget: cell });
+      handleSecondary({ currentTarget: findCell(msg) });
       break;
     }
 
     case "user_disable": {
-      const cell = $(`.grid[data-user-id="${msg.id}"]`).children[msg.item];
-      handleDisable({ currentTarget: cell });
+      handleDisable({ currentTarget: findCell(msg) });
       break;
     }
   }
