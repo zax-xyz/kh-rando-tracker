@@ -31,4 +31,11 @@ mixin switch(id)
   p.footnote By default the Atlantica tutorial and Pooh's House are included in the total. This removes them, reducing the total from 6 to 5.
 
 .row
+  p Disable image shadows
+  +switch("disable_shadows")
+
+.row
+  p.footnote All images in the tracker are displayed with a slight drop shadow. Disabling these can significantly improve performance on slower devices.
+
+.row
   p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions

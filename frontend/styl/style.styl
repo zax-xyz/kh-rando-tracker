@@ -88,34 +88,40 @@ main
 
   padding 5px
 
-  overflow hidden
-
-  &:after
-    display flex
-    align-items center
-    justify-content center
-
+  .cross
     position absolute
-
-    color red
-    font-size 100px
-    font-weight 300
+    height 100%
 
     opacity 0
     transform translateY(10px)
     transition opacity .25s, transform .25s
 
-    content "\d7"
+    &:before
+    &:after
+      position absolute
+      top 50%
+
+      width 2px
+      height 70%
+
+      background-color red
+      content ' '
+
+    &:before
+      transform translateY(-50%) rotate(45deg)
+
+    &:after
+      transform translateY(-50%) rotate(-45deg)
 
   &.disabled
     .icon
       opacity 0.18
 
-    &:after
+    .cross
       opacity 0.6
       transform scale(1.2)
 
-    img:not(.icon)
+    img:not(.icon):not(.cross)
       opacity 0
 
 img

@@ -82,3 +82,17 @@ atlantica100Acre.onchange = event => {
   try { localStorage.atlantica100Acre = event.target.checked }
   catch {}
 };
+
+const disableShadows = $("#disable_shadows");
+try { disableShadows.checked = localStorage.disableShadows === "true" }
+catch {}
+disableShadows.onchange = event => {
+  const filter = event.target.checked ? "none" : null;
+
+  $$("img").forEach(elem => {
+    elem.style.filter = filter;
+  });
+
+  try { localStorage.disableShadows = event.target.checked }
+  catch {}
+};
