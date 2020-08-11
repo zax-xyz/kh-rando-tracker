@@ -75,7 +75,7 @@ atlantica100Acre.onchange = event => {
   // Lower total if setting enabled
   const value = event.target.checked ? 5 : 6;
 
-  [ $("#atlantica"), $("#hundred_acre") ].forEach(elem => {
+  [ $(".atlantica"), $(".hundred_acre") ].forEach(elem => {
     elem.dataset.total = value;
   });
 
