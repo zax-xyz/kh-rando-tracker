@@ -124,12 +124,13 @@ const iconRemove = $("#remove");
 try { iconRemove.value = localStorage.remove ?? null }
 catch {}
 iconRemove.oninput = event => {
-  const remove = event.target.value.trim().split(" ");
+  const remove = event.target.value.trim().split(" ").map(i => parseInt(i) - 1);
   grid.innerHTML = "";
 
   for (const [index, icon] of icons.entries()) {
-    if (!(index in remove))
+    if (!(remove.includes(index))) {
       grid.appendChild(icon);
+    }
   }
 
   try { localStorage.remove = event.target.value }
