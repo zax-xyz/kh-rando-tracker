@@ -95,7 +95,7 @@ function handleSecondary(event) {
   if (index % (files.length + 1) === 0)
     index = 0;
   else
-    secondary.setAttribute("src", `img/secondary/${files[index - 1]}.png`);
+    secondary.setAttribute("src", `img/${files[index - 1]}.png`);
 
   // We toggle the opaque class for 0 (disable) and 1 (enable)
   if (index < 2)

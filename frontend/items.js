@@ -3,21 +3,21 @@
     // Worlds
     "worlds/simulated_twilight_town": { data: "roxas" },
     "worlds/twilight_town": { total: 3, data: "axel", },
-    "worlds/hollow_bastion": { total: 3, data: "demyx", secondary: "sephiroth", },
-    "worlds/cavern_of_remembrance": { secondary: [ "depths", "mining", "engine", "transport" ].map(i => `cor/${i}`) },
+    "worlds/hollow_bastion": { total: 3, data: "demyx", secondary: "secondary/sephiroth", },
+    "worlds/cavern_of_remembrance": { secondary: [ "depths", "mining", "engine", "transport" ].map(i => `secondary/cor/${i}`) },
     "worlds/land_of_dragons": { total: 2, data: "xigbar", },
     "worlds/beast's_castle": { total: 2, data: "xaldin", },
-    "worlds/olympus_coliseum": { total: 2, data: "zexion", secondary: [ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `cups/${c}`) },
-    "worlds/disney_castle": { data: "marluxia", secondary: "lingering_will", },
+    "worlds/olympus_coliseum": { total: 2, data: "zexion", secondary: [ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `secondary/cups/${c}`) },
+    "worlds/disney_castle": { data: "marluxia", secondary: "secondary/lingering_will", },
     "worlds/timeless_river": {},
     "worlds/port_royal": { total: 2, data: "luxord", },
     "worlds/agrabah": { total: 2, data: "lexaeus", },
     "worlds/halloween_town": { total: 2, data: "vexen", },
     "worlds/pride_land": { total: 2, data: "saix", },
     "worlds/space_paranoids": { total: 2, },
-    "worlds/the_world_that_never_was": { data: "xemnas", secondary: [ "XIII", "II", "X", "VII", "kingdom_hearts" ].map(i => `twtnw/${i}`) },
+    "worlds/the_world_that_never_was": { data: "xemnas", secondary: [ "roxas", "xigbar", "luxord", "saix", "kingdom_hearts" ].map(i => `nobody/${i}`) },
     "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica", },
-    "worlds/100_acre_wood": { total: 6, secondary: [ "page", "page2", "page3", "page4", "page5" ].map(p => `pages/${p}`), cls: "hundred_acre", },
+    "worlds/100_acre_wood": { total: 6, secondary: [ "page", "page2", "page3", "page4", "page5" ].map(p => `secondary/pages/${p}`), cls: "hundred_acre", },
     "worlds/underdrome_cups": { total: 5, },
     "worlds/replica_data": { total: 13, },
 
@@ -25,11 +25,11 @@
     "other/sora's_level": { total: 27, },
 
     // Drives
-    "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ].map(i => `drive/${i}`), cls: "drive", },
-    "drive/wisdom": { total: 7, secondary: [ "quick", "quick2", "quick3", "quick4" ].map(i => `drive/${i}`), cls: "drive", },
-    "drive/limit": { total: 7, secondary: [ "dodge", "dodge2", "dodge3", "dodge4" ].map(i => `drive/${i}`), cls: "drive", },
-    "drive/master": { total: 7, secondary: [ "aerial", "aerial2", "aerial3", "aerial4" ].map(i => `drive/${i}`), cls: "drive", },
-    "drive/final": { total: 7, secondary: [ "glide", "glide2", "glide3", "glide4" ].map(i => `drive/${i}`), cls: "drive", },
+    "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
+    "drive/wisdom": { total: 7, secondary: [ "quick", "quick2", "quick3", "quick4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
+    "drive/limit": { total: 7, secondary: [ "dodge", "dodge2", "dodge3", "dodge4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
+    "drive/master": { total: 7, secondary: [ "aerial", "aerial2", "aerial3", "aerial4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
+    "drive/final": { total: 7, secondary: [ "glide", "glide2", "glide3", "glide4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
 
     // Magic
     "magic/fire": { total: 3, },
@@ -48,9 +48,9 @@
     // Other
     "other/secret_reports": { total: 13, },
     "other/promise_charm": {},
-    "other/proof_of_nonexistence": { secondary: [ "bronze", "silver", "gold" ].map(i => `crowns/${i}`) },
-    "other/proof_of_connection": { secondary: [ "bronze", "silver", "gold" ].map(i => `crowns/${i}`) },
-    "other/proof_of_tranquility": { secondary: [ "bronze", "silver", "gold" ].map(i => `crowns/${i}`) },
+    "other/proof_of_nonexistence": { secondary: [ "bronze", "silver", "gold" ].map(i => `secondary/crowns/${i}`) },
+    "other/proof_of_connection": { secondary: [ "bronze", "silver", "gold" ].map(i => `secondary/crowns/${i}`) },
+    "other/proof_of_tranquility": { secondary: [ "bronze", "silver", "gold" ].map(i => `secondary/crowns/${i}`) },
   },
 
   preloadImages: [
@@ -73,10 +73,10 @@
     "secondary/drive/glide.png",
     ...[ ...Array(3).keys() ].map(i => `secondary/drive/glide${i}.png`),
 
-    ...[ "bronze", "silver", "gold" ].map(c => `crowns/${c}.png`),
-    ...[ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `cups/${c}.png`),
-    ...[ "XIII", "II", "X", "VII", "kingdom_hearts" ].map(i => `twtnw/${i}.png`),
-    ...[ "depths", "mining", "engine", "transport" ].map(i => `cor/${i}.png`),
+    ...[ "bronze", "silver", "gold" ].map(c => `secondary/crowns/${c}.png`),
+    ...[ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `secondary/cups/${c}.png`),
+    ...[ "roxas", "xigbar", "luxord", "saix", "kingdom_hearts" ].map(i => `nobody/${i}.png`),
+    ...[ "depths", "mining", "engine", "transport" ].map(i => `secondary/cor/${i}.png`),
     "lingering_will.png",
     "sephiroth.png",
     "triangle.png",
