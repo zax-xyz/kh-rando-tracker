@@ -23,9 +23,6 @@ CSSBUILDDIR := ${BUILDDIR}/css
 JSBUILDDIR := ${BUILDDIR}/js
 IMGBUILDDIR := ${BUILDDIR}/img
 
-HTMLSRC := index.pug
-HTMLBUILD := ${BUILDDIR}/index.html
-
 CSSSRCDIR := styl
 CSSSRCFILES := $(wildcard ${CSSSRCDIR}/*.styl)
 CSSBUILDFILES := $(patsubst ${CSSSRCDIR}/%.styl, ${CSSBUILDDIR}/%.css, ${CSSSRCFILES})
@@ -44,7 +41,7 @@ IMGBUILDFILES := $(patsubst ${IMGSRCDIR}/%, ${IMGBUILDDIR}/%, ${IMGSRCFILES})
 
 all: ${BUILDDIR} html css js img
 
-html: ${HTMLBUILD}
+html: ${BUILDDIR}/index.html
 
 css: ${CSSBUILDDIR} ${CSSBUILDFILES}
 
@@ -92,10 +89,8 @@ ${IMGBUILDDIR}:
 # Build
 ###############################################
 
-${HTMLBUILD}: ${HTMLSRC}
-
-${HTMLSRC}: items.js includes
-	${HTMLC} ${HTMLFLAGS} -o ${BUILDDIR} $@
+${BUILDDIR}/index.html: index.pug items.js includes
+	${HTMLC} ${HTMLFLAGS} -o ${BUILDDIR} index.pug
 
 ${CSSBUILDDIR}/%.css: ${CSSSRCDIR}/%.styl
 	${CSSC} ${CSSFLAGS} -o $@ $^
