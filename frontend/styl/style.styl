@@ -90,35 +90,19 @@ main
 
   .cross
     position absolute
-    height 100%
+    width 45%
+    height auto
 
     opacity 0
     transform translateY(10px)
     transition opacity .25s, transform .25s
-
-    &:before
-    &:after
-      position absolute
-      top 50%
-
-      width 2px
-      height 70%
-
-      background-color red
-      content ' '
-
-    &:before
-      transform translateY(-50%) rotate(45deg)
-
-    &:after
-      transform translateY(-50%) rotate(-45deg)
 
   &.disabled
     .icon
       opacity 0.18
 
     .cross
-      opacity 0.6
+      opacity 1
       transform scale(1.2)
 
     img:not(.icon):not(.cross)
