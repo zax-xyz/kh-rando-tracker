@@ -14,7 +14,7 @@
     "worlds/agrabah": { total: 2, data: "lexaeus", },
     "worlds/halloween_town": { total: 2, data: "vexen", },
     "worlds/pride_land": { total: 2, data: "saix", },
-    "worlds/space_paranoids": { total: 2, },
+    "worlds/space_paranoids": { total: 2, data: "larxene", },
     "worlds/the_world_that_never_was": { data: "xemnas", secondary: [ "roxas", "xigbar", "luxord", "saix", "kingdom_hearts" ].map(i => `nobody/${i}`) },
     "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica", },
     "worlds/100_acre_wood": { total: 6, secondary: [ "page", "page2", "page3", "page4", "page5" ].map(p => `secondary/pages/${p}`), cls: "hundred_acre", },
