@@ -1,27 +1,34 @@
 {
   "name": "kh2fm-rando-tracker",
-  "version": "1.4.3",
-  "description": "A tracker intended for use with the KH2FM randomiser",
+  "version": "2.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zaxutic/kh2fm-rando-tracker.git"
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "file-saver": "^2.0.2",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2",
+    "vue-router": "^3.2.0",
+    "vuedraggable": "^2.24.0",
+    "vuex": "^3.4.0",
+    "vuex-persistedstate": "^3.1.0"
   },
-  "author": "Zax",
-  "bugs": {
-    "url": "https://github.com/zaxutic/kh2fm-rando-tracker/issues"
-  },
-  "homepage": "https://github.com/zaxutic/kh2fm-rando-tracker#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "babel-preset-minify": "^0.5.1",
-    "pug-cli": "^1.0.0-alpha6",
-    "stylus": "^0.54.8"
-  },
-  "dependencies": {}
+    "@types/file-saver": "^2.0.1",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.0.0",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "typescript": "~3.9.3",
+    "vue-template-compiler": "^2.6.11"
+  }
 }
