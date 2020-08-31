@@ -4,7 +4,6 @@
     :componentData="componentData"
     :style="gridStyle"
     :class="{ disableShadows: disableShadows }"
-
     v-model="itemNums"
     animation="250"
     :disabled="!drag"
@@ -21,10 +20,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import draggable from 'vuedraggable'
+import { Component, Prop, Vue } from "vue-property-decorator";
+import draggable from "vuedraggable";
 
-import BaseCell from './BaseCell.vue'
+import BaseCell from "./BaseCell.vue";
 
 @Component({
   components: {
@@ -33,35 +32,36 @@ import BaseCell from './BaseCell.vue'
   },
 })
 export default class BaseGrid extends Vue {
-  @Prop({ type: String, required: false, default: '' }) clientId!: string;
+  @Prop({ type: String, required: false, default: "" }) clientId!: string;
 
-  items: Array<string> = Object.keys(this.$store.state.tracker.clients[this.clientId]);
+  items: Array<string> = Object.keys(
+    this.$store.state.tracker.clients[this.clientId]
+  );
   dragging: boolean = false;
 
   get disableShadows(): boolean {
-    return this.$store.state.settings.disableShadows
+    return this.$store.state.settings.disableShadows;
   }
 
   get itemNums(): Array<number> {
-    const itemNums = this.$store.state.settings.itemNums
-    if (itemNums.length)
-      return itemNums;
+    const itemNums = this.$store.state.settings.itemNums;
+    if (itemNums.length) return itemNums;
 
-    return [...Array(Object.keys(this.items).length).keys()]
+    return [...Array(Object.keys(this.items).length).keys()];
   }
 
   set itemNums(nums: Array<number>) {
-    this.$store.commit('settings/setNums', { nums: nums });
+    this.$store.commit("settings/setNums", { nums: nums });
   }
 
   get componentData(): object {
     return {
       props: {
-        tag: 'div',
-        type: 'transition',
-        name: !this.dragging ? 'flip-list' : null,
+        tag: "div",
+        type: "transition",
+        name: !this.dragging ? "flip-list" : null,
       },
-    }
+    };
   }
 
   get drag(): boolean {
@@ -72,20 +72,23 @@ export default class BaseGrid extends Vue {
     const settings = this.$store.state.settings;
     const itemSize = (settings.size || 100) + 2 * (settings.padding || 5);
 
-    const style: {[key:string]: string} = {
-      'max-width': `${(settings.columns || 5) * itemSize}px`,
-      'background-color': settings.bgColor,
+    const style: { [key: string]: string } = {
+      "max-width": `${(settings.columns || 5) * itemSize}px`,
+      "background-color": settings.bgColor,
     };
 
     const bgImg = settings.bgImg;
-    const darken = 'rgba(0, 0, 0, .6)'
-    if (bgImg) style['background-image'] = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
+    const darken = "rgba(0, 0, 0, .6)";
+    if (bgImg)
+      style[
+        "background-image"
+      ] = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
 
     return style;
   }
 
   remove(index: number): void {
-    this.itemNums = this.itemNums.filter(i => i !== index);
+    this.itemNums = this.itemNums.filter((i) => i !== index);
   }
 }
 </script>

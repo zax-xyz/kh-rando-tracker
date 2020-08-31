@@ -9,56 +9,40 @@
         | to use the pre-1.4 version
 
       .buttons
-        button(
-          :class="{ alt: drag }"
-          @click="toggleDrag"
-        ) Toggle Rearrange Mode
-        BaseTooltip Click + drag to move items around, and right click to remove an item
-        button(
-          @click="reset"
-        ) Reset
-
-      .buttons
         router-link(
           v-for="route in routes"
           :to="route"
           :key="route"
           tag="button"
         ) {{ title(route) }}
+
+      .buttons
+        button(@click="popout") Popout window
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import BaseTooltip from './BaseTooltip.vue'
+import { Component, Vue } from "vue-property-decorator";
+import BaseTooltip from "./BaseTooltip.vue";
 
 @Component({
   components: {
-    BaseTooltip,
-  },
+    BaseTooltip
+  }
 })
 export default class TheFooter extends Vue {
-  routes: Array<string> = [
-    "about",
-    "help",
-    "co-op",
-    "settings"
-  ];
+  routes: Array<string> = ["about", "help", "co-op", "settings"];
   version = process.env.PACKAGE_VER;
-
-  get drag(): boolean {
-    return this.$store.state.drag;
-  }
 
   title(route: string): string {
     return route[0].toUpperCase() + route.slice(1);
   }
 
-  toggleDrag() {
-    this.$store.commit('toggleDrag');
-  }
-
-  reset() {
-    this.$store.commit('settings/resetNums');
+  popout() {
+    window.open(
+      "#/?footer=0",
+      "",
+      "left=0,top=0,width=600,height=1200,menubar=no,toolbar=no,scrollbars=no"
+    );
   }
 }
 </script>

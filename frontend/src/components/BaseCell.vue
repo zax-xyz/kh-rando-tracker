@@ -6,55 +6,56 @@
     @wheel="handleWheel"
   )
     img.icon(
-      :src="`img/${file}.png`"
-      :class="{ opaque: opaque, disabled: disabled }"
+      :src="custom('file', `img/${file}.png`)"
+      :class="{ opaque: cell.opaque, disabled: cell.disabled }"
     )
-    transition(name="fade-up")
-      img.number(
-        v-if="!disabled && total > 1 && level > 1"
-        :src="`img/numbers/${Math.min(total, level)}.png`"
-      )
-    transition(name="fade-up")
-      img.nobody(
-        v-if="!disabled && dataFile && level === total + 1"
-        :src="`img/nobody/${dataFile}.png`"
-      )
-    transition(name="fade-up")
-      img.secondary(
-        v-if="!disabled && secondary && secondaryLevel"
-        :src="`img/${secondaryFile}.png`"
-      )
+    template(v-if="!cell.disabled")
+      transition(name="fade-up")
+        img.number(
+          v-if="cell.total > 1 && cell.level > 1"
+          :src="`img/numbers/${Math.min(cell.total, cell.level)}.png`"
+        )
+      transition(name="fade-up")
+        img.nobody(
+          v-if="cell.data && cell.level === cell.total + 1"
+          :src="`img/nobody/${cell.data}.png`"
+        )
+      transition(name="fade-up")
+        img.secondary(
+          v-if="cell.secondary && cell.secondaryLevel"
+          :src="`img/${secondaryFile}.png`"
+        )
     transition(name="fade-cross")
-      img.cross(
-        v-if="disabled"
-        src="img/cross.png"
-      )
+      img.cross(v-if="cell.disabled", src="img/cross.png")
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class BaseCell extends Vue {
   @Prop(String) client!: string;
   @Prop(String) file!: string;
 
-  cellData = this.$store.getters['tracker/cell'](this.client, this.file);
-  cls: string = this.cellData.cls ?? null;
+  cell = this.$store.getters["tracker/cell"](this.client, this.file);
+  cls: string = this.cell.cls ?? null;
 
-  get total(): number { return this.cellData.total }
-  get opaque(): boolean { return this.cellData.opaque }
-  get level(): number { return this.cellData.level }
-  get dataFile(): string { return this.cellData.data ?? null }
-  get secondary(): string | Array<string> { return this.cellData.secondary ?? null }
-  get secondaryLevel(): number { return this.cellData.secondaryLevel }
-  get secondaryFile(): string { return this.$store.getters['tracker/secondary'](this.client, this.file) }
-  get disabled(): boolean { return this.cellData.disabled }
+  get secondaryFile(): string {
+    return this.$store.getters["tracker/secondary"](this.client, this.file);
+  }
+
+  get customDefaults() {
+    return this.$store.state.settings.customDefaults[this.file];
+  }
+
+  custom(property: string, fallback: any): any {
+    return this.customDefaults?.[property] ?? fallback;
+  }
 
   get itemStyle(): object {
     return {
       width: `${100 / (this.$store.state.settings.columns || 5)}%`,
-      padding: `${this.$store.state.settings.padding || 5}px`,
+      padding: `${this.$store.state.settings.padding || 5}px`
     };
   }
 
@@ -63,48 +64,51 @@ export default class BaseCell extends Vue {
       client: this.client,
       cell: this.file,
       offset,
-      shift,
+      shift
     });
   }
 
   handleMouseDown(event: MouseEvent): void {
     if (this.$store.state.drag) {
-      if (event.button === 2)
-        this.$emit('remove')
+      if (event.button === 2) this.$emit("remove");
 
       return;
     }
 
-    const offset = event.ctrlKey ? -1: 1;
+    if (this.$store.state.edit) {
+      this.$router.push({ name: "EditItem", params: { file: this.file } });
+      return;
+    }
+
+    const offset = event.ctrlKey ? -1 : 1;
 
     switch (event.button) {
       case 0:
         // Left Click
-        this.dispatch('tracker/primary', offset, event.shiftKey);
+        this.dispatch("tracker/primary", offset, event.shiftKey);
         break;
 
       case 2:
         // Right Click
-        this.dispatch('tracker/secondary', offset);
+        this.dispatch("tracker/secondary", offset);
         break;
 
       case 1:
         // Middle Click
-        this.dispatch('tracker/disable');
+        this.dispatch("tracker/disable");
         break;
     }
   }
 
   handleWheel(event: WheelEvent): void {
-    if (!this.$store.state.settings.scroll)
-      return;
+    if (!this.$store.state.settings.scroll) return;
 
     // Prevent page scroll
     event.preventDefault();
 
     // Increment/decrement
     const offset = -Math.sign(event.deltaY);
-    this.dispatch('tracker/primary', offset, event.shiftKey);
+    this.dispatch("tracker/primary", offset, event.shiftKey);
   }
 }
 </script>

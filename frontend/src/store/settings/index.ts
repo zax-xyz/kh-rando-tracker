@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const state = {
   scroll: false,
   columns: "",
@@ -7,6 +9,7 @@ const state = {
   bgImg: "",
   disableShadows: false,
   itemNums: [] as Array<number>,
+  customDefaults: {} as { [key: string]: { [key: string]: any } },
 };
 
 type State = typeof state;
@@ -22,6 +25,10 @@ const mutations = {
 
   resetNums(state: State): void {
     state.itemNums = [];
+  },
+
+  setDefault(state: State, payload: { file: string; defaults: object }) {
+    Vue.set(state.customDefaults, payload.file, payload.defaults);
   },
 };
 

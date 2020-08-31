@@ -57,6 +57,25 @@
 
     .row.grid
       button(
+        :class="{ alt: drag }"
+        @click="toggleDrag"
+      ) Toggle Rearrange Mode
+      div
+        BaseTooltip Click + drag to move items around, and right click to remove an item
+        button(
+          @click="reset"
+        ) Reset
+
+    // .row.grid
+      button(
+        :class="{ alt: editItems }"
+        @click="toggleEdit"
+      ) Edit items
+      div
+        BaseTooltip Click on an item to open a menu to change its default properties
+
+    .row.grid
+      button(
         @click="save"
       ) Save as File
       div
@@ -81,29 +100,51 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { saveAs } from 'file-saver'
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { saveAs } from "file-saver";
 
-import BaseTooltip from '@/components/BaseTooltip.vue'
-import SwitchSlider from '@/components/SwitchSlider.vue'
+import BaseTooltip from "@/components/BaseTooltip.vue";
+import SwitchSlider from "@/components/SwitchSlider.vue";
 
 @Component({
   components: {
     BaseTooltip,
-    SwitchSlider,
+    SwitchSlider
   }
 })
 export default class Settings extends Vue {
   settings: object = { ...this.$store.state.settings };
 
-  @Watch('settings', { deep: true })
+  get drag(): boolean {
+    return this.$store.state.drag;
+  }
+
+  get editItems(): boolean {
+    return this.$store.state.edit;
+  }
+
+  @Watch("settings", { deep: true })
   onSettingsChanged(): void {
-    this.$store.commit('settings/setSettings', this.settings);
+    this.$store.commit("settings/setSettings", this.settings);
+  }
+
+  toggleDrag() {
+    this.$store.commit("toggleDrag");
+  }
+
+  reset() {
+    this.$store.commit("settings/resetNums");
+  }
+
+  toggleEdit() {
+    this.$store.commit("toggleEdit");
   }
 
   save(): void {
-    const file = new Blob([JSON.stringify(this.$store.state.settings)], { type: 'text/plain;charset=utf-8' });
-    saveAs(file, 'kh2fm-tracker-settings.json')
+    const file = new Blob([JSON.stringify(this.$store.state.settings)], {
+      type: "text/plain;charset=utf-8"
+    });
+    saveAs(file, "kh2fm-tracker-settings.json");
   }
 
   load(): void {
@@ -115,7 +156,10 @@ export default class Settings extends Vue {
     const reader = new FileReader();
 
     reader.onload = (event: Event) => {
-      this.$store.commit('settings/setSettings', JSON.parse((event.target as any).result));
+      this.$store.commit(
+        "settings/setSettings",
+        JSON.parse((event.target as any).result)
+      );
     };
     reader.readAsText(elem.files[0]);
   }

@@ -28,12 +28,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Settings extends Vue {
-  joinRoomId: string = '';
-  createRoomId: string = '';
+  joinRoomId: string = "";
+  createRoomId: string = "";
   roomSize: number | null = null;
 
   get message(): string {
@@ -41,18 +41,17 @@ export default class Settings extends Vue {
       return `Joined room ${this.$store.state.co_op.room}`;
 
     const err = this.$store.state.co_op.error;
-    if (err)
-      return err;
+    if (err) return err;
 
-    return '';
+    return "";
   }
 
   join(event: Event): void {
-    this.$store.dispatch('co_op/join', { room: this.joinRoomId });
+    this.$store.dispatch("co_op/join", { room: this.joinRoomId });
   }
 
   create(event: Event): void {
-    this.$store.dispatch('co_op/create', { size: this.roomSize || 2 });
+    this.$store.dispatch("co_op/create", { size: this.roomSize || 2 });
   }
 }
 </script>

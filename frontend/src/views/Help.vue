@@ -43,17 +43,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 
-import BaseTooltip from '@/components/BaseTooltip.vue'
+import BaseTooltip from "@/components/BaseTooltip.vue";
 
 @Component({
   components: {
     BaseTooltip,
-  }
+  },
 })
-export default class Help extends Vue {
-}
+export default class Help extends Vue {}
 </script>
 
 <style lang="stylus" scoped>

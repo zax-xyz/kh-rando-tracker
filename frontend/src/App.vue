@@ -8,36 +8,40 @@
         :key="client"
         :clientId="client"
       )
-    TheFooter
+    TheFooter(
+      v-if="footer"
+    )
     ModalView
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Route } from 'vue-router'
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
 
-import BaseGrid from './components/BaseGrid.vue';
-import TheFooter from './components/TheFooter.vue';
-import ModalView from './components/ModalView.vue'
+import BaseGrid from "./components/BaseGrid.vue";
+import TheFooter from "./components/TheFooter.vue";
+import ModalView from "./components/ModalView.vue";
 
 @Component({
   components: {
     BaseGrid,
     TheFooter,
-    ModalView,
-  },
+    ModalView
+  }
 })
 export default class extends Vue {
-  @Watch('$route', { immediate: true })
+  @Watch("$route", { immediate: true })
   onRouteChange(to: Route, from: Route): void {
-    if (to.meta.title)
-      document.title = `${to.meta.title} | KH2FM Item Tracker`;
-    else
-      document.title = 'KH2FM Item Tracker';
+    if (to.meta.title) document.title = `${to.meta.title} | KH2FM Item Tracker`;
+    else document.title = "KH2FM Item Tracker";
   }
 
   get clients(): object {
     return this.$store.state.tracker.clients;
+  }
+
+  get footer(): boolean {
+    return this.$route.query.footer !== "0";
   }
 
   mounted(): void {
@@ -45,7 +49,7 @@ export default class extends Vue {
       if (event.button === 1)
         // Prevent autoscroll on middle click
         return false;
-    }
+    };
   }
 }
 </script>
@@ -76,7 +80,6 @@ input
   align-items center
 
   min-height 100vh
-  padding-top 25px
 
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale

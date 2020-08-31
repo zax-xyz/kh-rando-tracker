@@ -11,10 +11,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drag: false,
+    edit: false,
   },
   mutations: {
     toggleDrag(state) {
       state.drag = !state.drag;
+    },
+
+    toggleEdit(state) {
+      state.edit = !state.edit;
     },
   },
   modules: {

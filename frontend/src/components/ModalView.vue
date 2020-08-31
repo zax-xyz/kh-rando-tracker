@@ -9,23 +9,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ModalView extends Vue {
   get show(): boolean {
-    return this.$route.path !== '/';
+    return this.$route.path !== "/";
   }
 
   gotoRoot(): void {
-    this.$router.push('/');
+    this.$router.push("/");
   }
 
   mounted(): void {
-    window.addEventListener("keydown", e=> {
-      if (e.key === "Escape" && this.$route.path !== '/')
+    window.addEventListener("keydown", e => {
+      if (e.key === "Escape" && this.$route.path !== "/") {
         this.gotoRoot();
-    })
+      }
+    });
   }
 }
 </script>
@@ -91,6 +92,7 @@ h6
 .row
   display flex
   align-items center
+  margin .5em 0
 
   &.grid
     display grid
@@ -100,18 +102,21 @@ h6
     :first-child
       margin-left auto
 
+    input:not(:first-child)
+      width 100%
+      text-align left
+
   p
     display inline-block
+    margin 0
 
   input
     width 3em
     padding 4px 6px
+    text-align right
     border 0
     border-radius 3px
     box-shadow 0 0 3px inset rgba(0, 0, 0, .35)
-
-    &:last-child
-      text-align right
 
     &.long
       width 9em
