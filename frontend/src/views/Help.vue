@@ -40,6 +40,9 @@
     h3 Modifiers
     p Holding ctrl while clicking on an item will go backwards rather than forwards. This works both for left click and right click.
     p Holding shift while left clicking will increase the level without lighting up the item. This is useful if you are leveling up a drive form using its auto ability but haven't unlocked the form itself. E.g. leveling up Valor Form through Auto Valor.
+
+    h3 OBS Browser Source
+    p Gameaddict has a <a href="https://docs.google.com/document/d/1STiVyCUkyx9_ZiEuXBU71gJSisJT4hvagxvqK0VOqU8/edit">guide</a> on using the tracker as a browser source in OBS if you wish to use it this way. This is not the same as capturing your browser window directly - the tracker is opened in OBS itself.
 </template>
 
 <script lang="ts">
