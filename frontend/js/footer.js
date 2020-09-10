@@ -137,3 +137,19 @@ iconRemove.oninput = event => {
   catch {}
 };
 if (iconRemove.value) iconRemove.oninput({ target: iconRemove });
+
+const minimalIcons = $("#minimal_icons");
+try { minimalIcons.checked = localStorage.minimalIcons === "true" }
+catch {}
+minimalIcons.onchange = event => {
+  if (event.target.checked) {
+    $$(".icon").forEach(elem => {
+      let [first, ...rest] = elem.getAttribute('src').split('/');
+      elem.src = `img/simple/${rest.join('/')}`;
+    });
+  }
+
+  try { localStorage.minimalIcons = event.target.checked }
+  catch {}
+};
+minimalIcons.onchange({ target: minimalIcons });

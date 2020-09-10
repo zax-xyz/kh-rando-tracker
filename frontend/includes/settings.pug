@@ -54,5 +54,11 @@ mixin switch(id)
     | .
 
 .row
+  p Use minimal icons
+  .note
+    p Going back to normal icons for now requires a refresh after disabling the option.
+  +switch("minimal_icons")
+
+.row
   p.footnote
     em Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions
