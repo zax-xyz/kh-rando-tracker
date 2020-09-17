@@ -73,6 +73,7 @@
     "secondary/drive/glide.png",
     ...[ ...Array(3).keys() ].map(i => `secondary/drive/glide${i}.png`),
 
+    ...[ "second_chance", "once_more", "survival_abilities" ].map(c => `secondary/abilities/${c}.png`),
     ...[ "bronze", "silver", "gold" ].map(c => `secondary/crowns/${c}.png`),
     ...[ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `secondary/cups/${c}.png`),
     ...[ "roxas", "xigbar", "luxord", "saix", "kingdom_hearts" ].map(i => `nobody/${i}.png`),
