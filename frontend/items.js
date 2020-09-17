@@ -22,7 +22,7 @@
     "worlds/replica_data": { total: 13, },
 
     // Level
-    "other/sora's_level": { total: 27, },
+    "other/sora's_level": { total: 27, secondary: [ "second_chance", "once_more", "survival_abilities" ].map(i => `secondary/abilities/${i}`), cls: "drive", },
 
     // Drives
     "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
