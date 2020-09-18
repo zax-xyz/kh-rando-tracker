@@ -22,7 +22,7 @@
     "worlds/replica_data": { total: 13, },
 
     // Level
-    "other/sora's_level": { total: 27, },
+    "other/sora's_level": { total: 27, secondary: [ "second_chance", "once_more", "survival_abilities" ].map(i => `secondary/abilities/${i}`), cls: "drive", },
 
     // Drives
     "drive/valor": { total: 7, secondary: [ "jump", "jump2", "jump3", "jump4" ].map(i => `secondary/drive/${i}`), cls: "drive", },
@@ -73,6 +73,7 @@
     "secondary/drive/glide.png",
     ...[ ...Array(3).keys() ].map(i => `secondary/drive/glide${i}.png`),
 
+    ...[ "second_chance", "once_more", "survival_abilities" ].map(c => `secondary/abilities/${c}.png`),
     ...[ "bronze", "silver", "gold" ].map(c => `secondary/crowns/${c}.png`),
     ...[ "pain_panic", "cerberus", "titan", "goddess", "paradox" ].map(c => `secondary/cups/${c}.png`),
     ...[ "roxas", "xigbar", "luxord", "saix", "kingdom_hearts" ].map(i => `nobody/${i}.png`),
