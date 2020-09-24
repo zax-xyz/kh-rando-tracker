@@ -28,8 +28,11 @@
         .base 100 Acre Wood
         .definition Torn Page Counter
       li
+        .base Sora's level
+        .definition Obtained Second Chance, Once More, Second Chance and Once More
+      li
         .base Drive Forms
-        .definition Growth Ability Counter
+        .definition Growth Ability Counter (High Jump, Quick Run, Dodge Roll, Aerial Dodge, Glide)
       li
         .base The Three Proofs
         .definition Obtained Bronze Crown, Silver Crown, Gold Crown
@@ -52,8 +55,8 @@ import BaseTooltip from "@/components/BaseTooltip.vue";
 
 @Component({
   components: {
-    BaseTooltip,
-  },
+    BaseTooltip
+  }
 })
 export default class Help extends Vue {}
 </script>
