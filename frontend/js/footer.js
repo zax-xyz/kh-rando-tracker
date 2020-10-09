@@ -141,15 +141,17 @@ if (iconRemove.value) iconRemove.oninput({ target: iconRemove });
 const minimalIcons = $("#minimal_icons");
 try { minimalIcons.checked = localStorage.minimalIcons === "true" }
 catch {}
+function useStyle(style) {
+  const dir = style ? `img/${style}/` : "img/";
+  $$(".icon").forEach(elem => {
+    const src = elem.dataset.src;
+    elem.src = dir + src;
+  });
+}
 minimalIcons.onchange = event => {
-  if (event.target.checked) {
-    $$(".icon").forEach(elem => {
-      let [first, ...rest] = elem.getAttribute('src').split('/');
-      elem.src = `img/simple/${rest.join('/')}`;
-    });
-  }
+  useStyle(event.target.checked ? "simple" : "");
 
   try { localStorage.minimalIcons = event.target.checked }
   catch {}
 };
-minimalIcons.onchange({ target: minimalIcons });
+useStyle(minimalIcons.checked ? "simple" : "");
