@@ -138,18 +138,31 @@ iconRemove.oninput = event => {
 };
 if (iconRemove.value) iconRemove.oninput({ target: iconRemove });
 
-const minimalIcons = $("#minimal_icons");
-try { minimalIcons.checked = localStorage.minimalIcons === "true" }
-catch {}
-minimalIcons.onchange = event => {
-  if (event.target.checked) {
-    $$(".icon").forEach(elem => {
-      let [first, ...rest] = elem.getAttribute('src').split('/');
-      elem.src = `img/simple/${rest.join('/')}`;
-    });
+function useStyle(style) {
+  const dir = style ? `img/${style}/` : "img/";
+  $$(".icon").forEach(elem => {
+    const src = elem.dataset.src;
+    let iconDir = dir;
+    if (style == "classic" && !(src.startsWith("drive/") || src.startsWith("summons/"))) {
+      iconDir = "img/"
+    }
+    elem.src = iconDir + src;
+  });
+}
+try {
+  let iconStyle = localStorage.iconStyle;
+  if (!("iconStyle" in localStorage) && "minimalIcons" in localStorage) {
+    iconStyle = localStorage.minimalIcons === "true" ? "simple" : "";
+    localStorage.iconStyle = iconStyle;
+    // TODO: delete localStorage.minimalIcons
   }
-
-  try { localStorage.minimalIcons = event.target.checked }
+  icon_style.value = iconStyle;
+  useStyle(iconStyle);
+} catch {
+  useStyle("");
+}
+icon_style.onchange = ev => {
+  useStyle(ev.target.value);
+  try { localStorage.iconStyle = ev.target.value }
   catch {}
 };
-minimalIcons.onchange({ target: minimalIcons });

@@ -61,10 +61,13 @@ mixin switch(id)
     | .
 
 .row
-  p Use minimal icons
+  p Icon style
   .note
-    p Going back to normal icons for now requires a refresh after disabling the option.
-  +switch("minimal_icons")
+    p Classic switches the drive and summon icons back to their pre-Televo versions.
+  select#icon_style
+    option(value="") Default
+    option(value="simple") Minimal
+    option(value="classic") Classic
 
 .row
   p.footnote
