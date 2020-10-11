@@ -28,15 +28,13 @@ import BaseCell from "./BaseCell.vue";
 @Component({
   components: {
     BaseCell,
-    draggable,
-  },
+    draggable
+  }
 })
 export default class BaseGrid extends Vue {
   @Prop({ type: String, required: false, default: "" }) clientId!: string;
 
-  items: Array<string> = Object.keys(
-    this.$store.state.tracker.clients[this.clientId]
-  );
+  items: Array<string> = Object.keys(this.$store.state.tracker.clients[this.clientId]);
   dragging: boolean = false;
 
   get disableShadows(): boolean {
@@ -59,8 +57,8 @@ export default class BaseGrid extends Vue {
       props: {
         tag: "div",
         type: "transition",
-        name: !this.dragging ? "flip-list" : null,
-      },
+        name: !this.dragging ? "flip-list" : null
+      }
     };
   }
 
@@ -74,28 +72,27 @@ export default class BaseGrid extends Vue {
 
     const style: { [key: string]: string } = {
       "max-width": `${(settings.columns || 5) * itemSize}px`,
-      "background-color": settings.bgColor,
+      "background-color": settings.bgColor
     };
 
     const bgImg = settings.bgImg;
     const darken = "rgba(0, 0, 0, .6)";
-    if (bgImg)
-      style[
-        "background-image"
-      ] = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
+    if (bgImg) style["background-image"] = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
 
     return style;
   }
 
   remove(index: number): void {
-    this.itemNums = this.itemNums.filter((i) => i !== index);
+    this.itemNums = this.itemNums.filter(i => i !== index);
   }
 }
 </script>
 
 <style scoped lang="stylus">
 .grid
-  display inline-block
+  display inline-flex
+  flex-wrap wrap
+  justify-content center
   padding 15px
   margin 5px 5px 0
   background $bg-color no-repeat center/cover

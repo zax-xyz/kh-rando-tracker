@@ -124,8 +124,6 @@ img
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
 .icon
-  max-width 100%
-  max-height 100px
   opacity .35
   transition opacity .25s
 
