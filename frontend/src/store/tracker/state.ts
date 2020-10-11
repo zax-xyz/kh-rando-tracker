@@ -1,4 +1,23 @@
-export const items: { [key: string]: { [key: string]: any } } = {
+const CROWNS = ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`);
+
+interface Item {
+  total?: number;
+  data?: string;
+  secondary?: string|string[];
+  cls?: string;
+  group?: string;
+
+  // set in the loop below
+  id?: number;
+  level?: number;
+  opaque?: boolean;
+  disabled?: boolean;
+  secondaryLevel?: number;
+
+  showData?: boolean;
+}
+
+export const items: { [key: string]: Item } = {
   // Worlds
   "worlds/simulated_twilight_town": { data: "roxas" },
   "worlds/twilight_town": { total: 3, data: "axel" },
@@ -91,15 +110,9 @@ export const items: { [key: string]: { [key: string]: any } } = {
   // Other
   "other/secret_reports": { total: 13 },
   "other/promise_charm": {},
-  "other/proof_of_nonexistence": {
-    secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`)
-  },
-  "other/proof_of_connection": {
-    secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`)
-  },
-  "other/proof_of_tranquility": {
-    secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`)
-  }
+  "other/proof_of_nonexistence": { secondary: CROWNS },
+  "other/proof_of_connection": { secondary: CROWNS },
+  "other/proof_of_tranquility": { secondary: CROWNS },
 };
 
 for (const [i, item] of Object.values(items).entries()) {
