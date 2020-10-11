@@ -1,4 +1,6 @@
 const CROWNS = ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`);
+const CHEST = "secondary/chest";
+const DONALD = "secondary/duck";
 
 interface Item {
   total?: number;
@@ -20,35 +22,35 @@ interface Item {
 export const items: { [key: string]: Item } = {
   // Worlds
   "worlds/simulated_twilight_town": { data: "roxas" },
-  "worlds/twilight_town": { total: 3, data: "axel" },
+  "worlds/twilight_town": { total: 3, data: "axel", secondary: CHEST },
   "worlds/hollow_bastion": {
     total: 2,
     data: "demyx",
-    secondary: "secondary/sephiroth"
+    secondary: [CHEST, "secondary/sephiroth"],
   },
   "worlds/cavern_of_remembrance": {
     secondary: ["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`)
   },
-  "worlds/land_of_dragons": { total: 2, data: "xigbar" },
-  "worlds/beast's_castle": { total: 2, data: "xaldin" },
+  "worlds/land_of_dragons": { total: 2, data: "xigbar", secondary: CHEST },
+  "worlds/beast's_castle": { total: 2, data: "xaldin", secondary: CHEST },
   "worlds/olympus_coliseum": {
     total: 2,
     data: "zexion",
-    secondary: ["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`)
+    secondary: [CHEST, ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`)],
   },
   "worlds/disney_castle": {
     data: "marluxia",
-    secondary: "secondary/lingering_will"
+    secondary: [CHEST, "secondary/lingering_will"],
   },
-  "worlds/timeless_river": {},
-  "worlds/port_royal": { total: 2, data: "luxord" },
-  "worlds/agrabah": { total: 2, data: "lexaeus" },
-  "worlds/halloween_town": { total: 2, data: "vexen" },
-  "worlds/pride_land": { total: 2, data: "saix" },
-  "worlds/space_paranoids": { total: 2, data: "larxene" },
+  "worlds/timeless_river": { secondary: CHEST },
+  "worlds/port_royal": { total: 2, data: "luxord", secondary: CHEST },
+  "worlds/agrabah": { total: 2, data: "lexaeus", secondary: CHEST },
+  "worlds/halloween_town": { total: 2, data: "vexen", secondary: CHEST },
+  "worlds/pride_land": { total: 2, data: "saix", secondary: CHEST },
+  "worlds/space_paranoids": { total: 2, data: "larxene", secondary: CHEST },
   "worlds/the_world_that_never_was": {
     data: "xemnas",
-    secondary: ["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`)
+    secondary: [CHEST, ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`)],
   },
   "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica" },
   "worlds/100_acre_wood": {
@@ -94,10 +96,10 @@ export const items: { [key: string]: Item } = {
   },
 
   // Magic
-  "magic/fire": { total: 3 },
-  "magic/blizzard": { total: 3 },
-  "magic/thunder": { total: 3 },
-  "magic/cure": { total: 3 },
+  "magic/fire": { total: 3, secondary: DONALD },
+  "magic/blizzard": { total: 3, secondary: DONALD },
+  "magic/thunder": { total: 3, secondary: DONALD },
+  "magic/cure": { total: 3, secondary: DONALD },
   "magic/reflect": { total: 3 },
   "magic/magnet": { total: 3 },
 
@@ -151,7 +153,8 @@ export type State = {
   ...["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}.png`),
   "secondary/lingering_will.png",
   "secondary/sephiroth.png",
-  "secondary/triangle.png"
+  "secondary/triangle.png",
+  "secondary/chest.png",
 ].forEach(src => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
