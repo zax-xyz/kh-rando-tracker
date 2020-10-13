@@ -150,7 +150,7 @@ img
   position absolute
   top 5%
   right 0
-  width 30%
+  width 35%
 
   /.drive &
   /.hundred_acre &
