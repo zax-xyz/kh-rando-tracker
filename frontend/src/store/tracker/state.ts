@@ -65,7 +65,7 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": {
     total: 27,
     level: 1,
-    secondary: ["second_chance", "once_more", "survival_abilities"].map(i => `abilities/${i}`)
+    secondary: ["second_chance", "once_more", "survival_abilities"].map(i => `secondary/abilities/${i}`)
   },
 
   // Drives
