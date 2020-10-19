@@ -6,6 +6,7 @@ interface Item {
   total?: number;
   data?: string;
   secondary?: string|string[];
+  secondaryTotal?: number;
   cls?: string;
   group?: string;
 
@@ -55,7 +56,8 @@ export const items: { [key: string]: Item } = {
   "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica" },
   "worlds/100_acre_wood": {
     total: 6,
-    secondary: ["page", "page2", "page3", "page4", "page5"].map(p => `secondary/pages/${p}`),
+    secondary: "secondary/pages/page",
+    secondaryTotal: 5,
     cls: "hundred_acre"
   },
   "worlds/underdrome_cups": { total: 5 },
@@ -71,27 +73,32 @@ export const items: { [key: string]: Item } = {
   // Drives
   "drive/valor": {
     total: 7,
-    secondary: ["jump", "jump2", "jump3", "jump4"].map(i => `secondary/drive/${i}`),
+    secondary: "secondary/drive/jump",
+    secondaryTotal: 4,
     cls: "drive"
   },
   "drive/wisdom": {
     total: 7,
-    secondary: ["quick", "quick2", "quick3", "quick4"].map(i => `secondary/drive/${i}`),
+    secondary: "secondary/drive/quick",
+    secondaryTotal: 4,
     cls: "drive"
   },
   "drive/limit": {
     total: 7,
-    secondary: ["dodge", "dodge2", "dodge3", "dodge4"].map(i => `secondary/drive/${i}`),
+    secondary: "secondary/drive/dodge",
+    secondaryTotal: 4,
     cls: "drive"
   },
   "drive/master": {
     total: 7,
-    secondary: ["aerial", "aerial2", "aerial3", "aerial4"].map(i => `secondary/drive/${i}`),
+    secondary: "secondary/drive/aerial",
+    secondaryTotal: 4,
     cls: "drive"
   },
   "drive/final": {
     total: 7,
-    secondary: ["glide", "glide2", "glide3", "glide4"].map(i => `secondary/drive/${i}`),
+    secondary: "secondary/drive/glide",
+    secondaryTotal: 4,
     cls: "drive"
   },
 
@@ -141,12 +148,12 @@ export type State = {
 [
   ...[...Array(27).keys()].map(i => `numbers/${i + 1}.png`),
   "numbers/max.png",
-  ...[...Array(5).keys()].map(i => `secondary/page${i ? i + 1 : ""}.png`),
-  ...[...Array(4).keys()].map(i => `secondary/drive/jump${i ? i + 1 : ""}.png`),
-  ...[...Array(4).keys()].map(i => `secondary/drive/quick${i ? i + 1 : ""}.png`),
-  ...[...Array(4).keys()].map(i => `secondary/drive/dodge${i ? i + 1 : ""}.png`),
-  ...[...Array(4).keys()].map(i => `secondary/drive/aerial${i ? i + 1 : ""}.png`),
-  ...[...Array(4).keys()].map(i => `secondary/drive/glide${i ? i + 1 : ""}.png`),
+  "secondary/page.png",
+  "secondary/drive/jump.png",
+  "secondary/drive/quick.png",
+  "secondary/drive/dodge.png",
+  "secondary/drive/aerial.png",
+  "secondary/drive/glide.png",
   ...["bronze", "silver", "gold"].map(c => `secondary/crowns/${c}.png`),
   ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}.png`),
   ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}.png`),

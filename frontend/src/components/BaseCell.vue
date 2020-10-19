@@ -21,10 +21,11 @@
           :src="`img/nobody/${cell.data}.png`"
         )
       transition(name="fade-up")
-        img.secondary(
+        .secondary(
           v-if="cell.secondary && cell.secondaryLevel"
-          :src="`img/${secondaryFile}.png`"
+          :data-level="cell.secondaryLevel"
         )
+          img(:src="`img/${secondaryFile}.png`")
     transition(name="fade-cross")
       img.cross(v-if="cell.disabled", src="img/cross.png")
 </template>
@@ -152,11 +153,40 @@ img
   right 0
   width 35%
 
+  & img
+    width 100%
+
+  &[data-level]::after
+    content ''
+    position absolute
+    top 0
+    left 0
+    height 50%
+    width 100%
+    background-size contain
+    background-repeat no-repeat
+
   /.drive &
   /.hundred_acre &
     left 0
     top 7.5%
     width 75%
+
+    &[data-level='2']::after
+      background-image url('../img/numbers/2.png')
+
+    &[data-level='3']::after
+      background-image url('../img/numbers/3.png')
+
+  /.drive &[data-level='4']::after
+    background-image url('../img/numbers/max.png')
+    background-position-x right
+
+  /.hundred_acre &[data-level='4']::after
+    background-image url('../img/numbers/4.png')
+
+  /.hundred_acre &[data-level='5']::after
+    background-image url('../img/numbers/5.png')
 
 .fade-up-enter-active
 .fade-up-leave-active
