@@ -7,6 +7,7 @@ interface Item {
   data?: string;
   secondary?: string|string[];
   secondaryTotal?: number;
+  secondaryMax?: boolean;
   cls?: string;
   group?: string;
 
@@ -74,31 +75,36 @@ export const items: { [key: string]: Item } = {
   "drive/valor": {
     total: 7,
     secondary: "secondary/drive/jump",
-    secondaryTotal: 4,
+    secondaryTotal: 3,
+    secondaryMax: true,
     cls: "drive"
   },
   "drive/wisdom": {
     total: 7,
     secondary: "secondary/drive/quick",
-    secondaryTotal: 4,
+    secondaryTotal: 3,
+    secondaryMax: true,
     cls: "drive"
   },
   "drive/limit": {
     total: 7,
     secondary: "secondary/drive/dodge",
-    secondaryTotal: 4,
+    secondaryTotal: 3,
+    secondaryMax: true,
     cls: "drive"
   },
   "drive/master": {
     total: 7,
     secondary: "secondary/drive/aerial",
-    secondaryTotal: 4,
+    secondaryTotal: 3,
+    secondaryMax: true,
     cls: "drive"
   },
   "drive/final": {
     total: 7,
     secondary: "secondary/drive/glide",
-    secondaryTotal: 4,
+    secondaryTotal: 3,
+    secondaryMax: true,
     cls: "drive"
   },
 
