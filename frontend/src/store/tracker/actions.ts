@@ -70,7 +70,11 @@ export default {
     );
 
     // Increment level with wrapping overflow based on total
-    const end = (Array.isArray(secondary) ? secondary.length : 1) + 1;
+    const end = 1 + (
+      Array.isArray(secondary)
+      ? secondary.length
+      : (item.secondaryTotal || 1) + (item.secondaryMax || 0)
+    );
     commit("setSecondaryLevel", {
       client,
       cell,
