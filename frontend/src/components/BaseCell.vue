@@ -166,7 +166,7 @@ img
 
   .number
     top 0
-    left 0
+    left 5%
     height 50%
     width auto
 
@@ -175,6 +175,7 @@ img
 
   /.drive &
   /.hundred_acre &
+  /.levels &
     left 0
     top 7.5%
     width 75%

@@ -5,7 +5,7 @@ const DONALD = "secondary/duck";
 interface Item {
   total?: number;
   data?: string;
-  secondary?: string|string[];
+  secondary?: string | string[];
   secondaryTotal?: number;
   secondaryMax?: boolean;
   cls?: string;
@@ -28,7 +28,7 @@ export const items: { [key: string]: Item } = {
   "worlds/hollow_bastion": {
     total: 2,
     data: "demyx",
-    secondary: [CHEST, "secondary/sephiroth"],
+    secondary: [CHEST, "secondary/sephiroth"]
   },
   "worlds/cavern_of_remembrance": {
     secondary: ["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`)
@@ -38,11 +38,11 @@ export const items: { [key: string]: Item } = {
   "worlds/olympus_coliseum": {
     total: 2,
     data: "zexion",
-    secondary: [CHEST, ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`)],
+    secondary: [CHEST, ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`)]
   },
   "worlds/disney_castle": {
     data: "marluxia",
-    secondary: [CHEST, "secondary/lingering_will"],
+    secondary: [CHEST, "secondary/lingering_will"]
   },
   "worlds/timeless_river": { secondary: CHEST },
   "worlds/port_royal": { total: 2, data: "luxord", secondary: CHEST },
@@ -52,12 +52,12 @@ export const items: { [key: string]: Item } = {
   "worlds/space_paranoids": { total: 2, data: "larxene", secondary: CHEST },
   "worlds/the_world_that_never_was": {
     data: "xemnas",
-    secondary: [CHEST, ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`)],
+    secondary: [CHEST, ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`)]
   },
   "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica" },
   "worlds/100_acre_wood": {
     total: 6,
-    secondary: "secondary/pages/page",
+    secondary: "secondary/page",
     secondaryTotal: 5,
     cls: "hundred_acre"
   },
@@ -68,7 +68,8 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": {
     total: 27,
     level: 1,
-    secondary: ["second_chance", "once_more", "survival_abilities"].map(i => `secondary/abilities/${i}`)
+    secondary: ["second_chance", "once_more", "survival_abilities"].map(i => `secondary/abilities/${i}`),
+    cls: "levels"
   },
 
   // Drives
@@ -127,7 +128,7 @@ export const items: { [key: string]: Item } = {
   "other/promise_charm": {},
   "other/proof_of_nonexistence": { secondary: CROWNS },
   "other/proof_of_connection": { secondary: CROWNS },
-  "other/proof_of_tranquility": { secondary: CROWNS },
+  "other/proof_of_tranquility": { secondary: CROWNS }
 };
 
 for (const [i, item] of Object.values(items).entries()) {
@@ -163,7 +164,7 @@ export type State = {
   "secondary/lingering_will.png",
   "secondary/sephiroth.png",
   "secondary/triangle.png",
-  "secondary/chest.png",
+  "secondary/chest.png"
 ].forEach(src => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
