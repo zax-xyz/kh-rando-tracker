@@ -10,6 +10,7 @@ const state = {
   disableShadows: false,
   itemNums: [] as Array<number>,
   customDefaults: {} as { [key: string]: { [key: string]: any } },
+  importantChecksMode: false,
 };
 
 type State = typeof state;
@@ -29,6 +30,10 @@ const mutations = {
 
   setDefault(state: State, payload: { file: string; defaults: object }) {
     Vue.set(state.customDefaults, payload.file, payload.defaults);
+  },
+
+  setImportantChecksMode(state: State, enabled: boolean): void {
+    state.importantChecksMode = enabled;
   },
 };
 

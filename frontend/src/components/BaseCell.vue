@@ -64,7 +64,7 @@ export default class BaseCell extends Vue {
   get itemStyle(): object {
     return {
       width: `${100 / (this.$store.state.settings.columns || 5)}%`,
-      padding: `${this.$store.state.settings.padding || 5}px`
+      padding: `${this.$store.state.settings.padding || 5}px`,
     };
   }
 
@@ -73,7 +73,7 @@ export default class BaseCell extends Vue {
       client: this.client,
       cell: this.file,
       offset,
-      shift
+      shift,
     });
   }
 
@@ -170,12 +170,13 @@ img
     height 50%
     width auto
 
-    &[src="img/numbers/max.png"]
+    &[src='img/numbers/max.png']
       left 25%
 
   /.drive &
   /.hundred_acre &
   /.levels &
+  /.magic &
     left 0
     top 7.5%
     width 75%
@@ -193,7 +194,6 @@ img
   position absolute
   width 50%
   height auto
-
   opacity 1
 
 .fade-cross-enter-active

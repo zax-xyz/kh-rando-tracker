@@ -1,5 +1,7 @@
 <template lang="pug">
   div
+    h1 [Does not yet work with important checks mode]
+
     h2 Join Room
     form(@submit.prevent="join")
       .row.grid
@@ -37,8 +39,7 @@ export default class Settings extends Vue {
   roomSize: number | null = null;
 
   get message(): string {
-    if (this.$store.state.co_op.joined)
-      return `Joined room ${this.$store.state.co_op.room}`;
+    if (this.$store.state.co_op.joined) return `Joined room ${this.$store.state.co_op.room}`;
 
     const err = this.$store.state.co_op.error;
     if (err) return err;

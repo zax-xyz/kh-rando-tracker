@@ -5,7 +5,7 @@
       @mousedown.self="gotoRoot"
     )
       .inner
-        router-view.content
+        router-view.modal-content
 </template>
 
 <script lang="ts">
@@ -22,8 +22,8 @@ export default class ModalView extends Vue {
   }
 
   mounted(): void {
-    window.addEventListener("keydown", e => {
-      if (e.key === "Escape" && this.$route.path !== "/") {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && this.show) {
         this.gotoRoot();
       }
     });
@@ -57,7 +57,7 @@ export default class ModalView extends Vue {
   overflow-x visible
   overflow-y auto
 
-.content
+.modal-content
   padding 1em 2em
   overflow-x visible
 

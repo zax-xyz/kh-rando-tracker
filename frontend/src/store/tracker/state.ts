@@ -17,8 +17,6 @@ interface Item {
   opaque?: boolean;
   disabled?: boolean;
   secondaryLevel?: number;
-
-  showData?: boolean;
 }
 
 export const items: { [key: string]: Item } = {
@@ -28,38 +26,44 @@ export const items: { [key: string]: Item } = {
   "worlds/hollow_bastion": {
     total: 2,
     data: "demyx",
-    secondary: [CHEST, "secondary/sephiroth"]
+    secondary: [CHEST, "secondary/sephiroth"],
   },
   "worlds/cavern_of_remembrance": {
-    secondary: ["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`)
+    secondary: ["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`),
   },
   "worlds/land_of_dragons": { total: 2, data: "xigbar", secondary: CHEST },
   "worlds/beast's_castle": { total: 2, data: "xaldin", secondary: CHEST },
   "worlds/olympus_coliseum": {
     total: 2,
     data: "zexion",
-    secondary: [CHEST, ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`)]
+    secondary: [
+      CHEST,
+      ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}`),
+    ],
   },
   "worlds/disney_castle": {
     data: "marluxia",
-    secondary: [CHEST, "secondary/lingering_will"]
+    secondary: [CHEST, "secondary/lingering_will"],
   },
   "worlds/timeless_river": { secondary: CHEST },
   "worlds/port_royal": { total: 2, data: "luxord", secondary: CHEST },
   "worlds/agrabah": { total: 2, data: "lexaeus", secondary: CHEST },
   "worlds/halloween_town": { total: 2, data: "vexen", secondary: CHEST },
-  "worlds/pride_land": { total: 2, data: "saix", secondary: CHEST },
+  "worlds/pride_lands": { total: 2, data: "saix", secondary: CHEST },
   "worlds/space_paranoids": { total: 2, data: "larxene", secondary: CHEST },
   "worlds/the_world_that_never_was": {
     data: "xemnas",
-    secondary: [CHEST, ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`)]
+    secondary: [
+      CHEST,
+      ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`),
+    ],
   },
   "worlds/atlantica": { total: 6, data: "larxene", cls: "atlantica" },
   "worlds/100_acre_wood": {
     total: 6,
     secondary: "secondary/page",
     secondaryTotal: 5,
-    cls: "hundred_acre"
+    cls: "hundred_acre",
   },
   "worlds/underdrome_cups": { total: 5 },
   "worlds/replica_data": { total: 13 },
@@ -68,8 +72,10 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": {
     total: 27,
     level: 1,
-    secondary: ["second_chance", "once_more", "survival_abilities"].map(i => `secondary/abilities/${i}`),
-    cls: "levels"
+    secondary: ["second_chance", "once_more", "survival_abilities"].map(
+      i => `secondary/abilities/${i}`
+    ),
+    cls: "levels",
   },
 
   // Drives
@@ -78,42 +84,42 @@ export const items: { [key: string]: Item } = {
     secondary: "secondary/drive/jump",
     secondaryTotal: 3,
     secondaryMax: true,
-    cls: "drive"
+    cls: "drive",
   },
   "drive/wisdom": {
     total: 7,
     secondary: "secondary/drive/quick",
     secondaryTotal: 3,
     secondaryMax: true,
-    cls: "drive"
+    cls: "drive",
   },
   "drive/limit": {
     total: 7,
     secondary: "secondary/drive/dodge",
     secondaryTotal: 3,
     secondaryMax: true,
-    cls: "drive"
+    cls: "drive",
   },
   "drive/master": {
     total: 7,
     secondary: "secondary/drive/aerial",
     secondaryTotal: 3,
     secondaryMax: true,
-    cls: "drive"
+    cls: "drive",
   },
   "drive/final": {
     total: 7,
     secondary: "secondary/drive/glide",
     secondaryTotal: 3,
     secondaryMax: true,
-    cls: "drive"
+    cls: "drive",
   },
 
   // Magic
-  "magic/fire": { total: 3, secondary: DONALD },
-  "magic/blizzard": { total: 3, secondary: DONALD },
-  "magic/thunder": { total: 3, secondary: DONALD },
-  "magic/cure": { total: 3, secondary: DONALD },
+  "magic/fire": { total: 3, secondary: DONALD, cls: "magic" },
+  "magic/blizzard": { total: 3, secondary: DONALD, cls: "magic" },
+  "magic/thunder": { total: 3, secondary: DONALD, cls: "magic" },
+  "magic/cure": { total: 3, secondary: DONALD, cls: "magic" },
   "magic/reflect": { total: 3 },
   "magic/magnet": { total: 3 },
 
@@ -128,7 +134,7 @@ export const items: { [key: string]: Item } = {
   "other/promise_charm": {},
   "other/proof_of_nonexistence": { secondary: CROWNS },
   "other/proof_of_connection": { secondary: CROWNS },
-  "other/proof_of_tranquility": { secondary: CROWNS }
+  "other/proof_of_tranquility": { secondary: CROWNS },
 };
 
 for (const [i, item] of Object.values(items).entries()) {
@@ -142,8 +148,8 @@ for (const [i, item] of Object.values(items).entries()) {
 
 export const state = {
   clients: {
-    "": JSON.parse(JSON.stringify(items)) // Shitty deep copy
-  }
+    "": JSON.parse(JSON.stringify(items)), // Shitty deep copy
+  },
 };
 
 export type State = {
@@ -164,7 +170,7 @@ export type State = {
   "secondary/lingering_will.png",
   "secondary/sephiroth.png",
   "secondary/triangle.png",
-  "secondary/chest.png"
+  "secondary/chest.png",
 ].forEach(src => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();

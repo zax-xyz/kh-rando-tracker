@@ -4,26 +4,28 @@
     h4 File: {{ file }}
 
     .row.grid
-      input.long
-      p Custom image
+      p Image
+      input.long(
+        :placeholder="file"
+      )
 
     .row.grid
+      p Total
       input(
         :placeholder="settings.total"
       )
-      p Total
 
     .row.grid
+      p Default Level
       input(
         :placeholder="settings.level"
       )
-      p Default Level
 
     .row.grid
+      p Group
       input.long(
         :placeholder="settings.group"
       )
-      p Group
 
     .row.grid
       p Secondary (right click)
@@ -48,5 +50,9 @@ export default class EditItem extends Vue {
 </script>
 
 <style lang="stylus" scoped>
+input
+  width 3em !important
 
+  &.long
+    width 100% !important
 </style>

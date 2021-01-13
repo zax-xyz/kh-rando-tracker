@@ -28,8 +28,8 @@ import BaseCell from "./BaseCell.vue";
 @Component({
   components: {
     BaseCell,
-    draggable
-  }
+    draggable,
+  },
 })
 export default class BaseGrid extends Vue {
   @Prop({ type: String, required: false, default: "" }) clientId!: string;
@@ -57,8 +57,8 @@ export default class BaseGrid extends Vue {
       props: {
         tag: "div",
         type: "transition",
-        name: !this.dragging ? "flip-list" : null
-      }
+        name: !this.dragging ? "flip-list" : null,
+      },
     };
   }
 
@@ -72,18 +72,23 @@ export default class BaseGrid extends Vue {
 
     const style: { [key: string]: string } = {
       "max-width": `${(settings.columns || 5) * itemSize}px`,
-      "background-color": settings.bgColor
+      "background-color": settings.bgColor,
     };
 
     const bgImg = settings.bgImg;
     const darken = "rgba(0, 0, 0, .6)";
     if (bgImg) style["background-image"] = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
 
+    if (this.$route.query.footer === "0") {
+      style["border-radius"] = "4px";
+      style.margin = "0";
+    }
+
     return style;
   }
 
   remove(index: number): void {
-    this.itemNums = this.itemNums.filter(i => i !== index);
+    this.itemNums = this.itemNums.filter((i) => i !== index);
   }
 }
 </script>
@@ -95,7 +100,7 @@ export default class BaseGrid extends Vue {
   justify-content center
   padding 15px
   margin 5px 5px 0
-  background $bg-color no-repeat center/cover
+  background $bg-color no-repeat center / cover
   border-radius 4px 4px 0 0
   box-sizing content-box
   user-select none

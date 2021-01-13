@@ -5,6 +5,7 @@ import createPersistedState from "vuex-persistedstate";
 import tracker from "./tracker";
 import settings from "./settings";
 import co_op from "./co_op";
+import tracker_important from "./tracker_important";
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     tracker,
     settings,
     co_op,
+    tracker_important,
   },
   strict: process.env.NODE_ENV !== "production",
   plugins: [createPersistedState({ paths: ["settings"] })],

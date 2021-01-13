@@ -4,8 +4,12 @@ import VueRouter, { RouteConfig } from "vue-router";
 import About from "@/views/About.vue";
 import CoOp from "@/views/CoOp.vue";
 import Help from "@/views/Help.vue";
+import HelpNormal from "@/views/HelpNormal.vue";
+import HelpImportant from "@/views/HelpImportant.vue";
 import Settings from "@/views/Settings.vue";
+import Thanks from "@/views/Thanks.vue";
 import EditItem from "@/views/EditItem.vue";
+import Reports from "@/views/Reports.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +25,20 @@ const routes: Array<RouteConfig> = [
     name: "Help",
     meta: { title: "Help" },
     component: Help,
+    children: [
+      {
+        path: "",
+        redirect: "normal",
+      },
+      {
+        path: "normal",
+        component: HelpNormal,
+      },
+      {
+        path: "important",
+        component: HelpImportant,
+      },
+    ],
   },
   {
     path: "/co-op",
@@ -35,10 +53,22 @@ const routes: Array<RouteConfig> = [
     component: Settings,
   },
   {
+    path: "/thanks",
+    name: "Thanks",
+    meta: { title: "Thanks" },
+    component: Thanks,
+  },
+  {
     path: "/item/:file",
     name: "EditItem",
     meta: { title: "Edit Item" },
     component: EditItem,
+  },
+  {
+    path: "/reports",
+    name: "Reports",
+    meta: { title: "Select Report Found" },
+    component: Reports,
   },
 ];
 

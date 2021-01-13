@@ -9,11 +9,7 @@ export default {
     const item: { [key: string]: any } = items[cell];
     if (item.disabled) return;
 
-    dispatch(
-      "co_op/sendClick",
-      { type: "user_primary", client, cell, offset },
-      { root: true }
-    );
+    dispatch("co_op/sendClick", { type: "user_primary", client, cell, offset }, { root: true });
 
     var level = item.level;
     const data = Boolean(item.data);
@@ -37,22 +33,16 @@ export default {
       commit("setOpaque", { client, cell, opaque: false });
     }
 
-    if (item.nobody && level === total)
-      // Show data image on last level
-      commit("setData", { client, cell, show: true });
-
     const group = item.group;
 
     const groupItems = [];
     if (group) {
-      for (const key in items)
-        if (items[key].group === group) groupItems.push(key);
+      for (const key in items) if (items[key].group === group) groupItems.push(key);
     } else {
       groupItems.push(cell);
     }
 
-    for (const item of groupItems)
-      commit("setLevel", { client, cell: item, level });
+    for (const item of groupItems) commit("setLevel", { client, cell: item, level });
   },
 
   // @ts-ignore
@@ -63,18 +53,14 @@ export default {
     const secondary = item.secondary;
     if (!secondary) return;
 
-    dispatch(
-      "co_op/sendClick",
-      { type: "user_secondary", client, cell, offset },
-      { root: true }
-    );
+    dispatch("co_op/sendClick", { type: "user_secondary", client, cell, offset }, { root: true });
 
     // Increment level with wrapping overflow based on total
-    const end = 1 + (
-      Array.isArray(secondary)
-      ? secondary.length
-      : (item.secondaryTotal || 1) + (item.secondaryMax || 0)
-    );
+    const end =
+      1 +
+      (Array.isArray(secondary)
+        ? secondary.length
+        : (item.secondaryTotal || 1) + (item.secondaryMax || 0));
     commit("setSecondaryLevel", {
       client,
       cell,
@@ -84,11 +70,7 @@ export default {
 
   // @ts-ignore
   disable({ commit, dispatch }, { client, cell }) {
-    dispatch(
-      "co_op/sendClick",
-      { type: "user_disable", client, cell },
-      { root: true }
-    );
+    dispatch("co_op/sendClick", { type: "user_disable", client, cell }, { root: true });
 
     commit("disable", { client, cell });
   },

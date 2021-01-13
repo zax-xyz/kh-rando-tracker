@@ -1,6 +1,7 @@
 <template lang="pug">
   div
     h2 Settings
+    p Many of these settings currently have no effect in important checks mode.
 
     .row.grid
       SwitchSlider(v-model="settings.scroll")
@@ -109,8 +110,8 @@ import SwitchSlider from "@/components/SwitchSlider.vue";
 @Component({
   components: {
     BaseTooltip,
-    SwitchSlider
-  }
+    SwitchSlider,
+  },
 })
 export default class Settings extends Vue {
   settings: object = { ...this.$store.state.settings };
@@ -142,7 +143,7 @@ export default class Settings extends Vue {
 
   save(): void {
     const file = new Blob([JSON.stringify(this.$store.state.settings)], {
-      type: "text/plain;charset=utf-8"
+      type: "text/plain;charset=utf-8",
     });
     saveAs(file, "kh2fm-tracker-settings.json");
   }
@@ -156,10 +157,7 @@ export default class Settings extends Vue {
     const reader = new FileReader();
 
     reader.onload = (event: Event) => {
-      this.$store.commit(
-        "settings/setSettings",
-        JSON.parse((event.target as any).result)
-      );
+      this.$store.commit("settings/setSettings", JSON.parse((event.target as any).result));
     };
     reader.readAsText(elem.files[0]);
   }

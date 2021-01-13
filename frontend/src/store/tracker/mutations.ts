@@ -3,42 +3,22 @@ import { items as defaultItems, State } from "./state";
 
 export default {
   addClient(state: State, payload: { client: string }): void {
-    Vue.set(
-      state.clients,
-      payload.client,
-      JSON.parse(JSON.stringify(defaultItems))
-    ); // Shitty deep copy
+    Vue.set(state.clients, payload.client, JSON.parse(JSON.stringify(defaultItems))); // Shitty deep copy
   },
 
   removeClient(state: State, payload: { client: string }): void {
     Vue.delete(state.clients, payload.client);
   },
 
-  setOpaque(
-    state: State,
-    payload: { client: string; cell: string; opaque: boolean }
-  ): void {
+  setOpaque(state: State, payload: { client: string; cell: string; opaque: boolean }): void {
     state.clients[payload.client][payload.cell].opaque = payload.opaque;
   },
 
-  setData(
-    state: State,
-    payload: { client: string; cell: string; show: boolean }
-  ): void {
-    state.clients[payload.client][payload.cell].showData = payload.show;
-  },
-
-  setLevel(
-    state: State,
-    payload: { client: string; cell: string; level: number }
-  ): void {
+  setLevel(state: State, payload: { client: string; cell: string; level: number }): void {
     state.clients[payload.client][payload.cell].level = payload.level;
   },
 
-  setSecondaryLevel(
-    state: State,
-    payload: { client: string; cell: string; level: number }
-  ): void {
+  setSecondaryLevel(state: State, payload: { client: string; cell: string; level: number }): void {
     state.clients[payload.client][payload.cell].secondaryLevel = payload.level;
   },
 
