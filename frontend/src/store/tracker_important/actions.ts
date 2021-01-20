@@ -102,7 +102,7 @@ export const actions: ActionTree<State, RootState> = {
     }
 
     const setting = state.items.checks[check].setting;
-    if (!setting || !state.hintSettings[setting].enabled) {
+    if (setting && !state.hintSettings[setting].enabled) {
       // if it is off in the hint settings, then don't increment checks
       return;
     }
@@ -122,7 +122,7 @@ export const actions: ActionTree<State, RootState> = {
     }
   },
 
-  undoCheck({ commit, dispatch, getters }, { check, location }) {
+  undoCheck({ commit, dispatch, getters, state }, { check, location }) {
     const cell = getters.cell(check);
 
     if (cell.cls === "drive" || cell.group === "summon") {
@@ -130,6 +130,12 @@ export const actions: ActionTree<State, RootState> = {
       commit("incrementChecks", -1);
     } else {
       dispatch("primary", { cell: check, offset: -1 });
+    }
+
+    const setting = state.items.checks[check].setting;
+    if (setting && !state.hintSettings[setting].enabled) {
+      // if it is off in the hint settings, then don't increment checks
+      return;
     }
 
     commit("incrementLocationChecks", { location, offset: -1 });
