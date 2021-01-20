@@ -29,6 +29,7 @@ nav
   margin-top -1em
   background #212121
   border-bottom 1px solid rgba(255, 255, 255, .1)
+  z-index 1
 
 .links
   display flex

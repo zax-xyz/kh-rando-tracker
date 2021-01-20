@@ -29,30 +29,28 @@ export default class SwitchSlider extends Vue {
 .slider
   display flex
   align-items center
-
   height 100%
   padding-left .25em
-
   background-color #ccc
   border-radius 1em
-
   cursor pointer
   transition background-color .2s
 
   input:checked + &
     background-color hsl($accent-hue, $button-sat, $button-lig)
 
-  &:before
+  &::before
     height 1em
     width 1em
-
     background-color white
     border-radius 50%
     box-shadow 0 2px 5px -2px black
-    content ""
-
-    transition margin-left .2s
+    content ''
+    transition margin-left .2s, box-shadow .2s
 
     input:checked + &
       margin-left 1.5em
+
+  &:hover::before
+    box-shadow 0 2px 8px -1px black
 </style>

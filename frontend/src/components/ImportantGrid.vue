@@ -15,23 +15,25 @@
       )
         ImportantCell(
           :file="name"
+          :hinted="numHinted(name)"
           style="width: 60px"
-          @undo-check="() => removeCheck(name)"
+          @undo-check="removeCheck(name)"
         )
 
-    .group.middle
     draggable.group.checks.dragArea(
       :list="Object.keys(checks[0])"
       :group="{ name: 'checks', pull: 'clone', put: false }"
       item="ImportantCell"
       :sort="false"
-      @start="() => dragging = true"
-      @end="() => dragging = false"
+      @start="dragging = true"
+      @end="dragging = false"
     )
       ImportantCell(
         v-for="(check, name) in checks[0]"
         :key="name"
         :file="name"
+        :hinted="numHinted(name)"
+        @found-report="showReports"
       )
       span(
         :style="numChecksStyle"
@@ -45,13 +47,14 @@
       :key="index"
       :group="{ name: 'checks', pull: 'clone', put: false }"
       :sort="false"
-      @start="() => dragging = true"
-      @end="() => dragging = false"
+      @start="dragging = true"
+      @end="dragging = false"
     )
       ImportantCell(
         v-for="(check, name) in row"
         :key="name"
         :file="name"
+        :hinted="numHinted(name)"
       )
 </template>
 
@@ -61,7 +64,7 @@ import draggable from "vuedraggable";
 
 import EventBus from "../event-bus";
 import ImportantCell from "./ImportantCell.vue";
-import { Item, Items } from "@/store/tracker_important/state";
+import { Hint, Item, Items } from "@/store/tracker_important/state";
 
 type ItemMap = { [key: string]: Item };
 type Style = { [key: string]: string };
@@ -81,6 +84,10 @@ function splitRows(items: ItemMap): ItemMap[] {
   return rows;
 }
 
+function mapToStringArray(items: ItemMap[]): { [key: string]: string[] } {
+  return Object.fromEntries(items.flatMap((l) => Object.keys(l)).map((l) => [l, []]));
+}
+
 @Component({
   components: {
     ImportantCell,
@@ -94,9 +101,8 @@ export default class ImportantGrid extends Vue {
   checks = splitRows(this.items.checks) as Items["checks"][];
 
   // create a mapping from locations to list of checks found there
-  foundChecks: { [key: string]: string[] } = Object.fromEntries(
-    this.locations.flatMap((l) => Object.keys(l)).map((l) => [l, []])
-  );
+  foundChecks: { [key: string]: string[] } = mapToStringArray(this.locations);
+  checkLocations: { [key: string]: string[] } = mapToStringArray(this.checks);
   totalChecks: number = 51;
 
   dragging: boolean = false;
@@ -128,6 +134,88 @@ export default class ImportantGrid extends Vue {
     return this.$store.state.tracker_important.checks;
   }
 
+  numHinted(item: string): number {
+    if (!this.$store.getters["tracker_important/isLocation"](item)) {
+      // checks
+      if (item !== "other/torn_page" && this.items.checks[item].cls !== "drive") {
+        // only track hinted for pages and drives
+        return 0;
+      }
+
+      // return number of locations for this check that have been hinted
+      let hinted = 0;
+      let dimmed = false;
+      this.checkLocations[item].forEach((l) => {
+        if (this.items.locations[l].totalChecks !== -1) {
+          hinted++;
+          return;
+        }
+
+        if (this.foundChecks[l].some((c) => c.startsWith("other/proof_"))) {
+          hinted++;
+          dimmed = true;
+        }
+      });
+
+      return hinted * (-1) ** +dimmed;
+    }
+
+    if (this.items.locations[item].totalChecks === -1) {
+      // not hinted
+      return 0;
+    }
+
+    const reportLocation = this.$store.state.tracker_important.hints.find(
+      (h: Hint) => h.location === item
+    ).report;
+
+    return reportLocation === "Free"
+      ? 0 // GoA/Critical Extra will never be hinted
+      : this.items.locations[reportLocation].totalChecks !== -1
+      ? 1 // World is hinted and we have the report
+      : // Otherwise, if the world has a proof, then it must be hinted by some report we don't have
+        -this.foundChecks[reportLocation].some((c) => c.startsWith("other/proof_"));
+  }
+
+  showReports(location: string): boolean {
+    if (!this.$store.state.tracker_important.hints.length) {
+      return false;
+    }
+
+    // so the Reports view component knows which location to check reports for
+    this.$store.commit("tracker_important/setLocation", location);
+    this.$router.push("reports");
+
+    EventBus.$on("correctReport", (hintLocation: string, checks: number, index: number) => {
+      EventBus.$off("correctReport");
+      EventBus.$off("wrongReport");
+
+      this.$store.dispatch("tracker_important/foundCheck", {
+        check: "other/secret_reports",
+        location,
+      });
+      this.$store.commit("tracker_important/setLocationTotal", {
+        location: hintLocation,
+        checks,
+      });
+      this.$store.dispatch("tracker_important/foundHint", index);
+
+      if (location !== "Free") {
+        this.checkLocations["other/secret_reports"].push(location);
+      }
+    });
+
+    // if the user didn't get the right report, then make sure the report isn't included in the list
+    EventBus.$on("wrongReport", () => {
+      EventBus.$off("correctReport");
+      EventBus.$off("wrongReport");
+
+      this.foundChecks[location].shift();
+    });
+
+    return true;
+  }
+
   add(location: string, added: { element: string; newIndex: number }) {
     if (added.newIndex === 1) {
       // With no visible list of elements, the item will always either be added at index 0 if
@@ -143,58 +231,33 @@ export default class ImportantGrid extends Vue {
     }
 
     // Show menu for reports/hints
-    if (
-      added.element === "other/secret_reports" &&
-      this.$store.state.tracker_important.hints.length
-    ) {
-      // so the Reports view component knows which location to check reports for
-      this.$store.commit("tracker_important/setLocation", location);
-      this.$router.push("reports");
-
-      EventBus.$on("correctReport", (hintLocation: string, checks: number, index: number) => {
-        EventBus.$off("correctReport");
-        EventBus.$off("wrongReport");
-
-        this.$store.dispatch("tracker_important/foundCheck", { check: added.element, location });
-        this.$store.commit("tracker_important/setLocationTotal", {
-          location: hintLocation,
-          checks,
-        });
-        this.$store.dispatch("tracker_important/foundHint", index);
-      });
-
-      // if the user didn't get the right report, then make sure the report isn't included in the
-      // list
-      EventBus.$on("wrongReport", () => {
-        EventBus.$off("correctReport");
-        EventBus.$off("wrongReport");
-
-        this.foundChecks[location].shift();
-      });
-
+    if (added.element === "other/secret_reports" && this.showReports(location)) {
       return;
     }
 
     this.$store.dispatch("tracker_important/foundCheck", { check: added.element, location });
+    this.checkLocations[added.element].push(location);
   }
 
   removeCheck(location: string) {
     const items = this.foundChecks[location];
     if (items.length === 0) return;
 
-    this.$store.dispatch("tracker_important/undoCheck", { check: items.shift(), location });
+    const check = items.shift() as string;
+    this.$store.dispatch("tracker_important/undoCheck", { check, location });
+    this.checkLocations[check].pop();
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 .grid
+  max-width calc(100vw - 25px)
   width 500px
   padding 15px
   margin 5px 5px 0
   background $bg-color no-repeat center / cover
   border-radius 4px 4px 0 0
-  box-sizing content-box
   user-select none
 
 .dragArea

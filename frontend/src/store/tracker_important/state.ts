@@ -85,7 +85,7 @@ export const items: BaseItems = {
 
   checks: {
     "other/secret_reports": { total: 13 },
-    "other/torn_page": { total: 5 },
+    "other/torn_page": { total: 5, cls: "pages" },
 
     "ROW END 1": {},
 
@@ -209,13 +209,15 @@ export interface Items {
   checks: { [key: string]: Check };
 }
 
-export type Hints = Array<{
+export interface Hint {
   report: string;
   location: string;
   checks: number;
   found: boolean;
   incorrectCounter: number;
-}>;
+}
+
+export type Hints = Array<Hint>;
 
 export const state = {
   items: items as Items,

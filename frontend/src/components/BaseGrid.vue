@@ -68,10 +68,12 @@ export default class BaseGrid extends Vue {
 
   get gridStyle(): object {
     const settings = this.$store.state.settings;
-    const itemSize = (settings.size || 100) + 2 * (settings.padding || 5);
+    const columns = settings.columns || 5;
+    const size = settings.size || "100px";
+    const padding = settings.padding ? settings.padding.split(/\s/).slice(-1)[0] : "5px";
 
     const style: { [key: string]: string } = {
-      "max-width": `${(settings.columns || 5) * itemSize}px`,
+      "max-width": `calc(${columns} * (${size} + 2 * ${padding}))`,
       "background-color": settings.bgColor,
     };
 
@@ -98,6 +100,7 @@ export default class BaseGrid extends Vue {
   display inline-flex
   flex-wrap wrap
   justify-content center
+  max-width 550px
   padding 15px
   margin 5px 5px 0
   background $bg-color no-repeat center / cover

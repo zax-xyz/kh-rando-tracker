@@ -97,8 +97,11 @@ export const actions: ActionTree<State, RootState> = {
 
   foundCheck({ commit, dispatch }, { check, location }) {
     dispatch("primary", { cell: check });
-    commit("incrementLocationChecks", { location });
+    if (location === "Free") {
+      return;
+    }
 
+    commit("incrementLocationChecks", { location });
     dispatch("checkTotal", location);
   },
 

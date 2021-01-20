@@ -39,6 +39,17 @@ export default class extends Vue {
     else document.title = "KH2FM Item Tracker";
   }
 
+  created() {
+    ["size", "padding"].forEach((s) => {
+      // @ts-ignore
+      const setting = this.$store.state.settings[s];
+      if (setting && !isNaN(Number(setting))) {
+        // @ts-ignore
+        this.$store.commit("settings/setSettings", { [s]: setting + "px" });
+      }
+    });
+  }
+
   get mainStyle(): object {
     if (!this.footer) {
       return {

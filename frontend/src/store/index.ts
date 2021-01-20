@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import tracker from "./tracker";
-import settings from "./settings";
+import { settings } from "./settings";
 import co_op from "./co_op";
 import tracker_important from "./tracker_important";
 

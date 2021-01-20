@@ -76,48 +76,62 @@ export default class ModalView extends Vue {
     transform translateY(15px) scale(.98)
 </style>
 
-<style lang="stylus">
-p
-h1
-h2
-h3
-h4
-h5
-h6
-  margin .5em 0
-
-.footnote
-  font-weight 300
-
-.row
-  display flex
-  align-items center
-  margin .5em 0
-
-  &.grid
-    display grid
-    grid-template-columns 12em auto
-    grid-gap 15px
-
-    :first-child
-      margin-left auto
-
-    input:not(:first-child)
-      width 100%
-      text-align left
-
+<style lang="stylus" scoped>
+>>>
   p
-    display inline-block
-    margin 0
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+    margin .5em 0
 
-  input
-    width 3em
-    padding 4px 6px
-    text-align right
-    border 0
-    border-radius 3px
-    box-shadow 0 0 3px inset rgba(0, 0, 0, .35)
+  .footnote
+    font-weight 300
 
-    &.long
-      width 9em
+  .row
+    display flex
+    align-items center
+    margin .5em 0
+
+    &.grid
+      display grid
+      grid-template-columns 12em auto
+      grid-gap 15px
+
+      :first-child
+        margin-left auto
+
+      input:not(:first-child)
+        width 100%
+        text-align left
+
+    p
+      display inline-block
+      margin 0
+
+    input
+      width 6em
+      padding 4px 0
+      text-align right
+      color hsl(0, 0, 85%)
+      background initial
+      border 0
+      border-bottom 1px solid rgba(255, 255, 255, .1)
+      outline 0
+      transition border-bottom-color .2s, color .2s
+
+      &:hover
+        border-bottom-color rgba(255, 255, 255, .3)
+
+      &:focus
+        border-bottom-color hsla($accent-hue, 65%, 65%, .6)
+        color white
+
+        &::placeholder
+          color transparent
+
+      &.long
+        width 12em
 </style>

@@ -18,19 +18,19 @@
 
     .row.grid
       input(
-        placeholder="100"
-        v-model.number="settings.size"
+        placeholder="100px"
+        v-model="settings.size"
       )
-      p Item size (px)
+      p Item size
 
     .row.grid
       input(
-        placeholder="5"
+        placeholder="5px"
         v-model="settings.padding"
       )
       div
-        p Item padding (px)
-        BaseTooltip Pre-1.4 versions used 7.5
+        p Item padding
+        BaseTooltip Pre-1.4 versions used 7.5px
 
     .row.grid
       input.long(
@@ -75,13 +75,20 @@
       div
         BaseTooltip Click on an item to open a menu to change its default properties
 
+    // .row.grid
+      router-link(
+        to="settings/icons"
+        tag="button"
+      ) Icon Styles
+      p Edit Icon Styles
+
+
     .row.grid
       button(
         @click="save"
       ) Save as File
       div
         p Export settings
-        BaseTooltip Includes custom layout
 
     .row.grid
       button(
@@ -106,6 +113,7 @@ import { saveAs } from "file-saver";
 
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import SwitchSlider from "@/components/SwitchSlider.vue";
+import { State } from "@/store/settings";
 
 @Component({
   components: {
@@ -114,7 +122,7 @@ import SwitchSlider from "@/components/SwitchSlider.vue";
   },
 })
 export default class Settings extends Vue {
-  settings: object = { ...this.$store.state.settings };
+  settings: State = { ...this.$store.state.settings };
 
   get drag(): boolean {
     return this.$store.state.drag;

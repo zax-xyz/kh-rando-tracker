@@ -22,10 +22,9 @@
           v-else-if="isLocation && cell.checks || cell.totalChecks > -1"
           key="1"
         ) {{ cell.checks }}
-          span.checksNumber(
-            v-if="cell.totalChecks > -1"
-            style="position: relative"
-          ) / {{ cell.totalChecks }}
+          template(v-if="cell.totalChecks > -1")
+            span(style="color: #fdbd8a")  / 
+            span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
 
         img.nobody(
           v-if="cell.data && cell.level === cell.total + 1"
@@ -44,6 +43,20 @@
               :src="`img/numbers/${secondaryNumber}.png`"
             )
 
+        .report(
+          v-if="hinted"
+          :class="{ dim: hinted < 0 }"
+          key="4"
+        )
+          img(
+            src="img/other/secret_reports.png"
+          )
+          transition(name="fade-up")
+            img.number(
+              v-if="Math.abs(hinted) > 1"
+              :src="`img/numbers/${Math.abs(hinted)}.png`"
+            )
+
     transition(name="fade-cross")
       img.cross(v-if="cell.disabled", src="img/cross.png")
 </template>
@@ -54,6 +67,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class ImportantCell extends Vue {
   @Prop(String) file!: string;
+  @Prop(Number) hinted!: number;
 
   cell = this.$store.getters["tracker_important/cell"](this.file);
   cls: string = this.cell.cls ?? null;
@@ -87,12 +101,18 @@ export default class ImportantCell extends Vue {
   }
 
   handleClick(event: MouseEvent): void {
-    if (this.isLocation && event.ctrlKey) {
+    const offset = event.ctrlKey ? -1 : 1;
+
+    if (this.isLocation && offset == -1) {
       this.$emit("undo-check");
       return;
     }
 
-    const offset = event.ctrlKey ? -1 : 1;
+    if (this.file === "other/secret_reports" && offset === 1) {
+      this.$emit("found-report", "Free");
+      return;
+    }
+
     this.dispatch("tracker_important/primary", offset, event.shiftKey);
   }
 
@@ -150,7 +170,7 @@ img
 
 .checksNumber
   position absolute
-  right -15%
+  right -20%
   bottom -15%
   color #fbf993
   font-size 1.2rem
@@ -181,16 +201,34 @@ img
     &[src='img/numbers/max.png']
       left 25%
 
-  /.drive &
-  /.hundred_acre &
-  /.levels &
+  .drive &
+  .hundred_acre &
+  .levels &
     left 0
     top 7.5%
     width 75%
 
-  /.magic &
+  .magic &
     left 0
     width 40%
+
+.report
+  position absolute
+  bottom -10%
+  left -20%
+  width 40%
+
+  img
+    width 100%
+    vertical-align bottom
+    transition opacity .2s
+
+  &.dim img
+    opacity .45
+
+  .pages &
+    bottom -5%
+    width 55%
 
 .fade-up-enter-active
 .fade-up-leave-active

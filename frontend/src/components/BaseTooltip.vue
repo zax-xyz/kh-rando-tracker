@@ -24,15 +24,12 @@ p
   position absolute
   bottom 1.5em
   left 50%
-
   max-width 450px
   width max-content
   padding 5px
-
   background-color rgba(0, 0, 0, .85)
   border-radius 3px
   box-shadow 0 2px 5px rgba(0, 0, 0, .5)
-
   opacity 0
   visibility hidden
   transform translate(-50%, 10px) scale(.95)
@@ -46,5 +43,5 @@ p
     border 5px solid transparent
     border-top-color @background-color
     transform translateX(-50%)
-    content " "
+    content ' '
 </style>

@@ -4,11 +4,15 @@ import VueRouter, { RouteConfig } from "vue-router";
 import About from "@/views/About.vue";
 import CoOp from "@/views/CoOp.vue";
 import Help from "@/views/Help.vue";
-import HelpNormal from "@/views/HelpNormal.vue";
-import HelpImportant from "@/views/HelpImportant.vue";
 import Settings from "@/views/Settings.vue";
 import Thanks from "@/views/Thanks.vue";
+
+import HelpNormal from "@/views/HelpNormal.vue";
+import HelpImportant from "@/views/HelpImportant.vue";
+
+import IconStyles from "@/views/IconStyles.vue";
 import EditItem from "@/views/EditItem.vue";
+
 import Reports from "@/views/Reports.vue";
 
 Vue.use(VueRouter);
@@ -45,6 +49,12 @@ const routes: Array<RouteConfig> = [
     name: "CoOp",
     meta: { title: "Co-Op" },
     component: CoOp,
+  },
+  {
+    path: "/settings/icons",
+    name: "Icon Styles",
+    meta: { title: "Icon Styles" },
+    component: IconStyles,
   },
   {
     path: "/settings",
