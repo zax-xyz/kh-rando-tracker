@@ -16,6 +16,7 @@ interface BaseItem {
   opaque?: boolean;
   disabled?: boolean;
   secondaryLevel?: number;
+  setting?: string;
 }
 
 interface BaseLocation extends BaseItem {
@@ -35,7 +36,7 @@ interface BaseItems {
 export const items: BaseItems = {
   locations: {
     // Worlds
-    "other/sora's_heart": {},
+    "other/sora's_heart": { setting: "Sora's Heart" },
     "other/drive_forms": {},
     "worlds/hollow_bastion": {
       data: "demyx",
@@ -72,8 +73,8 @@ export const items: BaseItems = {
     "ROW END 3": {},
 
     "worlds/disney_castle": { data: "marluxia", secondary: [CHEST, "secondary/lingering_will"] },
-    "worlds/100_acre_wood": {},
-    "worlds/simulated_twilight_town": { data: "roxas" },
+    "worlds/100_acre_wood": { setting: "100 Acre Wood" },
+    "worlds/simulated_twilight_town": { data: "roxas", setting: "Simulated Twilight Town" },
     "worlds/the_world_that_never_was": {
       data: "xemnas",
       secondary: [
@@ -84,8 +85,8 @@ export const items: BaseItems = {
   },
 
   checks: {
-    "other/secret_reports": { total: 13 },
-    "other/torn_page": { total: 5, cls: "pages" },
+    "other/secret_reports": { total: 13, setting: "Secret Ansem Reports" },
+    "other/torn_page": { total: 5, cls: "pages", setting: "Torn Pages" },
 
     "ROW END 1": {},
 
@@ -93,7 +94,7 @@ export const items: BaseItems = {
     "magic/fire": { total: 3, secondary: DONALD, cls: "magic" },
     "magic/blizzard": { total: 3, secondary: DONALD, cls: "magic" },
     "magic/thunder": { total: 3, secondary: DONALD, cls: "magic" },
-    "magic/cure": { total: 3, secondary: DONALD, cls: "magic" },
+    "magic/cure": { total: 3, secondary: DONALD, cls: "magic", setting: "Cure" },
     "magic/reflect": { total: 3 },
     "magic/magnet": { total: 3 },
 
@@ -139,6 +140,7 @@ export const items: BaseItems = {
       secondaryMax: true,
       cls: "drive",
       levelsImportant: false,
+      setting: "Final Form",
     },
 
     "ROW END 3": {},
@@ -152,9 +154,9 @@ export const items: BaseItems = {
     "ROW END 4": {},
 
     // Other
-    "other/second_chance": {},
-    "other/once_more": {},
-    "other/promise_charm": {},
+    "other/second_chance": { setting: "Second Chance & Once More" },
+    "other/once_more": { setting: "Second Chance & Once More" },
+    "other/promise_charm": { setting: "Promise Charm" },
     "other/proof_of_nonexistence": { secondary: CROWNS },
     "other/proof_of_connection": { secondary: CROWNS },
     "other/proof_of_tranquility": { secondary: CROWNS },
@@ -219,6 +221,14 @@ export interface Hint {
 
 export type Hints = Array<Hint>;
 
+export interface HintSetting {
+  items: string[];
+  disable?: boolean;
+  check?: boolean;
+  value?: number;
+  enabled?: boolean;
+}
+
 export const state = {
   items: items as Items,
   checks: 0,
@@ -226,7 +236,28 @@ export const state = {
   currentLocation: "",
   hints: [] as Hints,
   hintsLoaded: false,
+  hintSettings: {
+    "Promise Charm": { items: ["other/promise_charm"], disable: true, check: true },
+    "Second Chance & Once More": {
+      items: ["other/second_chance", "other/once_more"],
+      check: true,
+      value: 2,
+    },
+    "Torn Pages": { items: ["other/torn_page"], check: true, value: 5 },
+    "Secret Ansem Reports": { items: ["other/secret_reports"], check: true, value: 13 },
+    Cure: { items: ["magic/cure"], check: true, value: 3 },
+    "Final Form": { items: ["drive/final"], check: true },
+    "Sora's Heart": { items: ["other/sora's_heart"] },
+    "Simulated Twilight Town": { items: ["worlds/simulated_twilight_town"] },
+    "100 Acre Wood": { items: ["worlds/100_acre_wood"] },
+  } as { [key: string]: HintSetting },
 };
+
+for (const key in state.hintSettings) {
+  state.hintSettings[key].enabled = true;
+  state.hintSettings[key].value = state.hintSettings[key].value ?? 1;
+  state.hintSettings[key].check = state.hintSettings[key].check ?? false;
+}
 
 export type State = typeof state;
 

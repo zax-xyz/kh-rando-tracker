@@ -64,7 +64,7 @@ import draggable from "vuedraggable";
 
 import EventBus from "../event-bus";
 import ImportantCell from "./ImportantCell.vue";
-import { Hint, Item, Items } from "@/store/tracker_important/state";
+import { Hint, HintSetting, Item, Items } from "@/store/tracker_important/state";
 
 type ItemMap = { [key: string]: Item };
 type Style = { [key: string]: string };
@@ -103,9 +103,19 @@ export default class ImportantGrid extends Vue {
   // create a mapping from locations to list of checks found there
   foundChecks: { [key: string]: string[] } = mapToStringArray(this.locations);
   checkLocations: { [key: string]: string[] } = mapToStringArray(this.checks);
-  totalChecks: number = 51;
 
   dragging: boolean = false;
+
+  get totalChecks(): number {
+    let total = 51;
+    Object.values(this.$store.state.tracker_important.hintSettings).forEach((s: HintSetting) => {
+      if (!s.enabled) {
+        total -= s.value;
+      }
+    });
+
+    return total;
+  }
 
   get gridStyle(): object {
     if (this.$route.query.footer === "0") {

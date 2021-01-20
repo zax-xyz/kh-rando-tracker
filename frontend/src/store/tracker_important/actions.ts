@@ -95,9 +95,15 @@ export const actions: ActionTree<State, RootState> = {
     commit("disable", item);
   },
 
-  foundCheck({ commit, dispatch }, { check, location }) {
+  foundCheck({ commit, dispatch, state }, { check, location }) {
     dispatch("primary", { cell: check });
     if (location === "Free") {
+      return;
+    }
+
+    const setting = state.items.checks[check].setting;
+    if (!setting || !state.hintSettings[setting].enabled) {
+      // if it is off in the hint settings, then don't increment checks
       return;
     }
 
@@ -161,6 +167,9 @@ export const actions: ActionTree<State, RootState> = {
       });
 
       commit("setHints", hints);
+
+      const settings = lines[2].split(" - ").slice(1, -1);
+      commit("setHintSettings", Object.fromEntries(settings.map(s => [s, true])));
     };
   },
 

@@ -24,6 +24,18 @@ export const mutations: MutationTree<State> = {
     state.hintsLoaded = true;
   },
 
+  setHintSettings(state, settings: { [key: string]: boolean }) {
+    for (const key in state.hintSettings) {
+      state.hintSettings[key].enabled = settings[key] ?? false;
+
+      if (!settings[key] && state.hintSettings[key].disable) {
+        state.hintSettings[key].items.forEach(i => {
+          (state.items.checks[i] ?? state.items.locations[i]).disabled = true;
+        });
+      }
+    }
+  },
+
   setLocation(state, location: string): void {
     state.currentLocation = location;
   },
