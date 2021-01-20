@@ -108,9 +108,10 @@ export default class ImportantGrid extends Vue {
 
   get totalChecks(): number {
     let total = 51;
+    // @ts-ignore
     Object.values(this.$store.state.tracker_important.hintSettings).forEach((s: HintSetting) => {
-      if (!s.enabled) {
-        total -= s.value;
+      if (s.check && !s.enabled) {
+        total -= s.value ?? 1;
       }
     });
 
