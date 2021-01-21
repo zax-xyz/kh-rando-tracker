@@ -157,12 +157,14 @@ export default class ImportantGrid extends Vue {
       let hinted = 0;
       let dimmed = false;
       this.checkLocations[item].forEach((l) => {
-        if (this.items.locations[l].totalChecks !== -1) {
+        if (l === "Free" || this.items.locations[l].totalChecks !== -1) {
+          // Goa/Critical Extra, or hinted
           hinted++;
           return;
         }
 
         if (this.foundChecks[l].some((c) => c.startsWith("other/proof_"))) {
+          // has proof so much be hinted by some report but we don't have it yet
           hinted++;
           dimmed = true;
         }
@@ -180,10 +182,8 @@ export default class ImportantGrid extends Vue {
       (h: Hint) => h.location === item
     ).report;
 
-    return reportLocation === "Free"
-      ? 0 // GoA/Critical Extra will never be hinted
-      : this.items.locations[reportLocation].totalChecks !== -1
-      ? 1 // World is hinted and we have the report
+    return reportLocation === "Free" || this.items.locations[reportLocation].totalChecks !== -1
+      ? 1 // World is hinted, or it was goa/critical extra, which also counts
       : // Otherwise, if the world has a proof, then it must be hinted by some report we don't have
         -this.foundChecks[reportLocation].some((c) => c.startsWith("other/proof_"));
   }
