@@ -2,9 +2,7 @@
   div
     h3 Left Click
     p The item will become activated, lighting up to full opacity.
-    p When clicking on a world more than once, if applicable, a number will appear in the bottom right indicating how many visits have been completed. There are similar systems for drive, magic, summon, and Sora levels.
-      BaseTooltip 'Visits' for Atlantica/100 Acre Wood represent not whole world completion but segment completion. That is, song completion for Atlantica (including the tutorial), and pages for 100 Acre Wood.
-      BaseTooltip The counter for Sora's Level will increase in increments of +1 from LV1-15, then +5 from LV15-50 and +10 from LV50-99.
+    p When clicking on a world more than once, if applicable, a number will appear in the bottom right indicating how many visits (Songs for Atlantica, pages for 100 Acre Wood) have been completed. There are similar systems for drive, magic, summon, and Sora levels. The counter for levels increases in increments of +1 from 1-15, +5 from 15-50, and +10 from 50-99.
     p After all visits have been completed, clicking again will either trigger a symbol to appear in the top left, for defeat of the Data Org/Absent Sillhouette fight, or reset the cell back to its original state.
 
     h3 Right Click
