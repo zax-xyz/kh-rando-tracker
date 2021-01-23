@@ -86,11 +86,7 @@ export default class TheFooter extends Vue {
   }
 
   popout(): void {
-    window.open(
-      "#/?footer=0",
-      "",
-      "left=0,top=0,width=600,height=1200,menubar=no,toolbar=no,scrollbars=no"
-    );
+    window.open("#/", "", "left=0,top=0,width=600,height=1200,menubar=no,toolbar=no,scrollbars=no");
   }
 
   hideFooter(): void {
