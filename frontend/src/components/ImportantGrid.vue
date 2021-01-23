@@ -3,7 +3,10 @@
     :class="{ disableShadows: disableShadows }"
     :style="gridStyle"
   )
-    .group.locations(v-for="row in locations")
+    .group.locations(
+      v-for="row in locations"
+      :style="worldRowStyle"
+     )
       draggable.dragArea(
         v-for="(location, name) in row"
         :key="name"
@@ -16,7 +19,7 @@
         ImportantCell(
           :file="name"
           :hinted="numHinted(name)"
-          style="width: 60px"
+          :style="{ width: settings.worldSize || '60px' }"
           @undo-check="removeCheck(name)"
         )
 
@@ -25,6 +28,7 @@
       :group="{ name: 'checks', pull: 'clone', put: false }"
       item="ImportantCell"
       :sort="false"
+      :style="{ padding: `${settings.checkVerticalPadding || '2.5px'} 0` }"
       @start="dragging = true"
       @end="dragging = false"
     )
@@ -33,6 +37,7 @@
         :key="name"
         :file="name"
         :hinted="numHinted(name)"
+        :style="{ width: settings.checkSize }"
         @found-report="showReports"
       )
       span(
@@ -47,6 +52,7 @@
       :key="index"
       :group="{ name: 'checks', pull: 'clone', put: false }"
       :sort="false"
+      :style="{ padding: `${settings.checkVerticalPadding || '2.5px'} 0` }"
       @start="dragging = true"
       @end="dragging = false"
     )
@@ -55,6 +61,7 @@
         :key="name"
         :file="name"
         :hinted="numHinted(name)"
+        :style="{ width: settings.checkSize }"
       )
 </template>
 
@@ -65,6 +72,7 @@ import draggable from "vuedraggable";
 import EventBus from "../event-bus";
 import ImportantCell from "./ImportantCell.vue";
 import { Hint, HintSetting, Item, Items } from "@/store/tracker_important/state";
+import { formatItem } from "@/util";
 
 type ItemMap = { [key: string]: Item };
 type Style = { [key: string]: string };
@@ -85,7 +93,7 @@ function splitRows(items: ItemMap): ItemMap[] {
 }
 
 function mapToStringArray(items: ItemMap[]): { [key: string]: string[] } {
-  return Object.fromEntries(items.flatMap((l) => Object.keys(l)).map((l) => [l, []]));
+  return Object.fromEntries(items.flatMap(l => Object.keys(l)).map(l => [l, []]));
 }
 
 @Component({
@@ -106,6 +114,8 @@ export default class ImportantGrid extends Vue {
 
   dragging: boolean = false;
 
+  settings = this.$store.state.settings.important;
+
   get totalChecks(): number {
     let total = 51;
     // @ts-ignore
@@ -119,14 +129,30 @@ export default class ImportantGrid extends Vue {
   }
 
   get gridStyle(): object {
+    const settings = this.$store.state.settings;
+
+    const style: { [key: string]: string } = {
+      backgroundColor: settings.bgColor,
+      width: this.settings.width,
+    };
+
+    const bgImg = settings.bgImg;
+    const darken = "rgba(0, 0, 0, .6)";
+    if (bgImg) style.backgroundImage = `linear-gradient(${darken}, ${darken}), url(${bgImg})`;
+
     if (this.$route.query.footer === "0") {
-      return {
-        "border-radius": "4px",
-        margin: "0",
-      };
+      style.borderRadius = "4px";
+      style.margin = "0";
     }
 
-    return {};
+    return style;
+  }
+
+  get worldRowStyle(): object {
+    return {
+      height: this.settings.worldSize || "60px",
+      padding: `${this.settings.worldVerticalPadding || "7.5px"} 0`,
+    };
   }
 
   get numChecksStyle(): object {
@@ -156,14 +182,14 @@ export default class ImportantGrid extends Vue {
       // return number of locations for this check that have been hinted
       let hinted = 0;
       let dimmed = false;
-      this.checkLocations[item].forEach((l) => {
+      this.checkLocations[item].forEach(l => {
         if (l === "Free" || this.items.locations[l].totalChecks !== -1) {
           // Goa/Critical Extra, or hinted
           hinted++;
           return;
         }
 
-        if (this.foundChecks[l].some((c) => c.startsWith("other/proof_"))) {
+        if (this.foundChecks[l].some(c => c.startsWith("other/proof_"))) {
           // has proof so much be hinted by some report but we don't have it yet
           hinted++;
           dimmed = true;
@@ -185,7 +211,7 @@ export default class ImportantGrid extends Vue {
     return reportLocation === "Free" || this.items.locations[reportLocation].totalChecks !== -1
       ? 1 // World is hinted, or it was goa/critical extra, which also counts
       : // Otherwise, if the world has a proof, then it must be hinted by some report we don't have
-        -this.foundChecks[reportLocation].some((c) => c.startsWith("other/proof_"));
+        -this.foundChecks[reportLocation].some(c => c.startsWith("other/proof_"));
   }
 
   showReports(location: string): boolean {
@@ -211,9 +237,15 @@ export default class ImportantGrid extends Vue {
       });
       this.$store.dispatch("tracker_important/foundHint", index);
 
+      let formattedLocation;
       if (location !== "Free") {
         this.checkLocations["other/secret_reports"].push(location);
+        formattedLocation = formatItem(location);
+      } else {
+        formattedLocation = "GoA/Critical Extra";
       }
+
+      console.log("Report", index + 1, "found in", formattedLocation);
     });
 
     // if the user didn't get the right report, then make sure the report isn't included in the list
@@ -248,6 +280,7 @@ export default class ImportantGrid extends Vue {
 
     this.$store.dispatch("tracker_important/foundCheck", { check: added.element, location });
     this.checkLocations[added.element].push(location);
+    console.log(formatItem(added.element), "found in", formatItem(location));
   }
 
   removeCheck(location: string) {
@@ -257,6 +290,7 @@ export default class ImportantGrid extends Vue {
     const check = items.shift() as string;
     this.$store.dispatch("tracker_important/undoCheck", { check, location });
     this.checkLocations[check].pop();
+    console.warn("Removed", formatItem(check), "from", formatItem(location));
   }
 }
 </script>
@@ -276,9 +310,9 @@ export default class ImportantGrid extends Vue {
 
 .group
   display flex
-  // align-items center
   justify-content space-around
-  padding 5px 0
+  padding 7.5px 0
+  box-sizing content-box
 
   &.checks
     padding 2.5px 0

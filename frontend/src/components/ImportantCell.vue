@@ -7,7 +7,7 @@
     @wheel="handleWheel"
   )
     img.icon(
-      :src="custom('file', `img/${file}.png`)"
+      :src="`img/${styledIcon(file)}.png`"
       :class="{ opaque: cell.opaque, disabled: cell.disabled }"
     )
 
@@ -49,7 +49,7 @@
           key="4"
         )
           img(
-            src="img/other/secret_reports.png"
+            :src="`img/${styledIcon('other/secret_reports')}.png`"
           )
           transition(name="fade-up")
             img.number(
@@ -63,6 +63,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+
+import { formatItem } from "@/util";
 
 @Component
 export default class ImportantCell extends Vue {
@@ -84,12 +86,24 @@ export default class ImportantCell extends Vue {
     return this.$store.getters["tracker_important/secondaryNumber"](this.file);
   }
 
-  get customDefaults() {
-    return this.$store.state.settings.customDefaults[this.file];
-  }
+  styledIcon(file: string): string {
+    const cell = this.$store.getters["tracker_important/cell"](file);
+    const style = this.$store.state.settings.iconStyle[cell.category];
 
-  custom(property: string, fallback: any): any {
-    return this.customDefaults?.[property] ?? fallback;
+    if (style === cell.categoryExclude) {
+      return file;
+    }
+
+    switch (style) {
+      case "Default":
+        return file;
+      case "Minimal":
+        return `minimal/${file}`;
+      case "Classic":
+        return `classic/${file}`;
+      default:
+        return file;
+    }
   }
 
   dispatch(mutation: string, offset: number = 1, shift: boolean = false): void {
@@ -114,6 +128,11 @@ export default class ImportantCell extends Vue {
     }
 
     this.dispatch("tracker_important/primary", offset, event.shiftKey);
+    console.log(
+      "Clicked on",
+      formatItem(this.file),
+      `(${offset >= 0 ? "+" : ""}${offset})${event.shiftKey ? " (shift)" : ""}`
+    );
   }
 
   handleRightClick(event: MouseEvent): void {

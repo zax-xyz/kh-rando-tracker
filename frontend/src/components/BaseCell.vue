@@ -6,7 +6,7 @@
     @wheel="handleWheel"
   )
     img.icon(
-      :src="custom('file', `img/${file}.png`)"
+      :src="`img/${styledIcon(file)}.png`"
       :class="{ opaque: cell.opaque, disabled: cell.disabled }"
     )
 
@@ -59,6 +59,26 @@ export default class BaseCell extends Vue {
 
   custom(property: string, fallback: any): any {
     return this.customDefaults?.[property] ?? fallback;
+  }
+
+  styledIcon(file: string): string {
+    const cell = this.$store.state.tracker.clients[""][file];
+    const style = this.$store.state.settings.iconStyle[cell.category];
+
+    if (style === cell.categoryExclude) {
+      return file;
+    }
+
+    switch (style) {
+      case "Default":
+        return file;
+      case "Minimal":
+        return `minimal/${file}`;
+      case "Classic":
+        return `classic/${file}`;
+      default:
+        return file;
+    }
   }
 
   get itemStyle(): object {

@@ -22,7 +22,7 @@ export default class ModalView extends Vue {
   }
 
   mounted(): void {
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", e => {
       if (e.key === "Escape" && this.show) {
         this.gotoRoot();
       }
@@ -74,9 +74,7 @@ export default class ModalView extends Vue {
 
   .inner
     transform translateY(15px) scale(.98)
-</style>
 
-<style lang="stylus" scoped>
 >>>
   p
   h1
@@ -97,41 +95,57 @@ export default class ModalView extends Vue {
 
     &.grid
       display grid
-      grid-template-columns 12em auto
+      grid-template-columns 10em auto
       grid-gap 15px
 
-      :first-child
+      > :first-child
         margin-left auto
 
       input:not(:first-child)
         width 100%
         text-align left
 
+      @media screen and (max-width: 480px)
+        &
+          grid-template-columns none
+          grid-gap .5em
+          margin 1em 0
+
+          input
+            text-align left
+
+          > :first-child
+            grid-row 2
+            margin-left 0
+
+          .name
+            font-weight bold
+
     p
       display inline-block
       margin 0
 
-    input
-      width 6em
-      padding 4px 0
-      text-align right
-      color hsl(0, 0, 85%)
-      background initial
-      border 0
-      border-bottom 1px solid rgba(255, 255, 255, .1)
-      outline 0
-      transition border-bottom-color .2s, color .2s
+  input
+    width 6em
+    padding 4px 0
+    text-align right
+    color hsl(0, 0, 85%)
+    background initial
+    border 0
+    border-bottom 1px solid rgba(255, 255, 255, .1)
+    outline 0
+    transition border-bottom-color .2s, color .2s
 
-      &:hover
-        border-bottom-color rgba(255, 255, 255, .3)
+    &:hover
+      border-bottom-color rgba(255, 255, 255, .3)
 
-      &:focus
-        border-bottom-color hsla($accent-hue, 65%, 65%, .6)
-        color white
+    &:focus
+      border-bottom-color hsla($accent-hue, 65%, 65%, .6)
+      color white
 
-        &::placeholder
-          color transparent
+      &::placeholder
+        color transparent
 
-      &.long
-        width 12em
+    &.long
+      width 10em
 </style>

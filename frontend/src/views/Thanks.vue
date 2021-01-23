@@ -1,7 +1,5 @@
 <template lang="pug">
   div
-    h1 Thanks/Credit
-
     .content
       Collapse(name="Televo")
         p

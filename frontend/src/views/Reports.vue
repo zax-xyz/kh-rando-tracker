@@ -19,14 +19,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 import EventBus from "../event-bus";
 import { Hints } from "@/store/tracker_important/state";
-
-function formatLocation(location: string): string {
-  return location
-    .split("/", 2)[1]
-    .split("_")
-    .map((p) => p[0].toUpperCase() + p.slice(1))
-    .join(" ");
-}
+import { formatItem } from "@/util";
 
 @Component
 export default class Reports extends Vue {
@@ -43,7 +36,7 @@ export default class Reports extends Vue {
       return;
     }
 
-    this.msg = `${formatLocation(hint.location)} has ${hint.checks} important checks`;
+    this.msg = `${formatItem(hint.location)} has ${hint.checks} important checks`;
     EventBus.$emit("correctReport", hint.location, hint.checks, i - 1);
   }
 

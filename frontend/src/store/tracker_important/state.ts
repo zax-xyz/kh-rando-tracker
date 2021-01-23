@@ -1,3 +1,5 @@
+import { IconStyle } from "../settings";
+
 const CROWNS = ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`);
 const CHEST = "secondary/chest";
 const DONALD = "secondary/duck";
@@ -10,13 +12,15 @@ interface BaseItem {
   secondaryMax?: boolean;
   cls?: string;
   group?: string;
+  setting?: string;
+  category?: string;
+  categoryExclude?: IconStyle;
 
   // set in the loop below
   level?: number;
   opaque?: boolean;
   disabled?: boolean;
   secondaryLevel?: number;
-  setting?: string;
 }
 
 interface BaseLocation extends BaseItem {
@@ -36,8 +40,8 @@ interface BaseItems {
 export const items: BaseItems = {
   locations: {
     // Worlds
-    "other/sora's_heart": { setting: "Sora's Heart" },
-    "other/drive_forms": {},
+    "other/sora's_heart": { setting: "Sora's Heart", category: "levels" },
+    "other/drive_forms": { category: "drive" },
     "worlds/hollow_bastion": {
       data: "demyx",
       secondary: [
@@ -45,13 +49,14 @@ export const items: BaseItems = {
         ...["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`),
         "secondary/sephiroth",
       ],
+      category: "worlds",
     },
-    "worlds/twilight_town": { data: "axel", secondary: CHEST },
+    "worlds/twilight_town": { data: "axel", secondary: CHEST, category: "worlds" },
 
     "ROW END 1": {},
 
-    "worlds/land_of_dragons": { data: "xigbar", secondary: CHEST },
-    "worlds/beast's_castle": { data: "xaldin", secondary: CHEST },
+    "worlds/land_of_dragons": { data: "xigbar", secondary: CHEST, category: "worlds" },
+    "worlds/beast's_castle": { data: "xaldin", secondary: CHEST, category: "worlds" },
     "worlds/olympus_coliseum": {
       data: "zexion",
       secondary: [
@@ -60,43 +65,54 @@ export const items: BaseItems = {
           c => `secondary/cups/${c}`
         ),
       ],
+      category: "worlds",
     },
-    "worlds/space_paranoids": { data: "larxene", secondary: CHEST },
+    "worlds/space_paranoids": { data: "larxene", secondary: CHEST, category: "worlds" },
 
     "ROW END 2": {},
 
-    "worlds/halloween_town": { data: "vexen", secondary: CHEST },
-    "worlds/port_royal": { data: "luxord", secondary: CHEST },
-    "worlds/agrabah": { data: "lexaeus", secondary: CHEST },
-    "worlds/pride_lands": { data: "saix", secondary: CHEST },
+    "worlds/halloween_town": { data: "vexen", secondary: CHEST, category: "worlds" },
+    "worlds/port_royal": { data: "luxord", secondary: CHEST, category: "worlds" },
+    "worlds/agrabah": { data: "lexaeus", secondary: CHEST, category: "worlds" },
+    "worlds/pride_lands": { data: "saix", secondary: CHEST, category: "worlds" },
 
     "ROW END 3": {},
 
-    "worlds/disney_castle": { data: "marluxia", secondary: [CHEST, "secondary/lingering_will"] },
-    "worlds/100_acre_wood": { setting: "100 Acre Wood" },
-    "worlds/simulated_twilight_town": { data: "roxas", setting: "Simulated Twilight Town" },
+    "worlds/disney_castle": {
+      data: "marluxia",
+      secondary: [CHEST, "secondary/lingering_will"],
+      category: "worlds",
+    },
+    "worlds/100_acre_wood": { setting: "100 Acre Wood", category: "worlds" },
+    "worlds/simulated_twilight_town": {
+      data: "roxas",
+      setting: "Simulated Twilight Town",
+      category: "worlds",
+      categoryExclude: IconStyle.CLASSIC,
+    },
     "worlds/the_world_that_never_was": {
       data: "xemnas",
       secondary: [
         CHEST,
         ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`),
       ],
+      category: "worlds",
     },
   },
 
   checks: {
-    "other/secret_reports": { total: 13, setting: "Secret Ansem Reports" },
+    "other/secret_reports": { total: 13, setting: "Secret Ansem Reports", category: "reports" },
     "other/torn_page": { total: 5, cls: "pages", setting: "Torn Pages" },
 
     "ROW END 1": {},
 
     // Magic
-    "magic/fire": { total: 3, secondary: DONALD, cls: "magic" },
-    "magic/blizzard": { total: 3, secondary: DONALD, cls: "magic" },
-    "magic/thunder": { total: 3, secondary: DONALD, cls: "magic" },
-    "magic/cure": { total: 3, secondary: DONALD, cls: "magic", setting: "Cure" },
-    "magic/reflect": { total: 3 },
-    "magic/magnet": { total: 3 },
+    "magic/fire": { total: 3, secondary: DONALD, cls: "magic", category: "magic" },
+    "magic/blizzard": { total: 3, secondary: DONALD, cls: "magic", category: "magic" },
+    "magic/thunder": { total: 3, secondary: DONALD, cls: "magic", category: "magic" },
+    "magic/cure": { total: 3, secondary: DONALD, cls: "magic", setting: "Cure", category: "magic" },
+    "magic/reflect": { total: 3, category: "magic" },
+    "magic/magnet": { total: 3, category: "magic" },
 
     "ROW END 2": {},
 
@@ -108,6 +124,7 @@ export const items: BaseItems = {
       secondaryMax: true,
       cls: "drive",
       levelsImportant: false,
+      category: "forms",
     },
     "drive/wisdom": {
       total: 7,
@@ -116,6 +133,7 @@ export const items: BaseItems = {
       secondaryMax: true,
       cls: "drive",
       levelsImportant: false,
+      category: "forms",
     },
     "drive/limit": {
       total: 7,
@@ -124,6 +142,7 @@ export const items: BaseItems = {
       secondaryMax: true,
       cls: "drive",
       levelsImportant: false,
+      category: "forms",
     },
     "drive/master": {
       total: 7,
@@ -132,6 +151,7 @@ export const items: BaseItems = {
       secondaryMax: true,
       cls: "drive",
       levelsImportant: false,
+      category: "forms",
     },
     "drive/final": {
       total: 7,
@@ -141,25 +161,26 @@ export const items: BaseItems = {
       cls: "drive",
       levelsImportant: false,
       setting: "Final Form",
+      category: "forms",
     },
 
     "ROW END 3": {},
 
     // Summons
-    "summons/chicken_little": { total: 7, group: "summon" },
-    "summons/genie": { total: 7, group: "summon" },
-    "summons/stitch": { total: 7, group: "summon" },
-    "summons/peter_pan": { total: 7, group: "summon" },
+    "summons/chicken_little": { total: 7, group: "summon", category: "summons" },
+    "summons/genie": { total: 7, group: "summon", category: "summons" },
+    "summons/stitch": { total: 7, group: "summon", category: "summons" },
+    "summons/peter_pan": { total: 7, group: "summon", category: "summons" },
 
     "ROW END 4": {},
 
     // Other
-    "other/second_chance": { setting: "Second Chance & Once More" },
-    "other/once_more": { setting: "Second Chance & Once More" },
-    "other/promise_charm": { setting: "Promise Charm" },
-    "other/proof_of_nonexistence": { secondary: CROWNS },
-    "other/proof_of_connection": { secondary: CROWNS },
-    "other/proof_of_tranquility": { secondary: CROWNS },
+    "other/second_chance": { setting: "Second Chance & Once More", category: "scom" },
+    "other/once_more": { setting: "Second Chance & Once More", category: "scom" },
+    "other/promise_charm": { setting: "Promise Charm", category: "charm" },
+    "other/proof_of_nonexistence": { secondary: CROWNS, category: "proofs" },
+    "other/proof_of_connection": { secondary: CROWNS, category: "proofs" },
+    "other/proof_of_tranquility": { secondary: CROWNS, category: "proofs" },
   },
 };
 

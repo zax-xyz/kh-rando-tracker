@@ -40,7 +40,7 @@ export default class extends Vue {
   }
 
   created() {
-    ["size", "padding"].forEach((s) => {
+    ["size", "padding"].forEach(s => {
       // @ts-ignore
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {
@@ -118,7 +118,7 @@ input
   -moz-osx-font-smoothing grayscale
   text-align center
   color white
-  line-height 1.5
+  line-height 1.6
 
 a
   color hsl($accent-hue, $link-sat, 68%)

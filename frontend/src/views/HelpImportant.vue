@@ -18,7 +18,8 @@
     p If you marked a check wrong, you can click on the world while holding the Ctrl key to return the check back to the pool. You can also Ctrl+click directly on a check, but it won't decrease the counter for the world.
 
     h3 Hint Logic
-    p If a world is hinted and the world in which the report was found is also hinted, then the world that was hinted by the hinted world will have a report icon in the bottom left to indicate this. This is because worlds with proofs have to be hinted and their report also hinted. Report icons will also be shown but dimmed if a hinted world had its report in a world that hasn't been hinted but had a proof found there, since worlds with proofs have to be hinted. Report icons are also shown next to drive forms if they were found in a hinted world and torn pages will have a report icon with a number showing the number of pages that were found in hinted worlds.
+    p If a world is hinted and the world in which the report was found is also hinted, then the world that was hinted by the hinted world will have a report icon in the bottom left to indicate this. This is because worlds with proofs have to be hinted and their report also hinted. Report icons will also be shown but dimmed if a hinted world had its report in a world that hasn't been hinted but had a proof found there, since worlds with proofs have to be hinted.
+    p Report icons are also shown next to drive forms if they were found in a hinted world and torn pages will have a report icon with a number showing the number of pages that were found in hinted worlds.
     p To read more about the logic, check the 
       a(href="https://jsmartee.github.io/kh2fm-hints-demo/info.html#logic") official page
       | .

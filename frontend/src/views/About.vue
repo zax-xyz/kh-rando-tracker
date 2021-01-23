@@ -20,7 +20,7 @@
 
     p If you have any questions/issues, you can find me in the 
       a(href="https://discord.gg/GcJR7Fv" target="_blank") KH2FM Rando Discord
-      |  server, 
+      |  server (michael_#6969, nickname zax), 
       a(href="https://twitter.com/z_ax__" target="_blank") Twitter
       | , or GitHub.
 

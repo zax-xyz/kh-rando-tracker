@@ -90,7 +90,7 @@ export default class BaseGrid extends Vue {
   }
 
   remove(index: number): void {
-    this.itemNums = this.itemNums.filter((i) => i !== index);
+    this.itemNums = this.itemNums.filter(i => i !== index);
   }
 }
 </script>

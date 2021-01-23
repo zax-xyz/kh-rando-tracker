@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
+import Info from "@/views/Info.vue";
 import About from "@/views/About.vue";
 import CoOp from "@/views/CoOp.vue";
 import Help from "@/views/Help.vue";
@@ -9,6 +10,10 @@ import Thanks from "@/views/Thanks.vue";
 
 import HelpNormal from "@/views/HelpNormal.vue";
 import HelpImportant from "@/views/HelpImportant.vue";
+
+import SettingsGeneral from "@/views/SettingsGeneral.vue";
+import SettingsNormal from "@/views/SettingsNormal.vue";
+import SettingsImportant from "@/views/SettingsImportant.vue";
 
 import IconStyles from "@/views/IconStyles.vue";
 import EditItem from "@/views/EditItem.vue";
@@ -19,64 +24,84 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/about",
-    name: "About",
-    meta: { title: "About" },
-    component: About,
-  },
-  {
-    path: "/help",
-    name: "Help",
-    meta: { title: "Help" },
-    component: Help,
+    path: "/info",
+    meta: { title: "Info" },
+    component: Info,
     children: [
       {
         path: "",
-        redirect: "normal",
+        redirect: "about",
       },
       {
-        path: "normal",
-        component: HelpNormal,
+        path: "about",
+        meta: { title: "About" },
+        component: About,
       },
       {
-        path: "important",
-        component: HelpImportant,
+        path: "help",
+        meta: { title: "Help" },
+        component: Help,
+        children: [
+          {
+            path: "",
+            redirect: "normal",
+          },
+          {
+            path: "normal",
+            component: HelpNormal,
+          },
+          {
+            path: "important",
+            component: HelpImportant,
+          },
+        ],
+      },
+      {
+        path: "thanks",
+        meta: { title: "Thanks" },
+        component: Thanks,
       },
     ],
   },
   {
     path: "/co-op",
-    name: "CoOp",
     meta: { title: "Co-Op" },
     component: CoOp,
   },
   {
-    path: "/settings/icons",
-    name: "Icon Styles",
-    meta: { title: "Icon Styles" },
-    component: IconStyles,
-  },
-  {
     path: "/settings",
-    name: "Settings",
     meta: { title: "Settings" },
     component: Settings,
-  },
-  {
-    path: "/thanks",
-    name: "Thanks",
-    meta: { title: "Thanks" },
-    component: Thanks,
+    children: [
+      {
+        path: "",
+        redirect: "general",
+      },
+      {
+        path: "general",
+        component: SettingsGeneral,
+      },
+      {
+        path: "icons",
+        component: IconStyles,
+      },
+      {
+        path: "normal",
+        component: SettingsNormal,
+      },
+      {
+        path: "important",
+        component: SettingsImportant,
+      },
+    ],
   },
   {
     path: "/item/:file",
-    name: "EditItem",
     meta: { title: "Edit Item" },
     component: EditItem,
   },
   {
     path: "/reports",
-    name: "Reports",
     meta: { title: "Select Report Found" },
     component: Reports,
   },

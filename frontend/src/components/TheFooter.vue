@@ -3,11 +3,6 @@
     .container
       .info Kingdom Hearts 2 Final Mix Item Tracker - Version {{ version }} (Preview)
 
-      .info
-        a(href="https://tracker.zaxu.xyz/old" target="_blank") Click here
-        |
-        | to use the pre-1.4 version
-
       .buttons
         router-link(
           v-for="route in routes"
@@ -51,7 +46,7 @@ import SwitchSlider from "./SwitchSlider.vue";
   },
 })
 export default class TheFooter extends Vue {
-  routes: Array<string> = ["about", "help", "co-op", "settings", "thanks"];
+  routes: Array<string> = ["info", "co-op", "settings"];
   version = process.env.PACKAGE_VER;
 
   title(route: string): string {

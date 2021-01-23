@@ -1,25 +1,47 @@
 import Vue from "vue";
 
+export enum IconStyle {
+  CLASSIC = "Classic",
+  DEFAULT = "Default",
+  MINIMAL = "Minimal",
+}
+
 const state = {
+  bgColor: "",
+  bgImg: "",
+  disableShadows: false,
+  customDefaults: {} as { [key: string]: { [key: string]: any } },
+  importantChecksMode: false,
+
+  iconStyle: {
+    worlds: IconStyle.DEFAULT,
+    cups: IconStyle.DEFAULT,
+    data: IconStyle.DEFAULT,
+    levels: IconStyle.DEFAULT,
+    drive: IconStyle.DEFAULT,
+    magic: IconStyle.DEFAULT,
+    forms: IconStyle.DEFAULT,
+    summons: IconStyle.DEFAULT,
+    reports: IconStyle.DEFAULT,
+    pages: IconStyle.DEFAULT,
+    charm: IconStyle.DEFAULT,
+    proofs: IconStyle.DEFAULT,
+  } as { [key: string]: IconStyle },
+
+  // normal mode. kept outside in the root to remain backwards-compatible with old user settings
   scroll: false,
   columns: "",
   size: "",
   padding: "",
-  bgColor: "",
-  bgImg: "",
-  disableShadows: false,
   itemNums: [] as Array<number>,
-  customDefaults: {} as { [key: string]: { [key: string]: any } },
-  importantChecksMode: false,
-  iconStyle: {
-    worlds: 0,
-    magic: 0,
-    drive: 0,
-    summons: 0,
-    abilities: 0,
-    charm: 0,
-    proofs: 0,
-  } as { [key: string]: number },
+
+  important: {
+    width: "",
+    worldSize: "",
+    worldVerticalPadding: "",
+    checkSize: "",
+    checkVerticalPadding: "",
+  },
 };
 
 export type State = typeof state;
@@ -27,6 +49,10 @@ export type State = typeof state;
 const mutations = {
   setSettings(state: State, payload: typeof state) {
     Object.assign(state, payload);
+  },
+
+  setImportantSettings(state: State, payload: typeof state.important) {
+    Object.assign(state.important, payload);
   },
 
   setNums(state: State, payload: { nums: Array<number> }): void {
@@ -45,8 +71,8 @@ const mutations = {
     state.importantChecksMode = enabled;
   },
 
-  setIconStyle(state: State, payload: State["iconStyle"]) {
-    Object.assign(state.iconStyle, payload);
+  setIconStyle(state: State, payload: { name: string; value: IconStyle }) {
+    state.iconStyle[payload.name] = payload.value;
   },
 };
 
