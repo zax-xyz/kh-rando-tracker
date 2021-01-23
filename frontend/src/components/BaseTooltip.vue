@@ -33,7 +33,7 @@ p
   opacity 0
   visibility hidden
   transform translate(-50%, 10px) scale(.95)
-  z-index 1
+  z-index 2000
   transition opacity .2s, visibility .2s, transform .2s
 
   &:after
