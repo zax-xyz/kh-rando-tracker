@@ -18,7 +18,13 @@ export default class SliderIconStyles extends Vue {
   @Prop(Array) options!: string[];
 
   get value(): number {
-    return this.options.indexOf(this.$store.state.settings.iconStyle[this.name]);
+    const index = this.options.indexOf(this.$store.state.settings.iconStyle[this.name]);
+    if (index === -1) {
+      this.$store.commit("settings/setIconStyle", { name: this.name, value: "Default" });
+      return this.value;
+    }
+
+    return index;
   }
 
   set value(newValue) {
