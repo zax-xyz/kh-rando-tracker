@@ -48,10 +48,12 @@ const routes: Array<RouteConfig> = [
           },
           {
             path: "normal",
+            meta: { title: "Help (Normal)" },
             component: HelpNormal,
           },
           {
             path: "important",
+            meta: { title: "Help (Important Checks Mode)" },
             component: HelpImportant,
           },
         ],
@@ -79,18 +81,22 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: "general",
+        meta: { title: "General Settings" },
         component: SettingsGeneral,
       },
       {
         path: "icons",
+        meta: { title: "Icon Styles Settings" },
         component: IconStyles,
       },
       {
         path: "normal",
+        meta: { title: "Normal Settings" },
         component: SettingsNormal,
       },
       {
         path: "important",
+        meta: { title: "Important Checks Mode Settings" },
         component: SettingsImportant,
       },
     ],
