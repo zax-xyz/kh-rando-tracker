@@ -32,7 +32,7 @@ import BaseCell from "./BaseCell.vue";
   },
 })
 export default class BaseGrid extends Vue {
-  @Prop({ type: String, required: false, default: "" }) clientId!: string;
+  @Prop({ type: String, required: false, default: "self" }) clientId!: string;
 
   items: Array<string> = Object.keys(this.$store.state.tracker.clients[this.clientId]);
   dragging: boolean = false;

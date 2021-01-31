@@ -40,8 +40,12 @@ export default class extends Vue {
   }
 
   created() {
+    if (!this.$store.state.settings.autosave) {
+      this.$store.commit("tracker/resetState");
+      this.$store.commit("tracker_important/resetState");
+    }
+
     ["size", "padding"].forEach(s => {
-      // @ts-ignore
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {
         // @ts-ignore

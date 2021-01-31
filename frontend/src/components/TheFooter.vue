@@ -10,6 +10,7 @@
           :key="route"
           tag="button"
         ) {{ title(route) }}
+        button(@click="reset") Reset Tracker
 
       .buttons
         span Important Check Mode
@@ -36,8 +37,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+
 import BaseTooltip from "./BaseTooltip.vue";
 import SwitchSlider from "./SwitchSlider.vue";
+
+const tracker = namespace("tracker_important");
 
 @Component({
   components: {
@@ -46,6 +51,8 @@ import SwitchSlider from "./SwitchSlider.vue";
   },
 })
 export default class TheFooter extends Vue {
+  @tracker.State hintsLoaded!: boolean;
+
   routes: Array<string> = ["info", "co-op", "settings"];
   version = process.env.PACKAGE_VER;
 
@@ -55,10 +62,6 @@ export default class TheFooter extends Vue {
 
   get fileElem(): HTMLInputElement {
     return this.$refs.file as HTMLInputElement;
-  }
-
-  get hintsLoaded(): boolean {
-    return this.$store.state.tracker_important.hintsLoaded;
   }
 
   get importantMode(): boolean {
@@ -86,6 +89,14 @@ export default class TheFooter extends Vue {
 
   hideFooter(): void {
     this.$router.push({ query: { footer: "0" } });
+  }
+
+  reset(): void {
+    if (this.importantMode) {
+      this.$store.commit("tracker_important/resetState");
+    } else {
+      this.$store.commit("tracker/resetState");
+    }
   }
 }
 </script>

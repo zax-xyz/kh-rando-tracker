@@ -16,32 +16,62 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { namespace } from "vuex-class";
 
 import EventBus from "../event-bus";
 import { Hints } from "@/store/tracker_important/state";
 import { formatItem } from "@/util";
 
+const tracker = namespace("tracker_important");
+
 @Component
 export default class Reports extends Vue {
+  @tracker.State hints!: Hints;
+  @tracker.State("currentLocation") location!: string;
+
   incorrectReports: number[] = [];
   msg: string = "";
-  hints: Hints = this.$store.state.tracker_important.hints;
+  hintsAtBottom: boolean = this.$store.state.settings.important.hintsAtBottom;
+  timer: number = -1;
 
   checkReport(i: number): void {
-    const location: string = this.$store.state.tracker_important.currentLocation;
     const hint = this.hints[i - 1];
-    if (hint.report !== location) {
+    if (hint.report !== this.location) {
       this.incorrectReports.push(i);
       this.$store.commit("tracker_important/incrementIncorrectReport", i - 1);
       return;
     }
 
-    this.msg = `${formatItem(hint.location)} has ${hint.checks} important checks`;
-    EventBus.$emit("correctReport", hint.location, hint.checks, i - 1);
+    const msg =
+      formatItem(hint.location) +
+      (hint.checks === 0
+        ? " is a heartless choice"
+        : ` has ${hint.checks} important check${hint.checks !== 1 ? "s" : ""}`);
+
+    console.log(msg);
+
+    this.$store.dispatch("tracker_important/foundCheck", {
+      check: "other/secret_reports",
+      location: this.location,
+    });
+    this.$store.dispatch("tracker_important/foundHint", i - 1);
+
+    if (this.hintsAtBottom) {
+      this.$store.commit("tracker_important/setHintMessage", msg);
+      this.$router.push("/");
+    } else {
+      this.msg = msg;
+      this.timer = window.setTimeout(
+        () => this.$router.push("/"),
+        this.$store.state.settings.important.autoHideHintsDelay ?? 3000,
+      );
+    }
   }
 
   destroyed() {
-    if (!this.msg) EventBus.$emit("wrongReport");
+    if (this.timer !== -1) {
+      window.clearTimeout(this.timer);
+    }
   }
 }
 </script>

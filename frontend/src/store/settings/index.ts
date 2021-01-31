@@ -10,8 +10,10 @@ const state = {
   bgColor: "",
   bgImg: "",
   disableShadows: false,
+  autosave: true,
+
   customDefaults: {} as { [key: string]: { [key: string]: any } },
-  importantChecksMode: false,
+  importantChecksMode: true,
 
   iconStyle: {
     worlds: IconStyle.DEFAULT,
@@ -41,6 +43,9 @@ const state = {
     worldVerticalPadding: "",
     checkSize: "",
     checkVerticalPadding: "",
+    hintsAtBottom: true,
+    autoHideHints: true,
+    autoHideHintsDelay: null,
   },
 };
 

@@ -1,13 +1,15 @@
 import { ActionTree } from "vuex";
 
 import { Check, Hints, Items, Item, State } from "./state";
+import { formatItem } from "@/util";
 import locations from "./codes";
 import { RootState } from "../types";
+import { items } from "../tracker/state";
 
 export const actions: ActionTree<State, RootState> = {
   primary(
     { commit, dispatch, getters, state },
-    { cell, offset = 1, shift = false }: { cell: string; offset: number; shift: boolean }
+    { cell, offset = 1, shift = false }: { cell: string; offset: number; shift: boolean },
   ) {
     const items: Items = state.items;
     const item: Item = getters.cell(cell);
@@ -36,44 +38,38 @@ export const actions: ActionTree<State, RootState> = {
       }
     }
 
+    if (
+      !getters.isLocation(cell) &&
+      ((item as Check).levelsImportant ||
+        (!shift && ((offset === 1 && !item.opaque) || (offset < 0 && level === 0))))
+    ) {
+      // Don't increment check count if levels aren't important and we are levelling, but
+      // increment if we are going down to 0
+      commit("incrementChecks", offset);
+    }
+
     if (level) {
-      if (!shift) commit("setOpaque", { item, opaque: true });
+      if (!shift && !item.opaque) {
+        commit("setOpaque", { item, opaque: true });
+      }
     } else {
       commit("setOpaque", { item, opaque: false });
     }
 
     const group = item.group;
 
-    const groupItems: string[] = [];
-    if (group) {
-      for (const [key, item] of Object.entries(items.checks)) {
-        if (item.group === group) {
-          groupItems.push(key);
-        }
-      }
-    } else {
-      groupItems.push(cell);
-    }
+    const groupItems: string[] = group
+      ? Object.keys(items.all).filter(k => items.all[k].group === group)
+      : [cell];
 
     for (const i of groupItems) {
       const item: Item = getters.cell(i);
       commit("setLevel", { item, level });
     }
-
-    if (
-      cell in state.items.checks &&
-      ((item as Check).levelsImportant ||
-        (offset === 1 && level === 1) ||
-        (offset < 0 && level === 0 && !shift))
-    ) {
-      // Don't increment check count if levels aren't important and we are levelling, but
-      // increment if we are going down to 0
-      commit("incrementChecks", offset);
-    }
   },
 
   secondary({ commit, dispatch, getters }, { cell, offset = 1 }) {
-    const item = getters.cell(cell);
+    const item = getters.cell(cell) as Item;
     if (item.disabled) return;
 
     const secondary = item.secondary;
@@ -82,8 +78,8 @@ export const actions: ActionTree<State, RootState> = {
     dispatch("co_op/sendClick", { type: "user_secondary", cell, offset }, { root: true });
 
     // Increment level with wrapping overflow based on total
-    const end =
-      1 + ((Array.isArray(secondary) ? secondary.length : item.secondaryTotal) + item.secondaryMax);
+    const length = Array.isArray(secondary) ? secondary.length : item.secondaryTotal;
+    const end = 1 + length + +item.secondaryMax;
 
     commit("setSecondaryLevel", { item, level: (item.secondaryLevel + end + offset) % end });
   },
@@ -95,20 +91,28 @@ export const actions: ActionTree<State, RootState> = {
     commit("disable", item);
   },
 
-  foundCheck({ commit, dispatch, state }, { check, location }) {
-    dispatch("primary", { cell: check });
-    if (location === "Free") {
+  foundCheck({ commit, dispatch, state }, { check, location, shift = false }) {
+    const item = state.items.all[check] as Check;
+    const opaque = item.opaque;
+
+    dispatch("primary", { cell: check, shift });
+
+    if (location === "Free" && (opaque || shift) && !item.levelsImportant) {
+      console.log(formatItem(check), "levelled up to", item.level);
       return;
     }
 
-    const setting = state.items.checks[check].setting;
+    const setting = item.setting;
     if (setting && !state.hintSettings[setting].enabled) {
       // if it is off in the hint settings, then don't increment checks
       return;
     }
 
     commit("incrementLocationChecks", { location });
+    commit("setCheckLocation", { check, location });
     dispatch("checkTotal", location);
+
+    console.log(formatItem(check), "found in", formatItem(location));
   },
 
   checkTotal({ commit, dispatch, getters }, location: string) {
@@ -122,27 +126,36 @@ export const actions: ActionTree<State, RootState> = {
     }
   },
 
-  undoCheck({ commit, dispatch, getters, state }, { check, location }) {
+  undoCheck({ commit, dispatch, getters, state }, { check, location, shift = false }) {
     const cell = getters.cell(check);
 
-    if (cell.cls === "drive" || cell.group === "summon") {
+    if (!cell.levelsImportant) {
+      if (location === "Free" && cell.level > 1) {
+        dispatch("primary", { cell: check, offset: -1, shift: cell.opaque ? shift : true });
+        console.log(formatItem(check), "unlevelled to", cell.level);
+        return;
+      }
+
       commit("setOpaque", { item: cell, opaque: false });
       commit("incrementChecks", -1);
     } else {
-      dispatch("primary", { cell: check, offset: -1 });
+      dispatch("primary", { cell: check, offset: -1, shift });
     }
 
-    const setting = state.items.checks[check].setting;
+    const setting = state.items.all[check].setting;
     if (setting && !state.hintSettings[setting].enabled) {
-      // if it is off in the hint settings, then don't increment checks
+      // if it is off in the hint settings, then don't decrement checks
       return;
     }
 
     commit("incrementLocationChecks", { location, offset: -1 });
+    commit("removeCheckLocation", { check, location });
+
+    console.warn("Removed", formatItem(check), "from", formatItem(location));
   },
 
   loadHints({ commit }, file: File) {
-    // Modified from https://github.com/Jsmartee/kh2fm-hints-demo/blob/master/js/main.js
+    // based on https://github.com/Jsmartee/kh2fm-hints-demo/blob/master/js/main.js
     const reader = new FileReader();
     reader.readAsText(file);
 
@@ -153,7 +166,7 @@ export const actions: ActionTree<State, RootState> = {
       const hints: Hints = [];
 
       const [reportValues, reportLocationAddresses] = [0, 1].map(i =>
-        lines[i].slice(0, -1).split(".")
+        lines[i].slice(0, -1).split("."),
       );
 
       reportValues.forEach((value, index) => {
@@ -180,8 +193,9 @@ export const actions: ActionTree<State, RootState> = {
   },
 
   foundHint({ dispatch, commit, state }, index: number) {
-    const location = state.hints[index].location;
-    dispatch("checkTotal", location);
+    const hint = state.hints[index];
+    commit("setLocationTotal", { location: hint.location, checks: hint.checks });
+    dispatch("checkTotal", hint.location);
     commit("foundHint", index);
   },
 };

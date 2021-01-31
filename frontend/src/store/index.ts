@@ -30,5 +30,7 @@ export default new Vuex.Store({
     tracker_important,
   },
   strict: process.env.NODE_ENV !== "production",
-  plugins: [createPersistedState({ paths: ["settings"] })],
+  plugins: [
+    createPersistedState({ paths: ["settings", "tracker_important", "tracker.clients.self"] }),
+  ],
 });

@@ -42,8 +42,11 @@ export default class BaseCell extends Vue {
   @Prop(String) client!: string;
   @Prop(String) file!: string;
 
-  cell = this.$store.getters["tracker/cell"](this.client, this.file);
   cls: string = this.cell.cls ?? null;
+
+  get cell(): { [key: string]: any } {
+    return this.$store.getters["tracker/cell"](this.client, this.file);
+  }
 
   get secondaryFile(): string {
     return this.$store.getters["tracker/secondary"](this.client, this.file);
@@ -62,7 +65,7 @@ export default class BaseCell extends Vue {
   }
 
   styledIcon(file: string): string {
-    const cell = this.$store.state.tracker.clients[""][file];
+    const cell = this.$store.state.tracker.clients.self[file];
     const style = this.$store.state.settings.iconStyle[cell.category];
 
     if (style === cell.categoryExclude) {

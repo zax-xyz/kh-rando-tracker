@@ -5,15 +5,11 @@ import { RootState } from "../types";
 
 export const getters: GetterTree<State, RootState> = {
   isLocation: (state: State) => (item: string): boolean => {
-    return item in state.items.locations;
+    return state.items.locations.flat().includes(item);
   },
 
-  cell: (state, getters) => (item: string): Item => {
-    if (getters.isLocation(item)) {
-      return state.items.locations[item];
-    }
-
-    return state.items.checks[item];
+  cell: state => (item: string): Item => {
+    return state.items.all[item] ?? {};
   },
 
   secondary: (_, getters) => (item: string): string | undefined => {

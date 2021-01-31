@@ -25,6 +25,12 @@
         BaseTooltip Can significantly improve performance on slower devices
 
     .row.grid
+      SwitchSlider(v-model="settings.autosave")
+      div
+        p.name Autosave
+        BaseTooltip Saves your tracker state so that if you close the page, your progress will still be remembered for next time
+
+    .row.grid
       button(
         @click="save"
         style="grid-row: 1; margin-left: auto"

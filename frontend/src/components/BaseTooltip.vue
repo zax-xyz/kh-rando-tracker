@@ -24,9 +24,10 @@ p
   position absolute
   bottom 1.5em
   left 50%
-  max-width 450px
+  max-width 400px
   width max-content
   padding 5px
+  text-align center
   background-color rgba(0, 0, 0, .85)
   border-radius 3px
   box-shadow 0 2px 5px rgba(0, 0, 0, .5)

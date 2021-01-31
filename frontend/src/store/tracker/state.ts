@@ -93,7 +93,7 @@ export const items: { [key: string]: Item } = {
     total: 27,
     level: 1,
     secondary: ["second_chance", "once_more", "survival_abilities"].map(
-      i => `secondary/abilities/${i}`
+      i => `secondary/abilities/${i}`,
     ),
     cls: "levels",
     category: "levels",
@@ -174,7 +174,7 @@ for (const [i, item] of Object.values(items).entries()) {
 
 export const state = {
   clients: {
-    "": JSON.parse(JSON.stringify(items)), // Shitty deep copy
+    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
   },
 };
 

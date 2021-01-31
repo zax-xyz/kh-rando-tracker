@@ -27,9 +27,13 @@ export default {
     payload: {
       client: string;
       cell: string;
-    }
+    },
   ): void {
     const item = state.clients[payload.client][payload.cell];
     item.disabled = !item.disabled;
+  },
+
+  resetState(state: State): void {
+    state.clients.self = JSON.parse(JSON.stringify(defaultItems));
   },
 };

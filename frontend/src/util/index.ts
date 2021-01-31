@@ -1,4 +1,8 @@
 export function formatItem(item: string): string {
+  if (item === "Free") {
+    return "GoA/Critical Extra";
+  }
+
   return item
     .split("/", 2)[1]
     .split("_")

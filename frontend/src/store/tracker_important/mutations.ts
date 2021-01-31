@@ -1,6 +1,6 @@
 import { MutationTree } from "vuex";
 
-import { Hints, Item, State } from "./state";
+import { Hints, Item, Location, State, initialState } from "./state";
 
 export const mutations: MutationTree<State> = {
   setOpaque(_state, { item, opaque }: { item: Item; opaque: boolean }): void {
@@ -30,7 +30,7 @@ export const mutations: MutationTree<State> = {
 
       if (!settings[key] && state.hintSettings[key].disable) {
         state.hintSettings[key].items.forEach(i => {
-          (state.items.checks[i] ?? state.items.locations[i]).disabled = true;
+          state.items.all[i].disabled = true;
         });
       }
     }
@@ -42,9 +42,12 @@ export const mutations: MutationTree<State> = {
 
   incrementLocationChecks(
     state,
-    { location, offset = 1 }: { location: string; offset: number }
+    { location, offset = 1 }: { location: string; offset: number },
   ): void {
-    state.items.locations[location].checks += offset;
+    const locationState = state.items.all[location] as Location;
+    if (!locationState) return;
+
+    locationState.checks += offset;
   },
 
   incrementChecks(state, offset: number = 1): void {
@@ -52,7 +55,20 @@ export const mutations: MutationTree<State> = {
   },
 
   setLocationTotal(state, payload: { location: string; checks: number }): void {
-    state.items.locations[payload.location].totalChecks = payload.checks;
+    (state.items.all[payload.location] as Location).totalChecks = payload.checks;
+  },
+
+  setCheckLocation(state, payload: { check: string; location: string }) {
+    state.checkLocations[payload.check].push(payload.location);
+    state.foundChecks[payload.location].push(payload.check);
+  },
+
+  removeCheckLocation(state, payload: { check: string; location: string }) {
+    const locations = state.checkLocations[payload.check];
+    locations.splice(locations.indexOf(payload.location), 1);
+
+    const checks = state.foundChecks[payload.location];
+    checks.splice(checks.indexOf(payload.check), 1);
   },
 
   foundHint(state, index: number): void {
@@ -61,5 +77,13 @@ export const mutations: MutationTree<State> = {
 
   incrementIncorrectReport(state, index: number): void {
     state.hints[index].incorrectCounter++;
+  },
+
+  setHintMessage(state, message: string): void {
+    state.hintMessage = message;
+  },
+
+  resetState(state): void {
+    Object.assign(state, initialState());
   },
 };
