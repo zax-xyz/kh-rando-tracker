@@ -1,9 +1,9 @@
 <template lang="pug">
   div(
     style="display: inline-flex; flex: 1; justify-content: center"
-    @click="handleClick"
-    @contextmenu="secondary({cell: file, offset: $event.ctrlKey ? -1: 1})"
-    @auxclick="handleMiddleClick"
+    @click.left="handleClick"
+    @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1: 1 })"
+    @click.middle="disable({ cell: file })"
    )
     .item(:class="cls")
       img.icon(
@@ -171,7 +171,7 @@ export default class ImportantCell extends Vue {
     const offset = event.ctrlKey ? -1 : 1;
 
     if (this.file === "other/secret_reports" && offset === 1) {
-      this.$emit("found-report", "Free");
+      this.$emit("found-report");
       return;
     }
 
@@ -209,11 +209,6 @@ export default class ImportantCell extends Vue {
 
     this.primary({ cell: this.file, offset, shift });
     console.log("Clicked on", formatItem(this.file) + (event.shiftKey ? " (shift)" : ""));
-  }
-
-  handleMiddleClick(event: MouseEvent): void {
-    if (event.button !== 1) return;
-    this.disable({ cell: this.file });
   }
 }
 </script>
