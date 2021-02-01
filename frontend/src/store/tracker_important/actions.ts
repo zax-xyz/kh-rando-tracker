@@ -93,6 +93,15 @@ export const actions: ActionTree<State, RootState> = {
 
   foundCheck({ commit, dispatch, state }, { check, location, shift = false }) {
     const item = state.items.all[check] as Check;
+
+    if (item.level === item.total) {
+      if (!item.levelsImportant) {
+        commit("setLevel", { item, level: 1 });
+      }
+
+      return;
+    }
+
     const opaque = item.opaque;
 
     dispatch("primary", { cell: check, shift });
