@@ -41,6 +41,9 @@
         )
       span(
         :style="numChecksStyle"
+        @click.exact="incrementChecks(1)"
+        @click.ctrl="incrementChecks(-1)"
+        @contextmenu="incrementChecks(-1)"
       )
         span {{ numChecks }}
         span  / {{ totalChecks }}
@@ -99,6 +102,7 @@ export default class ImportantGrid extends Vue {
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
+  @tracker.Mutation incrementChecks!: Function;
 
   @settings.State("important") settings: any;
   @settings.State disableShadows!: boolean;
