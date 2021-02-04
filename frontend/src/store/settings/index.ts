@@ -46,6 +46,7 @@ const state = {
     hintsAtBottom: true,
     autoHideHints: true,
     autoHideHintsDelay: null,
+    atlantica: true,
   },
 };
 

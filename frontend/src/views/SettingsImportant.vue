@@ -55,6 +55,12 @@
       div
         p.name Autohide hint delay (ms)
         BaseTooltip This only has effect if 'Show hints at bottom' is off. Otherwise, it is always immediate
+
+    .row.grid
+      SwitchSlider(v-model="settings.atlantica")
+      div
+        p.name Show Atlantica
+        BaseTooltip Loading hints will override this option. This is only for when hints are not used.
 </template>
 
 <script lang="ts">

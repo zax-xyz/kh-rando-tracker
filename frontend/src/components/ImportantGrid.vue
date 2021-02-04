@@ -100,6 +100,7 @@ export default class ImportantGrid extends Vue {
   @tracker.State hintSettings!: { [key: string]: HintSetting };
   @tracker.State("checks") numChecks!: number;
   @tracker.State hintMessage!: string;
+  @tracker.State hintsLoaded!: string;
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
@@ -165,6 +166,10 @@ export default class ImportantGrid extends Vue {
     const hintKey = this.items.all[location].setting;
     if (!hintKey) {
       return true;
+    }
+
+    if (!this.hintsLoaded && location === "worlds/atlantica") {
+      return this.settings.atlantica;
     }
 
     const hint = this.hintSettings[hintKey];
