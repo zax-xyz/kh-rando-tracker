@@ -7,7 +7,7 @@
       )
       div
         p.name Background color
-        BaseTooltip Accepts any valid <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">CSS color</a>
+        BaseTooltip Accepts any valid #[a(href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value") CSS color]
 
     .row.grid
       input.long(

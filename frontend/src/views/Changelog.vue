@@ -9,9 +9,9 @@
     .added
       h3 Added
       ul
-        li <strong>Support selecting a world first by clicking on it, then the checks found there</strong>. Drag-and-drog is still supported alongside this. This behaviour can be disabled in the settings.
-        li <strong>Show checks found in a location by middle clicking on the world</strong>. Disabling a world now has to be done while holding the Shift key.
-        li <strong>Option to show Altantica</strong>. A setting can be found in Settings > Important Checks Mode, however <b><i>this setting will be ignored when loading hints, and the hint settings will be used instead</i></b>.
+        li #[strong Support selecting a world first by clicking on it, then the checks found there]. Drag-and-drog is still supported alongside this. This behaviour can be disabled in the settings.
+        li #[strong Show checks found in a location by middle clicking on the world]. Disabling a world now has to be done while holding the Shift key.
+        li #[strong Option to show Altantica]. A setting can be found in Settings > Important Checks Mode, however #[b #[i this setting will be ignored when loading hints, and the hint settings will be used instead]].
 
     .fixed
       h3 Fixed
