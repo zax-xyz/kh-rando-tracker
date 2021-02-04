@@ -1,7 +1,6 @@
 <template lang="pug">
   div(
     style="display: inline-flex; flex: 1; justify-content: center"
-    @click.left="handleClick"
     @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1: 1 })"
     @click.middle="disable({ cell: file })"
    )
@@ -15,24 +14,7 @@
         name="fade-up"
         v-if="!cell.disabled"
       )
-        img.number(
-          v-if="!isLocation && cell.total > 1 && cell.level > 1"
-          :src="`img/numbers/${Math.min(cell.total, cell.level)}.png`"
-          key="1"
-        )
-        span.checksNumber(
-          v-else-if="isLocation && cell.checks || cell.totalChecks > -1"
-          key="1"
-        ) {{ cell.checks }}
-          template(v-if="cell.totalChecks > -1")
-            span(style="color: #fdbd8a")  / 
-            span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
-
-        img.nobody(
-          v-if="cell.data && cell.level === cell.total + 1"
-          :src="`img/nobody/${cell.data}.png`"
-          key="2"
-        )
+        slot
 
         .secondary(
           v-if="cell.secondaryLevel"
@@ -65,35 +47,25 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Action, namespace } from "vuex-class";
+import { namespace } from "vuex-class";
 
-import { Check, Hint, HintSetting, Item, Items, Location } from "@/store/tracker_important/state";
-import { formatItem } from "@/util";
+import { Item } from "@/store/tracker_important/state";
 
 const tracker = namespace("tracker_important");
 
 @Component
 export default class ImportantCell extends Vue {
   @Prop(String) file!: string;
+  @Prop(Number) hinted!: number;
 
-  @tracker.State items!: Items;
-  @tracker.State foundChecks!: { [key: string]: string[] };
-  @tracker.State checkLocations!: { [key: string]: string[] };
-  @tracker.State hints!: Hint[];
   @tracker.Action primary!: Function;
   @tracker.Action secondary!: Function;
   @tracker.Action disable!: Function;
-  @tracker.Action foundCheck!: Function;
-  @tracker.Action undoCheck!: Function;
 
   cls: string = this.cell.cls ?? "";
 
   get cell(): Item {
     return this.$store.getters["tracker_important/cell"](this.file);
-  }
-
-  get isLocation(): boolean {
-    return this.$store.getters["tracker_important/isLocation"](this.file);
   }
 
   get secondaryFile(): string {
@@ -102,49 +74,6 @@ export default class ImportantCell extends Vue {
 
   get secondaryNumber(): string {
     return this.$store.getters["tracker_important/secondaryNumber"](this.file);
-  }
-
-  get hinted(): number {
-    if (!this.isLocation) {
-      // checks
-      if (this.file !== "other/torn_page" && this.items.all[this.file].cls !== "drive") {
-        // only track hinted for pages and drives
-        return 0;
-      }
-
-      // return number of locations for this check that have been hinted
-      let hinted = 0;
-      let dimmed = false;
-      this.checkLocations[this.file].forEach(l => {
-        if (l === "Free" || (this.items.all[l] as Location).totalChecks !== -1) {
-          // Goa/Critical Extra, or hinted
-          hinted++;
-          return;
-        }
-
-        if (this.foundChecks[l].some(c => c.startsWith("other/proof_"))) {
-          // has proof so much be hinted by some report but we don't have it yet
-          hinted++;
-          dimmed = true;
-        }
-      });
-
-      return hinted * (-1) ** +dimmed;
-    }
-
-    if ((this.items.all[this.file] as Location).totalChecks === -1) {
-      // not hinted
-      return 0;
-    }
-
-    const reportLocation = this.hints.find((h: Hint) => h.location === this.file)?.report;
-    if (!reportLocation) return 0;
-
-    return reportLocation === "Free" ||
-      (this.items.all[reportLocation] as Location).totalChecks !== -1
-      ? 1 // World is hinted, or it was goa/critical extra, which also counts
-      : // Otherwise, if the world has a proof, then it must be hinted by some report we don't have
-        -this.foundChecks[reportLocation].some(c => c.startsWith("other/proof_"));
   }
 
   styledIcon(file: string): string {
@@ -166,50 +95,6 @@ export default class ImportantCell extends Vue {
         return file;
     }
   }
-
-  handleClick(event: MouseEvent): void {
-    const offset = event.ctrlKey ? -1 : 1;
-
-    if (this.file === "other/secret_reports" && offset === 1) {
-      this.$emit("found-report");
-      return;
-    }
-
-    const shift = event.shiftKey;
-
-    if (!this.isLocation) {
-      // checks
-      if (offset === 1) {
-        this.foundCheck({ check: this.file, location: "Free", shift });
-        return;
-      }
-
-      if (!(this.cell as Check).levelsImportant && this.cell.level > 1) {
-        this.undoCheck({ check: this.file, location: "Free", shift });
-        return;
-      }
-
-      const locations = this.checkLocations[this.file];
-      if (locations.length) {
-        this.undoCheck({ check: this.file, location: locations[locations.length - 1], shift });
-      }
-
-      return;
-    }
-
-    // locations
-    if (offset == -1) {
-      const checks = this.foundChecks[this.file];
-      if (checks.length) {
-        this.undoCheck({ check: checks[checks.length - 1], location: this.file });
-      }
-
-      return;
-    }
-
-    this.primary({ cell: this.file, offset, shift });
-    console.log("Clicked on", formatItem(this.file) + (event.shiftKey ? " (shift)" : ""));
-  }
 }
 </script>
 
@@ -221,8 +106,7 @@ export default class ImportantCell extends Vue {
   justify-content center
   width 55px
 
-img
-.checksNumber
+>>> img
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
 .icon
@@ -236,26 +120,11 @@ img
   &.disabled
     opacity .18
 
-.number
+>>> .number
   position absolute
   right 1%
   bottom 5%
   width 72%
-
-.checksNumber
-  position absolute
-  right -20%
-  bottom -15%
-  color #fbf993
-  font-size 1.2rem
-  font-weight bold
-  text-shadow -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
-
-.nobody
-  position absolute
-  top 5%
-  left 0
-  width 40%
 
 .secondary
   position absolute
@@ -305,12 +174,12 @@ img
     bottom -5%
     width 55%
 
-.fade-up-enter-active
-.fade-up-leave-active
+>>> .fade-up-enter-active
+>>> .fade-up-leave-active
   transition opacity .25s, transform .25s
 
-.fade-up-enter
-.fade-up-leave-to
+>>> .fade-up-enter
+>>> .fade-up-leave-to
   opacity 0
   transform translateY(4px)
 

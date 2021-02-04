@@ -16,7 +16,7 @@
         @change="add(name, $event.added.element)"
         :list="[]"
       )
-        ImportantCell(
+        ImportantLocation(
           :file="name"
           :style="{ width: settings.worldSize || '60px' }"
           @undo-check="removeCheck(name)"
@@ -34,7 +34,7 @@
         v-for="name in items.checks[0]"
         :style="{ padding: `${settings.checkVerticalPadding || '2.5px'} 0` }"
       )
-        ImportantCell(
+        ImportantCheck(
           :key="name"
           :file="name"
           :style="{ width: settings.checkSize }"
@@ -62,7 +62,7 @@
         v-for="name in row"
         :style="{ padding: `${settings.checkVerticalPadding || '2.5px'} 0` }"
       )
-        ImportantCell(
+        ImportantCheck(
           :key="name"
           :file="name"
           :style="{ width: settings.checkSize }"
@@ -80,6 +80,8 @@ import { State, namespace } from "vuex-class";
 
 import EventBus from "../event-bus";
 import ImportantCell from "./ImportantCell.vue";
+import ImportantLocation from "./ImportantLocation.vue";
+import ImportantCheck from "./ImportantCheck.vue";
 import { Hint, HintSetting, Items, Location } from "@/store/tracker_important/state";
 import { formatItem } from "@/util";
 
@@ -91,6 +93,8 @@ type Style = { [key: string]: string };
 @Component({
   components: {
     ImportantCell,
+    ImportantLocation,
+    ImportantCheck,
     draggable,
   },
 })
