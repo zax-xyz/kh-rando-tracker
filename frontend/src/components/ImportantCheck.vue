@@ -3,11 +3,12 @@
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
+    @click.middle.native="disable({ cell: file })"
    )
     img.number(
       v-if="cell.total > 1 && cell.level > 1"
       :src="`img/numbers/${Math.min(cell.total, cell.level)}.png`"
-      key="1"
+      key="number"
     )
 </template>
 
@@ -33,6 +34,7 @@ export default class ImportantCheck extends Vue {
   @tracker.State checkLocations!: { [key: string]: string[] };
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
+  @tracker.Action disable!: Function;
 
   get cell(): Item {
     return this.$store.getters["tracker_important/cell"](this.file);

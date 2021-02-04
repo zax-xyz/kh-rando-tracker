@@ -2,7 +2,6 @@
   div(
     style="display: inline-flex; flex: 1; justify-content: center"
     @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1: 1 })"
-    @click.middle="disable({ cell: file })"
    )
     .item(:class="cls")
       img.icon(
@@ -18,7 +17,7 @@
 
         .secondary(
           v-if="cell.secondaryLevel"
-          key="3"
+          key="secondary"
         )
           img(:src="`img/${secondaryFile}.png`")
           transition(name="fade-up")
@@ -30,7 +29,7 @@
         .report(
           v-if="hinted"
           :class="{ dim: hinted < 0 }"
-          key="4"
+          key="report"
         )
           img.icon(
             :src="`img/${styledIcon('other/secret_reports')}.png`"
@@ -43,6 +42,8 @@
 
       transition(name="fade-cross")
         img.cross(v-if="cell.disabled", src="img/cross.png")
+
+      slot(name="after")
 </template>
 
 <script lang="ts">

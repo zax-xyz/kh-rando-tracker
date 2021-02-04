@@ -3,10 +3,11 @@
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
+    @click.middle.native="showChecks = !showChecks"
    )
     span.checksNumber(
       v-if="cell.checks || cell.totalChecks > -1"
-      key="1"
+      key="number"
     ) {{ cell.checks }}
       template(v-if="cell.totalChecks > -1")
         span(style="color: #fdbd8a")  / 
@@ -15,14 +16,23 @@
     img.nobody(
       v-if="cell.data && cell.level === cell.total + 1"
       :src="`img/nobody/${cell.data}.png`"
-      key="2"
+      key="data"
     )
+
+    template(v-slot:after)
+      transition(name="fade-in")
+        ChecksPopup(
+          v-if="showChecks"
+          :location="file"
+          key="checkPopup"
+        )
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 
+import ChecksPopup from "./ChecksPopup.vue";
 import ImportantCell from "./ImportantCell.vue";
 import { Hint, Item, Items, Location } from "@/store/tracker_important/state";
 import { formatItem } from "@/util";
@@ -31,6 +41,7 @@ const tracker = namespace("tracker_important");
 
 @Component({
   components: {
+    ChecksPopup,
     ImportantCell,
   },
 })
@@ -42,6 +53,8 @@ export default class ImportantLocation extends Vue {
   @tracker.State hints!: Hint[];
   @tracker.Action primary!: Function;
   @tracker.Action undoCheck!: Function;
+
+  showChecks = false;
 
   get cell(): Item {
     return this.$store.getters["tracker_important/cell"](this.file);
@@ -99,4 +112,16 @@ export default class ImportantLocation extends Vue {
   top 5%
   left 0
   width 40%
+
+.fade-in-enter-active
+  transition opacity .15s ease-out, transform .15s ease-out, transform-origin .15s step-end
+
+.fade-in-leave-active
+  transition opacity .15s ease-out, transform .15s ease-out, transform-origin .15s step-start
+
+.fade-in-enter
+.fade-in-leave-to
+  opacity 0
+  transform-origin top
+  transform translateX(-50%) translateY(-10px) scale(0.8)
 </style>
