@@ -3,8 +3,10 @@ import VueRouter, { RouteConfig } from "vue-router";
 
 import Info from "@/views/Info.vue";
 import About from "@/views/About.vue";
-import CoOp from "@/views/CoOp.vue";
 import Help from "@/views/Help.vue";
+import Changelog from "@/views/Changelog.vue";
+
+import CoOp from "@/views/CoOp.vue";
 import Settings from "@/views/Settings.vue";
 import Thanks from "@/views/Thanks.vue";
 
@@ -63,7 +65,17 @@ const routes: Array<RouteConfig> = [
         meta: { title: "Thanks" },
         component: Thanks,
       },
+      {
+        path: "changelog",
+        meta: { title: "Changelog" },
+        component: Changelog,
+      },
     ],
+  },
+  {
+    path: "/changelog",
+    meta: { title: "Changelog" },
+    component: Changelog,
   },
   {
     path: "/co-op",

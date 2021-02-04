@@ -52,6 +52,10 @@ export default class extends Vue {
         this.$store.commit("settings/setSettings", { [s]: setting + "px" });
       }
     });
+
+    if (this.$store.state.version !== this.$store.state.currVersion) {
+      this.$router.push("changelog");
+    }
   }
 
   get mainStyle(): object {
@@ -102,7 +106,7 @@ main
 </style>
 
 <style lang="stylus">
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap')
 
 $font = Lato, Helvetica, Arial, sans-serif
 

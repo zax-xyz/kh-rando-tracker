@@ -20,6 +20,7 @@ export default class Info extends Vue {
     "/info/about": "About",
     "/info/help": "Help",
     "/info/thanks": "Thanks",
+    "/info/changelog": "Changelog",
   };
 }
 </script>

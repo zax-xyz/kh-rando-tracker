@@ -13,6 +13,8 @@ export default new Vuex.Store({
   state: {
     drag: false,
     edit: false,
+    version: "",
+    currVersion: "Thursday 4 February 2021",
   },
   mutations: {
     toggleDrag(state) {
@@ -21,6 +23,10 @@ export default new Vuex.Store({
 
     toggleEdit(state) {
       state.edit = !state.edit;
+    },
+
+    updateVersion(state) {
+      state.version = state.currVersion;
     },
   },
   modules: {
@@ -31,6 +37,8 @@ export default new Vuex.Store({
   },
   strict: process.env.NODE_ENV !== "production",
   plugins: [
-    createPersistedState({ paths: ["settings", "tracker_important", "tracker.clients.self"] }),
+    createPersistedState({
+      paths: ["settings", "tracker_important", "tracker.clients.self", "version"],
+    }),
   ],
 });
