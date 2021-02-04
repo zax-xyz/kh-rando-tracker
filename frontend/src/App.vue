@@ -1,5 +1,5 @@
 <template lang="pug">
-#app
+#app(@click.self="handleClick")
   main(
     @contextmenu="(e) => e.preventDefault()"
     :style="mainStyle"
@@ -76,6 +76,14 @@ export default class extends Vue {
 
   get footer(): boolean {
     return this.$route.query.footer !== "0";
+  }
+
+  handleClick(): void {
+    if (!this.importantMode) {
+      return;
+    }
+
+    this.$store.commit("tracker_important/selectLocation", "Free");
   }
 
   mounted(): void {

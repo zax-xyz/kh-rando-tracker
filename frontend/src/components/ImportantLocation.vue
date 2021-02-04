@@ -1,5 +1,6 @@
 <template lang="pug">
   ImportantCell(
+    :class="{ active: settings.preselectWorld && selectedLocation === file }"
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
@@ -38,6 +39,7 @@ import { Hint, Item, Items, Location } from "@/store/tracker_important/state";
 import { formatItem } from "@/util";
 
 const tracker = namespace("tracker_important");
+const settings = namespace("settings");
 
 @Component({
   components: {
@@ -51,8 +53,12 @@ export default class ImportantLocation extends Vue {
   @tracker.State items!: Items;
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.State hints!: Hint[];
+  @tracker.State selectedLocation!: string;
   @tracker.Action primary!: Function;
   @tracker.Action undoCheck!: Function;
+  @tracker.Mutation selectLocation!: Function;
+
+  @settings.State("important") settings!: { [key: string]: any };
 
   showChecks = false;
 
@@ -88,15 +94,38 @@ export default class ImportantLocation extends Vue {
       return;
     }
 
-    const shift = event.shiftKey;
+    if (this.settings.preselectWorld) {
+      if (this.file === this.selectedLocation) {
+        this.selectLocation("Free");
+      } else {
+        this.selectLocation(this.file);
+      }
+    } else {
+      const shift = event.shiftKey;
 
-    this.primary({ cell: this.file, offset, shift });
-    console.log("Clicked on", formatItem(this.file) + (event.shiftKey ? " (shift)" : ""));
+      this.primary({ cell: this.file, offset, shift });
+      console.log("Clicked on", formatItem(this.file) + (event.shiftKey ? " (shift)" : ""));
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+>>> .item::before
+  content ''
+  position absolute
+  width 100%
+  padding-bottom 100%
+  border-radius 50%
+  transform scale(0.75)
+  box-shadow 0 0 7px hsla($accent-hue, $button-sat, $button-lig, .1)
+  transition background .2s, border-radius .2s, transform .2s
+
+.active >>> .item::before
+  background hsla($accent-hue, $button-sat, $button-lig, .15)
+  border-radius 12%
+  transform scale(1.4)
+
 .checksNumber
   position absolute
   right -20%

@@ -2,25 +2,27 @@
   .grid(
     :class="{ disableShadows: disableShadows }"
     :style="gridStyle"
+    @click.self="selectLocation('Free')"
   )
-    .group.locations(
-      v-for="row in items.locations"
-     )
-      draggable.dragArea(
-        v-for="name in row"
-        v-if="showWorld(name)"
-        :style="worldRowStyle"
-        :key="name"
-        group="checks"
-        :disabled="!dragging"
-        @change="add(name, $event.added.element)"
-        :list="[]"
+    div(style="z-index: 0")
+      .group.locations(
+        v-for="row in items.locations"
       )
-        ImportantLocation(
-          :file="name"
-          :style="{ width: settings.worldSize || '60px' }"
-          @undo-check="removeCheck(name)"
+        draggable.dragArea(
+          v-for="name in row"
+          v-if="showWorld(name)"
+          :style="worldRowStyle"
+          :key="name"
+          group="checks"
+          :disabled="!dragging"
+          @change="add(name, $event.added.element)"
+          :list="[]"
         )
+          ImportantLocation(
+            :file="name"
+            :style="{ width: settings.worldSize || '60px' }"
+            @undo-check="removeCheck(name)"
+          )
 
     draggable.group.checks.dragArea(
       :list="items.checks[0]"
@@ -38,7 +40,7 @@
           :key="name"
           :file="name"
           :style="{ width: settings.checkSize }"
-          @found-report="add('Free', 'other/secret_reports')"
+          @found-report="add(selectedLocation, 'other/secret_reports')"
         )
       span(
         :style="numChecksStyle"
@@ -106,9 +108,11 @@ export default class ImportantGrid extends Vue {
   @tracker.State hintMessage!: string;
   @tracker.State hintsLoaded!: string;
   @tracker.State foundChecks!: { [key: string]: string[] };
+  @tracker.State selectedLocation!: string;
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
   @tracker.Mutation incrementChecks!: Function;
+  @tracker.Mutation selectLocation!: Function;
 
   @settings.State("important") settings: any;
   @settings.State disableShadows!: boolean;

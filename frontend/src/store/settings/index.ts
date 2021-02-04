@@ -38,15 +38,16 @@ const state = {
   itemNums: [] as Array<number>,
 
   important: {
+    preselectWorld: true,
+    hintsAtBottom: true,
+    autoHideHints: true,
+    autoHideHintsDelay: null,
+    atlantica: false,
     width: "",
     worldSize: "",
     worldVerticalPadding: "",
     checkSize: "",
     checkVerticalPadding: "",
-    hintsAtBottom: true,
-    autoHideHints: true,
-    autoHideHintsDelay: null,
-    atlantica: false,
   },
 };
 

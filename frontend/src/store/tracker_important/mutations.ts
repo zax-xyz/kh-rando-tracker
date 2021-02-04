@@ -40,6 +40,10 @@ export const mutations: MutationTree<State> = {
     state.currentLocation = location;
   },
 
+  selectLocation(state, location: string): void {
+    state.selectedLocation = location;
+  },
+
   incrementLocationChecks(
     state,
     { location, offset = 1 }: { location: string; offset: number },

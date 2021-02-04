@@ -283,6 +283,7 @@ export const initialState = () => ({
   totalChecks: 51,
 
   currentLocation: "",
+  selectedLocation: "Free",
 
   hints: [] as Hints,
   hintsLoaded: false,
