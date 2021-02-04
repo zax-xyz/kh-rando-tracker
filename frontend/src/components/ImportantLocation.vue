@@ -120,12 +120,12 @@ export default class ImportantLocation extends Vue {
   padding-bottom 100%
   border-radius 50%
   transform scale(0.75)
-  box-shadow 0 0 7px hsla($accent-hue, $button-sat, $button-lig, .1)
-  transition background .2s, border-radius .2s, transform .2s
+  transition background .2s, border-radius .2s, transform .2s, box-shadow .2s
 
 .active >>> .item::before
   background hsla($accent-hue, $button-sat, $button-lig, .15)
   border-radius 12%
+  box-shadow 0 0 7px hsla($accent-hue, $button-sat, $button-lig, .1)
   transform scale(1.4)
 
 .checksNumber
