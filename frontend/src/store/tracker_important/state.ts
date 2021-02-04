@@ -125,6 +125,7 @@ const locations = (): Array<{ [key: string]: Location }> => [
       ],
       category: "worlds",
     }),
+    "worlds/atlantica": location({ setting: "Atlantica", category: "worlds" }),
   },
 ];
 
@@ -229,6 +230,7 @@ export interface HintSetting {
   check: boolean;
   value: number;
   enabled: boolean;
+  show: boolean;
 }
 
 const hintSetting = (options: { items: string[] } & Options): HintSetting => ({
@@ -236,6 +238,7 @@ const hintSetting = (options: { items: string[] } & Options): HintSetting => ({
   enabled: true,
   value: 1,
   check: false,
+  show: true,
   ...options,
 });
 
@@ -260,6 +263,7 @@ const hintSettings = (): { [key: string]: HintSetting } => ({
     disable: true,
   }),
   "100 Acre Wood": hintSetting({ items: ["worlds/100_acre_wood"], disable: true }),
+  Atlantica: hintSetting({ items: ["worlds/atlantica"], show: false }),
 });
 
 const mapItems = (key: "locations" | "checks"): { [key: string]: string[] } =>

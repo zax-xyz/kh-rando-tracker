@@ -8,6 +8,7 @@
      )
       draggable.dragArea(
         v-for="name in row"
+        v-if="showWorld(name)"
         :style="worldRowStyle"
         :key="name"
         group="checks"
@@ -158,6 +159,16 @@ export default class ImportantGrid extends Vue {
       alignSelf: "center",
       color: `hsl(${160 - (this.numChecks / this.totalChecks) * 160}, 100%, 75%)`,
     };
+  }
+
+  showWorld(location: string): boolean {
+    const hintKey = this.items.all[location].setting;
+    if (!hintKey) {
+      return true;
+    }
+
+    const hint = this.hintSettings[hintKey];
+    return hint.enabled || hint.show;
   }
 
   showReports(location: string): boolean {
