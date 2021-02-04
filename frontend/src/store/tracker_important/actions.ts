@@ -4,7 +4,6 @@ import { Check, Hints, Items, Item, State } from "./state";
 import { formatItem } from "@/util";
 import locations from "./codes";
 import { RootState } from "../types";
-import { items } from "../tracker/state";
 
 export const actions: ActionTree<State, RootState> = {
   primary(
