@@ -4,7 +4,8 @@
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
-    @click.middle.native="showChecks = !showChecks"
+    @click.middle.exact.native="showChecks = !showChecks"
+    @click.middle.shift.exact.native="disable({ cell: file })"
    )
     span.checksNumber(
       v-if="cell.checks || cell.totalChecks > -1"
@@ -55,6 +56,7 @@ export default class ImportantLocation extends Vue {
   @tracker.State hints!: Hint[];
   @tracker.State selectedLocation!: string;
   @tracker.Action primary!: Function;
+  @tracker.Action disable!: Function;
   @tracker.Action undoCheck!: Function;
   @tracker.Mutation selectLocation!: Function;
 
