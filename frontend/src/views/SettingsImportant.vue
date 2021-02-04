@@ -16,7 +16,7 @@
       SwitchSlider(v-model="settings.autoHideHints")
       div
         p.name Autohide hint screen
-        BaseTooltip Automatically hides the report selection screen or "[location] as [num] important checks" screen. Note that with the show hints at bottom setting, this is always immediate.
+        BaseTooltip Automatically hides the report selection screen or "[location] has [num] important checks" screen. Note that with the show hints at bottom setting, this is always immediate.
 
     .row.grid
       input(
