@@ -662,7 +662,7 @@ const Levels = [
   "11D0BCD0",
 ];
 
-export default {
+export const locations = {
   "worlds/100_acre_wood": AcreWood,
   "worlds/simulated_twilight_town": SimulatedTwilightTown,
   "worlds/twilight_town": TwilightTown,
@@ -682,3 +682,19 @@ export default {
   "worlds/atlantica": Atlantica,
   Free: Free,
 };
+
+export const defaultLocations = [
+  "worlds/hollow_bastion",
+  "worlds/twilight_town",
+  "worlds/the_world_that_never_was",
+  "worlds/beast's_castle",
+  "worlds/olympus_coliseum",
+  "worlds/port_royal",
+  "worlds/hollow_bastion",
+  "worlds/the_world_that_never_was",
+  "worlds/the_world_that_never_was",
+  "worlds/twilight_town",
+  "worlds/the_world_that_never_was",
+  "worlds/the_world_that_never_was",
+  "worlds/the_world_that_never_was",
+];

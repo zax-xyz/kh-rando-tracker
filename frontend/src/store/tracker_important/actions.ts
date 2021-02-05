@@ -1,8 +1,8 @@
 import { ActionTree } from "vuex";
 
 import { Check, Hints, Items, Item, State } from "./state";
+import { defaultLocations, locations } from "./codes";
 import { formatItem } from "@/util";
-import locations from "./codes";
 import { RootState } from "../types";
 
 export const actions: ActionTree<State, RootState> = {
@@ -191,7 +191,7 @@ export const actions: ActionTree<State, RootState> = {
         const hintedLocation = getWorldByAddress(parts[0]);
         const checks = parseInt(parts[1]) - 32;
 
-        const reportLocation = getWorldByAddress(reportLocationAddresses[index]);
+        const reportLocation = getWorldByAddress(reportLocationAddresses[index], index);
 
         hints.push({
           report: reportLocation,
@@ -217,12 +217,14 @@ export const actions: ActionTree<State, RootState> = {
   },
 };
 
-function getWorldByAddress(address: string): string {
+function getWorldByAddress(address: string, index: number): string {
   const location = Object.entries(locations).find(([_, addresses]) => {
     return addresses.includes(address);
   });
 
-  if (typeof location === "undefined") return "";
+  if (typeof location === "undefined") {
+    return defaultLocations[index];
+  }
 
   return location[0];
 }
