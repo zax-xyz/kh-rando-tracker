@@ -134,7 +134,7 @@ export const actions: ActionTree<State, RootState> = {
     }
   },
 
-  undoCheck({ commit, dispatch, getters, state }, { check, location, shift = false }) {
+  undoCheck({ commit, dispatch, getters, rootState, state }, { check, location, shift = false }) {
     const cell = getters.cell(check);
 
     if (!cell.levelsImportant) {
@@ -158,6 +158,15 @@ export const actions: ActionTree<State, RootState> = {
 
     commit("incrementLocationChecks", { location, offset: -1 });
     commit("removeCheckLocation", { check, location });
+
+    const locationCell = getters.cell(location);
+    if (
+      // @ts-ignore ts doesn't seem to be aware of store modules in rootState
+      rootState.settings.important.preselectWorld &&
+      locationCell.checks < locationCell.totalChecks
+    ) {
+      commit("setOpaque", { item: locationCell, opaque: false });
+    }
 
     console.warn("Removed", formatItem(check), "from", formatItem(location));
   },
