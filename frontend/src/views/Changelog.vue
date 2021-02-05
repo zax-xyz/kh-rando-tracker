@@ -1,7 +1,13 @@
 <template lang="pug">
   div
     h1 Recent Update Changelog
-    h2 Updated {{ currVersion }}
+    h2 {{ currVersion }}
+    .fixed
+      h3 Fixed
+      ul
+        li Reports found in worlds set to 'Vanilla' now work
+
+    h2 Thursday 4 February 2021
     p All updates are for the 'Important Checks Mode'
     p
       strong Usage of some new features may require a press of the 'Reset Tracker' button
@@ -37,7 +43,6 @@ export default class Changelog extends Vue {
 <style lang="stylus" scoped>
 h2
   font-weight normal
-  font-size 1.3em
 
 h3
   text-transform uppercase
