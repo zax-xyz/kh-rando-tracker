@@ -204,6 +204,9 @@ img
     top 7.5%
     width 75%
 
+  /.magic &
+    width 35%
+
 .fade-up-enter-active
 .fade-up-leave-active
   transition opacity .25s, transform .25s
