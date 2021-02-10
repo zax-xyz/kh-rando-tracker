@@ -3,7 +3,10 @@
     style="display: inline-flex; flex: 1; justify-content: center"
     @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1: 1 })"
    )
-    .item(:class="cls")
+    .item(
+      :class="cls"
+      :style="{ width: width }"
+     )
       img.icon(
         :src="`img/${styledIcon(file)}.png`"
         :class="{ opaque: cell.opaque, disabled: cell.disabled }"
@@ -58,6 +61,7 @@ const tracker = namespace("tracker_important");
 export default class ImportantCell extends Vue {
   @Prop(String) file!: string;
   @Prop(Number) hinted!: number;
+  @Prop(String) width!: string;
 
   @tracker.Action primary!: Function;
   @tracker.Action secondary!: Function;

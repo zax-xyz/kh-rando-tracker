@@ -1,5 +1,6 @@
 <template lang="pug">
   ImportantCell(
+    :width="settings.checkSize"
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
@@ -20,6 +21,7 @@ import ImportantCell from "./ImportantCell.vue";
 import { Check, Item, Items, Location } from "@/store/tracker_important/state";
 
 const tracker = namespace("tracker_important");
+const settings = namespace("settings");
 
 @Component({
   components: {
@@ -35,6 +37,8 @@ export default class ImportantCheck extends Vue {
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
   @tracker.Action disable!: Function;
+
+  @settings.State("important") settings!: { [key: string]: any };
 
   get cell(): Item {
     return this.$store.getters["tracker_important/cell"](this.file);

@@ -20,7 +20,6 @@
         )
           ImportantLocation(
             :file="name"
-            :style="{ width: settings.worldSize || '60px' }"
             @undo-check="removeCheck(name)"
           )
 
@@ -67,7 +66,6 @@
         ImportantCheck(
           :key="name"
           :file="name"
-          :style="{ width: settings.checkSize }"
         )
 
     template(v-if="hintsAtBottom")

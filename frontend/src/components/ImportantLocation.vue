@@ -1,6 +1,7 @@
 <template lang="pug">
   ImportantCell(
     :class="{ active: settings.preselectWorld && selectedLocation === file }"
+    :width="settings.worldSize"
     :file="file"
     :hinted="hinted"
     @click.left.native="handleClick"
