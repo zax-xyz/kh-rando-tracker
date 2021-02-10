@@ -18,7 +18,6 @@
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 
-import EventBus from "../event-bus";
 import { Hints } from "@/store/tracker_important/state";
 import { formatItem } from "@/util";
 
