@@ -68,7 +68,7 @@ export const actions: ActionTree<State, RootState> = {
   },
 
   secondary({ commit, dispatch, getters }, { cell, offset = 1 }) {
-    const item = getters.cell(cell) as Item;
+    const item: Item = getters.cell(cell);
     if (item.disabled) return;
 
     const secondary = item.secondary;
