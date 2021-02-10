@@ -1,22 +1,15 @@
-mixin popup(name)
+mixin popup(name, id)
   .popup
-    button= name
+    button(id=id)= name
     .content
       .body
         block
 
 footer
   .container
-    .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.5.1
-    .info
-      a(href="old") Click here
-      |
-      | to use the pre-1.4 version
-    .info If you want to change the layout, please use the
-      | 
-      a(href="next") 2.0 preview
-      |
-      | (it's much easier there)
+    .info Kingdom Hearts 2 Final Mix Item Tracker - Version 1.5.2
+    .info Please use the #[a(href="next") 2.0 version]
+    .info #[a(href="old") Click here] to use the pre-1.4 version
     .buttons
       +popup("About")
         include about.pug
@@ -29,3 +22,6 @@ footer
 
       +popup("Settings")
         include settings.pug
+
+      +popup("Legacy", "legacy")
+        include legacy.pug
