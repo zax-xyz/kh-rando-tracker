@@ -45,6 +45,14 @@ export default class extends Vue {
       this.$store.commit("tracker_important/resetState");
     }
 
+    const oldIconSettings = this.$store.state.settings.iconStyle;
+    if (oldIconSettings) {
+      Object.entries(oldIconSettings).forEach(([key, value]) => {
+        this.$store.commit("settings/setIconStyle", { name: key, value });
+      });
+      this.$store.commit("settings/wipeOldIconSettings");
+    }
+
     ["size", "padding"].forEach(s => {
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {

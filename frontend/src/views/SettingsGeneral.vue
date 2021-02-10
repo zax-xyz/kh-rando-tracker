@@ -46,6 +46,10 @@
           style="display: none"
           @change="onChange"
         )
+
+    .row.grid
+      button(@click="autoImportSettings") Import
+      p.name Import settings from 1.x.x
 </template>
 
 <script lang="ts">
@@ -54,7 +58,8 @@ import { saveAs } from "file-saver";
 
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import SwitchSlider from "@/components/SwitchSlider.vue";
-import { State } from "@/store/settings";
+import { IconStyle, State } from "@/store/settings";
+import { items } from "@/store/tracker/state";
 
 @Component({
   components: {
@@ -79,6 +84,54 @@ export default class SettingsGeneral extends Vue {
 
   load(): void {
     (this.$refs.fileLoader as HTMLElement).click();
+  }
+
+  autoImportSettings(): void {
+    const newSettings: { [key: string]: any } = {};
+
+    if (localStorage.scroll === "true") {
+      newSettings.scroll = true;
+    }
+
+    if (localStorage.columns) {
+      newSettings.columns = localStorage.columns;
+    }
+
+    if (localStorage.bg) {
+      newSettings.bgColor = localStorage.bg;
+    }
+
+    if (localStorage.disableShadows === "true") {
+      newSettings.disableShadows = true;
+    }
+
+    const splitNums = (str: string) =>
+      str
+        .trim()
+        .split(" ")
+        .map((i: string) => parseInt(i) - 1);
+
+    if (localStorage.remove) {
+      const remove = new Set(splitNums(localStorage.remove));
+      newSettings.itemNums = [...Array(items).keys()].filter(i => !remove.has(i));
+    } else if (localStorage.order) {
+      newSettings.itemNums = splitNums(localStorage.order);
+    }
+
+    console.log(newSettings);
+    this.$store.commit("settings/setSettings", newSettings);
+    this.settings = { ...this.$store.state.settings };
+
+    let iconStyle: IconStyle;
+    switch (localStorage.iconStyle) {
+      case "simple":
+        iconStyle = IconStyle.MINIMAL;
+      case "classic":
+        iconStyle = IconStyle.CLASSIC;
+        Object.keys(this.settings.iconStyles).forEach(k => {
+          this.$store.commit("settings/setIconStyle", { name: k, value: iconStyle });
+        });
+    }
   }
 
   onChange(event: Event): void {

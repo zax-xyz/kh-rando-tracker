@@ -16,9 +16,10 @@ import SliderMulti from "@/components/SliderMulti.vue";
 export default class SliderIconStyles extends Vue {
   @Prop(String) name!: string;
   @Prop(Array) options!: string[];
+  @Prop(String) iconStyle!: IconStyle;
 
   get value(): number {
-    const index = this.options.indexOf(this.$store.state.settings.iconStyle[this.name]);
+    const index = this.options.indexOf(this.iconStyle);
     if (index === -1) {
       this.$store.commit("settings/setIconStyle", { name: this.name, value: "Default" });
       return this.value;

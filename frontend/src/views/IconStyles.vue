@@ -3,13 +3,16 @@
     .grid
       .group(v-for="(properties, name) in categories")
         h1 {{ properties.title }}
-        SliderIconStyles(:options="properties.options" :name="name")
+        SliderIconStyles(
+          :options="properties.options"
+          :name="name"
+          :iconStyle="properties.value"
+        )
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import { IconStyle } from "@/store/settings";
 import SliderIconStyles from "@/components/SliderIconStyles.vue";
 
 @Component({
@@ -18,56 +21,7 @@ import SliderIconStyles from "@/components/SliderIconStyles.vue";
   },
 })
 export default class IconStyles extends Vue {
-  categories = {
-    worlds: {
-      title: "Worlds",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    cups: {
-      title: "Cups",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    data: {
-      title: "Data Org",
-      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    drive: {
-      title: "Drive Forms (Location)",
-      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    levels: {
-      title: "Levels",
-      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    magic: {
-      title: "Magic",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    forms: {
-      title: "Drive Forms",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    summons: {
-      title: "Summons",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    reports: {
-      title: "Reports",
-      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    scom: {
-      title: "Second Chance/Once More",
-      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    charm: {
-      title: "Promise Charm",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-    proofs: {
-      title: "Proofs",
-      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
-    },
-  };
+  categories = this.$store.state.settings.iconStyles;
 }
 </script>
 

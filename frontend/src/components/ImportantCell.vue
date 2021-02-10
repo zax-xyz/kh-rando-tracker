@@ -79,7 +79,8 @@ export default class ImportantCell extends Vue {
 
   styledIcon(file: string): string {
     const cell = this.$store.getters["tracker_important/cell"](file);
-    const style = this.$store.state.settings.iconStyle[cell.category];
+    const style = this.$store.state.settings.iconStyles[cell.category]?.value;
+    console.log(style);
 
     if (style === cell.categoryExclude) {
       return file;

@@ -15,20 +15,68 @@ const state = {
   customDefaults: {} as { [key: string]: { [key: string]: any } },
   importantChecksMode: true,
 
-  iconStyle: {
-    worlds: IconStyle.DEFAULT,
-    cups: IconStyle.DEFAULT,
-    data: IconStyle.DEFAULT,
-    levels: IconStyle.DEFAULT,
-    drive: IconStyle.DEFAULT,
-    magic: IconStyle.DEFAULT,
-    forms: IconStyle.DEFAULT,
-    summons: IconStyle.DEFAULT,
-    reports: IconStyle.DEFAULT,
-    pages: IconStyle.DEFAULT,
-    charm: IconStyle.DEFAULT,
-    proofs: IconStyle.DEFAULT,
-  } as { [key: string]: IconStyle },
+  iconStyles: {
+    worlds: {
+      title: "Worlds",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    cups: {
+      title: "Cups",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    data: {
+      title: "Data Org",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    drive: {
+      title: "Drive Forms (Location)",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    levels: {
+      title: "Levels",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    magic: {
+      title: "Magic",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    forms: {
+      title: "Drive Forms",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    summons: {
+      title: "Summons",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    reports: {
+      title: "Reports",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    scom: {
+      title: "Second Chance/Once More",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    charm: {
+      title: "Promise Charm",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    proofs: {
+      title: "Proofs",
+      options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+  } as { [key: string]: { title: string; options: IconStyle[]; value: IconStyle } },
 
   // normal mode. kept outside in the root to remain backwards-compatible with old user settings
   scroll: false,
@@ -55,6 +103,7 @@ export type State = typeof state;
 
 const mutations = {
   setSettings(state: State, payload: typeof state) {
+    // Object.entries(payload).forEach(([key, value]) => Vue.set(state, key, value));
     Object.assign(state, payload);
   },
 
@@ -78,8 +127,18 @@ const mutations = {
     state.importantChecksMode = enabled;
   },
 
-  setIconStyle(state: State, payload: { name: string; value: IconStyle }) {
-    state.iconStyle[payload.name] = payload.value;
+  setIconStyle(state: State, payload: { name: string; value: IconStyle }): void {
+    const setting = state.iconStyles[payload.name];
+
+    if (typeof setting === "undefined" || !setting.options.includes(payload.value)) {
+      return;
+    }
+
+    state.iconStyles[payload.name].value = payload.value;
+  },
+
+  wipeOldIconSettings(state: State): void {
+    Vue.set(state, "iconStyle", undefined);
   },
 };
 

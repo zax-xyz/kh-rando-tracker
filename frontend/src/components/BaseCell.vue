@@ -66,7 +66,7 @@ export default class BaseCell extends Vue {
 
   styledIcon(file: string): string {
     const cell = this.$store.state.tracker.clients.self[file];
-    const style = this.$store.state.settings.iconStyle[cell.category];
+    const style = this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
       return file;
