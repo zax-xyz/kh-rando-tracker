@@ -1,39 +1,36 @@
 import Vue from "vue";
+import { MutationTree } from "vuex";
 import { items as defaultItems, State } from "./state";
 
-export default {
-  addClient(state: State, payload: { client: string }): void {
+const mutations: MutationTree<State> = {
+  addClient(state, payload: { client: string }): void {
     Vue.set(state.clients, payload.client, JSON.parse(JSON.stringify(defaultItems))); // Shitty deep copy
   },
 
-  removeClient(state: State, payload: { client: string }): void {
+  removeClient(state, payload: { client: string }): void {
     Vue.delete(state.clients, payload.client);
   },
 
-  setOpaque(state: State, payload: { client: string; cell: string; opaque: boolean }): void {
+  setOpaque(state, payload: { client: string; cell: string; opaque: boolean }): void {
     state.clients[payload.client][payload.cell].opaque = payload.opaque;
   },
 
-  setLevel(state: State, payload: { client: string; cell: string; level: number }): void {
+  setLevel(state, payload: { client: string; cell: string; level: number }): void {
     state.clients[payload.client][payload.cell].level = payload.level;
   },
 
-  setSecondaryLevel(state: State, payload: { client: string; cell: string; level: number }): void {
+  setSecondaryLevel(state, payload: { client: string; cell: string; level: number }): void {
     state.clients[payload.client][payload.cell].secondaryLevel = payload.level;
   },
 
-  disable(
-    state: State,
-    payload: {
-      client: string;
-      cell: string;
-    },
-  ): void {
+  disable(state, payload: { client: string; cell: string }): void {
     const item = state.clients[payload.client][payload.cell];
     item.disabled = !item.disabled;
   },
 
-  resetState(state: State): void {
+  resetState(state): void {
     state.clients.self = JSON.parse(JSON.stringify(defaultItems));
   },
 };
+
+export default mutations;

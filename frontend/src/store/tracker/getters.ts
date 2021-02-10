@@ -1,31 +1,37 @@
-import { State } from "./state";
+import { GetterTree } from "vuex";
 
-export default {
-  cell: (state: State) => (client: string, item: string) => {
+import { Item, State } from "./state";
+import { RootState } from "../types";
+
+const getters: GetterTree<State, RootState> = {
+  cell: state => (client: string, item: string) => {
     return state.clients[client][item];
   },
 
-  secondary: (_: State, getters: { [key: string]: any }) => (
-    client: string,
-    item: string
-  ) => {
-    const cell = getters.cell(client, item);
-    if (typeof cell.secondary === "string") return cell.secondary;
+  secondary: (_, getters: { [key: string]: any }) => (client: string, item: string) => {
+    const cell: Item = getters.cell(client, item);
+    if (typeof cell.secondary === "string") {
+      return cell.secondary;
+    }
 
-    // If it isn't a string, we assume it's an array and index it by level
-    return cell.secondary[cell.secondaryLevel - 1];
+    if (Array.isArray(cell.secondary)) {
+      return cell.secondary[cell.secondaryLevel - 1];
+    }
   },
 
-  secondaryNumber: (_: State, getters: { [key: string]: any }) => (
-    client: string,
-    item: string
-  ) => {
-    const cell = getters.cell(client, item);
+  secondaryNumber: (_, getters: { [key: string]: any }) => (client: string, item: string) => {
+    const cell: Item = getters.cell(client, item);
+
     if (typeof cell.secondary === "string") {
-      if (cell.secondaryMax && cell.secondaryLevel == cell.secondaryTotal + 1)
+      if (cell.secondaryMax && cell.secondaryLevel === cell.secondaryTotal + 1) {
         return "max";
-      if (cell.secondaryLevel > 1)
+      }
+
+      if (cell.secondaryLevel > 1) {
         return cell.secondaryLevel;
+      }
     }
   },
 };
+
+export default getters;
