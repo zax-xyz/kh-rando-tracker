@@ -11,9 +11,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Action, namespace } from "vuex-class";
-
-const tracker = namespace("tracker_important");
 
 @Component
 export default class ChecksPopup extends Vue {

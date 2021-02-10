@@ -78,17 +78,13 @@ import { Component, Vue } from "vue-property-decorator";
 import draggable from "vuedraggable";
 import { State, namespace } from "vuex-class";
 
-import EventBus from "../event-bus";
 import ImportantCell from "./ImportantCell.vue";
 import ImportantLocation from "./ImportantLocation.vue";
 import ImportantCheck from "./ImportantCheck.vue";
-import { Hint, HintSetting, Items, Location } from "@/store/tracker_important/state";
-import { formatItem } from "@/util";
+import { HintSetting, Items } from "@/store/tracker_important/state";
 
 const tracker = namespace("tracker_important");
 const settings = namespace("settings");
-
-type Style = { [key: string]: string };
 
 @Component({
   components: {
