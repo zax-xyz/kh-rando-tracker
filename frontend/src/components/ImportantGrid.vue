@@ -183,6 +183,11 @@ export default class ImportantGrid extends Vue {
   }
 
   numChecksStyle(num: number, total: number): object {
+    // avoid zero division error by just using 1 as a fallback
+    total = total || 1;
+    // something's definitely not right if num is greater than total but keep a maximum anyway
+    num = Math.min(num, total);
+
     return {
       flex: 1,
       fontWeight: "bold",
