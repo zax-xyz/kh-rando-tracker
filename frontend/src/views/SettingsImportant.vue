@@ -7,6 +7,12 @@
         BaseTooltip This allows you to select the world, then click on the checks without dragging them. This prevents you from being able to manually light up a world by clicking on it.
 
     .row.grid
+      SwitchSlider(v-model="settings.showHintedChecks")
+      div
+        p.name Show number of hinted checks
+        BaseTooltip Shows the number of hinted checks that have been found, and the total number of checks that have been hinted, in the format #[code found / total], next to the number of overall checks found
+
+    .row.grid
       SwitchSlider(v-model="settings.hintsAtBottom")
       div
         p.name Show hints at bottom

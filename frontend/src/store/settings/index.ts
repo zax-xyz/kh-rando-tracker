@@ -87,6 +87,7 @@ const state = {
 
   important: {
     preselectWorld: true,
+    showHintedChecks: true,
     hintsAtBottom: true,
     autoHideHints: true,
     autoHideHintsDelay: null,

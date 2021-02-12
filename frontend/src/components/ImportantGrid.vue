@@ -54,9 +54,9 @@
           span  / {{ totalChecks }}
 
         span(
+          v-if="hintsLoaded && settings.showHintedChecks"
           :style="numChecksStyle(hintedChecks[0], hintedChecks[1])"
           style="flex: 1"
-          v-if="hintsLoaded"
         )
           span {{ hintedChecks[0] }}
           span  / {{ hintedChecks[1] }}
