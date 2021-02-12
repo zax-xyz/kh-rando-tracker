@@ -16,11 +16,21 @@
         span(style="color: #fdbd8a")  / 
         span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
 
-    img.nobody(
-      v-if="cell.data && cell.level === cell.total + 1"
-      :src="`img/nobody/${cell.data}.png`"
-      key="data"
+    .proofs(
+      v-if="proofs.length"
+      :style="{ width: `calc(3 * ${proofSize})`, right: `calc(-1.5 * ${proofSize})` }"
+      key="proofs"
     )
+      transition-group(
+        name="proofs"
+        tag="div"
+        :style="{ height: proofSize }"
+      )
+        div(
+          v-for="proof in proofs"
+          :key="proof"
+        )
+          img(:src="`img/${proof}.png`")
 
     template(v-slot:after)
       transition(name="fade-in")
@@ -85,6 +95,14 @@ export default class ImportantLocation extends Vue {
         -this.foundChecks[reportLocation].some(c => c.startsWith("other/proof_"));
   }
 
+  get proofs(): string[] {
+    return this.foundChecks[this.file].filter(c => c.startsWith("other/proof_"));
+  }
+
+  get proofSize(): string {
+    return `calc(0.4 * ${this.settings.worldSize || "55px"})`;
+  }
+
   handleClick(event: MouseEvent): void {
     const offset = event.ctrlKey ? -1 : 1;
 
@@ -139,11 +157,35 @@ export default class ImportantLocation extends Vue {
   text-shadow -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
-.nobody
+.proofs
   position absolute
-  top 5%
-  left 0
-  width 40%
+  top 0
+  // display flex
+  // justify-content center
+
+  > div
+    // display flex
+
+    > div
+      display inline-block
+      height 100%
+      transition transform .2s, opacity .2s
+
+  img
+    height 100%
+
+.proofs-enter
+.proofs-leave-to
+  opacity 0
+
+.proofs-enter
+  transform translateY(10px)
+
+.proofs-leave-to
+  transform translateY(10px) translateX(-50%)
+
+.proofs-leave-active
+  position absolute
 
 .fade-in-enter-active
   transition opacity .15s ease-out, transform .15s ease-out, transform-origin .15s step-end

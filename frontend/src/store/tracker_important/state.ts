@@ -13,8 +13,6 @@ export interface Item {
 
   disabled: boolean;
 
-  data?: string;
-
   cls?: string; // just used for styling the specific items/groups of items
   group?: string; // used for levelling multiple items at once, e.g. summons
 
@@ -70,58 +68,60 @@ const locations = (): Array<{ [key: string]: Location }> => [
     "other/sora's_heart": location({ setting: "Sora's Heart", category: "levels" }),
     "other/drive_forms": location({ category: "drive" }),
     "worlds/hollow_bastion": location({
-      data: "demyx",
       secondary: [
         CHEST,
         ...["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`),
         "secondary/sephiroth",
+        "nobody/demyx",
       ],
       category: "worlds",
     }),
-    "worlds/twilight_town": location({ data: "axel", secondary: CHEST, category: "worlds" }),
+    "worlds/twilight_town": location({ secondary: [CHEST, "nobody/axel"], category: "worlds" }),
   },
 
   {
-    "worlds/land_of_dragons": location({ data: "xigbar", secondary: CHEST, category: "worlds" }),
-    "worlds/beast's_castle": location({ data: "xaldin", secondary: CHEST, category: "worlds" }),
+    "worlds/land_of_dragons": location({ secondary: [CHEST, "nobody/xigbar"], category: "worlds" }),
+    "worlds/beast's_castle": location({ secondary: [CHEST, "nobody/xaldin"], category: "worlds" }),
     "worlds/olympus_coliseum": location({
-      data: "zexion",
       secondary: [
         CHEST,
         ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(
           c => `secondary/cups/${c}`,
         ),
+        "nobody/zexion",
       ],
       category: "worlds",
     }),
-    "worlds/space_paranoids": location({ data: "larxene", secondary: CHEST, category: "worlds" }),
+    "worlds/space_paranoids": location({
+      secondary: [CHEST, "nobody/larxene"],
+      category: "worlds",
+    }),
   },
 
   {
-    "worlds/halloween_town": location({ data: "vexen", secondary: CHEST, category: "worlds" }),
-    "worlds/port_royal": location({ data: "luxord", secondary: CHEST, category: "worlds" }),
-    "worlds/agrabah": location({ data: "lexaeus", secondary: CHEST, category: "worlds" }),
-    "worlds/pride_lands": location({ data: "saix", secondary: CHEST, category: "worlds" }),
+    "worlds/halloween_town": location({ secondary: [CHEST, "nobody/vexen"], category: "worlds" }),
+    "worlds/port_royal": location({ secondary: [CHEST, "nobody/luxord"], category: "worlds" }),
+    "worlds/agrabah": location({ secondary: [CHEST, "nobody/lexaeus"], category: "worlds" }),
+    "worlds/pride_lands": location({ secondary: [CHEST, "nobody/saix"], category: "worlds" }),
   },
 
   {
     "worlds/disney_castle": location({
-      data: "marluxia",
-      secondary: [CHEST, "secondary/lingering_will"],
+      secondary: [CHEST, "secondary/lingering_will", "nobody/marluxia"],
       category: "worlds",
     }),
     "worlds/100_acre_wood": location({ setting: "100 Acre Wood", category: "worlds" }),
     "worlds/simulated_twilight_town": location({
-      data: "roxas",
+      secondary: "nobody/roxas",
       setting: "Simulated Twilight Town",
       category: "worlds",
       categoryExclude: IconStyle.CLASSIC,
     }),
     "worlds/the_world_that_never_was": location({
-      data: "xemnas",
       secondary: [
         CHEST,
         ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`),
+        "nobody/xemnas",
       ],
       category: "worlds",
     }),
@@ -197,6 +197,7 @@ const checks = (): Array<{ [key: string]: Check }> => [
       check({
         secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`),
         category: "proofs",
+        cls: "proof",
       }),
     ),
   },

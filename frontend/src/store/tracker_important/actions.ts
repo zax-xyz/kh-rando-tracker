@@ -16,10 +16,8 @@ export const actions: ActionTree<State, RootState> = {
 
     dispatch("co_op/sendClick", { type: "user_primary", cell, offset }, { root: true });
 
-    var level = item.level;
-    const data = Boolean(item.data);
-    const total = item.total + ~~data;
-    const end = total + 1;
+    let level = item.level;
+    const end = item.total + 1;
 
     // Increment level with wrapping overflow based on total,
     // but not if locked but levelled - assume it is now unlocked for first time
