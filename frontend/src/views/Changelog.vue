@@ -3,6 +3,25 @@
     h1 Recent Update Changelog
 
     section
+      h2 Friday 12 February 2021
+      p All changes are for the 'Important Checks Mode'
+      p
+        strong Some changes may require a press of the 'Reset Tracker' button to
+
+      .added
+        h3 Added
+        ul
+          li #[strong Indicator for how many hinted checks you have, and how many checks are hinted in total], next to the indicator for overall checks. This is only shown if you have hints loaded. This can be disabled in the settings.
+          li #[strong Show proof icons next to the worlds you found them in]. The proofs will be shown in the top-right corners of the worlds, each next to each other if there were multiple in one location.
+
+      .changed
+        h3 Changed
+        ul
+          li #[strong Moved Data/AS icons to right-click, after any other right-click icons].
+          li #[strong Moved right-click icons from the top right to the top left].
+          li The colour cycle for number of checks should stop if it is greater than the total, although this shouldn't be able to happen anymore unless you change the number manually.
+
+    section
       h2 Wednesday 10 February 2021
       p 2.0 is no longer called a preview. 1.x is now considered legacy and users are urged to migrate.
 
@@ -90,13 +109,17 @@ h3
 strong
   font-style italic
 
-.added
+highlight-colors(color)
   h3
   strong
-    color hsl($green-hue, 60%, 75%)
+    color color
+
+.added
+  highlight-colors hsl($green-hue, 60%, 75%)
+
+.changed
+  highlight-colors hsl($accent-hue, 90%, 75%)
 
 .fixed
-  h3
-  strong
-    color hsl(30, 90%, 65%)
+  highlight-colors hsl($orange-hue, 90%, 65%)
 </style>
