@@ -41,14 +41,25 @@
           :style="{ width: settings.checkSize }"
           @found-report="add(selectedLocation, 'other/secret_reports')"
         )
-      span(
-        :style="numChecksStyle"
-        @click.exact="incrementChecks(1)"
-        @click.ctrl="incrementChecks(-1)"
-        @contextmenu="incrementChecks(-1)"
-      )
-        span {{ numChecks }}
-        span  / {{ totalChecks }}
+
+      span(style="display: flex; align-items: center; flex: 1")
+        span(
+          :style="numChecksStyle(numChecks, totalChecks)"
+          style="flex: 1"
+          @click.exact="incrementChecks(1)"
+          @click.ctrl="incrementChecks(-1)"
+          @contextmenu="incrementChecks(-1)"
+        )
+          span {{ numChecks }}
+          span  / {{ totalChecks }}
+
+        span(
+          :style="numChecksStyle(hintedChecks[0], hintedChecks[1])"
+          style="flex: 1"
+          v-if="hintsLoaded"
+        )
+          span {{ hintedChecks[0] }}
+          span  / {{ hintedChecks[1] }}
 
     draggable.group.checks.dragArea(
       v-for="(row, index) in items.checks.slice(1)"
@@ -81,7 +92,7 @@ import { State, namespace } from "vuex-class";
 import ImportantCell from "./ImportantCell.vue";
 import ImportantLocation from "./ImportantLocation.vue";
 import ImportantCheck from "./ImportantCheck.vue";
-import { HintSetting, Items } from "@/store/tracker_important/state";
+import { HintSetting, Items, Location } from "@/store/tracker_important/state";
 
 const tracker = namespace("tracker_important");
 const settings = namespace("settings");
@@ -100,7 +111,7 @@ export default class ImportantGrid extends Vue {
   @tracker.State hintSettings!: { [key: string]: HintSetting };
   @tracker.State("checks") numChecks!: number;
   @tracker.State hintMessage!: string;
-  @tracker.State hintsLoaded!: string;
+  @tracker.State hintsLoaded!: boolean;
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.State selectedLocation!: string;
   @tracker.Action foundCheck!: Function;
@@ -155,12 +166,28 @@ export default class ImportantGrid extends Vue {
     };
   }
 
-  get numChecksStyle(): object {
+  get hintedChecks(): [number, number] {
+    let hinted = 0;
+    let total = 0;
+
+    this.items.locations
+      .flat()
+      .map(l => this.items.all[l] as Location)
+      .filter(l => l.totalChecks !== -1)
+      .forEach(l => {
+        hinted += l.checks;
+        total += l.totalChecks;
+      });
+
+    return [hinted, total];
+  }
+
+  numChecksStyle(num: number, total: number): object {
     return {
       flex: 1,
       fontWeight: "bold",
       alignSelf: "center",
-      color: `hsl(${160 - (this.numChecks / this.totalChecks) * 160}, 100%, 75%)`,
+      color: `hsl(${160 - (num / total) * 160}, 100%, 75%)`,
     };
   }
 
