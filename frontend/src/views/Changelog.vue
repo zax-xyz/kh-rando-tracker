@@ -3,10 +3,21 @@
     h1 Recent Update Changelog
 
     section
+      h2 Sunday 14 February 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed not being able to mark forms levelled through auto ability (shift+click) past level 2
+          li Fixed shift-levelling a form incrementing the number of checks found in a location
+          li Fixed trying to mark a form that's been levelled through its auto ability or has been removed from a location being marked as in GoA/Critical Extra rather than its actual location
+          li Fixed not being able to shift level a form that has been removed from a location
+
+    section
       h2 Friday 12 February 2021
       p All changes are for the 'Important Checks Mode'
       p
-        strong Some changes may require a press of the 'Reset Tracker' button to
+        strong Some changes may require a press of the 'Reset Tracker' button
 
       .added
         h3 Added
