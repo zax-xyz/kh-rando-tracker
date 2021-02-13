@@ -81,8 +81,8 @@ export default class ImportantCheck extends Vue {
     const shift = event.shiftKey;
 
     if (!(this.cell as Check).levelsImportant) {
-      if (offset === 1 && this.cell.level >= 1) {
-        this.foundCheck({ check: this.file, location: "Free" });
+      if (offset === 1 && this.cell.level >= 1 && (this.cell.opaque || shift)) {
+        this.foundCheck({ check: this.file, location: "Free", shift });
         return;
       } else if (offset === -1 && this.cell.level > 1) {
         this.undoCheck({ check: this.file, location: "Free", shift });

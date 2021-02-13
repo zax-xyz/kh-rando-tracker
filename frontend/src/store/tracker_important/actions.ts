@@ -103,7 +103,7 @@ export const actions: ActionTree<State, RootState> = {
 
     dispatch("primary", { cell: check, shift });
 
-    if (location === "Free" && (opaque || shift) && !item.levelsImportant) {
+    if ((opaque || shift) && !item.levelsImportant) {
       console.log(formatItem(check), "levelled up to", item.level);
       return;
     }
@@ -136,14 +136,22 @@ export const actions: ActionTree<State, RootState> = {
     const cell = getters.cell(check);
 
     if (!cell.levelsImportant) {
-      if (location === "Free" && cell.level > 1) {
-        dispatch("primary", { cell: check, offset: -1, shift: cell.opaque ? shift : true });
-        console.log(formatItem(check), "unlevelled to", cell.level);
-        return;
-      }
+      if (cell.level > 1) {
+        if (location === "Free") {
+          dispatch("primary", { cell: check, offset: -1, shift: cell.opaque ? shift : true });
+          console.log(formatItem(check), "unlevelled to", cell.level);
+          return;
+        }
 
-      commit("setOpaque", { item: cell, opaque: false });
-      commit("incrementChecks", -1);
+        if (cell.opaque) {
+          commit("setOpaque", { item: cell, opaque: false });
+          commit("incrementChecks", -1);
+        } else {
+          dispatch("primary", { cell: check, offset: -1, shift: true });
+        }
+      } else if (cell.opaque) {
+        dispatch("primary", { cell: check, offset: -1 });
+      }
     } else {
       dispatch("primary", { cell: check, offset: -1, shift });
     }
