@@ -92,7 +92,12 @@ import { State, namespace } from "vuex-class";
 import ImportantCell from "./ImportantCell.vue";
 import ImportantLocation from "./ImportantLocation.vue";
 import ImportantCheck from "./ImportantCheck.vue";
-import { HintSetting, Items, Location } from "@/store/tracker_important/state";
+import {
+  HintSetting,
+  Items,
+  Location,
+  State as TrackerState,
+} from "@/store/tracker_important/state";
 
 const tracker = namespace("tracker_important");
 const settings = namespace("settings");
@@ -106,7 +111,7 @@ const settings = namespace("settings");
   },
 })
 export default class ImportantGrid extends Vue {
-  @State("tracker_important") state: any;
+  @State("tracker_important") state!: TrackerState;
   @tracker.State items!: Items;
   @tracker.State hintSettings!: { [key: string]: HintSetting };
   @tracker.State("checks") numChecks!: number;
@@ -119,7 +124,7 @@ export default class ImportantGrid extends Vue {
   @tracker.Mutation incrementChecks!: Function;
   @tracker.Mutation selectLocation!: Function;
 
-  @settings.State("important") settings: any;
+  @settings.State("important") settings!: { [key: string]: any };
   @settings.State disableShadows!: boolean;
 
   dragging: boolean = false;
