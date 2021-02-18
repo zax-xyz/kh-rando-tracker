@@ -12,9 +12,12 @@
       v-if="cell.checks || cell.totalChecks > -1"
       key="number"
     ) {{ cell.checks }}
-      template(v-if="cell.totalChecks > -1")
+      template(v-if="cell.totalChecks !== -1")
         span(style="color: #fdbd8a")  / 
         span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
+      template(v-else-if="willBeHinted")
+        span(style="color: #fdbd8a")  / 
+        span(style="color: hsl(0, 100%, 75%); opacity: .45") ?
 
     .proofs(
       v-if="proofs.length"
@@ -173,6 +176,7 @@ export default class ImportantLocation extends Vue {
 
   > div
     // display flex
+    position relative
 
     > div
       display inline-block
