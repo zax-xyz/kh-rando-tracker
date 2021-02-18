@@ -60,8 +60,8 @@ export default class ImportantCheck extends Vue {
         return;
       }
 
-      if (this.foundChecks[l].some(c => c.startsWith("other/proof_"))) {
-        // has proof so much be hinted by some report but we don't have it yet
+      if (this.$store.getters["tracker_important/willBeHinted"](l)) {
+        // the world isn't hinted, but will be, as it either has a proof or a hint to a proof
         hinted++;
         dimmed = true;
       }

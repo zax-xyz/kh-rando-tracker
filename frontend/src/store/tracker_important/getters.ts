@@ -4,7 +4,7 @@ import { Item, State } from "./state";
 import { RootState } from "../types";
 
 export const getters: GetterTree<State, RootState> = {
-  isLocation: (state: State) => (item: string): boolean => {
+  isLocation: state => (item: string): boolean => {
     return state.items.locations.flat().includes(item);
   },
 
@@ -36,5 +36,19 @@ export const getters: GetterTree<State, RootState> = {
         return cell.secondaryLevel;
       }
     }
+  },
+
+  willBeHinted: state => (location: string): boolean => {
+    return (
+      // if the world has a proof it has to be hinted
+      state.foundChecks[location].some(c => c.startsWith("other_proof")) ||
+      // if the world has a report that hints a world with a proof, then it has to be hinted
+      state.hints.some(
+        h =>
+          h.found &&
+          h.report === location &&
+          state.foundChecks[h.location].some(c => c.startsWith("other_proof")),
+      )
+    );
   },
 };

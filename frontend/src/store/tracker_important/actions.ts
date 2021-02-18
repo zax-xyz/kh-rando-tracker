@@ -193,17 +193,12 @@ export const actions: ActionTree<State, RootState> = {
       );
 
       reportValues.forEach((value, index) => {
-        const parts = value.split(",");
-        const hintedLocation = getWorldByAddress(parts[0]);
-        const checks = parseInt(parts[1]) - 32;
-
-        const reportLocation =
-          getWorldByAddress(reportLocationAddresses[index]) || defaultLocations[index];
+        const [location, checks] = value.split(",");
 
         hints.push({
-          report: reportLocation,
-          location: hintedLocation,
-          checks,
+          report: getWorldByAddress(reportLocationAddresses[index]) || defaultLocations[index],
+          location: getWorldByAddress(location),
+          checks: parseInt(checks) - 32,
           found: false,
           incorrectCounter: 0,
         });
