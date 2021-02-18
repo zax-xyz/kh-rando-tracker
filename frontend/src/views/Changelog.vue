@@ -3,6 +3,24 @@
     h1 Recent Update Changelog
 
     section
+      h2 Thursday 18 February 2021
+
+      .added
+        h3 Added
+        ul
+          li Show faint question mark in place of a number for worlds that are known must be hinted (has a proof or hints a world that has a proof) but the report hasn't been found for yet
+
+      .changed
+        h3 Changed
+        ul
+          li Adjusted positions of icons displayed next to worlds slightly to be more spacious
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed proof icon fade animation in corner of world when multiple proofs have been marked for it and one is removed
+
+    section
       h2 Sunday 14 February 2021
 
       .fixed
