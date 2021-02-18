@@ -41,13 +41,13 @@ export const getters: GetterTree<State, RootState> = {
   willBeHinted: state => (location: string): boolean => {
     return (
       // if the world has a proof it has to be hinted
-      state.foundChecks[location].some(c => c.startsWith("other_proof")) ||
+      state.foundChecks[location].some(c => c.startsWith("other/proof_")) ||
       // if the world has a report that hints a world with a proof, then it has to be hinted
       state.hints.some(
         h =>
           h.found &&
           h.report === location &&
-          state.foundChecks[h.location].some(c => c.startsWith("other_proof")),
+          state.foundChecks[h.location].some(c => c.startsWith("other/proof_")),
       )
     );
   },
