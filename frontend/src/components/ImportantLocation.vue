@@ -33,7 +33,7 @@
           v-for="proof in proofs"
           :key="proof"
         )
-          img(:src="`img/${proof}.png`")
+          img(:src="`img/${styledIcon(proof)}.png`")
 
     template(v-slot:after)
       transition(name="fade-in")
@@ -112,6 +112,26 @@ export default class ImportantLocation extends Vue {
 
   get proofSize(): string {
     return `calc(0.4 * ${this.settings.worldSize || "55px"})`;
+  }
+
+  styledIcon(file: string): string {
+    const cell = this.$store.getters["tracker_important/cell"](file);
+    const style = this.$store.state.settings.iconStyles[cell.category]?.value;
+
+    if (style === cell.categoryExclude) {
+      return file;
+    }
+
+    switch (style) {
+      case "Default":
+        return file;
+      case "Minimal":
+        return `minimal/${file}`;
+      case "Classic":
+        return `classic/${file}`;
+      default:
+        return file;
+    }
   }
 
   handleClick(event: MouseEvent): void {
