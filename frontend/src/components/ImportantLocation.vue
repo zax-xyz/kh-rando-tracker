@@ -94,8 +94,9 @@ export default class ImportantLocation extends Vue {
     return reportLocation === "Free" ||
       (this.items.all[reportLocation] as Location).totalChecks !== -1
       ? 1 // World is hinted, or it was goa/critical extra, which also counts
-      : // Otherwise, if the world has a proof, then it must be hinted by some report we don't have
-        -this.foundChecks[reportLocation].some(c => c.startsWith("other/proof_"));
+      : // Otherwise, check if we know it will be hinted but we just don't have the report yet
+        // i.e., it has a proof or hints a world with a proof
+        -this.$store.getters["tracker_important/willBeHinted"](reportLocation);
   }
 
   get willBeHinted(): boolean {
