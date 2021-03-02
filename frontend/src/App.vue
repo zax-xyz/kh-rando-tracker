@@ -18,6 +18,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
+import isbot from "isbot";
 
 import BaseGrid from "./components/BaseGrid.vue";
 import TheFooter from "./components/TheFooter.vue";
@@ -53,13 +54,18 @@ export default class extends Vue {
       this.$store.commit("settings/wipeOldIconSettings");
     }
 
-    ["size", "padding"].forEach(s => {
+    ["size", "padding"].forEach((s) => {
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {
         // @ts-ignore
         this.$store.commit("settings/setSettings", { [s]: setting + "px" });
       }
     });
+
+    if (isbot(navigator.userAgent)) {
+      // don't show changelog to bots/crawlers
+      return;
+    }
 
     if (this.$store.state.version !== this.$store.state.currVersion) {
       this.$router.push("changelog");
