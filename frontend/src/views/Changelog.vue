@@ -3,6 +3,20 @@
     h1 Recent Update Changelog
 
     section
+      h2 Tuesday 2 March 2021
+      p 2.0 is now the default version
+
+      .added
+        h3 Added
+        ul
+          li #[strong Show hinted hints when a world is hinted by a world that hints another world that has a proof]. E.g. World A hints world B, which has a proof, and world A also hints world C. Since world A hinted world B, it must be hinted, and hence world C is a hinted hint.
+
+      .fixed
+        h3 Fixed
+        ul
+          li Use proper icon styles for the small proof icons next to worlds in which they were found, if not using default.
+
+    section
       h2 Thursday 18 February 2021
 
       .added
