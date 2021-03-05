@@ -61,6 +61,11 @@ const state = {
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
+    pages: {
+      title: "Torn Pages",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
     scom: {
       title: "Second Chance/Once More",
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],

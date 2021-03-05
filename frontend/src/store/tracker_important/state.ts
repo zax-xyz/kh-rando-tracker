@@ -61,58 +61,150 @@ const check = (options: Options): Check => ({
   ...item(options),
 });
 
-const CHEST = "secondary/chest";
+const CHEST = "other/chest";
 
 const locations = (): Array<{ [key: string]: Location }> => [
   {
     "other/sora's_heart": location({ setting: "Sora's Heart", category: "levels" }),
-    "other/drive_forms": location({ category: "drive" }),
+    "other/drive_form": location({ category: "drive" }),
     "worlds/hollow_bastion": location({
       secondary: [
         CHEST,
-        ...["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}`),
-        "secondary/sephiroth",
-        "nobody/demyx",
+        ...["bailey", "dancers", "demyx_story", "1000_heartless"].map(i => `hollow_bastion/${i}`),
+        ...["depths", "mining_area", "engine_chamber", "transport"].map(
+          i => `cavern_of_remembrance/${i}`,
+        ),
+        "hollow_bastion/sephiroth",
+        "hollow_bastion/demyx",
       ],
       category: "worlds",
     }),
-    "worlds/twilight_town": location({ secondary: [CHEST, "nobody/axel"], category: "worlds" }),
+    "worlds/twilight_town": location({
+      secondary: ["mysterious_tower", "berserkers", "mickey", "betwixt_and_between", "axel"].map(
+        i => `twilight_town/${i}`,
+      ),
+      category: "worlds",
+    }),
   },
 
   {
-    "worlds/land_of_dragons": location({ secondary: [CHEST, "nobody/xigbar"], category: "worlds" }),
-    "worlds/beast's_castle": location({ secondary: [CHEST, "nobody/xaldin"], category: "worlds" }),
+    "worlds/land_of_dragons": location({
+      secondary: [
+        CHEST,
+        ...["village_cave", "shan_yu", "summit", "snipers", "storm_rider", "xigbar"].map(
+          i => `land_of_dragons/${i}`,
+        ),
+      ],
+      category: "worlds",
+    }),
+    "worlds/beast's_castle": location({
+      secondary: [
+        CHEST,
+        ...["thresholder", "beast", "dark_thorn", "dragoons", "xaldin_story", "xaldin"].map(
+          i => `beast's_castle/${i}`,
+        ),
+      ],
+      category: "worlds",
+    }),
     "worlds/olympus_coliseum": location({
       secondary: [
         CHEST,
-        ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(
-          c => `secondary/cups/${c}`,
-        ),
-        "nobody/zexion",
+        ...[
+          "cerberus",
+          "the_lock",
+          "hydra",
+          "hades",
+          "zexion",
+          "pain_panic_cup",
+          "cerberus_cup",
+          "titan_cup",
+          "goddess_cup",
+          "hades_cup",
+        ].map(c => `olympus_coliseum/${c}`),
       ],
       category: "worlds",
     }),
     "worlds/space_paranoids": location({
-      secondary: [CHEST, "nobody/larxene"],
+      secondary: [
+        CHEST,
+        ...[
+          "dataspace",
+          "hostile_program",
+          "solar_sailer",
+          "master_control_program",
+          "larxene",
+        ].map(i => `space_paranoids/${i}`),
+      ],
       category: "worlds",
     }),
   },
 
   {
-    "worlds/halloween_town": location({ secondary: [CHEST, "nobody/vexen"], category: "worlds" }),
-    "worlds/port_royal": location({ secondary: [CHEST, "nobody/luxord"], category: "worlds" }),
-    "worlds/agrabah": location({ secondary: [CHEST, "nobody/lexaeus"], category: "worlds" }),
-    "worlds/pride_lands": location({ secondary: [CHEST, "nobody/saix"], category: "worlds" }),
+    "worlds/halloween_town": location({
+      secondary: [
+        CHEST,
+        ...[
+          "candy_cane_lane",
+          "prison_keeper",
+          "oogie_boogie",
+          "presents",
+          "experiment",
+          "vexen",
+        ].map(i => `halloween_town/${i}`),
+      ],
+      category: "worlds",
+    }),
+    "worlds/port_royal": location({
+      secondary: [
+        CHEST,
+        ...["town", "isla_de_muerta", "barbossa", "gamblers", "grim_reaper", "luxord"].map(
+          i => `port_royal/${i}`,
+        ),
+      ],
+      category: "worlds",
+    }),
+    "worlds/agrabah": location({
+      secondary: [
+        CHEST,
+        ...[
+          "guardians",
+          "chasm_of_challenges",
+          "elemental_lords",
+          "magic_switches",
+          "jafar",
+          "lexaeus",
+        ].map(i => `agrabah/${i}`),
+      ],
+      category: "worlds",
+    }),
+    "worlds/pride_lands": location({
+      secondary: [CHEST, ...["oasis", "scar", "groundshaker", "saix"].map(i => `pride_lands/${i}`)],
+      category: "worlds",
+    }),
   },
 
   {
     "worlds/disney_castle": location({
-      secondary: [CHEST, "secondary/lingering_will", "nobody/marluxia"],
+      secondary: [
+        CHEST,
+        "disney_castle/minnie",
+        ...["old_pete", "windows_of_time", "pete"].map(i => `timeless_river/${i}`),
+        ...["marluxia", "lingering_will"].map(i => `disney_castle/${i}`),
+      ],
       category: "worlds",
     }),
-    "worlds/100_acre_wood": location({ setting: "100 Acre Wood", category: "worlds" }),
+    "worlds/100_acre_wood": location({
+      secondary: [
+        CHEST,
+        ...["blustery_rescue", "hunny_slider", "balloon_bounce", "expotition", "hunny_pot"].map(
+          i => `100_acre_wood/${i}`,
+        ),
+      ],
+      setting: "100 Acre Wood",
+      category: "worlds",
+    }),
     "worlds/simulated_twilight_town": location({
-      secondary: "nobody/roxas",
+      secondary: ["computer_room", "pod_room", "roxas"].map(i => `simulated_twilight_town/${i}`),
       setting: "Simulated Twilight Town",
       category: "worlds",
       categoryExclude: IconStyle.CLASSIC,
@@ -120,8 +212,9 @@ const locations = (): Array<{ [key: string]: Location }> => [
     "worlds/the_world_that_never_was": location({
       secondary: [
         CHEST,
-        ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}`),
-        "nobody/xemnas",
+        ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts", "xemnas"].map(
+          i => `the_world_that_never_was/${i}`,
+        ),
       ],
       category: "worlds",
     }),
@@ -145,13 +238,13 @@ const checks = (): Array<{ [key: string]: Check }> => [
       setting: "Secret Ansem Reports",
       category: "reports",
     }),
-    "other/torn_page": check({ total: 5, cls: "pages", setting: "Torn Pages" }),
+    "other/torn_pages": check({ total: 5, cls: "pages", setting: "Torn Pages", category: "pages" }),
   },
 
   {
     ...mapChecks(
       ["magic/fire", "magic/blizzard", "magic/thunder"],
-      check({ total: 3, category: "magic", secondary: "secondary/duck", cls: "magic" }),
+      check({ total: 3, category: "magic", secondary: "other/duck", cls: "magic" }),
     ),
     ...mapChecks(
       [["magic/cure", { setting: "Cure" }], "magic/reflect", "magic/magnet"],
@@ -162,11 +255,11 @@ const checks = (): Array<{ [key: string]: Check }> => [
   {
     ...mapChecks(
       [
-        ["drive/valor", { secondary: "secondary/drive/jump" }],
-        ["drive/wisdom", { secondary: "secondary/drive/quick" }],
-        ["drive/limit", { secondary: "secondary/drive/dodge" }],
-        ["drive/master", { secondary: "secondary/drive/aerial" }],
-        ["drive/final", { secondary: "secondary/drive/glide", setting: "Final Form" }],
+        ["drive/valor", { secondary: "other/high_jump" }],
+        ["drive/wisdom", { secondary: "other/quick_run" }],
+        ["drive/limit", { secondary: "other/dodge_roll" }],
+        ["drive/master", { secondary: "other/aerial_dodge" }],
+        ["drive/final", { secondary: "other/glide", setting: "Final Form" }],
       ],
       check({
         total: 7,
@@ -195,7 +288,7 @@ const checks = (): Array<{ [key: string]: Check }> => [
     ...mapChecks(
       ["other/proof_of_nonexistence", "other/proof_of_connection", "other/proof_of_tranquility"],
       check({
-        secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`),
+        secondary: ["bronze", "silver", "gold"].map(i => `other/${i}`),
         category: "proofs",
         cls: "proof",
       }),

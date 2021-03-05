@@ -8,7 +8,7 @@
       :style="{ width: width }"
      )
       img.icon(
-        :src="`img/${styledIcon(file)}.png`"
+        :src="`img/${styledIcon(file)}.webp`"
         :class="{ opaque: cell.opaque, disabled: cell.disabled }"
       )
 
@@ -22,11 +22,11 @@
           v-if="cell.secondaryLevel"
           key="secondary"
         )
-          img(:src="`img/${secondaryFile}.png`")
+          img(:src="`img/progression/${secondaryFile}.webp`")
           transition(name="fade-up")
             img.number(
               v-if="secondaryNumber"
-              :src="`img/numbers/${secondaryNumber}.png`"
+              :src="`img/progression/numbers/${secondaryNumber}.webp`"
             )
 
         .report(
@@ -35,16 +35,16 @@
           key="report"
         )
           img.icon(
-            :src="`img/${styledIcon('other/secret_reports')}.png`"
+            :src="`img/progression/other/secret_reports.webp`"
           )
           transition(name="fade-up")
             img.number(
               v-if="Math.abs(hinted) > 1"
-              :src="`img/numbers/${Math.abs(hinted)}.png`"
+              :src="`img/progression/numbers/${Math.abs(hinted)}.webp`"
             )
 
       transition(name="fade-cross")
-        img.cross(v-if="cell.disabled", src="img/cross.png")
+        img.cross(v-if="cell.disabled", src="img/minimal/other/cross.webp")
 
       slot(name="after")
 </template>
@@ -86,18 +86,16 @@ export default class ImportantCell extends Vue {
     const style = this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
-      return file;
+      return `default/${file}`;
     }
 
     switch (style) {
-      case "Default":
-        return file;
       case "Minimal":
         return `minimal/${file}`;
       case "Classic":
-        return `classic/${file}`;
+        return `legacy/${file}`;
       default:
-        return file;
+        return `default/${file}`;
     }
   }
 }
@@ -141,18 +139,17 @@ export default class ImportantCell extends Vue {
     width 100%
 
   .number
-    top 0
-    left 3%
-    height 50%
+    top 7.5%
+    left -25%
+    height 38%
     width auto
 
-    &[src='img/numbers/max.png']
-      left 25%
+    &[src='img/progression/numbers/max.webp']
+      left 55%
 
   .drive &
     left 0
-    top 7.5%
-    width 75%
+    width 36%
 
   .proof &
     left initial

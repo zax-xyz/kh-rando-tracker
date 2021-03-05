@@ -8,7 +8,7 @@
    )
     img.number(
       v-if="cell.total > 1 && cell.level > 1"
-      :src="`img/numbers/${Math.min(cell.total, cell.level)}.png`"
+      :src="`img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
       key="number"
     )
 </template>
@@ -45,7 +45,7 @@ export default class ImportantCheck extends Vue {
   }
 
   get hinted(): number {
-    if (this.file !== "other/torn_page" && this.items.all[this.file].cls !== "drive") {
+    if (this.file !== "other/torn_pages" && this.items.all[this.file].cls !== "drive") {
       // only track hinted for pages and drives
       return 0;
     }

@@ -677,7 +677,7 @@ export const locations = {
   "worlds/port_royal": PortRoyal,
   "worlds/space_paranoids": SpaceParanoids,
   "worlds/the_world_that_never_was": TheWorldThatNeverWas,
-  "other/drive_forms": Forms,
+  "other/drive_form": Forms,
   "other/sora's_heart": Levels,
   "worlds/atlantica": Atlantica,
   Free: Free,

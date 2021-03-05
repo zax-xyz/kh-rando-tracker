@@ -5,7 +5,7 @@
    )
     img(
       v-for="check in checks"
-      :src="`img/${check}.png`"
+      :src="`img/${check}.webp`"
     )
 </template>
 

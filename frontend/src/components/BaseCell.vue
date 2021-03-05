@@ -6,7 +6,7 @@
     @wheel="handleWheel"
   )
     img.icon(
-      :src="`img/${styledIcon(file)}.png`"
+      :src="`img/${styledIcon(file)}.webp`"
       :class="{ opaque: cell.opaque, disabled: cell.disabled }"
     )
 
@@ -14,24 +14,24 @@
       transition(name="fade-up")
         img.number(
           v-if="cell.total > 1 && cell.level > 1"
-          :src="`img/numbers/${Math.min(cell.total, cell.level)}.png`"
+          :src="`img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
         )
       transition(name="fade-up")
         img.nobody(
           v-if="cell.data && cell.level === cell.total + 1"
-          :src="`img/nobody/${cell.data}.png`"
+          :src="`img/nobody/${cell.data}.webp`"
         )
       transition(name="fade-up")
         .secondary(v-if="cell.secondaryLevel")
-          img(:src="`img/${secondaryFile}.png`")
+          img(:src="`img/progression/${secondaryFile}.webp`")
           transition(name="fade-up")
             img.number(
               v-if="secondaryNumber"
-              :src="`img/numbers/${secondaryNumber}.png`"
+              :src="`img/progression/numbers/${secondaryNumber}.webp`"
             )
 
     transition(name="fade-cross")
-      img.cross(v-if="cell.disabled", src="img/cross.png")
+      img.cross(v-if="cell.disabled", src="img/cross.webp")
 </template>
 
 <script lang="ts">
@@ -69,18 +69,16 @@ export default class BaseCell extends Vue {
     const style = this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
-      return file;
+      return `default/${file}`;
     }
 
     switch (style) {
-      case "Default":
-        return file;
       case "Minimal":
         return `minimal/${file}`;
       case "Classic":
         return `classic/${file}`;
       default:
-        return file;
+        return `default/${file}`;
     }
   }
 
@@ -168,9 +166,9 @@ img
 
 .number
   position absolute
-  right 1%
-  bottom 5%
-  width 72%
+  right 8%
+  bottom 7%
+  width 75%
 
 .nobody
   position absolute
@@ -188,13 +186,13 @@ img
     width 100%
 
   .number
-    top 0
-    left 5%
-    height 50%
+    top 7.5%
+    left -25%
+    height 38%
     width auto
 
-    &[src='img/numbers/max.png']
-      left 25%
+    &[src='img/progression/numbers/max.webp']
+      left 55%
 
   /.drive &
   /.hundred_acre &
@@ -202,10 +200,10 @@ img
   /.magic &
     left 0
     top 7.5%
-    width 75%
-
-  /.magic &
     width 35%
+
+  /.levels &
+    width 75%
 
 .fade-up-enter-active
 .fade-up-leave-active

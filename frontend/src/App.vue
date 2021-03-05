@@ -20,10 +20,10 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import isbot from "isbot";
 
-import BaseGrid from "./components/BaseGrid.vue";
+const BaseGrid = () => import("./components/BaseGrid.vue");
+const ImportantGrid = () => import("./components/ImportantGrid.vue");
 import TheFooter from "./components/TheFooter.vue";
 import ModalView from "./components/ModalView.vue";
-import ImportantGrid from "./components/ImportantGrid.vue";
 
 @Component({
   components: {
@@ -54,7 +54,7 @@ export default class extends Vue {
       this.$store.commit("settings/wipeOldIconSettings");
     }
 
-    ["size", "padding"].forEach((s) => {
+    ["size", "padding"].forEach(s => {
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {
         // @ts-ignore
@@ -131,7 +131,7 @@ body
   margin 0
   background #333 no-repeat fixed center / cover
   $over = rgba(0, 0, 0, .5)
-  background-image linear-gradient($over, $over), url('../img/bg.jpg')
+  background-image linear-gradient($over, $over), url('../img/bg.webp')
 
 #app
 button

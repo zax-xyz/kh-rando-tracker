@@ -33,7 +33,7 @@
           v-for="proof in proofs"
           :key="proof"
         )
-          img(:src="`img/${styledIcon(proof)}.png`")
+          img(:src="`img/${styledIcon(proof)}.webp`")
 
     template(v-slot:after)
       transition(name="fade-in")
@@ -120,18 +120,16 @@ export default class ImportantLocation extends Vue {
     const style = this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
-      return file;
+      return `default/${file}`;
     }
 
     switch (style) {
-      case "Default":
-        return file;
       case "Minimal":
         return `minimal/${file}`;
       case "Classic":
         return `classic/${file}`;
       default:
-        return file;
+        return `default/${file}`;
     }
   }
 
