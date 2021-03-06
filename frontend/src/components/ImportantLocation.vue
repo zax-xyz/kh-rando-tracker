@@ -4,7 +4,9 @@
     :width="settings.worldSize"
     :file="file"
     :hinted="hinted"
-    @click.left.native="handleClick"
+    @click.left.exact.native="handleClick"
+    @click.left.ctrl.exact.native="removeCheck"
+    @click.left.shift.exact.native="showOther"
     @click.middle.exact.native="showChecks = !showChecks"
     @click.middle.shift.exact.native="disable({ cell: file })"
    )
@@ -19,21 +21,11 @@
         span(style="color: #fdbd8a")  / 
         span(style="color: hsl(0, 100%, 75%); opacity: .45") ?
 
-    .proofs(
-      v-if="proofs.length"
-      :style="{ width: `calc(3 * ${proofSize})`, right: `calc(-1.5 * ${proofSize})` }"
-      key="proofs"
+    .other(
+      v-if="cell.otherLevel"
+      key="other"
     )
-      transition-group(
-        name="proofs"
-        tag="div"
-        :style="{ height: proofSize }"
-      )
-        div(
-          v-for="proof in proofs"
-          :key="proof"
-        )
-          img(:src="`img/${styledIcon(proof)}.webp`")
+      img(:src="`img/progression/${otherFile}.webp`")
 
     template(v-slot:after)
       transition(name="fade-in")
@@ -71,6 +63,7 @@ export default class ImportantLocation extends Vue {
   @tracker.State selectedLocation!: string;
   @tracker.Action primary!: Function;
   @tracker.Action disable!: Function;
+  @tracker.Action other!: Function;
   @tracker.Action undoCheck!: Function;
   @tracker.Mutation selectLocation!: Function;
 
@@ -78,7 +71,7 @@ export default class ImportantLocation extends Vue {
 
   showChecks = false;
 
-  get cell(): Item {
+  get cell(): Location {
     return this.$store.getters["tracker_important/cell"](this.file);
   }
 
@@ -107,12 +100,13 @@ export default class ImportantLocation extends Vue {
     );
   }
 
-  get proofs(): string[] {
-    return this.foundChecks[this.file].filter(c => c.startsWith("other/proof_"));
-  }
+  get otherFile(): string | undefined {
+    const other = this.cell.other;
+    if (Array.isArray(other)) {
+      return other[this.cell.otherLevel - 1];
+    }
 
-  get proofSize(): string {
-    return `calc(0.4 * ${this.settings.worldSize || "55px"})`;
+    return other;
   }
 
   styledIcon(file: string): string {
@@ -134,17 +128,6 @@ export default class ImportantLocation extends Vue {
   }
 
   handleClick(event: MouseEvent): void {
-    const offset = event.ctrlKey ? -1 : 1;
-
-    if (offset == -1) {
-      const checks = this.foundChecks[this.file];
-      if (checks.length) {
-        this.undoCheck({ check: checks[checks.length - 1], location: this.file });
-      }
-
-      return;
-    }
-
     if (this.settings.preselectWorld) {
       if (this.file === this.selectedLocation) {
         this.selectLocation("Free");
@@ -154,9 +137,20 @@ export default class ImportantLocation extends Vue {
     } else {
       const shift = event.shiftKey;
 
-      this.primary({ cell: this.file, offset, shift });
+      this.primary({ cell: this.file, offset: 1, shift });
       console.log("Clicked on", formatItem(this.file) + (event.shiftKey ? " (shift)" : ""));
     }
+  }
+
+  removeCheck(): void {
+    const checks = this.foundChecks[this.file];
+    if (checks.length) {
+      this.undoCheck({ check: checks[checks.length - 1], location: this.file });
+    }
+  }
+
+  showOther(event: MouseEvent) {
+    this.other({ cell: this.file, offset: event.ctrlKey ? -1 : 1 });
   }
 }
 </script>
@@ -187,36 +181,14 @@ export default class ImportantLocation extends Vue {
   text-shadow -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
   filter drop-shadow(1px 1px 5px rgba(0, 0, 0, .4))
 
-.proofs
+.other
   position absolute
   top 0
-  // display flex
-  // justify-content center
-
-  > div
-    // display flex
-    position relative
-
-    > div
-      display inline-block
-      height 100%
-      transition transform .2s, opacity .2s
+  right -5%
+  width 40%
 
   img
-    height 100%
-
-.proofs-enter
-.proofs-leave-to
-  opacity 0
-
-.proofs-enter
-  transform translateY(10px)
-
-.proofs-leave-to
-  transform translateY(10px) translateX(-50%)
-
-.proofs-leave-active
-  position absolute
+    width 100%
 
 .fade-in-enter-active
   transition opacity .15s ease-out, transform .15s ease-out, transform-origin .15s step-end

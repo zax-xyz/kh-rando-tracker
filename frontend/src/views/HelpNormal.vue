@@ -6,7 +6,7 @@
     p After all visits have been completed, clicking again will either trigger a symbol to appear in the top left, for defeat of the Data Org/Absent Sillhouette fight, or reset the cell back to its original state.
 
     h3 Right Click
-    p All worlds have a chest icon on the first right click. After that, they cycle through these lists:
+    p Some items have icons that appear next to them upon right-click, cycling through these lists:
     DefinitionsList(:definitions="definitions")
 
     h3 Middle Click
@@ -34,14 +34,51 @@ import DefinitionsList from "@/components/DefinitionsList.vue";
 })
 export default class HelpNormal extends Vue {
   definitions: { [key: string]: string } = {
-    "Hollow Bastion": "Defeated Sephiroth",
+    "Simulated Twilight Town":
+      "Defeated the Computer Room, Entered the Pod Room, Defeated Data Roxas",
+
+    "Twilight Town":
+      "Cleared the First Visit, Cleared Sandlot Berserkers Fight, Cleared Old Mansion Nobodies Fight, Cleared Betwixt and Between Assassins Fight, Defeated Data Axel",
+
+    "Hollow Bastion":
+      "Cleared Bailey Samurai Fight, Activated Ansem’s Study Computer, Cleared Restoration Site Dancers Fight, Defeated Demyx, Cleared 1000 Heartless Fight, Defeated Sephiroth, Defeated Data Demyx",
+
     "Cavern of Remembrance":
-      "All Chests until 1st Fight, All Chests until 2nd Fight, All Remaining Chests, Cleared Nobody Fights",
+      "Opened Chests Before First Fight, Opened Chests Before Second Fight, Opened Remaining Chests, Cleared Transport to Remembrance Nobodies Fights",
+
+    "Land of Dragons":
+      "Opened Starting Chests, Cleared Village Cave Fight, Cleared Timed Summit Fight, Defeated Shan Yu, Cleared Antechamber Snipers Fight, Defeated Storm Rider, Defeated Data Xigbar",
+
+    "Beast’s Castle":
+      "Opened Starting Chests, Defeated Thresholder and Possessor, Defeated The Beast, Defeated Dark Thorn, Cleared Entrance Hall Dragoon Fight, Defeated Xaldin, Defeated Data Xaldin",
+
     "Olympus Coliseum":
-      "Cleared Pain and Panic Cup, Cerberus Cup, Titan Cup, Goddess of Fate Cup, Hades Paradox Cup",
-    "Disney Castle": "Defeated Lingering Will/Terra",
-    "The World That Never Was": "Defeated Roxas, Xigbar, Luxord, Saïx, Xemnas",
-    "100 Acre Wood": "Torn Page Counter",
+      "Opened Starting Chests, Defeated Cerberus, Freed Meg at the Lock, Defeated Hydra, Defeated Hades, Defeated Zexion’s Absent Silhouette",
+
+    "Disney Castle/Timeless River":
+      "Opened Starting Chests, Cleared Minnie Escort Fights, Defeated Old Pete, Cleared Windows of Time Fights, Defeated Pete, Defeated Marluxia’s Absent Silhouette, Defeated Lingering Will",
+
+    Agrabah:
+      "Opened Starting Chests, Cleared Abu Escort Minigame, Cleared Chasm of Challenges Fights, Defeated Volcano and Blizzard Lords, Activated Magic Switches, Defeated Genie Jafar, Defeated Lexaeus’ Absent Silhouette",
+
+    "Port Royal":
+      "Opened Starting Chests, Cleared Town Fight, Cleared Isla de Muerta Pirates Fight, Defeated Barbossa, Cleared Seadrift Keep Gamblers Fight, Defeated Grim Reaper, Defeated Data Luxord",
+
+    "Halloween Town":
+      "Opened Starting Chests, Cleared Candy Cane Lane Fight, Defeated Prison Keeper, Defeated Oogie Boogie, Cleared Presents Minigame, Defeated The Experiment, Defeated Vexen’s Absent Silhouette",
+
+    "Pride Lands":
+      "Opened Starting Chests, Talked to Simba at the Oasis, Defeated Scar, Defeated Groundshaker, Defeated Data Saix",
+
+    "Space Paranoids":
+      "Opened Starting Chests, Cleared Dataspace Fight, Defeated Hostile Program, Cleared Solar Sailer Fight, Defeated MCP, Defeated Larxene’s Absent Silhouette",
+
+    "The World That Never Was":
+      "Opened Starting Chests, Defeated Roxas, Defeated Xigbar, Defeated Luxord, Defeated Saix, Reached the Door to Kingdom Hearts, Defeated Data Xemnas",
+
+    "100 Acre Wood":
+      "Opened Starting Chests, Cleared Blustery Rescue Minigame, Cleared Hunny Slider Minigame, Cleared Balloon Bounce Minigame, Cleared The Expotition Minigame, Cleared Hunny Pot Minigame",
+
     "Sora's level": "Obtained Second Chance, Once More, Second Chance and Once More",
     "Drive Forms": "Growth Ability Counter (High Jump, Quick Run, Dodge Roll, Aerial Dodge, Glide)",
     "The Three Proofs": "Obtained Bronze Crown, Silver Crown, Gold Crown",

@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
 
-import { Check, Hints, Items, Item, State } from "./state";
+import { Check, Hints, Items, Item, Location, State } from "./state";
 import { defaultLocations, locations } from "./codes";
 import { formatItem } from "@/util";
 import { RootState } from "../types";
@@ -79,6 +79,18 @@ export const actions: ActionTree<State, RootState> = {
     const end = 1 + length + +item.secondaryMax;
 
     commit("setSecondaryLevel", { item, level: (item.secondaryLevel + end + offset) % end });
+  },
+
+  other({ commit, getters }, { cell, offset = 1 }) {
+    const item: Location = getters.cell(cell);
+    if (item.disabled) return;
+
+    const other = item.other;
+    if (!other) return;
+
+    const end = Array.isArray(other) ? other.length + 1 : 2;
+
+    commit("setOtherLevel", { item, level: (item.otherLevel + end + offset) % end });
   },
 
   disable({ commit, dispatch, getters }, { cell }) {

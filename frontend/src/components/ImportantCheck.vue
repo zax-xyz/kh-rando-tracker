@@ -11,6 +11,12 @@
       :src="`img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
       key="number"
     )
+
+    .location(
+      v-if="isProof && locations.length"
+      key="location"
+    )
+      img(:src="`img/minimal/${location}.webp`")
 </template>
 
 <script lang="ts">
@@ -70,6 +76,22 @@ export default class ImportantCheck extends Vue {
     return hinted * (-1) ** +dimmed;
   }
 
+  get isProof(): boolean {
+    return this.file.startsWith("other/proof_");
+  }
+
+  get locations(): string[] {
+    return this.checkLocations[this.file];
+  }
+
+  get location(): string {
+    if (this.locations[0] == "Free") {
+      return "worlds/replica_data";
+    }
+
+    return this.locations[0];
+  }
+
   handleClick(event: MouseEvent): void {
     const offset = event.ctrlKey ? -1 : 1;
 
@@ -101,10 +123,25 @@ export default class ImportantCheck extends Vue {
       return;
     }
 
-    const locations = this.checkLocations[this.file];
-    if (locations.length) {
-      this.undoCheck({ check: this.file, location: locations[locations.length - 1], shift });
+    if (this.locations.length) {
+      this.undoCheck({
+        check: this.file,
+        location: this.locations[this.locations.length - 1],
+        shift,
+      });
     }
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.location
+  position absolute
+  bottom -20%
+  left -15%
+  width 55%
+
+  img
+    width 100%
+    filter drop-shadow(1px 1px 5px black)
+</style>

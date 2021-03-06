@@ -15,6 +15,10 @@ export const mutations: MutationTree<State> = {
     payload.item.secondaryLevel = payload.level;
   },
 
+  setOtherLevel(_state, payload: { item: Location; level: number }): void {
+    payload.item.otherLevel = payload.level;
+  },
+
   disable(_state, item: Item): void {
     item.disabled = !item.disabled;
   },

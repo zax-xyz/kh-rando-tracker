@@ -29,6 +29,8 @@ export interface Item {
 export interface Location extends Item {
   checks: number;
   totalChecks: number;
+  other?: string | string[];
+  otherLevel: number;
 }
 
 export interface Check extends Item {
@@ -53,6 +55,7 @@ const item = (options: Options): Item => ({
 const location = (options: Options): Location => ({
   checks: 0,
   totalChecks: -1,
+  otherLevel: 0,
   ...item(options),
 });
 
@@ -70,13 +73,19 @@ const locations = (): Array<{ [key: string]: Location }> => [
     "worlds/hollow_bastion": location({
       secondary: [
         CHEST,
-        ...["bailey", "dancers", "demyx_story", "1000_heartless"].map(i => `hollow_bastion/${i}`),
-        ...["depths", "mining_area", "engine_chamber", "transport"].map(
-          i => `cavern_of_remembrance/${i}`,
-        ),
-        "hollow_bastion/sephiroth",
-        "hollow_bastion/demyx",
+        ...[
+          "bailey",
+          "ansem's_study",
+          "dancers",
+          "demyx_story",
+          "1000_heartless",
+          "sephiroth",
+          "demyx",
+        ].map(i => `hollow_bastion/${i}`),
       ],
+      other: ["depths", "mining_area", "engine_chamber", "transport"].map(
+        i => `cavern_of_remembrance/${i}`,
+      ),
       category: "worlds",
     }),
     "worlds/twilight_town": location({
@@ -91,7 +100,7 @@ const locations = (): Array<{ [key: string]: Location }> => [
     "worlds/land_of_dragons": location({
       secondary: [
         CHEST,
-        ...["village_cave", "shan_yu", "summit", "snipers", "storm_rider", "xigbar"].map(
+        ...["village_cave", "summit", "shan_yu", "snipers", "storm_rider", "xigbar"].map(
           i => `land_of_dragons/${i}`,
         ),
       ],
@@ -109,19 +118,11 @@ const locations = (): Array<{ [key: string]: Location }> => [
     "worlds/olympus_coliseum": location({
       secondary: [
         CHEST,
-        ...[
-          "cerberus",
-          "the_lock",
-          "hydra",
-          "hades",
-          "zexion",
-          "pain_panic_cup",
-          "cerberus_cup",
-          "titan_cup",
-          "goddess_cup",
-          "hades_cup",
-        ].map(c => `olympus_coliseum/${c}`),
+        ...["cerberus", "the_lock", "hydra", "hades", "zexion"].map(c => `olympus_coliseum/${c}`),
       ],
+      other: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
+        c => `olympus_coliseum/${c}`,
+      ),
       category: "worlds",
     }),
     "worlds/space_paranoids": location({
@@ -167,7 +168,7 @@ const locations = (): Array<{ [key: string]: Location }> => [
       secondary: [
         CHEST,
         ...[
-          "guardians",
+          "abu",
           "chasm_of_challenges",
           "elemental_lords",
           "magic_switches",

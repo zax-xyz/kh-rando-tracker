@@ -75,7 +75,7 @@ export const items: { [key: string]: Item } = {
     data: "demyx",
     secondary: [
       CHEST,
-      ...["bailey", "dancers", "demyx_story", "1000_heartless", "sephiroth"].map(
+      ...["bailey", "ansem's_study", "dancers", "demyx_story", "1000_heartless", "sephiroth"].map(
         i => `hollow_bastion/${i}`,
       ),
     ],
@@ -93,7 +93,7 @@ export const items: { [key: string]: Item } = {
     data: "xigbar",
     secondary: [
       CHEST,
-      ...["village_cave", "shan_yu", "summit", "snipers", "storm_rider"].map(
+      ...["village_cave", "summit", "shan_yu", "snipers", "storm_rider"].map(
         i => `land_of_dragons/${i}`,
       ),
     ],
