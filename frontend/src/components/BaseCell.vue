@@ -166,9 +166,9 @@ img
 
 .number
   position absolute
-  right 8%
-  bottom 7%
-  width 75%
+  right 5%
+  bottom 9%
+  width 74%
 
 .nobody
   position absolute

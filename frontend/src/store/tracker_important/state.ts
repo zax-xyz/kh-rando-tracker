@@ -190,8 +190,9 @@ const locations = (): Array<{ [key: string]: Location }> => [
         CHEST,
         "disney_castle/minnie",
         ...["old_pete", "windows_of_time", "pete"].map(i => `timeless_river/${i}`),
-        ...["marluxia", "lingering_will"].map(i => `disney_castle/${i}`),
+        "disney_castle/marluxia",
       ],
+      other: "disney_castle/lingering_will",
       category: "worlds",
     }),
     "worlds/100_acre_wood": location({

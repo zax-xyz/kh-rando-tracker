@@ -104,6 +104,7 @@ export default class HelpImportant extends Vue {
       "Opened Chests Before First Fight, Opened Chests Before Second Fight, Opened Remaining Chests, Cleared Transport to Remembrance Nobodies Fights",
     "Olympus Coliseum":
       "Cleared Pain and Panic Cup, Cleared Cerberus Cup, Cleared Titan Cup, Cleared Goddess of Fate Cup, Cleared Hades Paradox Cup",
+    "Disney Castle": "Lingering Will",
   };
 }
 </script>

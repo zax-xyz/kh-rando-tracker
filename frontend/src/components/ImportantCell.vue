@@ -131,8 +131,8 @@ export default class ImportantCell extends Vue {
 
 .secondary
   position absolute
-  top 5%
-  left -5%
+  top 0
+  left -10%
   width 40%
 
   img
