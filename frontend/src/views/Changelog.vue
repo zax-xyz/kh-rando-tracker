@@ -4,12 +4,15 @@
 
     section
       h2 Saturday 6 March 2021
+      p(style="color: hsl(0, 90%, 70%")
+        strong
+          u This update requires you to click the Reset Tracker button for the changes to fully apply
 
       .added
         h3 Added
         ul
           li #[strong Many new icons made by Televo have been added], including #[strong world progression icons]! Majority of the existing icons used in the tracker have also been reworked, including magic, all of the minimal-style icons, Sora's Heart, Drive (location, in important checks mode), and several others. The minimal-style icons now have a metallic-like feel to them. If you use minimal-style icons, make sure to enable the new minimal torn pages icon in the settings!
-          li Hollow Bastion, Olympus Coliseum, and Disney Castle in important checks mode now have the CoR progress/Cups progress/Lingering will on shift+click respectively, and show in the top-right corner, separate from the main world progress icons.
+          li Hollow Bastion, Olympus Coliseum, and Disney Castle in important checks mode now have the CoR progress/Cups progress/Lingering Will icons on shift+click respectively, and show in the top-right corner, separate from the main world progress icons.
 
       .changed
         h3 Changed
