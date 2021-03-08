@@ -173,7 +173,7 @@ export default class ImportantLocation extends Vue {
 
 .checksNumber
   position absolute
-  right -20%
+  right -25%
   bottom -15%
   color #fbf993
   font-size 1.2rem

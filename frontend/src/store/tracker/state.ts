@@ -199,7 +199,7 @@ export const items: { [key: string]: Item } = {
     ],
     category: "worlds",
   }),
-  "worlds/atlantica": item({ total: 6, data: "larxene", cls: "atlantica", category: "worlds" }),
+  "worlds/atlantica": item({ total: 6, cls: "atlantica", category: "worlds" }),
   "worlds/100_acre_wood": item({
     total: 6,
     secondary: "100_acre_wood/torn_pages",

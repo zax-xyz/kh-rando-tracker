@@ -13,10 +13,10 @@
     )
 
     .location(
-      v-if="isProof && locations.length"
+      v-if="showLocation"
       key="location"
     )
-      img(:src="`img/minimal/${location}.webp`")
+      img(:src="`img/progression/worlds/${location}.webp`")
 </template>
 
 <script lang="ts">
@@ -76,8 +76,11 @@ export default class ImportantCheck extends Vue {
     return hinted * (-1) ** +dimmed;
   }
 
-  get isProof(): boolean {
-    return this.file.startsWith("other/proof_");
+  get showLocation(): boolean {
+    return (
+      (this.file.startsWith("other/proof_") || this.file === "other/promise_charm") &&
+      this.locations.length > 0
+    );
   }
 
   get locations(): string[] {
@@ -89,7 +92,7 @@ export default class ImportantCheck extends Vue {
       return "worlds/replica_data";
     }
 
-    return this.locations[0];
+    return this.locations[0].split("/")[1];
   }
 
   handleClick(event: MouseEvent): void {
@@ -139,7 +142,7 @@ export default class ImportantCheck extends Vue {
   position absolute
   bottom -20%
   left -15%
-  width 55%
+  width 40%
 
   img
     width 100%

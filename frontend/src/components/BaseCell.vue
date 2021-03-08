@@ -19,7 +19,7 @@
       transition(name="fade-up")
         img.nobody(
           v-if="cell.data && cell.level === cell.total + 1"
-          :src="`img/nobody/${cell.data}.webp`"
+          :src="`img/progression/${file.split('/')[1]}/${cell.data}.webp`"
         )
       transition(name="fade-up")
         .secondary(v-if="cell.secondaryLevel")

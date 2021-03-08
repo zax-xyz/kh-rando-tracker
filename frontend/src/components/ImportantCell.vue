@@ -160,7 +160,7 @@ export default class ImportantCell extends Vue {
 .report
   position absolute
   bottom -10%
-  left -25%
+  left -10%
   width 40%
 
   img

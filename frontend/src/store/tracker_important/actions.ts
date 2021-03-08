@@ -100,12 +100,19 @@ export const actions: ActionTree<State, RootState> = {
     commit("disable", item);
   },
 
-  foundCheck({ commit, dispatch, state }, { check, location, shift = false }) {
+  foundCheck({ commit, dispatch, getters, state }, { check, location, shift = false }) {
     const item = state.items.all[check] as Check;
 
     if (item.level === item.total) {
       if (!item.levelsImportant) {
-        commit("setLevel", { item, level: 1 });
+        const groupItems: string[] = item.group
+          ? Object.keys(state.items.all).filter(k => state.items.all[k].group === item.group)
+          : [check];
+
+        for (const i of groupItems) {
+          const item: Item = getters.cell(i);
+          commit("setLevel", { item, level: 1 });
+        }
       }
 
       return;

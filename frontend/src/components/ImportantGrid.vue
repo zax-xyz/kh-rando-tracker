@@ -166,8 +166,8 @@ export default class ImportantGrid extends Vue {
 
   get worldRowStyle(): object {
     return {
-      height: this.settings.worldSize || "60px",
-      padding: `${this.settings.worldVerticalPadding || "7.5px"} 0`,
+      height: this.settings.worldSize || "65px",
+      padding: `${this.settings.worldVerticalPadding || "5px"} 0`,
     };
   }
 
