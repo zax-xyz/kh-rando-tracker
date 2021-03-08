@@ -16,7 +16,7 @@
         ul
           li Proof icons are no longer shown next to their locations in order to make room for the additional progress icons. Instead, minimal-style icons of the location are shown next to the proofs.
           li All images have been converted to #[a(href="https://developers.google.com/speed/webp") WebP format] and resized to be optimised for the web, greatly improving the performance on slow internet connections and minimising the amount of bandwidth required.
-          li Optimisations under the hood to the code to improve the performance on slow internet connections further. Certain things such as the Info and Settings views may not show immediately on slow connections, as loading them is put off until they are actually required in order to improve the initial load time of the page.
+          li Optimisations under the hood to the code to improve the performance on slow internet connections further. Certain views may not show immediately on slow connections and loading them is delayed to improve the initial load time.
 
     section
       h2 Tuesday 2 March 2021
