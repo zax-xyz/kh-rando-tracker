@@ -76,7 +76,7 @@ export default class BaseCell extends Vue {
       case "Minimal":
         return `minimal/${file}`;
       case "Classic":
-        return `classic/${file}`;
+        return `legacy/${file}`;
       default:
         return `default/${file}`;
     }
