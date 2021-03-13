@@ -17,19 +17,22 @@
 
     section
       h2 Saturday 6 March 2021
+      p(style="color: hsl(0, 90%, 70%")
+        strong
+          u This update requires you to click the Reset Tracker button for the changes to fully apply
 
       .added
         h3 Added
         ul
           li #[strong Many new icons made by Televo have been added], including #[strong world progression icons]! Majority of the existing icons used in the tracker have also been reworked, including magic, all of the minimal-style icons, Sora's Heart, Drive (location, in important checks mode), and several others. The minimal-style icons now have a metallic-like feel to them. If you use minimal-style icons, make sure to enable the new minimal torn pages icon in the settings!
-          li Hollow Bastion and Olympus Coliseum in important checks mode now have the CoR/Cups progress on shift+click, and show in the top-right corner, separate from the main world progress icons.
+          li Hollow Bastion, Olympus Coliseum, and Disney Castle in important checks mode now have the CoR progress/Cups progress/Lingering Will icons on shift+click respectively, and show in the top-right corner, separate from the main world progress icons.
 
       .changed
         h3 Changed
         ul
           li Proof icons are no longer shown next to their locations in order to make room for the additional progress icons. Instead, minimal-style icons of the location are shown next to the proofs.
           li All images have been converted to #[a(href="https://developers.google.com/speed/webp") WebP format] and resized to be optimised for the web, greatly improving the performance on slow internet connections and minimising the amount of bandwidth required.
-          li Optimisations under the hood to the code to improve the performance on slow internet connections further. Certain things such as the Info and Settings views may not show immediately on slow connections, as loading them is put off until they are actually required in order to improve the initial load time of the page.
+          li Optimisations under the hood to the code to improve the performance on slow internet connections further. Certain views may not show immediately on slow connections as loading them is delayed to improve the initial load time.
 
     section
       h2 Tuesday 2 March 2021

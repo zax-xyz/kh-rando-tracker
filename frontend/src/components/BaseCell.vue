@@ -76,7 +76,7 @@ export default class BaseCell extends Vue {
       case "Minimal":
         return `minimal/${file}`;
       case "Classic":
-        return `classic/${file}`;
+        return `legacy/${file}`;
       default:
         return `default/${file}`;
     }
@@ -166,9 +166,9 @@ img
 
 .number
   position absolute
-  right 8%
-  bottom 7%
-  width 75%
+  right 5%
+  bottom 9%
+  width 74%
 
 .nobody
   position absolute

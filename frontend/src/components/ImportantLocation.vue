@@ -156,6 +156,9 @@ export default class ImportantLocation extends Vue {
 </script>
 
 <style lang="stylus" scoped>
+>>> .item
+  width 65px
+
 >>> .item::before
   content ''
   position absolute
@@ -173,7 +176,7 @@ export default class ImportantLocation extends Vue {
 
 .checksNumber
   position absolute
-  right -25%
+  right -20%
   bottom -15%
   color #fbf993
   font-size 1.2rem

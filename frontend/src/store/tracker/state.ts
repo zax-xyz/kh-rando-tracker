@@ -82,7 +82,7 @@ export const items: { [key: string]: Item } = {
     category: "worlds",
   }),
   "worlds/cavern_of_remembrance": item({
-    ...["depths", "mining_area", "engine_chamber", "transport"].map(
+    secondary: ["depths", "mining_area", "engine_chamber", "transport"].map(
       i => `cavern_of_remembrance/${i}`,
     ),
     category: "worlds",
@@ -155,7 +155,7 @@ export const items: { [key: string]: Item } = {
     data: "lexaeus",
     secondary: [
       CHEST,
-      ...["guardians", "chasm_of_challenges", "elemental_lords", "magic_switches", "jafar"].map(
+      ...["abu", "chasm_of_challenges", "elemental_lords", "magic_switches", "jafar"].map(
         i => `agrabah/${i}`,
       ),
     ],

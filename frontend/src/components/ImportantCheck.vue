@@ -99,7 +99,7 @@ export default class ImportantCheck extends Vue {
 
   get location(): string {
     if (this.locations[0] == "Free") {
-      return "worlds/replica_data";
+      return "garden_of_assemblage";
     }
 
     return this.locations[0].split("/")[1];
@@ -150,8 +150,8 @@ export default class ImportantCheck extends Vue {
 <style lang="stylus" scoped>
 .location
   position absolute
-  bottom -20%
-  left -15%
+  bottom -15%
+  left -10%
   width 40%
 
   img
