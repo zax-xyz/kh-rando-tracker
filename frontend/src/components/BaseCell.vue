@@ -31,7 +31,7 @@
             )
 
     transition(name="fade-cross")
-      img.cross(v-if="cell.disabled", src="img/cross.webp")
+      img.cross(v-if="cell.disabled", src="img/minimal/other/cross.webp")
 </template>
 
 <script lang="ts">
