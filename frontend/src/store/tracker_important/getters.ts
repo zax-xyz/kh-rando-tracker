@@ -38,17 +38,23 @@ export const getters: GetterTree<State, RootState> = {
     }
   },
 
-  willBeHinted: state => (location: string): boolean => {
+  hasProof: state => (location: string): boolean =>
+    state.foundChecks[location].some(c => c.startsWith("other/proof_")),
+
+  willBeHinted: (state, getters) => (location: string): boolean => {
     return (
-      // if the world has a proof it has to be hinted
-      state.foundChecks[location].some(c => c.startsWith("other/proof_")) ||
-      // if the world has a report that hints a world with a proof, then it has to be hinted
-      state.hints.some(
-        h =>
-          h.found &&
-          h.report === location &&
-          state.foundChecks[h.location].some(c => c.startsWith("other/proof_")),
-      )
+      // the world has a proof
+      getters.hasProof(location) ||
+      // the world has a report that hints a world with a proof
+      state.hints
+        .filter(h => h.found && h.report === location)
+        .some(h => getters.hasProof(h.location)) ||
+      // the world has a form and a proof is on drive levels
+      (getters.hasProof("other/drive_form") &&
+        state.foundChecks[location].some(c => c.startsWith("drive/"))) ||
+      // the world has a page and a proof is in 100AW
+      (getters.hasProof("worlds/100_acre_wood") &&
+        state.foundChecks[location].includes("other/torn_pages"))
     );
   },
 };

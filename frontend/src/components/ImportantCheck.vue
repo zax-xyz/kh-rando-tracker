@@ -40,6 +40,7 @@ export default class ImportantCheck extends Vue {
   @tracker.State items!: Items;
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.State checkLocations!: { [key: string]: string[] };
+  @tracker.Getter hasProof!: Function;
   @tracker.Action foundCheck!: Function;
   @tracker.Action undoCheck!: Function;
   @tracker.Action disable!: Function;
@@ -54,6 +55,15 @@ export default class ImportantCheck extends Vue {
     if (this.file !== "other/torn_pages" && this.items.all[this.file].cls !== "drive") {
       // only track hinted for pages and drives
       return 0;
+    }
+
+    if (
+      this.items.all[this.file].cls === "drive" &&
+      !this.checkLocations.length &&
+      this.hasProof("other/drive_form")
+    ) {
+      // if a proof is on a drive level then all forms must be hinted
+      return -1;
     }
 
     // return number of locations for this check that have been hinted
