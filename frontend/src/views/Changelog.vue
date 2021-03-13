@@ -3,6 +3,19 @@
     h1 Recent Update Changelog
 
     section
+      h2 Saturday 13 march 2021
+
+      .added
+        h3 Added
+        ul
+          li #[strong Forms and the worlds they were found in are now shown as hinted if a proof was found on drive levels], and similarly for #[strong torn pages]. This shows more inferred hinted hints. E.g. Proof of Connection was found on Wisdom Form level 2. Valor Form was found in Port Royal. Port Royal has a report that hints Beast's Castle. Since all forms must be hinted, then Port Royal must be hinted, and Beast's Castle is hence a hinted hint.
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed cross icon (middle-click) not showing on Normal Mode (Important Checks Mode OFF).
+
+    section
       h2 Saturday 6 March 2021
 
       .added

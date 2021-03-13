@@ -14,7 +14,7 @@ export default new Vuex.Store({
     drag: false,
     edit: false,
     version: "",
-    currVersion: "Saturday 6 March 2021",
+    currVersion: "Saturday 13 March 2021",
   },
   mutations: {
     toggleDrag(state) {
