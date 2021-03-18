@@ -9,6 +9,7 @@
         h3 Fixed
         ul
           li Fixed Co-Op mode not sending anything between everyone
+          li Fixed shift+click in Co-Op mode
 
     section
       h2 Saturday 13 march 2021
