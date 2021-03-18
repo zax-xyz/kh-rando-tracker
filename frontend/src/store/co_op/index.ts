@@ -46,23 +46,20 @@ const actions = {
       socket.send(payload.openData);
     });
 
-    socket.addEventListener("message", (e) => {
+    socket.addEventListener("message", e => {
       dispatch("handleMessage", { message: e.data });
     });
   },
 
-  sendClick(
-    {},
-    payload: { type: string; client: string; cell: string; offset: number }
-  ) {
-    if (!socket || payload.client) return;
+  sendClick({}, payload: { type: string; client: string; cell: string; offset: number }) {
+    if (!socket || payload.client !== "self") return;
 
     socket.send(
       JSON.stringify({
         type: payload.type,
         item: payload.cell,
         offset: payload.offset,
-      })
+      }),
     );
   },
 
@@ -116,7 +113,7 @@ const actions = {
             offset: msg.offset,
             shift: msg.shift,
           },
-          { root: true }
+          { root: true },
         );
         break;
 
@@ -128,16 +125,12 @@ const actions = {
             cell: msg.item,
             offset: msg.offset,
           },
-          { root: true }
+          { root: true },
         );
         break;
 
       case "user_disable":
-        commit(
-          "tracker/disable",
-          { client: msg.id, cell: msg.item },
-          { root: true }
-        );
+        commit("tracker/disable", { client: msg.id, cell: msg.item }, { root: true });
         break;
     }
   },

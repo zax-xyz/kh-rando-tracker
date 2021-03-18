@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
 
     section
+      h2 Thursday 18 March 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed Co-Op mode not sending anything between everyone
+
+    section
       h2 Saturday 13 march 2021
 
       .added
