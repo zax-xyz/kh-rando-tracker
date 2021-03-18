@@ -51,7 +51,10 @@ const actions = {
     });
   },
 
-  sendClick({}, payload: { type: string; client: string; cell: string; offset: number }) {
+  sendClick(
+    {},
+    payload: { type: string; client: string; cell: string; offset: number; shift: boolean },
+  ) {
     if (!socket || payload.client !== "self") return;
 
     socket.send(
@@ -59,6 +62,7 @@ const actions = {
         type: payload.type,
         item: payload.cell,
         offset: payload.offset,
+        shift: payload.shift,
       }),
     );
   },

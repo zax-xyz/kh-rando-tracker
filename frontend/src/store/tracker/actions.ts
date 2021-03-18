@@ -9,7 +9,11 @@ const actions: ActionTree<State, RootState> = {
     const item: Item = items[cell];
     if (item.disabled) return;
 
-    dispatch("co_op/sendClick", { type: "user_primary", client, cell, offset }, { root: true });
+    dispatch(
+      "co_op/sendClick",
+      { type: "user_primary", client, cell, offset, shift },
+      { root: true },
+    );
 
     var level = item.level;
     const data = Boolean(item.data);
