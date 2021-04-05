@@ -25,7 +25,7 @@
         input(
           ref="file"
           type="file"
-          accept=".txt,.hints"
+          accept=".txt,.hint"
           hidden
           @change="loadHints"
         )
