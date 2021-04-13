@@ -1,6 +1,6 @@
 import { GetterTree } from "vuex";
 
-import { Item, State } from "./state";
+import { Check, Item, State } from "./state";
 import { RootState } from "../types";
 
 export const getters: GetterTree<State, RootState> = {
@@ -10,6 +10,10 @@ export const getters: GetterTree<State, RootState> = {
 
   cell: state => (item: string): Item => {
     return state.items.all[item] ?? {};
+  },
+
+  cellWeight: state => (item: Check): number => {
+    return state.hintsType === "goaracle" ? item.goaracleScore : 1;
   },
 
   secondary: (_, getters) => (item: string): string | undefined => {

@@ -10,7 +10,7 @@
       )
         draggable.dragArea(
           v-for="name in row"
-          v-if="showWorld(name)"
+          v-if="shouldShowItem(name)"
           :style="worldRowStyle"
           :key="name"
           group="checks"
@@ -72,12 +72,26 @@
     )
       .check(
         v-for="name in row"
+        v-if="shouldShowItem(name)"
         :style="{ padding: `${settings.checkVerticalPadding || '2.5px'} 0` }"
       )
         ImportantCheck(
           :key="name"
           :file="name"
         )
+
+    .group.checks(
+      v-if="hintsLoaded && hintsType === 'goaracle'"
+    )
+      //-
+        this was the best way to get around the issue of not being able to escape quotes here
+        without creating a component data variable for it
+      button(
+        v-for="pool in [`Roxas's Choice`, `Riku's Choice`, `Kairi's Choice`, `Mickey's Choice`]"
+        @click="showAbilities(pool)"
+       ) {{ pool }}
+        br
+        | 0 / {{ goaraclePools[pool].score }}
 
     template(v-if="hintsAtBottom")
       span(v-if="hintMessage") {{ hintMessage }}
@@ -95,6 +109,7 @@ import ImportantCheck from "./ImportantCheck.vue";
 import {
   HintSetting,
   Items,
+  GoaraclePool,
   Location,
   State as TrackerState,
 } from "@/store/tracker_important/state";
@@ -117,6 +132,8 @@ export default class ImportantGrid extends Vue {
   @tracker.State("checks") numChecks!: number;
   @tracker.State hintMessage!: string;
   @tracker.State hintsLoaded!: boolean;
+  @tracker.State hintsType!: string;
+  @tracker.State goaraclePools!: { [key: string]: GoaraclePool };
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.State selectedLocation!: string;
   @tracker.Action foundCheck!: Function;
@@ -134,6 +151,12 @@ export default class ImportantGrid extends Vue {
   }
 
   get totalChecks(): number {
+    if (this.hintsType === "goaracle") {
+      return Object.values(this.goaraclePools)
+        .filter(p => p.enabled)
+        .reduce((x, y) => x + y.score, 0);
+    }
+
     let total = 51;
     Object.values(this.hintSettings).forEach((s: HintSetting) => {
       if (s.check && !s.enabled) {
@@ -201,13 +224,22 @@ export default class ImportantGrid extends Vue {
     };
   }
 
-  showWorld(location: string): boolean {
-    const hintKey = this.items.all[location].setting;
+  shouldShowItem(item: string): boolean {
+    if (
+      this.hintsLoaded &&
+      this.hintsType === "goaracle" &&
+      ["other/second_chance", "other/once_more"].includes(item)
+    ) {
+      // we have special popups for abilities for goaracle
+      return false;
+    }
+
+    const hintKey = this.items.all[item].setting;
     if (!hintKey) {
       return true;
     }
 
-    if (!this.hintsLoaded && location === "worlds/atlantica") {
+    if (!this.hintsLoaded && item === "worlds/atlantica") {
       return this.settings.atlantica;
     }
 
@@ -244,6 +276,11 @@ export default class ImportantGrid extends Vue {
     if (items.length === 0) return;
 
     this.$store.dispatch("tracker_important/undoCheck", { check: items[0], location });
+  }
+
+  showAbilities(pool: string) {
+    this.$store.commit("tracker_important/setGoaraclePool", pool);
+    this.$router.push("goaracleAbilities");
   }
 }
 </script>
@@ -284,4 +321,15 @@ label
 
 .locations .sortable-ghost
   display none
+
+button
+  margin-top .5em
+  // padding 15px
+  background rgba(255, 255, 255, .1)
+  box-shadow none
+  box-shadow 0 3px 20px -5px rgba(0, 0, 0, .15)
+
+  &:hover
+    background rgba(255, 255, 255, .15)
+    box-shadow 0 3px 25px -5px rgba(0, 0, 0, .3), 0 6px 15px -5px rgba(0, 0, 0, .13)
 </style>

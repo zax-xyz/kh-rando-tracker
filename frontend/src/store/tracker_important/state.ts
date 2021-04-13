@@ -33,6 +33,7 @@ export interface Location extends Item {
 
 export interface Check extends Item {
   levelsImportant: boolean;
+  goaracleScore: number;
 }
 
 interface Options {
@@ -58,6 +59,7 @@ const location = (options: Options): Location => ({
 
 const check = (options: Options): Check => ({
   levelsImportant: true,
+  goaracleScore: 1,
   ...item(options),
 });
 
@@ -141,32 +143,42 @@ const mapChecks = (keys: Array<string | [string, Options]>, defaults: Check) =>
 const checks = (): Array<{ [key: string]: Check }> => [
   {
     "other/secret_reports": check({
-      total: 13,
+      total: 14,
       setting: "Secret Ansem Reports",
       category: "reports",
+      goaracleScore: 15,
     }),
-    "other/torn_page": check({ total: 5, cls: "pages", setting: "Torn Pages" }),
+    "other/torn_page": check({ total: 5, cls: "pages", setting: "Torn Pages", goaracleScore: 33 }),
   },
 
   {
     ...mapChecks(
       ["magic/fire", "magic/blizzard", "magic/thunder"],
-      check({ total: 3, category: "magic", secondary: "secondary/duck", cls: "magic" }),
+      check({
+        total: 3,
+        category: "magic",
+        secondary: "secondary/duck",
+        cls: "magic",
+        goaracleScore: 33,
+      }),
     ),
     ...mapChecks(
       [["magic/cure", { setting: "Cure" }], "magic/reflect", "magic/magnet"],
-      check({ total: 3, category: "magic" }),
+      check({ total: 3, category: "magic", goaracleScore: 33 }),
     ),
   },
 
   {
     ...mapChecks(
       [
-        ["drive/valor", { secondary: "secondary/drive/jump" }],
-        ["drive/wisdom", { secondary: "secondary/drive/quick" }],
-        ["drive/limit", { secondary: "secondary/drive/dodge" }],
-        ["drive/master", { secondary: "secondary/drive/aerial" }],
-        ["drive/final", { secondary: "secondary/drive/glide", setting: "Final Form" }],
+        ["drive/valor", { secondary: "secondary/drive/jump", goaracleScore: 33 }],
+        ["drive/wisdom", { secondary: "secondary/drive/quick", goaracleScore: 33 }],
+        ["drive/limit", { secondary: "secondary/drive/dodge", goaracleScore: 25 }],
+        ["drive/master", { secondary: "secondary/drive/aerial", goaracleScore: 25 }],
+        [
+          "drive/final",
+          { secondary: "secondary/drive/glide", setting: "Final Form", goaracleScore: 25 },
+        ],
       ],
       check({
         total: 7,
@@ -175,6 +187,7 @@ const checks = (): Array<{ [key: string]: Check }> => [
         cls: "drive",
         levelsImportant: false,
         category: "forms",
+        goaracleSecondaryScore: 5,
       }),
     ),
   },
@@ -182,36 +195,111 @@ const checks = (): Array<{ [key: string]: Check }> => [
   {
     ...mapChecks(
       ["summons/chicken_little", "summons/genie", "summons/stitch", "summons/peter_pan"],
-      check({ total: 7, group: "summon", category: "summons", levelsImportant: false }),
+      check({
+        total: 7,
+        group: "summon",
+        category: "summons",
+        levelsImportant: false,
+        goaracleScore: 33,
+      }),
     ),
   },
 
   {
     ...mapChecks(
       ["other/second_chance", "other/once_more"],
-      check({ setting: "Second Chance & Once More", category: "scom" }),
+      check({ setting: "Second Chance & Once More", category: "scom", goaracleScore: 25 }),
     ),
-    "other/promise_charm": check({ setting: "Promise Charm", category: "charm" }),
+    "other/promise_charm": check({
+      setting: "Promise Charm",
+      category: "charm",
+      goaracleScore: 100,
+    }),
     ...mapChecks(
       ["other/proof_of_nonexistence", "other/proof_of_connection", "other/proof_of_tranquility"],
       check({
         secondary: ["bronze", "silver", "gold"].map(i => `secondary/crowns/${i}`),
         category: "proofs",
         cls: "proof",
+        goaracleScore: 100,
       }),
     ),
   },
 ];
 
+export interface Ability {
+  total: number;
+  level: number;
+}
+
+const ability = (): Ability => ({
+  total: 1,
+  level: 0,
+});
+
+const mapAbilities = (score: number, keys: Array<string | [string, number]>) => ({
+  score,
+  abilities: Object.fromEntries(
+    keys.map(k =>
+      // each element is either a string to be used as a key and given the defaults, or an array of
+      // the key and the default total, e.g. ["Scan", 2]
+      !Array.isArray(k) ? [k, ability()] : [k[0], { ...ability(), level: k[1] }],
+    ),
+  ),
+});
+
+const abilities = () => ({
+  "Roxas's Choice": mapAbilities(25, [
+    "Light and Dark",
+    ["Scan", 2],
+    "Guard",
+    "Aerial Recovery",
+    "Second Chance",
+    "Once More",
+    "Combo Master",
+    ["Finishing Plus", 3],
+    "Counterguard",
+  ]),
+  "Riku's Choice": mapAbilities(25, [
+    "Explosion",
+    "Guard Break",
+    "Flash Step",
+    "Slide Dash",
+    "Finishing Leap",
+    ["Combo Boost", 2],
+    "Slapshot",
+    "Vicinity Break",
+  ]),
+  "Kairi's Choice": mapAbilities(25, [
+    "Aerial Finish",
+    "Magnet Splash",
+    "Aerial Spiral",
+    "Aerial Dive",
+    "Horizontal Slash",
+    ["Air Combo Boost", 2],
+    ["Berserk Charge", 2],
+  ]),
+  "Mickey's Choice": mapAbilities(20, [
+    "Trinity Limit",
+    ["Negative Combo", 2],
+    ["Fire Boost", 2],
+    ["Blizzard Boost", 2],
+    ["Thunder Boost", 2],
+    ["Experience Boost", 2],
+  ]),
+});
+
 export interface Items {
   locations: string[][];
   checks: string[][];
+  abilities: { [key: string]: { score: number; abilities: { [key: string]: Ability } } };
   all: { [key: string]: Item };
 }
 
 const items = (): Items => ({
   locations: locations().map(l => Object.keys(l)),
   checks: checks().map(c => Object.keys(c)),
+  abilities: abilities(),
   all: Object.assign({}, ...locations(), ...checks()),
 });
 
@@ -255,6 +343,7 @@ const hintSettings = (): { [key: string]: HintSetting } => ({
     items: ["other/secret_reports"],
     check: true,
     value: 13,
+    enabled: false,
   }),
   Cure: hintSetting({ items: ["magic/cure"], check: true, value: 3 }),
   "Final Form": hintSetting({ items: ["drive/final"], check: true }),
@@ -264,7 +353,39 @@ const hintSettings = (): { [key: string]: HintSetting } => ({
     disable: true,
   }),
   "100 Acre Wood": hintSetting({ items: ["worlds/100_acre_wood"], disable: true }),
-  Atlantica: hintSetting({ items: ["worlds/atlantica"], show: false }),
+  Atlantica: hintSetting({ items: ["worlds/atlantica"], show: false, enabled: false }),
+});
+
+export interface GoaracleHint {
+  report: string;
+  location: string;
+  points: number;
+  pool: string;
+  found: boolean;
+  incorrectCounter: number;
+}
+
+export interface GoaraclePool {
+  score: number;
+  enabled: boolean;
+}
+
+const goaraclePool = (score: number): GoaraclePool => ({
+  score,
+  enabled: false,
+});
+
+const goaraclePools = (): { [key: string]: GoaraclePool } => ({
+  "Path of Light": goaraclePool(400),
+  "Goofy's Choice": goaraclePool(330),
+  "Donald's Choice": goaraclePool(330),
+  "Merlin's Choice": goaraclePool(292),
+  "Roxas's Choice": goaraclePool(325),
+  "Riku's Choice": goaraclePool(250),
+  "Kairi's Choice": goaraclePool(250),
+  "Mickey's Choice": goaraclePool(220),
+  "Yen Sid's Choice": goaraclePool(100),
+  Reports: goaraclePool(210),
 });
 
 const mapItems = (key: "locations" | "checks"): { [key: string]: string[] } =>
@@ -286,10 +407,16 @@ export const initialState = () => ({
   currentLocation: "",
   selectedLocation: "Free",
 
-  hints: [] as Hints,
   hintsLoaded: false,
+  hints: [] as Hints,
   hintSettings: hintSettings(),
+
+  goaracleHints: [] as GoaracleHint[],
+  goaraclePools: goaraclePools(),
+  currentGoaraclePool: "",
+
   hintMessage: "",
+  hintsType: "",
 });
 
 export const state = initialState();

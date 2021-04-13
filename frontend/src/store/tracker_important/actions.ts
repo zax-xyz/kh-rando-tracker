@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
 
-import { Check, Hints, Items, Item, State } from "./state";
+import { Check, GoaracleHint, Hint, Hints, Items, Item, State } from "./state";
 import { defaultLocations, locations } from "./codes";
 import { formatItem } from "@/util";
 import { RootState } from "../types";
@@ -42,7 +42,7 @@ export const actions: ActionTree<State, RootState> = {
     ) {
       // Don't increment check count if levels aren't important and we are levelling, but
       // increment if we are going down to 0
-      commit("incrementChecks", offset);
+      commit("incrementChecks", getters.cellWeight(item) * (offset < 0 ? -1 : 1));
     }
 
     if (level) {
@@ -88,7 +88,7 @@ export const actions: ActionTree<State, RootState> = {
     commit("disable", item);
   },
 
-  foundCheck({ commit, dispatch, state }, { check, location, shift = false }) {
+  foundCheck({ commit, dispatch, getters, state }, { check, location, shift = false }) {
     const item = state.items.all[check] as Check;
 
     if (item.level === item.total) {
@@ -109,13 +109,16 @@ export const actions: ActionTree<State, RootState> = {
     }
 
     const setting = item.setting;
-    if (setting && !state.hintSettings[setting].enabled) {
+    commit("setCheckLocation", { check, location });
+    if (state.hintsType === "jmsartee" && setting && !state.hintSettings[setting].enabled) {
       // if it is off in the hint settings, then don't increment checks
       return;
     }
 
-    commit("incrementLocationChecks", { location });
-    commit("setCheckLocation", { check, location });
+    commit("incrementLocationChecks", {
+      location,
+      offset: getters.cellWeight(item),
+    });
     dispatch("checkTotal", location);
 
     console.log(formatItem(check), "found in", formatItem(location));
@@ -133,19 +136,24 @@ export const actions: ActionTree<State, RootState> = {
   },
 
   undoCheck({ commit, dispatch, getters, rootState, state }, { check, location, shift = false }) {
-    const cell = getters.cell(check);
+    const cell: Check = getters.cell(check);
+    const weight = getters.cellWeight(cell);
 
     if (!cell.levelsImportant) {
       if (cell.level > 1) {
         if (location === "Free") {
-          dispatch("primary", { cell: check, offset: -1, shift: cell.opaque ? shift : true });
+          dispatch("primary", {
+            cell: check,
+            offset: -1,
+            shift: cell.opaque ? shift : true,
+          });
           console.log(formatItem(check), "unlevelled to", cell.level);
           return;
         }
 
         if (cell.opaque) {
           commit("setOpaque", { item: cell, opaque: false });
-          commit("incrementChecks", -1);
+          commit("incrementChecks", -weight);
         } else {
           dispatch("primary", { cell: check, offset: -1, shift: true });
         }
@@ -157,12 +165,12 @@ export const actions: ActionTree<State, RootState> = {
     }
 
     const setting = state.items.all[check].setting;
-    if (setting && !state.hintSettings[setting].enabled) {
+    if (state.hintsType === "jsmartee" && setting && !state.hintSettings[setting].enabled) {
       // if it is off in the hint settings, then don't decrement checks
       return;
     }
 
-    commit("incrementLocationChecks", { location, offset: -1 });
+    commit("incrementLocationChecks", { location, offset: -weight });
     commit("removeCheckLocation", { check, location });
 
     const locationCell = getters.cell(location);
@@ -183,37 +191,79 @@ export const actions: ActionTree<State, RootState> = {
     reader.readAsText(file);
 
     reader.onload = () => {
-      const csv = reader.result as string;
+      const data = reader.result as string;
+      const lines = data.split(/\r\n|\n/);
 
-      const lines = csv.split(/\r\n|\n/);
-      const hints: Hints = [];
+      if (file.name.toLowerCase().endsWith(".txt")) {
+        const hints: Hints = [];
 
-      const [reportValues, reportLocationAddresses] = [0, 1].map(i =>
-        lines[i].slice(0, -1).split("."),
-      );
+        const [reportValues, reportLocationAddresses] = [0, 1].map(i =>
+          lines[i].slice(0, -1).split("."),
+        );
 
-      reportValues.forEach((value, index) => {
-        const [location, checks] = value.split(",");
+        reportValues.forEach((value, index) => {
+          const [location, checks] = value.split(",");
 
-        hints.push({
-          report: getWorldByAddress(reportLocationAddresses[index]) || defaultLocations[index],
-          location: getWorldByAddress(location),
-          checks: parseInt(checks) - 32,
-          found: false,
-          incorrectCounter: 0,
+          hints.push({
+            report: getWorldByAddress(reportLocationAddresses[index]) || defaultLocations[index],
+            location: getWorldByAddress(location),
+            checks: parseInt(checks) - 32,
+            found: false,
+            incorrectCounter: 0,
+          });
         });
-      });
 
-      commit("setHints", hints);
+        commit("setHints", hints);
 
-      const settings = lines[2].split(" - ").slice(1, -1);
-      commit("setHintSettings", Object.fromEntries(settings.map(s => [s, true])));
+        const settings = lines[2].split(" - ").slice(1, -1);
+        commit("setHintSettings", Object.fromEntries(settings.map(s => [s, true])));
+
+        commit("setHintType", "jsmartee");
+      } else if (file.name.toLowerCase().endsWith(".goaracle")) {
+        const hints: GoaracleHint[] = [];
+
+        const pools = lines[0].slice(0, -1).split(",");
+
+        const [reportValues, reportLocationAddresses] = [2, 3].map(i =>
+          lines[i].slice(0, -1).split("."),
+        );
+
+        reportValues.forEach((value, index) => {
+          const [locationCode, pointsCode, poolCode] = value.split(",");
+          const points = parseInt(pointsCode) / 97;
+          const pool = parseInt(poolCode) - points * 53;
+
+          hints.push({
+            report: getWorldByAddress(reportLocationAddresses[index]) || defaultLocations[index],
+            location: getWorldByAddress(locationCode),
+            points,
+            pool: pools[pool],
+            found: false,
+            incorrectCounter: 0,
+          });
+        });
+
+        commit("setGoaracleHints", hints);
+        commit("setGoaraclePools", pools);
+        commit("setHintType", "goaracle");
+      }
     };
   },
 
   foundHint({ dispatch, commit, state }, index: number) {
-    const hint = state.hints[index];
-    commit("setLocationTotal", { location: hint.location, checks: hint.checks });
+    let hint, checks;
+    if (state.hintsType === "jsmartee") {
+      hint = state.hints[index] as Hint;
+      checks = hint.checks;
+    } else if (state.hintsType === "goaracle") {
+      hint = state.goaracleHints[index] as GoaracleHint;
+      checks = hint.points;
+    } else {
+      // unexpected hints type
+      return;
+    }
+
+    commit("setLocationTotal", { location: hint.location, checks: checks });
     dispatch("checkTotal", hint.location);
     commit("foundHint", index);
   },

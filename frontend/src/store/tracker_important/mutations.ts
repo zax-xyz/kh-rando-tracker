@@ -1,6 +1,6 @@
 import { MutationTree } from "vuex";
 
-import { Hints, Item, Location, State, initialState } from "./state";
+import { GoaracleHint, Hints, Item, Location, State, initialState } from "./state";
 
 export const mutations: MutationTree<State> = {
   setOpaque(_state, { item, opaque }: { item: Item; opaque: boolean }): void {
@@ -34,6 +34,25 @@ export const mutations: MutationTree<State> = {
         });
       }
     }
+  },
+
+  setGoaraclePools(state, pools: Set<string>) {
+    for (const pool of pools) {
+      state.goaraclePools[pool].enabled = true;
+    }
+  },
+
+  setGoaraclePool(state, pool: string) {
+    state.currentGoaraclePool = pool;
+  },
+
+  setGoaracleHints(state, hints: GoaracleHint[]) {
+    state.goaracleHints = hints;
+    state.hintsLoaded = true;
+  },
+
+  setHintType(state, type: string) {
+    state.hintsType = type;
   },
 
   setLocation(state, location: string): void {

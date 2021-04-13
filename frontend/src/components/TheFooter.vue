@@ -25,7 +25,7 @@
         input(
           ref="file"
           type="file"
-          accept=".txt"
+          accept=".txt, .goaracle"
           hidden
           @change="loadHints"
         )

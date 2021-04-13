@@ -21,6 +21,7 @@ import IconStyles from "@/views/IconStyles.vue";
 import EditItem from "@/views/EditItem.vue";
 
 import Reports from "@/views/Reports.vue";
+import GoaracleAbilities from "@/views/GoaracleAbilities.vue";
 
 Vue.use(VueRouter);
 
@@ -122,6 +123,11 @@ const routes: Array<RouteConfig> = [
     path: "/reports",
     meta: { title: "Select Report Found" },
     component: Reports,
+  },
+  {
+    path: "/goaracleAbilities",
+    meta: { title: "Select Ability" },
+    component: GoaracleAbilities,
   },
 ];
 
