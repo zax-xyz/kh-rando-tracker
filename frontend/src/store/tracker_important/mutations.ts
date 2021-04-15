@@ -1,6 +1,7 @@
 import { MutationTree } from "vuex";
 
-import { Hints, Item, Location, State, initialState } from "./state";
+import { Hints, Location, State, initialState } from "./state";
+import type { Item } from "../types";
 
 export const mutations: MutationTree<State> = {
   setOpaque(_state, { item, opaque }: { item: Item; opaque: boolean }): void {

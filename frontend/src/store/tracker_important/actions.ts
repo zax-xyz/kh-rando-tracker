@@ -1,9 +1,9 @@
-import { ActionTree } from "vuex";
+import type { ActionTree } from "vuex";
 
-import { Check, Hints, Items, Item, Location, State } from "./state";
+import type { Check, Hints, Items, Location, State } from "./state";
 import { defaultLocations, locations } from "./codes";
 import { formatItem } from "@/util";
-import { RootState } from "../types";
+import type { Item, RootState } from "../types";
 
 export const actions: ActionTree<State, RootState> = {
   primary(

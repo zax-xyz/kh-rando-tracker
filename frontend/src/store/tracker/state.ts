@@ -1,40 +1,16 @@
 import { IconStyle } from "../settings";
+import type { Item as BaseItem } from "../types";
 
 const CHEST = "other/chest";
 
-export interface Item {
-  total: number;
-  level: number;
-  opaque: boolean;
-
-  // for icons displayed in the corner activated by right-click
-  secondaryLevel: number;
-  secondary?: string | string[];
-  secondaryTotal: number;
-  secondaryMax: boolean;
-
-  disabled: boolean;
-
+export type Item = BaseItem & {
   data?: string;
-
-  cls?: string; // just used for styling the specific items/groups of items
-  group?: string; // used for levelling multiple items at once, e.g. summons
-
-  // the category to be used for customising icon styles, e.g. "worlds", "drive", etc.
-  category?: string;
-  // the IconStyle to exclude for this item. used because some items don't have icons in
-  // a particular style despite all others in the category having ones. e.g. STT and 'Classic'
-  categoryExclude?: IconStyle;
 
   // set in the loop below
   id?: number;
 }
 
-interface Options {
-  [key: string]: any;
-}
-
-const item = (options: Options): Item => ({
+const item = (options: Partial<Item>): Item => ({
   total: 1,
   level: 0,
   opaque: options.level ? true : false,
@@ -45,7 +21,7 @@ const item = (options: Options): Item => ({
   ...options,
 });
 
-const mapItems = (keys: Array<string | [string, Options]>, defaults: Item) =>
+const mapItems = (keys: Array<string | [string, Partial<Item>]>, defaults: Item) =>
   Object.fromEntries(
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
@@ -209,7 +185,7 @@ export const items: { [key: string]: Item } = {
   }),
   "worlds/underdrome_cups": item({
     total: 5,
-    seconadry: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
+    secondary: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
       c => `olympus_coliseum/${c}`,
     ),
     category: "cups",
@@ -275,16 +251,16 @@ for (const [i, item] of Object.values(items).entries()) {
   item.id = i;
 }
 
-export const state = {
-  clients: {
-    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
-  },
-};
-
 export type State = {
   clients: {
     [key: string]: typeof items;
   };
+};
+
+export const state: State = {
+  clients: {
+    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
+  },
 };
 
 [

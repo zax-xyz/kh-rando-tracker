@@ -24,7 +24,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 
 import ImportantCell from "./ImportantCell.vue";
-import { Check, Item, Items, Location } from "@/store/tracker_important/state";
+import type { Check, Items, Location } from "@/store/tracker_important/state";
+import type { Item } from "@/store/types";
 
 const tracker = namespace("tracker_important");
 const settings = namespace("settings");

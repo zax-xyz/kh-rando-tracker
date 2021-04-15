@@ -1,47 +1,16 @@
 import { IconStyle } from "../settings";
+import type { Item } from "../types";
 
-export interface Item {
-  total: number;
-  level: number;
-  opaque: boolean;
-
-  // for icons displayed in the corner activated by right-click
-  secondaryLevel: number;
-  secondary?: string | string[];
-  secondaryTotal: number;
-  secondaryMax: boolean;
-
-  disabled: boolean;
-
-  cls?: string; // just used for styling the specific items/groups of items
-  group?: string; // used for levelling multiple items at once, e.g. summons
-
-  // the corresponding hint setting key for this item
-  setting?: string;
-
-  // the category to be used for customising icon styles, e.g. "worlds", "drive", etc.
-  category?: string;
-  // the IconStyle to exclude for this item. used because some items don't have icons in
-  // a particular style despite all others in the category having ones. e.g. STT and 'Classic'
-  categoryExclude?: IconStyle;
-}
-
-export interface Location extends Item {
+export type Location = Item & {
   checks: number;
   totalChecks: number;
   other?: string | string[];
   otherLevel: number;
 }
 
-export interface Check extends Item {
-  levelsImportant: boolean;
-}
+export type Check = Item & { levelsImportant: boolean };
 
-interface Options {
-  [key: string]: any;
-}
-
-const item = (options: Options): Item => ({
+const item = (options: Partial<Item>): Item => ({
   total: 1,
   level: 0,
   opaque: options.level ? true : false,
@@ -52,14 +21,14 @@ const item = (options: Options): Item => ({
   ...options,
 });
 
-const location = (options: Options): Location => ({
+const location = (options: Partial<Item> & Pick<Location, "other">): Location => ({
   checks: 0,
   totalChecks: -1,
   otherLevel: 0,
   ...item(options),
 });
 
-const check = (options: Options): Check => ({
+const check = (options: Partial<Check>): Check => ({
   levelsImportant: true,
   ...item(options),
 });
@@ -224,7 +193,7 @@ const locations = (): Array<{ [key: string]: Location }> => [
   },
 ];
 
-const mapChecks = (keys: Array<string | [string, Options]>, defaults: Check) =>
+const mapChecks = (keys: Array<string | [string, Partial<Check>]>, defaults: Check) =>
   Object.fromEntries(
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
@@ -310,7 +279,7 @@ const items = (): Items => ({
   all: Object.assign({}, ...locations(), ...checks()),
 });
 
-export interface Hint {
+export type Hint = {
   report: string;
   location: string;
   checks: number;
@@ -320,7 +289,7 @@ export interface Hint {
 
 export type Hints = Array<Hint>;
 
-export interface HintSetting {
+export type HintSetting = {
   items: string[];
   disable: boolean;
   check: boolean;
@@ -329,7 +298,7 @@ export interface HintSetting {
   show: boolean;
 }
 
-const hintSetting = (options: { items: string[] } & Options): HintSetting => ({
+const hintSetting = (options: { items: string[] } & Partial<HintSetting>): HintSetting => ({
   disable: false,
   enabled: true,
   value: 1,
