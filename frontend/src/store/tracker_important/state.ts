@@ -1,16 +1,14 @@
 import { IconStyle } from "../settings";
 import type { Item } from "../types";
 
-export interface Location extends Item {
+export type Location = Item & {
   checks: number;
   totalChecks: number;
   other?: string | string[];
   otherLevel: number;
 }
 
-export interface Check extends Item {
-  levelsImportant: boolean;
-}
+export type Check = Item & { levelsImportant: boolean };
 
 const item = (options: Partial<Item>): Item => ({
   total: 1,
@@ -281,7 +279,7 @@ const items = (): Items => ({
   all: Object.assign({}, ...locations(), ...checks()),
 });
 
-export interface Hint {
+export type Hint = {
   report: string;
   location: string;
   checks: number;
@@ -291,7 +289,7 @@ export interface Hint {
 
 export type Hints = Array<Hint>;
 
-export interface HintSetting {
+export type HintSetting = {
   items: string[];
   disable: boolean;
   check: boolean;

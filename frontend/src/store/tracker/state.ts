@@ -3,7 +3,7 @@ import type { Item as BaseItem } from "../types";
 
 const CHEST = "other/chest";
 
-export interface Item extends BaseItem {
+export type Item = BaseItem & {
   data?: string;
 
   // set in the loop below

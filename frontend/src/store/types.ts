@@ -1,6 +1,6 @@
 import type { IconStyle } from "./settings";
 
-export interface Item {
+export type Item = {
   total: number;
   level: number;
   opaque: boolean;
