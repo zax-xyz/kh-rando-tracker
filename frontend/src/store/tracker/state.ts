@@ -209,7 +209,7 @@ export const items: { [key: string]: Item } = {
   }),
   "worlds/underdrome_cups": item({
     total: 5,
-    seconadry: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
+    secondary: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
       c => `olympus_coliseum/${c}`,
     ),
     category: "cups",
