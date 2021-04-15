@@ -1,7 +1,7 @@
-import { GetterTree } from "vuex";
+import type { GetterTree } from "vuex";
 
-import { Item, State } from "./state";
-import { RootState } from "../types";
+import type { State } from "./state";
+import type { Item, RootState } from "../types";
 
 export const getters: GetterTree<State, RootState> = {
   isLocation: state => (item: string): boolean => {

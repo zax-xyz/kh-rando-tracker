@@ -1,30 +1,10 @@
 import { IconStyle } from "../settings";
+import type { Item as BaseItem } from "../types";
 
 const CHEST = "other/chest";
 
-export interface Item {
-  total: number;
-  level: number;
-  opaque: boolean;
-
-  // for icons displayed in the corner activated by right-click
-  secondaryLevel: number;
-  secondary?: string | string[];
-  secondaryTotal: number;
-  secondaryMax: boolean;
-
-  disabled: boolean;
-
+export interface Item extends BaseItem {
   data?: string;
-
-  cls?: string; // just used for styling the specific items/groups of items
-  group?: string; // used for levelling multiple items at once, e.g. summons
-
-  // the category to be used for customising icon styles, e.g. "worlds", "drive", etc.
-  category?: string;
-  // the IconStyle to exclude for this item. used because some items don't have icons in
-  // a particular style despite all others in the category having ones. e.g. STT and 'Classic'
-  categoryExclude?: IconStyle;
 
   // set in the loop below
   id?: number;
