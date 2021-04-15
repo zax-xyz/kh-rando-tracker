@@ -37,11 +37,7 @@ export interface Check extends Item {
   levelsImportant: boolean;
 }
 
-interface Options {
-  [key: string]: any;
-}
-
-const item = (options: Options): Item => ({
+const item = (options: Partial<Item>): Item => ({
   total: 1,
   level: 0,
   opaque: options.level ? true : false,
@@ -52,14 +48,14 @@ const item = (options: Options): Item => ({
   ...options,
 });
 
-const location = (options: Options): Location => ({
+const location = (options: Partial<Item> & Pick<Location, "other">): Location => ({
   checks: 0,
   totalChecks: -1,
   otherLevel: 0,
   ...item(options),
 });
 
-const check = (options: Options): Check => ({
+const check = (options: Partial<Check>): Check => ({
   levelsImportant: true,
   ...item(options),
 });
@@ -224,7 +220,7 @@ const locations = (): Array<{ [key: string]: Location }> => [
   },
 ];
 
-const mapChecks = (keys: Array<string | [string, Options]>, defaults: Check) =>
+const mapChecks = (keys: Array<string | [string, Partial<Check>]>, defaults: Check) =>
   Object.fromEntries(
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
@@ -329,7 +325,7 @@ export interface HintSetting {
   show: boolean;
 }
 
-const hintSetting = (options: { items: string[] } & Options): HintSetting => ({
+const hintSetting = (options: { items: string[] } & Partial<HintSetting>): HintSetting => ({
   disable: false,
   enabled: true,
   value: 1,

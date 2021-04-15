@@ -30,11 +30,7 @@ export interface Item {
   id?: number;
 }
 
-interface Options {
-  [key: string]: any;
-}
-
-const item = (options: Options): Item => ({
+const item = (options: Partial<Item>): Item => ({
   total: 1,
   level: 0,
   opaque: options.level ? true : false,
@@ -45,7 +41,7 @@ const item = (options: Options): Item => ({
   ...options,
 });
 
-const mapItems = (keys: Array<string | [string, Options]>, defaults: Item) =>
+const mapItems = (keys: Array<string | [string, Partial<Item>]>, defaults: Item) =>
   Object.fromEntries(
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
@@ -275,16 +271,16 @@ for (const [i, item] of Object.values(items).entries()) {
   item.id = i;
 }
 
-export const state = {
-  clients: {
-    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
-  },
-};
-
 export type State = {
   clients: {
     [key: string]: typeof items;
   };
+};
+
+export const state: State = {
+  clients: {
+    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
+  },
 };
 
 [
