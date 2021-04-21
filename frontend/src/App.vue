@@ -5,7 +5,7 @@
     :style="mainStyle"
   )
     BaseGrid(
-      v-if="!importantMode"
+      v-if="!importantMode || kh1fmMode"
       v-for="(_, client) in clients"
       :key="client"
       :clientId="client"
@@ -86,6 +86,10 @@ export default class extends Vue {
 
   get importantMode(): boolean {
     return this.$store.state.settings.importantChecksMode;
+  }
+
+  get kh1fmMode(): boolean {
+    return this.$store.state.settings.kh1fmMode;
   }
 
   get clients(): object {

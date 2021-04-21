@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 import tracker from "./tracker";
+import tracker_1fm from "./tracker_1fm";
 import { settings } from "./settings";
 import co_op from "./co_op";
 import tracker_important from "./tracker_important";
@@ -31,14 +32,15 @@ export default new Vuex.Store({
   },
   modules: {
     tracker,
+    tracker_important,
+    tracker_1fm,
     settings,
     co_op,
-    tracker_important,
   },
   strict: process.env.NODE_ENV !== "production",
   plugins: [
     createPersistedState({
-      paths: ["settings", "tracker_important", "tracker.clients.self", "version"],
+      paths: ["settings", "tracker_important", "tracker_1fm", "tracker.clients.self", "version"],
     }),
   ],
 });

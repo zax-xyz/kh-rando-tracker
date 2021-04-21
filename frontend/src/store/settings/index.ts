@@ -14,6 +14,7 @@ const state = {
 
   customDefaults: {} as { [key: string]: { [key: string]: any } },
   importantChecksMode: true,
+  kh1fmMode: false,
 
   iconStyles: {
     worlds: {
@@ -131,6 +132,10 @@ const mutations = {
 
   setImportantChecksMode(state: State, enabled: boolean): void {
     state.importantChecksMode = enabled;
+  },
+
+  setKh1fmMode(state: State, enabled: boolean): void {
+    state.kh1fmMode = enabled;
   },
 
   setIconStyle(state: State, payload: { name: string; value: IconStyle }): void {

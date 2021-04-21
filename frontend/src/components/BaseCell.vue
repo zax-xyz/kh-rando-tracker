@@ -44,16 +44,37 @@ export default class BaseCell extends Vue {
 
   cls: string = this.cell.cls ?? null;
 
+  get kh1fmMode(): boolean {
+    return this.$store.state.settings.kh1fmMode;
+  }
+
+  get tracker() {
+    if (this.kh1fmMode) {
+      return this.$store.state.tracker_1fm;
+    }
+
+    return this.$store.state.tracker;
+  }
+
+  get trackerString(): string {
+    if (this.kh1fmMode) return "tracker_1fm";
+    return "tracker";
+  }
+
+  trackerGetter(getter: string) {
+    return this.$store.getters[`${this.trackerString}/${getter}`];
+  }
+
   get cell(): { [key: string]: any } {
-    return this.$store.getters["tracker/cell"](this.client, this.file);
+    return this.$store.getters[`${this.trackerString}/cell`](this.client, this.file);
   }
 
   get secondaryFile(): string {
-    return this.$store.getters["tracker/secondary"](this.client, this.file);
+    return this.$store.getters[`${this.trackerString}/secondary`](this.client, this.file);
   }
 
   get secondaryNumber(): string {
-    return this.$store.getters["tracker/secondaryNumber"](this.client, this.file);
+    return this.$store.getters[`${this.trackerString}/secondaryNumber`](this.client, this.file);
   }
 
   get customDefaults() {
@@ -65,7 +86,7 @@ export default class BaseCell extends Vue {
   }
 
   styledIcon(file: string): string {
-    const cell = this.$store.state.tracker.clients.self[file];
+    const cell = this.tracker.clients.self[file];
     const style = this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
@@ -74,7 +95,7 @@ export default class BaseCell extends Vue {
 
     switch (style) {
       case "Minimal":
-        return `minimal/${file}`;
+        return `minimal/${cell.minimal ?? file}`;
       case "Classic":
         return `legacy/${file}`;
       default:
@@ -90,7 +111,7 @@ export default class BaseCell extends Vue {
   }
 
   dispatch(mutation: string, offset: number = 1, shift: boolean = false): void {
-    this.$store.dispatch(mutation, {
+    this.$store.dispatch(`${this.trackerString}/${mutation}`, {
       client: this.client,
       cell: this.file,
       offset,
@@ -115,17 +136,17 @@ export default class BaseCell extends Vue {
     switch (event.button) {
       case 0:
         // Left Click
-        this.dispatch("tracker/primary", offset, event.shiftKey);
+        this.dispatch("primary", offset, event.shiftKey);
         break;
 
       case 2:
         // Right Click
-        this.dispatch("tracker/secondary", offset);
+        this.dispatch("secondary", offset);
         break;
 
       case 1:
         // Middle Click
-        this.dispatch("tracker/disable");
+        this.dispatch("disable");
         break;
     }
   }
@@ -138,7 +159,7 @@ export default class BaseCell extends Vue {
 
     // Increment/decrement
     const offset = -Math.sign(event.deltaY);
-    this.dispatch("tracker/primary", offset, event.shiftKey);
+    this.dispatch("primary", offset, event.shiftKey);
   }
 }
 </script>

@@ -34,16 +34,26 @@ import BaseCell from "./BaseCell.vue";
 export default class BaseGrid extends Vue {
   @Prop({ type: String, required: false, default: "self" }) clientId!: string;
 
-  items: Array<string> = Object.keys(this.$store.state.tracker.clients[this.clientId]);
   dragging: boolean = false;
 
   get disableShadows(): boolean {
     return this.$store.state.settings.disableShadows;
   }
 
+  get items(): Array<string> {
+    const tracker = this.$store.state.settings.kh1fmMode
+      ? this.$store.state.tracker_1fm
+      : this.$store.state.tracker;
+
+    return Object.keys(tracker.clients[this.clientId]);
+  }
+
   get itemNums(): Array<number> {
-    const itemNums = this.$store.state.settings.itemNums;
-    if (itemNums.length) return itemNums;
+    console.log(this.items);
+    if (!this.$store.state.settings.kh1fmMode) {
+      const itemNums = this.$store.state.settings.itemNums;
+      if (itemNums.length) return itemNums;
+    }
 
     return [...Array(Object.keys(this.items).length).keys()];
   }

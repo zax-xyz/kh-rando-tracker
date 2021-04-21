@@ -31,6 +31,10 @@
         )
 
       .buttons
+        span KH1FM Mode
+        SwitchSlider(v-model="kh1fmMode")
+
+      .buttons
         button(@click="popout") Popout window
         button(@click="hideFooter") Hide Footer
 </template>
@@ -72,6 +76,14 @@ export default class TheFooter extends Vue {
     this.$store.commit("settings/setImportantChecksMode", toggled);
   }
 
+  get kh1fmMode(): boolean {
+    return this.$store.state.settings.kh1fmMode;
+  }
+
+  set kh1fmMode(toggled: boolean) {
+    this.$store.commit("settings/setKh1fmMode", toggled);
+  }
+
   selectHints() {
     this.fileElem.click();
   }
@@ -84,11 +96,7 @@ export default class TheFooter extends Vue {
   }
 
   popout(): void {
-    window.open(
-      "#/",
-      "",
-      "left=0,top=0,width=600,height=1200,menubar=no,toolbar=no,scrollbars=no"
-    );
+    window.open("#/", "", "left=0,top=0,width=600,height=1200,menubar=no,toolbar=no,scrollbars=no");
   }
 
   hideFooter(): void {
@@ -96,7 +104,9 @@ export default class TheFooter extends Vue {
   }
 
   reset(): void {
-    if (this.importantMode) {
+    if (this.kh1fmMode) {
+      this.$store.commit("tracker_1fm/resetState");
+    } else if (this.importantMode) {
       this.$store.commit("tracker_important/resetState");
     } else {
       this.$store.commit("tracker/resetState");
