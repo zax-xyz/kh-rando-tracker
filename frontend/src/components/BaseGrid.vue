@@ -12,7 +12,7 @@
   )
     BaseCell(
       v-for="i in itemNums"
-      :key="i"
+      :key="(kh1fmMode ? 'kh2' : 'kh1') + items[i]"
       :client="clientId"
       :file="items[i]"
       @remove="remove(i)"
@@ -40,6 +40,10 @@ export default class BaseGrid extends Vue {
     return this.$store.state.settings.disableShadows;
   }
 
+  get kh1fmMode(): boolean {
+    return this.$store.state.settings.kh1fmMode;
+  }
+
   get items(): Array<string> {
     const tracker = this.$store.state.settings.kh1fmMode
       ? this.$store.state.tracker_1fm
@@ -49,7 +53,6 @@ export default class BaseGrid extends Vue {
   }
 
   get itemNums(): Array<number> {
-    console.log(this.items);
     if (!this.$store.state.settings.kh1fmMode) {
       const itemNums = this.$store.state.settings.itemNums;
       if (itemNums.length) return itemNums;

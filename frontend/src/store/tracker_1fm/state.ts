@@ -88,11 +88,16 @@ export const items: { [key: string]: Item } = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/100_acre_wood": item({
+    total: 6,
     minimal: "worlds/100_acre_wood",
+    secondary: "100_acre_wood/torn_pages",
+    secondaryTotal: 5,
+    cls: "hundred_acre",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/olympus_cups": item({
+    total: 4,
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -101,6 +106,11 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": item({
     total: 27,
     level: 1,
+    numbers: [
+      ...[...Array(15).keys()].map(i => i + 1),
+      ...[...Array(6).keys()].map(i => 20 + i * 5),
+      ...[...Array(6).keys()].map(i => 50 + i * 10),
+    ],
     secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
     cls: "levels",
     category: "levels",
@@ -117,7 +127,7 @@ export const items: { [key: string]: Item } = {
   ...mapItems(
     [
       "summons/simba",
-      "summons/genie",
+      "summons/genie_kh1",
       "summons/bambi",
       "summons/dumbo",
       "summons/tinkerbell",

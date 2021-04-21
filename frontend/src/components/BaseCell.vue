@@ -14,7 +14,7 @@
       transition(name="fade-up")
         img.number(
           v-if="cell.total > 1 && cell.level > 1"
-          :src="`img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
+          :src="`img/progression/numbers/${number}.webp`"
         )
       transition(name="fade-up")
         img.nobody(
@@ -67,6 +67,14 @@ export default class BaseCell extends Vue {
 
   get cell(): { [key: string]: any } {
     return this.$store.getters[`${this.trackerString}/cell`](this.client, this.file);
+  }
+
+  get number(): number {
+    if (!this.cell.numbers) {
+      return this.cell.level;
+    }
+
+    return this.cell.numbers[this.cell.level - 1];
   }
 
   get secondaryFile(): string {

@@ -3,6 +3,7 @@ import type { IconStyle } from "./settings";
 export type Item = {
   total: number;
   level: number;
+  numbers?: number[];
   opaque: boolean;
 
   // for icons displayed in the corner activated by right-click
@@ -24,7 +25,7 @@ export type Item = {
   // the IconStyle to exclude for this item. used because some items don't have icons in
   // a particular style despite all others in the category having ones. e.g. STT and 'Classic'
   categoryExclude?: IconStyle;
-}
+};
 
 export interface RootState {
   drag: boolean;

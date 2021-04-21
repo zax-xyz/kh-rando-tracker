@@ -196,6 +196,12 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": item({
     total: 27,
     level: 1,
+    numbers: [
+      ...[...Array(15).keys()].map(i => i + 1),
+      ...[...Array(6).keys()].map(i => 20 + i * 5),
+      ...[...Array(5).keys()].map(i => 50 + i * 10),
+      99,
+    ],
     secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
     cls: "levels",
     category: "levels",
@@ -248,104 +254,6 @@ export const items: { [key: string]: Item } = {
 };
 
 for (const [i, item] of Object.values(items).entries()) {
-  item.id = i;
-}
-
-export const kh1fmItems: { [key: string]: Item } = {
-  // Worlds
-  "worlds/kh1/destiny_islands": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/traverse_town": item({
-    total: 4,
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/wonderland": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/olympus_coliseum": item({
-    secondary: "hollow_bastion/sephiroth",
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/deep_jungle": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/agrabah": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/monstro": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/halloween_town": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/atlantica": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/neverland": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/hollow_bastion": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/end_of_the_world": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/100_acre_wood": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-  "worlds/kh1/olympus_cups": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
-  }),
-
-  // Level
-  "other/sora's_level": item({
-    total: 27,
-    level: 1,
-    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
-    cls: "levels",
-    category: "levels",
-  }),
-
-  // Magic
-  ...mapItems(
-    ["magic/fire", "magic/blizzard", "magic/thunder", "magic/cure"],
-    item({ total: 3, category: "magic", secondary: "other/duck", cls: "magic" }),
-  ),
-  ...mapItems(["magic/aero", "magic/gravity"], item({ total: 3, category: "magic" })),
-
-  // Summons
-  ...mapItems(
-    [
-      "summons/simba",
-      "summons/genie",
-      "summons/bambi",
-      "summons/dumbo",
-      "summons/tinker_bell",
-      "summons/mushu",
-    ],
-    item({ category: "summons" }),
-  ),
-
-  // Other
-  "other/ansem's reports": item({ total: 13, category: "reports" }),
-};
-
-for (const [i, item] of Object.values(kh1fmItems).entries()) {
   item.id = i;
 }
 
