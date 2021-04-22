@@ -25,7 +25,7 @@
       v-if="cell.otherLevel"
       key="other"
     )
-      img(:src="`img/progression/${otherFile}.webp`")
+      img(:src="`/img/progression/${otherFile}.webp`")
 
     template(v-slot:after)
       transition(name="fade-in")

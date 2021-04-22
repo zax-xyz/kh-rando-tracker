@@ -6,7 +6,7 @@
     @wheel="handleWheel"
   )
     img.icon(
-      :src="`img/${styledIcon(file)}.webp`"
+      :src="`/img/${styledIcon(file)}.webp`"
       :class="{ opaque: cell.opaque, disabled: cell.disabled }"
     )
 
@@ -14,24 +14,24 @@
       transition(name="fade-up")
         img.number(
           v-if="cell.total > 1 && cell.level > 1"
-          :src="`img/progression/numbers/${number}.webp`"
+          :src="`/img/progression/numbers/${number}.webp`"
         )
       transition(name="fade-up")
         img.nobody(
           v-if="cell.data && cell.level > cell.total"
-          :src="`img/progression/${file.split('/').slice(-1)[0]}/${dataFile}.webp`"
+          :src="`/img/progression/${file.split('/').slice(-1)[0]}/${dataFile}.webp`"
         )
       transition(name="fade-up")
         .secondary(v-if="cell.secondaryLevel")
-          img(:src="`img/progression/${secondaryFile}.webp`")
+          img(:src="`/img/progression/${secondaryFile}.webp`")
           transition(name="fade-up")
             img.number(
               v-if="secondaryNumber"
-              :src="`img/progression/numbers/${secondaryNumber}.webp`"
+              :src="`/img/progression/numbers/${secondaryNumber}.webp`"
             )
 
     transition(name="fade-cross")
-      img.cross(v-if="cell.disabled", src="img/minimal/other/cross.webp")
+      img.cross(v-if="cell.disabled", src="/img/minimal/other/cross.webp")
 </template>
 
 <script lang="ts">

@@ -3,7 +3,7 @@
     .links(ref="links")
       router-link(
         v-for="(name, to, index) in links"
-        :to="to"
+        :to="{ name: to }"
         :style="{ minWidth: minWidth }"
         :key="index"
         @click.native="scroll(index)"

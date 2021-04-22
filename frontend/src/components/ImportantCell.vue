@@ -8,7 +8,7 @@
       :style="{ width: width }"
      )
       img.icon(
-        :src="`img/${styledIcon(file)}.webp`"
+        :src="`/img/${styledIcon(file)}.webp`"
         :class="{ opaque: cell.opaque, disabled: cell.disabled }"
       )
 
@@ -22,11 +22,11 @@
           v-if="cell.secondaryLevel"
           key="secondary"
         )
-          img(:src="`img/progression/${secondaryFile}.webp`")
+          img(:src="`/img/progression/${secondaryFile}.webp`")
           transition(name="fade-up")
             img.number(
               v-if="secondaryNumber"
-              :src="`img/progression/numbers/${secondaryNumber}.webp`"
+              :src="`/img/progression/numbers/${secondaryNumber}.webp`"
             )
 
         .report(
@@ -35,16 +35,16 @@
           key="report"
         )
           img.icon(
-            :src="`img/progression/other/secret_reports.webp`"
+            :src="`/img/progression/other/secret_reports.webp`"
           )
           transition(name="fade-up")
             img.number(
               v-if="Math.abs(hinted) > 1"
-              :src="`img/progression/numbers/${Math.abs(hinted)}.webp`"
+              :src="`/img/progression/numbers/${Math.abs(hinted)}.webp`"
             )
 
       transition(name="fade-cross")
-        img.cross(v-if="cell.disabled", src="img/minimal/other/cross.webp")
+        img.cross(v-if="cell.disabled", src="/img/minimal/other/cross.webp")
 
       slot(name="after")
 </template>
