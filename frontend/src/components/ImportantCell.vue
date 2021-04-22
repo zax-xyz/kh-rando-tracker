@@ -144,7 +144,7 @@ export default class ImportantCell extends Vue {
     height 38%
     width auto
 
-    &[src='img/progression/numbers/max.webp']
+    &[src='/img/progression/numbers/max.webp']
       left 55%
 
   .drive &
