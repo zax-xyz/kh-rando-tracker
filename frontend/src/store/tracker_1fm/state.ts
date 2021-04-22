@@ -48,7 +48,6 @@ export const items: { [key: string]: Item } = {
   }),
   "worlds/kh1/olympus_coliseum": item({
     data: ["ice_titan", "sephiroth"],
-    minimal: "worlds/olympus_coliseum",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -142,7 +141,11 @@ export const items: { [key: string]: Item } = {
   ),
 
   // Other
-  "other/ansem's_reports": item({ total: 13, minimal: "other/secret_reports", category: "reports" }),
+  "other/ansem's_reports": item({
+    total: 13,
+    minimal: "other/secret_reports",
+    category: "reports",
+  }),
 };
 
 for (const [i, item] of Object.values(items).entries()) {
