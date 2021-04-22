@@ -76,7 +76,7 @@ export const items: { [key: string]: Item } = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/neverland": item({
-    data: "neverland/phantom",
+    data: "phantom",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
