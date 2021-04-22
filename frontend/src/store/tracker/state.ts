@@ -4,7 +4,7 @@ import type { Item as BaseItem } from "../types";
 const CHEST = "other/chest";
 
 export type Item = BaseItem & {
-  data?: string;
+  data?: string[] | string;
 
   // set in the loop below
   id?: number;

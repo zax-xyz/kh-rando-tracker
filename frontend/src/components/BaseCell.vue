@@ -18,8 +18,8 @@
         )
       transition(name="fade-up")
         img.nobody(
-          v-if="cell.data && cell.level === cell.total + 1"
-          :src="`img/progression/${file.split('/')[1]}/${cell.data}.webp`"
+          v-if="cell.data && cell.level > cell.total"
+          :src="`img/progression/${file.split('/').slice(-1)[0]}/${dataFile}.webp`"
         )
       transition(name="fade-up")
         .secondary(v-if="cell.secondaryLevel")
@@ -75,6 +75,11 @@ export default class BaseCell extends Vue {
     }
 
     return this.cell.numbers[this.cell.level - 1];
+  }
+
+  get dataFile(): string {
+    if (typeof this.cell.data === "string") return this.cell.data;
+    return this.cell.data[this.cell.level - this.cell.total - 1];
   }
 
   get secondaryFile(): string {

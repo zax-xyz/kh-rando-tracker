@@ -16,8 +16,9 @@ const actions: ActionTree<State, RootState> = {
     );
 
     var level = item.level;
-    const data = Boolean(item.data);
-    const total = item.total + +data;
+    const total =
+      item.total +
+      (typeof item.data === "string" ? 1 : typeof item.data === "object" ? item.data.length : 0);
     const end = total + 1;
 
     // Increment level with wrapping overflow based on total,
