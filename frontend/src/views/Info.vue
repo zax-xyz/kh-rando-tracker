@@ -17,10 +17,10 @@ import NavBar from "@/components/NavBar.vue";
 })
 export default class Info extends Vue {
   links = {
-    about: "About",
-    help: "Help",
-    thanks: "Thanks",
-    changelog: "Changelog",
+    "/info/about": "About",
+    "/info/help": "Help",
+    "/info/thanks": "Thanks",
+    "/info/changelog": "Changelog",
   };
 }
 </script>

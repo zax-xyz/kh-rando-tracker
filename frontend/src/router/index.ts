@@ -36,13 +36,11 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: "about",
-        name: "about",
         meta: { title: "About" },
         component: About,
       },
       {
         path: "help",
-        name: "help",
         meta: { title: "Help" },
         component: Help,
         children: [
@@ -64,13 +62,11 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: "thanks",
-        name: "thanks",
         meta: { title: "Thanks" },
         component: Thanks,
       },
       {
         path: "changelog",
-        name: "changelog",
         meta: { title: "Changelog" },
         component: Changelog,
       },

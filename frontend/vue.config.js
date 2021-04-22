@@ -8,7 +8,6 @@ module.exports = {
       title: 'KH2FM Item Tracker',
     },
   },
-  publicPath: '',
   css: {
     loaderOptions: {
       css: {
