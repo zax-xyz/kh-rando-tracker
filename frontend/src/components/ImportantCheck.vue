@@ -8,7 +8,7 @@
    )
     img.number(
       v-if="cell.total > 1 && cell.level > 1"
-      :src="`img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
+      :src="`/img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
       key="number"
     )
 
@@ -16,7 +16,7 @@
       v-if="showLocation"
       key="location"
     )
-      img(:src="`img/progression/worlds/${location}.webp`")
+      img(:src="`/img/progression/worlds/${location}.webp`")
 </template>
 
 <script lang="ts">
