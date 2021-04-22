@@ -82,7 +82,7 @@ export const items: { [key: string]: Item } = {
   }),
   "worlds/kh1/hollow_bastion": item({
     data: "xemnas",
-    secondary: ["riku", "maleficent", "riku_ansem", "chernabog"].map(i => `hollow_bastion/${i}`),
+    secondary: ["riku", "maleficent", "riku_ansem", "behemoth"].map(i => `hollow_bastion/${i}`),
     minimal: "worlds/hollow_bastion",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
