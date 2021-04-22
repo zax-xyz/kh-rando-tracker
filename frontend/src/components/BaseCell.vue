@@ -70,11 +70,12 @@ export default class BaseCell extends Vue {
   }
 
   get number(): number {
+    const level = Math.min(this.cell.total, this.cell.level);
     if (!this.cell.numbers) {
-      return this.cell.level;
+      return level;
     }
 
-    return this.cell.numbers[this.cell.level - 1];
+    return this.cell.numbers[level - 1];
   }
 
   get dataFile(): string {
