@@ -118,9 +118,11 @@ export default class BaseCell extends Vue {
   }
 
   get itemStyle(): object {
+    const width = 100 / (this.$store.state.settings.columns || 5);
     return {
-      width: `${100 / (this.$store.state.settings.columns || 5)}%`,
-      padding: this.$store.state.settings.padding || "5px",
+      width: `${width}%`,
+      height: 0,
+      padding: `${width / 2}% ${this.$store.state.settings.padding || "7.5px"}`,
     };
   }
 

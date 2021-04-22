@@ -22,12 +22,12 @@
 
     .row.grid
       input(
-        placeholder="5px"
+        placeholder="7.5px"
         v-model="settings.padding"
       )
       div
         p.name Item padding
-        BaseTooltip Pre-1.4 versions used 7.5px
+        BaseTooltip Pre-2.2 versions used 7.5px
 
     .row.grid
       button(
