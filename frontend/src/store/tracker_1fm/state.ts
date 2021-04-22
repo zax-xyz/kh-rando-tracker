@@ -142,7 +142,7 @@ export const items: { [key: string]: Item } = {
   ),
 
   // Other
-  "other/ansem's_reports": item({ total: 13, category: "reports" }),
+  "other/ansem's_reports": item({ total: 13, minimal: "other/secret_reports", category: "reports" }),
 };
 
 for (const [i, item] of Object.values(items).entries()) {
