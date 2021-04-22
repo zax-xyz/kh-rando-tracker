@@ -47,7 +47,7 @@ export const items: { [key: string]: Item } = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/olympus_coliseum": item({
-    secondary: "hollow_bastion/sephiroth",
+    secondary: ["ice_titan", "sephiroth"].map(i => `olympus_coliseum/${i}`),
     minimal: "worlds/olympus_coliseum",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
@@ -58,6 +58,7 @@ export const items: { [key: string]: Item } = {
   }),
   "worlds/kh1/agrabah": item({
     minimal: "worlds/agrabah",
+    secondary: "agrabah/kurt_zisa",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -75,15 +76,18 @@ export const items: { [key: string]: Item } = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/neverland": item({
+    secondary: "neverland/phantom",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/hollow_bastion": item({
+    secondary: ["riku", "maleficent", "riku_ansem", "xemnas"].map(i => `hollow_bastion/${i}`),
     minimal: "worlds/hollow_bastion",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/end_of_the_world": item({
+    secondary: ["behemoth", "final_rest", "chernabog"].map(i => `end_of_the_world/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
