@@ -132,7 +132,7 @@ export const items: { [key: string]: Item } = {
   ...mapItems(
     [
       "summons/simba",
-      "summons/genie_kh1",
+      ["summons/genie_kh1", { minimal: "summons/genie" }],
       "summons/bambi",
       "summons/dumbo",
       "summons/tinkerbell",
