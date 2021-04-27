@@ -36,8 +36,8 @@ import ModalView from "./components/ModalView.vue";
 export default class extends Vue {
   @Watch("$route", { immediate: true })
   onRouteChange(to: Route, from: Route): void {
-    if (to.meta.title) document.title = `${to.meta.title} | KH2FM Item Tracker`;
-    else document.title = "KH2FM Item Tracker";
+    if (to.meta.title) document.title = `${to.meta.title} | KH Item Tracker`;
+    else document.title = "KH Item Tracker";
   }
 
   created() {

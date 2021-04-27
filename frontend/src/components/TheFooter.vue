@@ -1,7 +1,7 @@
 <template lang="pug">
   footer
     .container
-      .info Kingdom Hearts 2 Final Mix Item Tracker - Version {{ version }}
+      .info KH1 &amp; KH2 Rando Tracker - Version {{ version }}
 
       .buttons
         router-link(

@@ -3,6 +3,24 @@
     h1 Recent Update Changelog
 
     section
+      h2 Friday 27 April 2021
+      p Some changes may require you to Reset Tracker
+
+      .added
+        h3 Added
+        ul
+          li #[strong Added a KH1 Mode!] Thanks to Televo for creating the icons for this and helping design it. Toggle the "KH1FM Mode" switch at the bottom of the page to enable it.
+
+      .changed
+        h3 Changed
+        ul
+          li We have rebranded with a more generic name, since this is no longer focused on just KH2FM.
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed KH2FM cups right-click not working in non-important checks mode.
+
       h2 Thursday 18 March 2021
 
       .fixed

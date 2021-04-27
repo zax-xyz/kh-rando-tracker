@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    p This is a tracker intended for use with the #[a(href="https://randomizer.valaxor.com" target="_blank") Kingdom Hearts 2 Final Mix Randomizer] by #[router-link(to="thanks") Valaxor], for the #[a(href="https://docs.google.com/document/d/1GYjEnrM_TIk7qyO75clPLYD-_nP5wTR7K6SE-Wn-QCg/edit" target="_blank") Garden of Assemblage (GoA) Mod] by #[router-link(to="thanks") Sonicshadowsilver2].
+    p This is a tracker intended for use with the #[a(href="https://github.com/Denhonator/KHPCSpeedrunTools/tree/main/1FMMods" target="_blank") Kingdom Hearts 1 Final Mix Randomizer] by Denhonator and #[a(href="https://randomizer.valaxor.com" target="_blank") Kingdom Hearts 2 Final Mix Randomizer] by #[router-link(to="thanks") Valaxor], for the #[a(href="https://docs.google.com/document/d/1GYjEnrM_TIk7qyO75clPLYD-_nP5wTR7K6SE-Wn-QCg/edit" target="_blank") Garden of Assemblage (GoA) Mod] by #[router-link(to="thanks") Sonicshadowsilver2].
 
     p It allows the tracking of progress such as world completion, drive forms, magic, etc. For a more detailed explanation, see #[router-link(to="help") Help].
 
