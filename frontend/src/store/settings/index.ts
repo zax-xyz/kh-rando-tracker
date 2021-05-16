@@ -82,6 +82,16 @@ const state = {
       options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
+    dalmatians: {
+      title: "Dalmatians",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    trinities: {
+      title: "Trinities",
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
   } as { [key: string]: { title: string; options: IconStyle[]; value: IconStyle } },
 
   // normal mode. kept outside in the root to remain backwards-compatible with old user settings

@@ -146,6 +146,17 @@ export const items: { [key: string]: Item } = {
     minimal: "other/secret_reports",
     category: "reports",
   }),
+
+  "other/dalmatians": item({
+    total: 33,
+    numbers: [...Array(33).keys()].map(i => (i + 1) * 3),
+    category: "dalmatians",
+  }),
+
+  ...mapItems(
+    ["trinities/blue", "trinities/red", "trinities/green", "trinities/yellow", "trinities/white"],
+    item({ category: "trinities" }),
+  ),
 };
 
 for (const [i, item] of Object.values(items).entries()) {
