@@ -3,6 +3,19 @@
     h1 Recent Update Changelog
 
     section
+      h2 Sunday 16 May 2021
+
+      .added
+        h3 Added
+        ul
+          li #[strong Added dalmations and trinities to KH1 mode]. Thanks to Televo for this. As always, minimal versions are available through the settings.
+
+      .changed
+        h3 Changed
+        ul
+          li No longer shows the "Important Checks Mode" switch and "Upload Hints" button in KH1 mode.
+
+    section
       h2 Friday 27 April 2021
       p Some changes may require you to Reset Tracker
 
@@ -30,7 +43,7 @@
           li Fixed shift+click in Co-Op mode
 
     section
-      h2 Saturday 13 march 2021
+      h2 Saturday 13 March 2021
 
       .added
         h3 Added

@@ -12,7 +12,9 @@
         ) {{ title(route) }}
         button(@click="reset") Reset Tracker
 
-      .buttons
+      .buttons(
+        v-if="!kh1fmMode"
+      )
         span Important Check Mode
         SwitchSlider(
           v-model="importantMode"
