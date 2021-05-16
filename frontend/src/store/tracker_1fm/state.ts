@@ -154,7 +154,13 @@ export const items: { [key: string]: Item } = {
   }),
 
   ...mapItems(
-    ["trinities/blue", "trinities/red", "trinities/green", "trinities/yellow", "trinities/white"],
+    [
+      ["trinities/blue", { total: 17 }],
+      ["trinities/red", { total: 6 }],
+      ["trinities/green", { total: 9 }],
+      ["trinities/yellow", { total: 4 }],
+      ["trinities/white", { total: 10 }],
+    ],
     item({ category: "trinities" }),
   ),
 };
