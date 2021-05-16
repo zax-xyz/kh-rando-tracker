@@ -6,12 +6,13 @@ export type Location = Item & {
   totalChecks: number;
   other?: string | string[];
   otherLevel: number;
-}
+};
 
 export type Check = Item & { levelsImportant: boolean };
 
 const item = (options: Partial<Item>): Item => ({
   total: 1,
+  showFirst: false,
   level: 0,
   opaque: options.level ? true : false,
   secondaryTotal: options.secondary ? 1 : 0,
@@ -285,7 +286,7 @@ export type Hint = {
   checks: number;
   found: boolean;
   incorrectCounter: number;
-}
+};
 
 export type Hints = Array<Hint>;
 
@@ -296,7 +297,7 @@ export type HintSetting = {
   value: number;
   enabled: boolean;
   show: boolean;
-}
+};
 
 const hintSetting = (options: { items: string[] } & Partial<HintSetting>): HintSetting => ({
   disable: false,

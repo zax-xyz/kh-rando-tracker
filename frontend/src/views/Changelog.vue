@@ -14,6 +14,7 @@
         h3 Changed
         ul
           li No longer shows the "Important Checks Mode" switch and "Upload Hints" button in KH1 mode.
+          li No longer show the 1 on Sora's levels beneath the actual level.
 
     section
       h2 Friday 27 April 2021

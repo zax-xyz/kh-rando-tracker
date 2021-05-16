@@ -13,6 +13,7 @@ export type Item = BaseItem & {
 
 const item = (options: Partial<Item>): Item => ({
   total: 1,
+  showFirst: false,
   level: 0,
   opaque: options.level ? true : false,
   secondaryTotal: options.secondary ? 1 : 0,
@@ -110,6 +111,7 @@ export const items: { [key: string]: Item } = {
   "other/sora's_level": item({
     total: 27,
     level: 1,
+    showFirst: true,
     numbers: [
       ...[...Array(15).keys()].map(i => i + 1),
       ...[...Array(6).keys()].map(i => 20 + i * 5),
@@ -149,6 +151,7 @@ export const items: { [key: string]: Item } = {
 
   "other/dalmatians": item({
     total: 33,
+    showFirst: true,
     numbers: [...Array(33).keys()].map(i => (i + 1) * 3),
     category: "dalmatians",
   }),

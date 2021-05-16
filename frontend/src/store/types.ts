@@ -3,6 +3,7 @@ import type { IconStyle } from "./settings";
 export type Item = {
   total: number;
   level: number;
+  showFirst: boolean;
   numbers?: number[];
   opaque: boolean;
 

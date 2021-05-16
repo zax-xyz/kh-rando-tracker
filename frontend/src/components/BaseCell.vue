@@ -13,7 +13,7 @@
     template(v-if="!cell.disabled")
       transition(name="fade-up")
         img.number(
-          v-if="cell.total > 1 && cell.level > 1"
+          v-if="cell.total > 1 && cell.level > 1 || (cell.showFirst && cell.level)"
           :src="`/img/progression/numbers/${number}.webp`"
         )
       transition(name="fade-up")
