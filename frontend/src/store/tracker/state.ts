@@ -36,7 +36,9 @@ export const items: { [key: string]: Item } = {
   // Worlds
   "worlds/simulated_twilight_town": item({
     data: "roxas",
-    secondary: ["computer_room", "pod_room"].map(i => `simulated_twilight_town/${i}`),
+    secondary: ["twilight_thorn", "struggle", "computer_room", "pod_room"].map(
+      i => `simulated_twilight_town/${i}`,
+    ),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
