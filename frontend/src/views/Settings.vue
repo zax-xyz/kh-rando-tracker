@@ -22,6 +22,7 @@ export default class Settings extends Vue {
     general: "General",
     icons: "Icon Styles",
     normal: "Normal",
+    kh1: "KH1",
     important: "Important Checks Mode",
   };
 }

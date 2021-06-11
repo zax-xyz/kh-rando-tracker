@@ -16,6 +16,7 @@ const HelpImportant = () => import("@/views/HelpImportant.vue");
 const SettingsGeneral = () => import("@/views/SettingsGeneral.vue");
 const SettingsNormal = () => import("@/views/SettingsNormal.vue");
 const SettingsImportant = () => import("@/views/SettingsImportant.vue");
+const SettingsKh1 = () => import("@/views/SettingsKh1.vue");
 
 const IconStyles = () => import("@/views/IconStyles.vue");
 const EditItem = () => import("@/views/EditItem.vue");
@@ -110,6 +111,11 @@ const routes: Array<RouteConfig> = [
         path: "important",
         meta: { title: "Important Checks Mode Settings" },
         component: SettingsImportant,
+      },
+      {
+        path: "kh1",
+        meta: { title: "KH1 Settings" },
+        component: SettingsKh1,
       },
     ],
   },

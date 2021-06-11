@@ -1,0 +1,91 @@
+<template lang="pug">
+  div
+    .row.grid
+      SwitchSlider(v-model="settings.expandRaftSupplies")
+      p.name Expand Raft Supplies
+
+    .row.grid
+      SwitchSlider(v-model="show.worlds")
+      p.name Show Worlds
+
+    .row.grid
+      SwitchSlider(v-model="show.cups")
+      p.name Show Cups
+
+    .row.grid
+      SwitchSlider(v-model="show.levels")
+      p.name Show Levels
+
+    .row.grid
+      SwitchSlider(v-model="show.magic")
+      p.name Show Magic
+
+    .row.grid
+      SwitchSlider(v-model="show.summons")
+      p.name Show Summons
+
+    .row.grid
+      SwitchSlider(v-model="show.reports")
+      p.name Show Reports
+
+    .row.grid
+      SwitchSlider(v-model="show.dalmations")
+      p.name Show Dalmations
+
+    .row.grid
+      SwitchSlider(v-model="show.trinities")
+      p.name Show Trinities
+
+    .row.grid
+      SwitchSlider(v-model="show.jackInTheBox")
+      p.name Show Jack-in-the-box
+
+    .row.grid
+      SwitchSlider(v-model="show.crystalTrident")
+      p.name Show Crystal Trident
+
+    .row.grid
+      SwitchSlider(v-model="show.libraryBooks")
+      p.name Show Library Books
+</template>
+
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+
+import BaseTooltip from "@/components/BaseTooltip.vue";
+import SwitchSlider from "@/components/SwitchSlider.vue";
+import { Game, State } from "@/store/settings";
+
+@Component({
+  components: {
+    BaseTooltip,
+    SwitchSlider,
+  },
+})
+export default class SettingsNormal extends Vue {
+  settings: State[Game.KH1] = { ...this.$store.state.settings[Game.KH1] };
+  show: State[Game.KH1]["show"] = { ...this.$store.state.settings[Game.KH1].show };
+
+  get drag(): boolean {
+    return this.$store.state.drag;
+  }
+
+  @Watch("settings", { deep: true })
+  onSettingsChanged(): void {
+    this.$store.commit("settings/setKh1Settings", this.settings);
+  }
+
+  @Watch("show", { deep: true })
+  onShowChanged(): void {
+    this.$store.commit("settings/setKh1Show", this.show);
+  }
+
+  toggleDrag() {
+    this.$store.commit("toggleDrag");
+  }
+
+  reset() {
+    this.$store.commit("settings/resetNums");
+  }
+}
+</script>

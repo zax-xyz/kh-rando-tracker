@@ -4,6 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 
 import tracker from "./tracker";
 import tracker_1fm from "./tracker_1fm";
+import tracker_other from "./tracker_other";
 import { settings } from "./settings";
 import co_op from "./co_op";
 import tracker_important from "./tracker_important";
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     tracker,
     tracker_important,
     tracker_1fm,
+    tracker_other,
     settings,
     co_op,
   },

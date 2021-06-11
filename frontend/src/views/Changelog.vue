@@ -3,6 +3,25 @@
     h1 Recent Update Changelog
 
     section
+      h2 Friday 11 May 2021
+
+      .added
+        h3 Added
+
+        ul
+          li #[strong Added all key items to KH1 mode]. Thanks to Televo for all of the icons for these.
+          li #[strong Added settings to hide different categories of icons in KH1 mode]. There is also a #[strong toggle] to #[strong expand the Destiny Islands raft supplies] (1 grouped icon vs 8 individual icons).
+          li #[strong Added CoM, Days, BBS, Coded, DDD, and KH3]. Thanks to Televo for the relevant icons here again!
+
+      .changed
+        h3 Changed
+
+        ul
+          li To better accomodate the new changes, no longer uses a KH1 mode toggle, but a #[strong dropdown menu to select the game] instead.
+          li Now #[strong only shows the icon style settings relevant to the current game] in Settings &gt; Icon Style. This screen should be somewhat less cluttered now.
+          li Minor style changes in the modal menus.
+
+    section
       h2 Sunday 16 May 2021
 
       .added

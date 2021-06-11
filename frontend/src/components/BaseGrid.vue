@@ -12,7 +12,8 @@
   )
     BaseCell(
       v-for="i in itemNums"
-      :key="(kh1fmMode ? 'kh2' : 'kh1') + items[i]"
+      v-if="shouldShow(items[i])"
+      :key="game + items[i]"
       :client="clientId"
       :file="items[i]"
       @remove="remove(i)"
@@ -24,6 +25,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import draggable from "vuedraggable";
 
 import BaseCell from "./BaseCell.vue";
+import { Item } from "@/store/types";
+import { Game } from "@/store/settings";
 
 @Component({
   components: {
@@ -44,12 +47,23 @@ export default class BaseGrid extends Vue {
     return this.$store.state.settings.kh1fmMode;
   }
 
-  get items(): Array<string> {
-    const tracker = this.$store.state.settings.kh1fmMode
-      ? this.$store.state.tracker_1fm
-      : this.$store.state.tracker;
+  get game(): Game {
+    return this.$store.state.settings.game;
+  }
 
-    return Object.keys(tracker.clients[this.clientId]);
+  get tracker() {
+    switch (this.game) {
+      case Game.KH1:
+        return this.$store.state.tracker_1fm.clients[this.clientId];
+      case Game.KH2:
+        return this.$store.state.tracker.clients[this.clientId];
+      default:
+        return this.$store.state.tracker_other.clients[this.clientId][this.game];
+    }
+  }
+
+  get items(): Array<string> {
+    return Object.keys(this.tracker);
   }
 
   get itemNums(): Array<number> {
@@ -100,6 +114,32 @@ export default class BaseGrid extends Vue {
     }
 
     return style;
+  }
+
+  shouldShow(name: string) {
+    const item: Item = this.tracker[name];
+    const { category, show, dontShow } = item;
+    const settings = this.$store.state.settings?.[this.game];
+
+    let shouldShow = true;
+    if (category !== undefined) {
+      const showSetting: boolean | undefined = this.$store.state.settings?.[this.game]?.show?.[
+        category
+      ];
+      shouldShow = showSetting === undefined || showSetting;
+
+      if (!shouldShow) {
+        return false;
+      }
+    }
+
+    if (show) {
+      shouldShow = settings[show];
+    } else if (dontShow) {
+      shouldShow = !settings[dontShow];
+    }
+
+    return shouldShow;
   }
 
   remove(index: number): void {

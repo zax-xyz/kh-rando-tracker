@@ -4,13 +4,13 @@
     @contextmenu="(e) => e.preventDefault()"
     :style="mainStyle"
   )
+    ImportantGrid(v-if="game === Game.KH2_IC")
     BaseGrid(
-      v-if="!importantMode || kh1fmMode"
+      v-else
       v-for="(_, client) in clients"
       :key="client"
       :clientId="client"
     )
-    ImportantGrid(v-else)
   TheFooter(v-if="footer")
   ModalView
 </template>
@@ -24,6 +24,7 @@ const BaseGrid = () => import("./components/BaseGrid.vue");
 const ImportantGrid = () => import("./components/ImportantGrid.vue");
 import TheFooter from "./components/TheFooter.vue";
 import ModalView from "./components/ModalView.vue";
+import { Game } from "@/store/settings";
 
 @Component({
   components: {
@@ -72,6 +73,10 @@ export default class extends Vue {
     }
   }
 
+  get Game() {
+    return Game;
+  }
+
   get mainStyle(): object {
     if (!this.footer) {
       return {
@@ -88,8 +93,8 @@ export default class extends Vue {
     return this.$store.state.settings.importantChecksMode;
   }
 
-  get kh1fmMode(): boolean {
-    return this.$store.state.settings.kh1fmMode;
+  get game(): Game {
+    return this.$store.state.settings.game;
   }
 
   get clients(): object {

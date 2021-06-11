@@ -50,8 +50,11 @@ nav
 a
   position relative
   height 40px
-  padding-top .5em
+  padding .5em .5em 0
+  margin 0 .125em
   flex 1
+  background rgba(255, 255, 255, .015)
+  border-radius 3px 3px 0 0
   text-align center
   font-size 1.1em
   text-decoration none

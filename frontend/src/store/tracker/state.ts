@@ -19,6 +19,7 @@ const item = (options: Partial<Item>): Item => ({
   secondaryMax: false,
   secondaryLevel: 0,
   disabled: false,
+  isMinimal: false,
   ...options,
 });
 
