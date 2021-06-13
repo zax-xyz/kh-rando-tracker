@@ -128,7 +128,7 @@ async def main(websocket, _):
 
             await dispatch(websocket, json.dumps(message))
     except Exception as e:
-        if not isinstance(e, websockets.exceptions.ConnectionClosedError):
+        if not isinstance(e, websockets.exceptions.ConnectionClosed):
             traceback.print_exc()
     finally:
         # Client disconnected from server
