@@ -127,8 +127,9 @@ async def main(websocket, _):
             message['id'] = USERS[websocket]['id']
 
             await dispatch(websocket, json.dumps(message))
-    except:
-        traceback.print_exc()
+    except Exception as e:
+        if not isinstance(e, websockets.exceptions.ConnectionClosedError):
+            traceback.print_exc()
     finally:
         # Client disconnected from server
         if websocket not in USERS:
