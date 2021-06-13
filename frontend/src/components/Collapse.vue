@@ -21,7 +21,8 @@ import smoothReflow from "vue-smooth-reflow";
 })
 export default class Collapse extends Vue {
   @Prop(String) name!: string;
-  show: boolean = false;
+  @Prop({ type: String, default: "" }) match!: string;
+  show: boolean = this.name.toLowerCase() === this.match;
 
   toggle(): void {
     this.show = !this.show;
