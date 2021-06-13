@@ -1,45 +1,48 @@
-var socket: WebSocket;
+import { ActionTree, MutationTree } from "vuex";
+import { RootState } from "../types";
+import { Game } from "../settings";
+
+let socket: WebSocket;
 
 const state = {
   room: "",
   joined: false,
   error: "",
+  single: false,
 };
 
 type State = typeof state;
 
-const mutations = {
-  // @ts-ignore
-  setRoom(state: State, payload: { room: string }) {
-    state.room = payload.room;
+const mutations: MutationTree<State> = {
+  setRoom(state: State, room: string) {
+    state.room = room;
   },
 
-  // @ts-ignore
-  setJoined(state: State, payload: { joined: boolean }) {
-    state.joined = payload.joined;
+  setJoined(state: State, joined: boolean) {
+    state.joined = joined;
   },
 
-  // @ts-ignore
-  setError(state: State, payload: { error: string }) {
-    state.error = payload.error;
+  setError(state: State, error: string) {
+    state.error = error;
+  },
+
+  setSingle(state: State, single: boolean) {
+    state.single = single;
   },
 };
 
-const actions = {
-  // @ts-ignore
+const actions: ActionTree<State, RootState> = {
   connect({ commit, dispatch }, payload: { openData: string }) {
     if (socket)
       // Ensure old connections are closed
       socket.close(1000);
 
-    commit("setJoined", { joined: false });
-    commit("setError", { error: "" });
+    commit("setJoined", false);
+    commit("setError", "");
 
-    socket = new WebSocket("wss://tracker-ws.zaxu.xyz");
+    socket = new WebSocket(process.env.VUE_APP_WS as string);
     socket.addEventListener("error", () => {
-      commit("setError", {
-        error: "Could not connect to server. (Server may be down)",
-      });
+      commit("setError", "Could not connect to server. (Server may be down)");
     });
 
     socket.addEventListener("open", () => {
@@ -67,55 +70,60 @@ const actions = {
     );
   },
 
-  // @ts-ignore
   join({ dispatch }, payload: { room: string }) {
     dispatch("connect", {
       openData: JSON.stringify({ type: "join_room", room: payload.room }),
     });
   },
 
-  // @ts-ignore
-  create({ dispatch }, payload: { size: number }) {
+  create({ commit, dispatch }, payload: { size: number; single: boolean }) {
+    commit("setSingle", payload.single);
     dispatch("connect", {
-      openData: JSON.stringify({ type: "create_room", size: payload.size }),
+      openData: JSON.stringify({ type: "create_room", size: payload.size, single: payload.single }),
     });
   },
 
-  // @ts-ignore
-  handleMessage({ commit, dispatch }, payload: { message: string }) {
+  handleMessage({ commit, dispatch, rootState, state }, payload: { message: string }) {
     const msg = JSON.parse(payload.message);
+    const game: Game = (<any>rootState).settings.game;
+    const tracker =
+      game === Game.KH1 ? "tracker_1fm" : game === Game.KH2 ? "tracker" : "tracker_other";
+
+    const client = state.single ? "self" : msg.id;
 
     switch (msg.type) {
       case "room_created":
-        commit("setRoom", { room: msg.id });
-        commit("setJoined", { joined: true });
+        commit("setRoom", msg.id);
+        commit("setJoined", true);
         break;
 
       case "room_joined":
-        commit("setRoom", { room: msg.id });
-        commit("setJoined", { joined: true });
+        commit("setRoom", msg.id);
+        commit("setJoined", true);
+        commit("setSingle", msg.single ?? false);
         break;
 
       case "user_joined":
-        commit("tracker/addClient", { client: msg.id }, { root: true });
+        commit(`${tracker}/addClient`, { client: msg.id }, { root: true });
         break;
 
       case "user_left":
-        commit("tracker/removeClient", { client: msg.id }, { root: true });
+        commit(`${tracker}/removeClient`, { client: msg.id }, { root: true });
         break;
 
       case "error":
-        commit("setError", { error: msg.message });
+        commit("setError", msg.message);
         break;
 
       case "user_primary":
         dispatch(
-          "tracker/primary",
+          `${tracker}/primary`,
           {
-            client: msg.id,
+            client,
             cell: msg.item,
             offset: msg.offset,
             shift: msg.shift,
+            remote: true,
           },
           { root: true },
         );
@@ -123,18 +131,19 @@ const actions = {
 
       case "user_secondary":
         dispatch(
-          "tracker/secondary",
+          `${tracker}/secondary`,
           {
-            client: msg.id,
+            client,
             cell: msg.item,
             offset: msg.offset,
+            remote: true,
           },
           { root: true },
         );
         break;
 
       case "user_disable":
-        commit("tracker/disable", { client: msg.id, cell: msg.item }, { root: true });
+        commit(`${tracker}/disable`, { client, cell: msg.item, remote: true }, { root: true });
         break;
     }
   },

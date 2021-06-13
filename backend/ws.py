@@ -2,9 +2,11 @@
 import asyncio
 import json
 import random
+import signal
 import string
 import traceback
 import uuid
+from datetime import datetime
 
 import websockets
 
@@ -12,6 +14,28 @@ ROOMS = {}
 USERS = {}
 
 CHARS = string.ascii_lowercase + string.digits
+
+
+def handler(signum, frame):
+    print('Open rooms:', len(ROOMS))
+    print('Active clients:', len(USERS))
+    print('Rooms:', json.dumps(
+        {
+            k: {
+                'clients': len(v['users']),
+                'max': v['size'],
+                'created': v['created'],
+            } for k, v in ROOMS.items()
+        },
+        indent=2
+    ))
+
+
+signal.signal(signal.SIGUSR1, handler)
+
+
+def current_time():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 async def dispatch(websocket, message):
@@ -55,6 +79,7 @@ async def main(websocket, _):
             await websocket.send(json.dumps({
                 'type': 'room_joined',
                 'id': data['room'],
+                'single': room['single']
             }))
 
             # Tell the other users in the room about the user joining
@@ -84,17 +109,22 @@ async def main(websocket, _):
                     # imagine not having do-while loops
                     break
 
+            time = current_time()
+
             # Save room and user
             ROOMS[room] = {
                 'name': room,
                 'size': size,
                 'users': {websocket},
+                'single': data.get('single', False),
+                'created': time,
             }
             USERS[websocket] = {
                 'room': ROOMS[room],
                 'id': str(uuid.uuid4()),
             }
-            print('Room created:', room)
+
+            print(time, 'Room created:', room)
 
             await websocket.send(json.dumps({
                 'type': 'room_created',
@@ -107,8 +137,9 @@ async def main(websocket, _):
             message['id'] = USERS[websocket]['id']
 
             await dispatch(websocket, json.dumps(message))
-    except:
-        traceback.print_exc()
+    except Exception as e:
+        if not isinstance(e, websockets.exceptions.ConnectionClosed):
+            traceback.print_exc()
     finally:
         # Client disconnected from server
         if websocket not in USERS:
@@ -130,7 +161,8 @@ async def main(websocket, _):
             # If no more users in the room, close it
             name = room['name']
             del ROOMS[name]
-            print('Room closed:', name)
+            print(current_time(), 'Room closed:', name)
+            print('Open rooms:', len(ROOMS))
 
 
 loop = asyncio.get_event_loop()

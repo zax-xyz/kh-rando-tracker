@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { Game } from "@/store/settings";
 
 @Component
 export default class BaseCell extends Vue {
@@ -44,21 +45,19 @@ export default class BaseCell extends Vue {
 
   cls: string = this.cell.cls ?? null;
 
-  get kh1fmMode(): boolean {
-    return this.$store.state.settings.kh1fmMode;
-  }
-
-  get tracker() {
-    if (this.kh1fmMode) {
-      return this.$store.state.tracker_1fm;
-    }
-
-    return this.$store.state.tracker;
+  get game(): Game {
+    return this.$store.state.settings.game;
   }
 
   get trackerString(): string {
-    if (this.kh1fmMode) return "tracker_1fm";
-    return "tracker";
+    switch (this.game) {
+      case Game.KH1:
+        return "tracker_1fm";
+      case Game.KH2:
+        return "tracker";
+      default:
+        return "tracker_other";
+    }
   }
 
   trackerGetter(getter: string) {
@@ -100,8 +99,10 @@ export default class BaseCell extends Vue {
   }
 
   styledIcon(file: string): string {
-    const cell = this.tracker.clients.self[file];
-    const style = this.$store.state.settings.iconStyles[cell.category]?.value;
+    const cell = this.$store.getters[`${this.trackerString}/cell`](this.client, file);
+    const style = cell.isMinimal
+      ? "Minimal"
+      : this.$store.state.settings.iconStyles[cell.category]?.value;
 
     if (style === cell.categoryExclude) {
       return `default/${file}`;

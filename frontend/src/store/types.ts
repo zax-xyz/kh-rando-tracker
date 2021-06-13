@@ -26,6 +26,12 @@ export type Item = {
   // the IconStyle to exclude for this item. used because some items don't have icons in
   // a particular style despite all others in the category having ones. e.g. STT and 'Classic'
   categoryExclude?: IconStyle;
+
+  // show based on setting
+  show?: string;
+  dontShow?: string;
+
+  isMinimal: boolean;
 };
 
 export interface RootState {

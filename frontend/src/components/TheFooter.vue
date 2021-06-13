@@ -1,7 +1,7 @@
 <template lang="pug">
   footer
     .container
-      .info KH1 &amp; KH2 Rando Tracker - Version {{ version }}
+      .info KH Item Tracker - Version {{ version }}
 
       .buttons
         router-link(
@@ -12,14 +12,22 @@
         ) {{ title(route) }}
         button(@click="reset") Reset Tracker
 
-      .buttons(
-        v-if="!kh1fmMode"
-      )
-        span Important Check Mode
-        SwitchSlider(
-          v-model="importantMode"
-        )
+      .buttons
+        label(for="game") Game
+        select(name="game" v-model="game")
+          option(:value="Game.KH2" selected) KH2
+          option(:value="Game.KH2_IC") KH2 (Important Checks Mode)
+          option(:value="Game.KH1") KH1
+          option(:value="Game.COM") CoM
+          option(:value="Game.DAYS") Days
+          option(:value="Game.BBS") BBS
+          option(:value="Game.CODED") Coded
+          option(:value="Game.DDD") DDD
+          option(:value="Game.KH3") KH3
 
+      .buttons(
+        v-if="game === Game.KH2"
+      )
         button(
           :class="{ success: hintsLoaded }"
           @click="selectHints"
@@ -33,10 +41,6 @@
         )
 
       .buttons
-        span KH1FM Mode
-        SwitchSlider(v-model="kh1fmMode")
-
-      .buttons
         button(@click="popout") Popout window
         button(@click="hideFooter") Hide Footer
 </template>
@@ -47,6 +51,7 @@ import { namespace } from "vuex-class";
 
 import BaseTooltip from "./BaseTooltip.vue";
 import SwitchSlider from "./SwitchSlider.vue";
+import { Game } from "@/store/settings";
 
 const tracker = namespace("tracker_important");
 
@@ -64,6 +69,10 @@ export default class TheFooter extends Vue {
 
   title(route: string): string {
     return route[0].toUpperCase() + route.slice(1);
+  }
+
+  get Game() {
+    return Game;
   }
 
   get fileElem(): HTMLInputElement {
@@ -86,6 +95,14 @@ export default class TheFooter extends Vue {
     this.$store.commit("settings/setKh1fmMode", toggled);
   }
 
+  get game(): Game {
+    return this.$store.state.settings.game;
+  }
+
+  set game(game: Game) {
+    this.$store.commit("settings/setGame", game);
+  }
+
   selectHints() {
     this.fileElem.click();
   }
@@ -106,13 +123,7 @@ export default class TheFooter extends Vue {
   }
 
   reset(): void {
-    if (this.kh1fmMode) {
-      this.$store.commit("tracker_1fm/resetState");
-    } else if (this.importantMode) {
-      this.$store.commit("tracker_important/resetState");
-    } else {
-      this.$store.commit("tracker/resetState");
-    }
+    this.$store.dispatch("reset");
   }
 }
 </script>
@@ -142,4 +153,17 @@ footer
 
   > *
     margin 0 3px
+
+select
+  padding 6px 5px
+  background #464646
+  color white
+  text-align center
+  border 0
+  border-radius 3px;
+  box-shadow 0 2px 4px rgba(0, 0, 0, 0.2)
+  transition background-color 0.2s
+
+  &:hover
+    background #333
 </style>

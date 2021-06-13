@@ -19,6 +19,7 @@ const item = (options: Partial<Item>): Item => ({
   secondaryMax: false,
   secondaryLevel: 0,
   disabled: false,
+  isMinimal: false,
   ...options,
 });
 
@@ -35,7 +36,9 @@ export const items: { [key: string]: Item } = {
   // Worlds
   "worlds/simulated_twilight_town": item({
     data: "roxas",
-    secondary: ["computer_room", "pod_room"].map(i => `simulated_twilight_town/${i}`),
+    secondary: ["twilight_thorn", "struggle", "computer_room", "pod_room"].map(
+      i => `simulated_twilight_town/${i}`,
+    ),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -271,21 +274,15 @@ export const state: State = {
   },
 };
 
-[
-  ...[...Array(27).keys()].map(i => `numbers/${i + 1}.png`),
-  "numbers/max.png",
-  "secondary/page.png",
-  ...["jump", "quick", "dodge", "aerial", "glide"].map(g => `secondary/drive/${g}.png`),
-  ...["bronze", "silver", "gold"].map(c => `secondary/crowns/${c}.png`),
-  ...["pain_panic", "cerberus", "titan", "goddess", "paradox"].map(c => `secondary/cups/${c}.png`),
-  ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(i => `nobody/${i}.png`),
-  ...["depths", "mining", "engine", "transport"].map(i => `secondary/cor/${i}.png`),
-  "secondary/lingering_will.png",
-  "secondary/sephiroth.png",
-  "secondary/triangle.png",
-  "secondary/chest.png",
-].forEach(src => {
+// preload all the number images we have
+const nums: Set<number> = new Set();
+for (let i = 1; i <= 20; i++) nums.add(i);
+for (let i = 25; i <= 50; i += 5) nums.add(i);
+for (let i = 60; i <= 100; i += 10) nums.add(i);
+for (let i = 21; i < 100; i += 3) nums.add(i);
+
+nums.forEach(i => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
-  image.src = `img/${src}`;
+  image.src = `/img/progression/${i + 1}.png`;
 });

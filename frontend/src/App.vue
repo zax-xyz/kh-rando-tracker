@@ -1,18 +1,23 @@
 <template lang="pug">
-#app(@click.self="handleClick")
-  main(
-    @contextmenu="(e) => e.preventDefault()"
-    :style="mainStyle"
-  )
-    BaseGrid(
-      v-if="!importantMode || kh1fmMode"
-      v-for="(_, client) in clients"
-      :key="client"
-      :clientId="client"
+#app(
+  @click.self="handleClick"
+  :class="{ transparent: route.name === 'remote' }"
+)
+  router-view(v-if="route.meta.full")
+  template(v-else)
+    main(
+      @contextmenu="(e) => e.preventDefault()"
+      :style="mainStyle"
     )
-    ImportantGrid(v-else)
-  TheFooter(v-if="footer")
-  ModalView
+      ImportantGrid(v-if="game === Game.KH2_IC")
+      BaseGrid(
+        v-else
+        v-for="(_, client) in clients"
+        :key="client"
+        :clientId="client"
+      )
+    TheFooter(v-if="footer")
+    ModalView
 </template>
 
 <script lang="ts">
@@ -24,6 +29,7 @@ const BaseGrid = () => import("./components/BaseGrid.vue");
 const ImportantGrid = () => import("./components/ImportantGrid.vue");
 import TheFooter from "./components/TheFooter.vue";
 import ModalView from "./components/ModalView.vue";
+import { Game } from "@/store/settings";
 
 @Component({
   components: {
@@ -67,9 +73,18 @@ export default class extends Vue {
       return;
     }
 
-    if (this.$store.state.version !== this.$store.state.currVersion) {
+    const version = this.$store.state.version;
+    if (version && version !== this.$store.state.currVersion) {
       this.$router.push("changelog");
     }
+  }
+
+  get route(): Route {
+    return this.$route;
+  }
+
+  get Game() {
+    return Game;
   }
 
   get mainStyle(): object {
@@ -88,12 +103,25 @@ export default class extends Vue {
     return this.$store.state.settings.importantChecksMode;
   }
 
-  get kh1fmMode(): boolean {
-    return this.$store.state.settings.kh1fmMode;
+  get game(): Game {
+    return this.$store.state.settings.game;
   }
 
   get clients(): object {
-    return this.$store.state.tracker.clients;
+    let clients;
+    switch (this.game) {
+      case Game.KH1:
+        clients = this.$store.state.tracker_1fm.clients;
+        break;
+      case Game.KH2:
+        clients = this.$store.state.tracker.clients;
+        break;
+      default:
+        clients = this.$store.state.tracker_other.clients;
+        break;
+    }
+
+    return this.$store.state.co_op.single ? { self: clients.self } : clients;
   }
 
   get footer(): boolean {
@@ -133,9 +161,6 @@ $font = Lato, Helvetica, Arial, sans-serif
 
 body
   margin 0
-  background #333 no-repeat fixed center / cover
-  $over = rgba(0, 0, 0, .5)
-  background-image linear-gradient($over, $over), url('../img/bg.webp')
 
 #app
 button
@@ -153,6 +178,12 @@ input
   text-align center
   color white
   line-height 1.6
+  background #333 no-repeat fixed center / cover
+  $over = rgba(0, 0, 0, .5)
+  background-image linear-gradient($over, $over), url('../img/bg.webp')
+
+  &.transparent
+    background transparent
 
 a
   color hsl($accent-hue, $link-sat, 68%)

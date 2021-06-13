@@ -1,7 +1,10 @@
 <template lang="pug">
   div
     .grid
-      .group(v-for="(properties, name) in categories")
+      .group(
+        v-for="(properties, name) in categories"
+        v-if="properties.games === undefined || properties.games.includes(game)"
+      )
         h1 {{ properties.title }}
         SliderIconStyles(
           :options="properties.options"
@@ -14,6 +17,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import SliderIconStyles from "@/components/SliderIconStyles.vue";
+import { Game } from "@/store/settings";
 
 @Component({
   components: {
@@ -22,6 +26,10 @@ import SliderIconStyles from "@/components/SliderIconStyles.vue";
 })
 export default class IconStyles extends Vue {
   categories = this.$store.state.settings.iconStyles;
+
+  get game(): Game {
+    return this.$store.state.settings.game;
+  }
 }
 </script>
 

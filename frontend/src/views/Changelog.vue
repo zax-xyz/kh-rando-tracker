@@ -3,6 +3,34 @@
     h1 Recent Update Changelog
 
     section
+      h2 Sunday 13 Jun 2021
+
+      .added
+        h3 Added
+        ul
+          li #[strong Added all key items to KH1 mode]. Thanks to Televo for all of the icons for these.
+          li #[strong Added progression icons for worlds in KH1]. Thanks to Televo for the icons here again!
+          li #[strong Added settings to hide different categories of icons in KH1 mode]. There is also a #[strong toggle] to #[strong expand the Destiny Islands raft supplies] (1 grouped icon vs 8 individual icons).
+          li #[strong Added CoM, Days, BBS, Coded, DDD, and KH3]. Again, thanks to Televo for the icons!
+          li #[strong Added remote view for OBS with true transparency]. Create a single-mode co-op room and use the generated link with an OBS browser source to use it, similar to Streamlabs overlays. Also works cross-device, including mobile.
+            ul
+              li Note that this is #[b #[i not]] available for KH2 important checks mode (yet).
+              li You will want to resize the browser source view to fit the whole tracker. For KH1 with default settings, this is 580x800.
+
+      .changed
+        h3 Changed
+        ul
+          li To better accomodate the new changes, no longer uses a KH1 mode toggle, but a #[strong dropdown menu to select the game] instead.
+          li #[strong Disable some KH1 settings like showing worlds, and expand raft supplies by default] as per the general community preference. Change these in Settings &gt; KH1 if you wish.
+          li Now #[strong only shows the icon style settings relevant to the current game] in Settings &gt; Icon Style. This screen should be somewhat less cluttered now.
+          li Minor style changes in the modal menus.
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Co-op mode now works with KH1 and all games other than KH2 on important check mode]. This will soon be fixed for KH2 important checks mode.
+
+    section
       h2 Sunday 16 May 2021
 
       .added
