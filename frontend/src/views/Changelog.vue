@@ -3,7 +3,7 @@
     h1 Recent Update Changelog
 
     section
-      h2 Sunday 13 May 2021
+      h2 Sunday 13 Jun 2021
 
       .added
         h3 Added
