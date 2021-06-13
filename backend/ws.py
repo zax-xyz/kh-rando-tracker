@@ -2,6 +2,7 @@
 import asyncio
 import json
 import random
+import signal
 import string
 import traceback
 import uuid
@@ -12,6 +13,23 @@ ROOMS = {}
 USERS = {}
 
 CHARS = string.ascii_lowercase + string.digits
+
+
+def handler(signum, frame):
+    print('Open rooms:', len(ROOMS))
+    print('Active clients:', len(USERS))
+    print('Rooms:', json.dumps(
+        {
+            k: {
+                'clients': len(v['users']),
+                'max': v['size']
+            } for k, v in ROOMS.items()
+        },
+        indent=2
+    ))
+
+
+signal.signal(signal.SIGUSR1, handler)
 
 
 async def dispatch(websocket, message):
