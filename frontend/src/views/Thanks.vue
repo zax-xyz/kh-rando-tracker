@@ -58,6 +58,11 @@
 
         p Created the Garden of Assemblage mod that the randomizer uses. Without it, none of this would exist.
 
+      Collapse(name="Denhonator")
+        p #[b Links]: #[a(href="https://twitter.com/Denhonator") Twitter], #[a(href="https://www.twitch.tv/denhonator") Twitch]
+
+        p Created the KHFM randomizer.
+
       Collapse(name="Kokemon198")
         p #[b Links]: #[a(href="https://twitter.com/jorgeoviedo1998") Twitter], #[a(href="https://twitch.tv/kokemon198") Twitch]
         p #[b Discord]: Jorge Oviedo#[span.light #9282]
