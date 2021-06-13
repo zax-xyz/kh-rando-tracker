@@ -6,6 +6,7 @@ import signal
 import string
 import traceback
 import uuid
+from datetime import datetime
 
 import websockets
 
@@ -22,7 +23,8 @@ def handler(signum, frame):
         {
             k: {
                 'clients': len(v['users']),
-                'max': v['size']
+                'max': v['size'],
+                'created': v['created'],
             } for k, v in ROOMS.items()
         },
         indent=2
@@ -30,6 +32,10 @@ def handler(signum, frame):
 
 
 signal.signal(signal.SIGUSR1, handler)
+
+
+def current_time():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 async def dispatch(websocket, message):
@@ -103,18 +109,22 @@ async def main(websocket, _):
                     # imagine not having do-while loops
                     break
 
+            time = current_time()
+
             # Save room and user
             ROOMS[room] = {
                 'name': room,
                 'size': size,
                 'users': {websocket},
                 'single': data.get('single', False),
+                'created': time,
             }
             USERS[websocket] = {
                 'room': ROOMS[room],
                 'id': str(uuid.uuid4()),
             }
-            print('Room created:', room)
+
+            print(time, 'Room created:', room)
 
             await websocket.send(json.dumps({
                 'type': 'room_created',
@@ -151,7 +161,7 @@ async def main(websocket, _):
             # If no more users in the room, close it
             name = room['name']
             del ROOMS[name]
-            print('Room closed:', name)
+            print(current_time(), 'Room closed:', name)
             print('Open rooms:', len(ROOMS))
 
 
