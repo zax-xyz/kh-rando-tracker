@@ -4,17 +4,22 @@ import { Item, State } from "./state";
 import { RootState } from "../types";
 
 const actions: ActionTree<State, RootState> = {
-  primary({ commit, dispatch, state, rootState }, { client, cell, offset = 1, shift = false }) {
+  primary(
+    { commit, dispatch, state, rootState },
+    { client, cell, offset = 1, shift = false, remote = false },
+  ) {
     // @ts-ignore
     const items = state.clients[client][rootState.settings.game];
     const item: Item = items[cell];
     if (item.disabled) return;
 
-    dispatch(
-      "co_op/sendClick",
-      { type: "user_primary", client, cell, offset, shift },
-      { root: true },
-    );
+    if (!remote) {
+      dispatch(
+        "co_op/sendClick",
+        { type: "user_primary", client, cell, offset, shift },
+        { root: true },
+      );
+    }
 
     var level = item.level;
     const total =
@@ -60,15 +65,18 @@ const actions: ActionTree<State, RootState> = {
     }
   },
 
-  secondary({ commit, dispatch, getters, state, rootState }, { client, cell, offset = 1 }) {
-    // @ts-ignore
+  secondary(
+    { commit, dispatch, getters, state, rootState },
+    { client, cell, offset = 1, remote = false },
+  ) {
     const item: Item = getters.cell(client, cell);
     if (item.disabled) return;
 
     const secondary = item.secondary;
     if (!secondary) return;
 
-    dispatch("co_op/sendClick", { type: "user_secondary", client, cell, offset }, { root: true });
+    if (!remote)
+      dispatch("co_op/sendClick", { type: "user_secondary", client, cell, offset }, { root: true });
 
     // Increment level with wrapping overflow based on total
     const length = Array.isArray(secondary) ? secondary.length : item.secondaryTotal;
@@ -80,9 +88,10 @@ const actions: ActionTree<State, RootState> = {
     });
   },
 
-  disable({ commit, dispatch, getters }, { client, cell }) {
+  disable({ commit, dispatch, getters }, { client, cell, remote = false }) {
     const item: Item = getters.cell(client, cell);
-    dispatch("co_op/sendClick", { type: "user_disable", client, cell }, { root: true });
+    if (!remote)
+      dispatch("co_op/sendClick", { type: "user_disable", client, cell }, { root: true });
 
     commit("disable", { item });
   },

@@ -21,6 +21,8 @@ const SettingsKh1 = () => import("@/views/SettingsKh1.vue");
 const IconStyles = () => import("@/views/IconStyles.vue");
 const EditItem = () => import("@/views/EditItem.vue");
 
+const Remote = () => import("@/views/Remote.vue");
+
 import Reports from "@/views/Reports.vue";
 
 Vue.use(VueRouter);
@@ -128,6 +130,12 @@ const routes: Array<RouteConfig> = [
     path: "/reports",
     meta: { title: "Select Report Found" },
     component: Reports,
+  },
+  {
+    path: "/remote/:game/:room",
+    name: "remote",
+    meta: { title: "Remote View", full: true },
+    component: Remote,
   },
 ];
 

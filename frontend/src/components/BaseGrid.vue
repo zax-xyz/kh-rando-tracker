@@ -56,6 +56,7 @@ export default class BaseGrid extends Vue {
       case Game.KH1:
         return this.$store.state.tracker_1fm.clients[this.clientId];
       case Game.KH2:
+      case Game.KH2_IC:
         return this.$store.state.tracker.clients[this.clientId];
       default:
         return this.$store.state.tracker_other.clients[this.clientId][this.game];
@@ -160,6 +161,10 @@ export default class BaseGrid extends Vue {
   border-radius 4px 4px 0 0
   box-sizing content-box
   user-select none
+
+  /.transparent &
+    margin 0
+    background transparent
 
 .disableShadows >>> img
   filter none

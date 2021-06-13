@@ -1,5 +1,10 @@
 <template lang="pug">
   div
+    .row
+      p Note:
+        | 
+        span.footnote You can also use #[code Toggle Rearrange] under #[code Normal] settings and remove icons by right-clicking on them (or rearrange them by dragging).
+
     .row.grid
       SwitchSlider(v-model="settings.expandRaftSupplies")
       p.name Expand Raft Supplies
@@ -62,7 +67,7 @@ import { Game, State } from "@/store/settings";
     SwitchSlider,
   },
 })
-export default class SettingsNormal extends Vue {
+export default class SettingsKh1 extends Vue {
   settings: State[Game.KH1] = { ...this.$store.state.settings[Game.KH1] };
   show: State[Game.KH1]["show"] = { ...this.$store.state.settings[Game.KH1].show };
 

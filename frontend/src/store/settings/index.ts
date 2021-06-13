@@ -7,22 +7,22 @@ export enum IconStyle {
 }
 
 export enum Game {
-  KH1,
-  KH2,
-  KH2_IC,
-  KH3,
-  COM,
-  DAYS,
-  BBS,
-  CODED,
-  DDD,
+  KH1 = "kh1",
+  KH2 = "kh2",
+  KH2_IC = "kh2_ic",
+  KH3 = "kh3",
+  COM = "com",
+  DAYS = "days",
+  BBS = "bbs",
+  CODED = "coded",
+  DDD = "ddd",
 }
 
 const kh1Settings = {
   show: {
-    worlds: true,
-    cups: true,
-    levels: true,
+    worlds: false,
+    cups: false,
+    levels: false,
     magic: true,
     summons: true,
     reports: true,
@@ -32,7 +32,7 @@ const kh1Settings = {
     crystalTrident: true,
     libraryBooks: true,
   },
-  expandRaftSupplies: false,
+  expandRaftSupplies: true,
 };
 
 const state = {

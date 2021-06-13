@@ -55,6 +55,7 @@ async def main(websocket, _):
             await websocket.send(json.dumps({
                 'type': 'room_joined',
                 'id': data['room'],
+                'single': room['single']
             }))
 
             # Tell the other users in the room about the user joining
@@ -89,6 +90,7 @@ async def main(websocket, _):
                 'name': room,
                 'size': size,
                 'users': {websocket},
+                'single': data.get('single', False),
             }
             USERS[websocket] = {
                 'room': ROOMS[room],
@@ -131,6 +133,7 @@ async def main(websocket, _):
             name = room['name']
             del ROOMS[name]
             print('Room closed:', name)
+            print('Open rooms:', len(ROOMS))
 
 
 loop = asyncio.get_event_loop()

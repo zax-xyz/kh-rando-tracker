@@ -95,11 +95,11 @@ export default class TheFooter extends Vue {
     this.$store.commit("settings/setKh1fmMode", toggled);
   }
 
-  get game(): string {
+  get game(): Game {
     return this.$store.state.settings.game;
   }
 
-  set game(game: string) {
+  set game(game: Game) {
     this.$store.commit("settings/setGame", game);
   }
 
@@ -123,17 +123,7 @@ export default class TheFooter extends Vue {
   }
 
   reset(): void {
-    switch (this.game) {
-      case "kh1":
-        this.$store.commit("tracker_1fm/resetState");
-        break;
-      case "kh2":
-        if (this.importantMode) {
-          this.$store.commit("tracker_important/resetState");
-        } else {
-          this.$store.commit("tracker/resetState");
-        }
-    }
+    this.$store.dispatch("reset");
   }
 }
 </script>
