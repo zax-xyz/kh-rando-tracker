@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
 
     section
+      h2 Monday 14 Jun 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Fixed selecting DDD breaking the tracker] due to a typo that replaced BBS with DDD.
+
+    section
       h2 Sunday 13 Jun 2021
 
       .added

@@ -85,7 +85,7 @@ export const items: { [key: string]: { [k: string]: Item } } = {
     "worlds/other/system_sector": item({ category: "worlds" }),
     "worlds/other/castle_oblivion": item({ category: "worlds" }),
   },
-  [Game.BBS]: {
+  [Game.DDD]: {
     "worlds/ddd/traverse_town": item({ category: "worlds" }),
     "worlds/ddd/la_cité_des_cloches": item({ category: "worlds" }),
     "worlds/ddd/the_grid": item({ category: "worlds" }),
