@@ -83,12 +83,8 @@ const actions: ActionTree<State, RootState> = {
     });
   },
 
-  handleMessage({ commit, dispatch, rootState, state }, payload: { message: string }) {
+  handleMessage({ commit, dispatch, state }, payload: { message: string }) {
     const msg = JSON.parse(payload.message);
-    const game: Game = (<any>rootState).settings.game;
-    const tracker =
-      game === Game.KH1 ? "tracker_1fm" : game === Game.KH2 ? "tracker" : "tracker_other";
-
     const client = state.single ? "self" : msg.id;
 
     switch (msg.type) {
@@ -104,11 +100,11 @@ const actions: ActionTree<State, RootState> = {
         break;
 
       case "user_joined":
-        commit(`${tracker}/addClient`, { client: msg.id }, { root: true });
+        dispatch(`tracker/addClient`, msg.id, { root: true });
         break;
 
       case "user_left":
-        commit(`${tracker}/removeClient`, { client: msg.id }, { root: true });
+        commit(`tracker/removeClient`, { client: msg.id }, { root: true });
         break;
 
       case "error":
@@ -117,7 +113,7 @@ const actions: ActionTree<State, RootState> = {
 
       case "user_primary":
         dispatch(
-          `${tracker}/primary`,
+          `tracker/primary`,
           {
             client,
             cell: msg.item,
@@ -131,7 +127,7 @@ const actions: ActionTree<State, RootState> = {
 
       case "user_secondary":
         dispatch(
-          `${tracker}/secondary`,
+          `tracker/secondary`,
           {
             client,
             cell: msg.item,
@@ -143,7 +139,7 @@ const actions: ActionTree<State, RootState> = {
         break;
 
       case "user_disable":
-        commit(`${tracker}/disable`, { client, cell: msg.item, remote: true }, { root: true });
+        dispatch(`tracker/disable`, { client, cell: msg.item, remote: true }, { root: true });
         break;
     }
   },

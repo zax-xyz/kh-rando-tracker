@@ -1,39 +1,7 @@
-import { IconStyle } from "../settings";
-import type { Item as BaseItem } from "../types";
+import { IconStyle } from "../../settings";
+import { item, Items, mapItems } from "../state";
 
-const CHEST = "other/chest";
-
-export type Item = BaseItem & {
-  data?: string[] | string;
-  minimal?: string;
-
-  // set in the loop below
-  id?: number;
-};
-
-const item = (options: Partial<Item>): Item => ({
-  total: 1,
-  showFirst: false,
-  level: 0,
-  opaque: options.level ? true : false,
-  secondaryTotal: options.secondary ? 1 : 0,
-  secondaryMax: false,
-  secondaryLevel: 0,
-  disabled: false,
-  isMinimal: false,
-  ...options,
-});
-
-const mapItems = (keys: Array<string | [string, Partial<Item>]>, defaults: Item) =>
-  Object.fromEntries(
-    keys.map(k =>
-      // each element is either a string to be used as a key and given the defaults, or an array of
-      // the key and options to add to the defaults, e.g. ["final", { category: "Final Form" }]
-      !Array.isArray(k) ? [k, { ...defaults }] : [k[0], { ...defaults, ...k[1] }],
-    ),
-  );
-
-export const items: { [key: string]: Item } = {
+export const items: Items = {
   // Worlds
   "worlds/kh1/destiny_islands": item({
     category: "worlds",
@@ -250,20 +218,4 @@ export const items: { [key: string]: Item } = {
   "other/navi_gummi": item({
     category: "navi",
   }),
-};
-
-for (const [i, item] of Object.values(items).entries()) {
-  item.id = i;
-}
-
-export type State = {
-  clients: {
-    [key: string]: typeof items;
-  };
-};
-
-export const state: State = {
-  clients: {
-    self: JSON.parse(JSON.stringify(items)), // Shitty deep copy
-  },
 };

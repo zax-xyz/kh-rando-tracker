@@ -52,15 +52,7 @@ export default class BaseGrid extends Vue {
   }
 
   get tracker() {
-    switch (this.game) {
-      case Game.KH1:
-        return this.$store.state.tracker_1fm.clients[this.clientId];
-      case Game.KH2:
-      case Game.KH2_IC:
-        return this.$store.state.tracker.clients[this.clientId];
-      default:
-        return this.$store.state.tracker_other.clients[this.clientId][this.game];
-    }
+    return this.$store.getters["tracker/items"](this.clientId);
   }
 
   get items(): Array<string> {
@@ -122,9 +114,7 @@ export default class BaseGrid extends Vue {
 
     let shouldShow = true;
     if (category !== undefined) {
-      const showSetting: boolean | undefined = this.$store.state.settings?.[this.game]?.show?.[
-        category
-      ];
+      const showSetting: boolean | undefined = settings?.show?.[category];
       shouldShow = showSetting === undefined || showSetting;
 
       if (!shouldShow) {

@@ -52,6 +52,7 @@ export default class extends Vue {
       this.$store.commit("tracker_important/resetState");
     }
 
+    // settings migrations
     const oldIconSettings = this.$store.state.settings.iconStyle;
     if (oldIconSettings) {
       Object.entries(oldIconSettings).forEach(([key, value]) => {
@@ -73,6 +74,55 @@ export default class extends Vue {
         this.$store.commit("settings/setSettings", { [s]: setting + "px" });
       }
     });
+
+    // migration to 2.4.3 with single tracker module
+    let oldState = this.$store.state.tracker?.clients?.self;
+    if (oldState?.["worlds/simulated_twilight_town"] !== undefined) {
+      this.$store.commit("tracker/addClient", { client: "self" });
+      this.$store.commit("tracker/addGame", {
+        client: "self",
+        game: Game.KH2,
+        items: oldState,
+      });
+      this.$store.commit("tracker/removeClient", { client: "clients" });
+    }
+
+    oldState = this.$store.state.tracker_1fm?.clients?.self;
+    if (oldState !== undefined) {
+      this.$store.commit("tracker/addGame", {
+        client: "self",
+        game: Game.KH1,
+        items: oldState,
+      });
+      this.$store.commit("deleteProperty", "tracker_1fm");
+    }
+
+    oldState = this.$store.state.tracker_other?.clients?.self;
+    if (oldState !== undefined) {
+      for (const game in oldState) {
+        this.$store.commit("tracker/addGame", {
+          client: "self",
+          game,
+          items: oldState[game],
+        });
+      }
+      this.$store.commit("deleteProperty", "tracker_other");
+    }
+
+    if (
+      this.$store.state.settings.game !== Game.KH2_IC &&
+      this.$store.getters["tracker/items"]("self") === undefined
+    ) {
+      this.$store.dispatch("tracker/addClient", "self");
+    }
+  }
+
+  mounted() {
+    document.body.onmousedown = (event: MouseEvent) => {
+      if (event.button === 1)
+        // Prevent autoscroll on middle click
+        return false;
+    };
 
     if (isbot(navigator.userAgent)) {
       // don't show changelog to bots/crawlers
@@ -114,18 +164,7 @@ export default class extends Vue {
   }
 
   get clients(): object {
-    let clients;
-    switch (this.game) {
-      case Game.KH1:
-        clients = this.$store.state.tracker_1fm.clients;
-        break;
-      case Game.KH2:
-        clients = this.$store.state.tracker.clients;
-        break;
-      default:
-        clients = this.$store.state.tracker_other.clients;
-        break;
-    }
+    const clients = this.$store.state.tracker;
 
     return this.$store.state.co_op.single ? { self: clients.self } : clients;
   }
@@ -140,14 +179,6 @@ export default class extends Vue {
     }
 
     this.$store.commit("tracker_important/selectLocation", "Free");
-  }
-
-  mounted(): void {
-    document.body.onmousedown = (event: MouseEvent) => {
-      if (event.button === 1)
-        // Prevent autoscroll on middle click
-        return false;
-    };
   }
 }
 </script>
@@ -186,7 +217,7 @@ input
   line-height 1.6
   background #333 no-repeat fixed center / cover
   $over = rgba(0, 0, 0, .5)
-  background-image linear-gradient($over, $over), url('../img/bg.webp')
+  background-image linear-gradient($over, $over), url('/img/bg.webp')
 
   &.transparent
     background transparent

@@ -49,23 +49,8 @@ export default class BaseCell extends Vue {
     return this.$store.state.settings.game;
   }
 
-  get trackerString(): string {
-    switch (this.game) {
-      case Game.KH1:
-        return "tracker_1fm";
-      case Game.KH2:
-        return "tracker";
-      default:
-        return "tracker_other";
-    }
-  }
-
-  trackerGetter(getter: string) {
-    return this.$store.getters[`${this.trackerString}/${getter}`];
-  }
-
   get cell(): { [key: string]: any } {
-    return this.$store.getters[`${this.trackerString}/cell`](this.client, this.file);
+    return this.$store.getters["tracker/cell"](this.client, this.file);
   }
 
   get number(): number {
@@ -83,11 +68,11 @@ export default class BaseCell extends Vue {
   }
 
   get secondaryFile(): string {
-    return this.$store.getters[`${this.trackerString}/secondary`](this.client, this.file);
+    return this.$store.getters["tracker/secondary"](this.client, this.file);
   }
 
   get secondaryNumber(): string {
-    return this.$store.getters[`${this.trackerString}/secondaryNumber`](this.client, this.file);
+    return this.$store.getters["tracker/secondaryNumber"](this.client, this.file);
   }
 
   get customDefaults() {
@@ -99,7 +84,7 @@ export default class BaseCell extends Vue {
   }
 
   styledIcon(file: string): string {
-    const cell = this.$store.getters[`${this.trackerString}/cell`](this.client, file);
+    const cell = this.$store.getters["tracker/cell"](this.client, file);
     const style = cell.isMinimal
       ? "Minimal"
       : this.$store.state.settings.iconStyles[cell.category]?.value;
@@ -128,7 +113,7 @@ export default class BaseCell extends Vue {
   }
 
   dispatch(mutation: string, offset: number = 1, shift: boolean = false): void {
-    this.$store.dispatch(`${this.trackerString}/${mutation}`, {
+    this.$store.dispatch(`tracker/${mutation}`, {
       client: this.client,
       cell: this.file,
       offset,

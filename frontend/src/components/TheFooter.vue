@@ -26,7 +26,7 @@
           option(:value="Game.KH3") KH3
 
       .buttons(
-        v-if="game === Game.KH2"
+        v-if="game === Game.KH2_IC"
       )
         button(
           :class="{ success: hintsLoaded }"
@@ -100,7 +100,7 @@ export default class TheFooter extends Vue {
   }
 
   set game(game: Game) {
-    this.$store.commit("settings/setGame", game);
+    this.$store.dispatch("settings/setGame", game);
   }
 
   selectHints() {

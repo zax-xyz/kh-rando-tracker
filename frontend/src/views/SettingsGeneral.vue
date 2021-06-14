@@ -59,7 +59,6 @@ import { saveAs } from "file-saver";
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import SwitchSlider from "@/components/SwitchSlider.vue";
 import { IconStyle, State } from "@/store/settings";
-import { items } from "@/store/tracker/state";
 
 @Component({
   components: {
@@ -86,7 +85,7 @@ export default class SettingsGeneral extends Vue {
     (this.$refs.fileLoader as HTMLElement).click();
   }
 
-  autoImportSettings(): void {
+  async autoImportSettings() {
     const newSettings: { [key: string]: any } = {};
 
     if (localStorage.scroll === "true") {
@@ -113,6 +112,7 @@ export default class SettingsGeneral extends Vue {
 
     if (localStorage.remove) {
       const remove = new Set(splitNums(localStorage.remove));
+      const { items } = await import("@/store/tracker/items/kh2");
       newSettings.itemNums = [...Array(items).keys()].filter(i => !remove.has(i));
     } else if (localStorage.order) {
       newSettings.itemNums = splitNums(localStorage.order);

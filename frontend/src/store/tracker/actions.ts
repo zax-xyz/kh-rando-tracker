@@ -1,15 +1,17 @@
 import { ActionTree } from "vuex";
 
-import { Item, State } from "./state";
+import { Items, State } from "./state";
 import { RootState } from "../types";
+import { Game } from "../settings";
 
 const actions: ActionTree<State, RootState> = {
   primary(
-    { commit, dispatch, state },
+    { commit, dispatch, state, rootState },
     { client, cell, offset = 1, shift = false, remote = false },
   ) {
-    const items = state.clients[client];
-    const item: Item = items[cell];
+    const game: Game = (rootState as any).settings.game;
+    const items = state[client][game];
+    const item = items[cell];
     if (item.disabled) return;
 
     if (!remote) {
@@ -21,9 +23,7 @@ const actions: ActionTree<State, RootState> = {
     }
 
     var level = item.level;
-    const total =
-      item.total +
-      (typeof item.data === "string" ? 1 : typeof item.data === "object" ? item.data.length : 0);
+    const total = item.total + (typeof item.data === "string" ? 1 : item.data?.length ?? 0);
     const end = total + 1;
 
     // Increment level with wrapping overflow based on total,
@@ -44,10 +44,10 @@ const actions: ActionTree<State, RootState> = {
 
     if (level) {
       if (!shift) {
-        commit("setOpaque", { client, cell, opaque: true });
+        commit("setOpaque", { client, game, cell, opaque: true });
       }
     } else {
-      commit("setOpaque", { client, cell, opaque: false });
+      commit("setOpaque", { client, game, cell, opaque: false });
     }
 
     const group = item.group;
@@ -60,12 +60,14 @@ const actions: ActionTree<State, RootState> = {
     }
 
     for (const item of groupItems) {
-      commit("setLevel", { client, cell: item, level });
+      commit("setLevel", { client, game, cell: item, level });
     }
   },
 
-  secondary({ commit, dispatch, state }, { client, cell, offset = 1, remote = false }) {
-    const item: Item = state.clients[client][cell];
+  secondary({ commit, dispatch, state, rootState }, { client, cell, offset = 1, remote = false }) {
+    const game: Game = (rootState as any).settings.game;
+    const items = state[client][game];
+    const item = items[cell];
     if (item.disabled) return;
 
     const secondary = item.secondary;
@@ -79,16 +81,38 @@ const actions: ActionTree<State, RootState> = {
     const end = 1 + length + +item.secondaryMax;
     commit("setSecondaryLevel", {
       client,
+      game,
       cell,
       level: (item.secondaryLevel + end + offset) % end,
     });
   },
 
-  disable({ commit, dispatch }, { client, cell, remote }) {
+  disable({ commit, dispatch, rootState }, { client, cell, remote }) {
     if (!remote)
       dispatch("co_op/sendClick", { type: "user_disable", client, cell }, { root: true });
 
-    commit("disable", { client, cell });
+    const game: Game = (rootState as any).settings.game;
+
+    commit("disable", { client, game, cell });
+  },
+
+  async addClient({ commit, rootState, state }, client: string) {
+    const game: Game = (rootState as any).settings.game;
+    const { items } = await import(`./items/${game}`);
+
+    if (state[client] === undefined) {
+      commit("addClient", { client });
+    }
+
+    commit("addGame", { client, game, items });
+  },
+
+  async resetState({ commit, rootState, state }) {
+    const game: Game = (rootState as any).settings.game;
+    const { items } = await import(`./items/${game}`);
+    for (const client in state) {
+      commit("addGame", { client, game, items });
+    }
   },
 };
 

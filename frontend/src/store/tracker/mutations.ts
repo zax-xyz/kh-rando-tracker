@@ -1,35 +1,43 @@
 import Vue from "vue";
 import { MutationTree } from "vuex";
-import { items as defaultItems, State } from "./state";
+import { Items, State } from "./state";
+import { Game } from "../settings";
 
 const mutations: MutationTree<State> = {
   addClient(state, payload: { client: string }): void {
-    Vue.set(state.clients, payload.client, JSON.parse(JSON.stringify(defaultItems))); // Shitty deep copy
+    Vue.set(state, payload.client, {});
   },
 
   removeClient(state, payload: { client: string }): void {
-    Vue.delete(state.clients, payload.client);
+    Vue.delete(state, payload.client);
   },
 
-  setOpaque(state, payload: { client: string; cell: string; opaque: boolean }): void {
-    state.clients[payload.client][payload.cell].opaque = payload.opaque;
+  addGame(state, payload: { client: string; game: Game; items: Items }): void {
+    Vue.set(state[payload.client], payload.game, JSON.parse(JSON.stringify(payload.items)));
   },
 
-  setLevel(state, payload: { client: string; cell: string; level: number }): void {
-    state.clients[payload.client][payload.cell].level = payload.level;
+  setOpaque(state, payload: { client: string; game: Game; cell: string; opaque: boolean }): void {
+    state[payload.client][payload.game][payload.cell].opaque = payload.opaque;
   },
 
-  setSecondaryLevel(state, payload: { client: string; cell: string; level: number }): void {
-    state.clients[payload.client][payload.cell].secondaryLevel = payload.level;
+  setLevel(state, payload: { client: string; game: Game; cell: string; level: number }): void {
+    state[payload.client][payload.game][payload.cell].level = payload.level;
   },
 
-  disable(state, payload: { client: string; cell: string }): void {
-    const item = state.clients[payload.client][payload.cell];
+  setSecondaryLevel(
+    state,
+    payload: { client: string; game: Game; cell: string; level: number },
+  ): void {
+    state[payload.client][payload.game][payload.cell].secondaryLevel = payload.level;
+  },
+
+  disable(state, payload: { client: string; game: Game; cell: string }): void {
+    const item = state[payload.client][payload.game][payload.cell];
     item.disabled = !item.disabled;
   },
 
-  resetState(state): void {
-    state.clients.self = JSON.parse(JSON.stringify(defaultItems));
+  resetState(state, payload: { client: string; game: Game; items: Items }): void {
+    state[payload.client] = JSON.parse(JSON.stringify(payload.items));
   },
 };
 

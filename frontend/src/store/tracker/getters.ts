@@ -2,13 +2,19 @@ import { GetterTree } from "vuex";
 
 import { Item, State } from "./state";
 import { RootState } from "../types";
+import { Game } from "../settings";
 
 const getters: GetterTree<State, RootState> = {
-  cell: state => (client: string, item: string) => {
-    return state.clients[client][item];
+  items: (state, _, rootState) => (client: string) => {
+    const game: Game = (rootState as any).settings.game;
+    return state[client][game];
   },
 
-  secondary: (_, getters: { [key: string]: any }) => (client: string, item: string) => {
+  cell: (_, getters) => (client: string, item: string) => {
+    return getters.items(client)[item];
+  },
+
+  secondary: (_, getters) => (client: string, item: string) => {
     const cell: Item = getters.cell(client, item);
     if (typeof cell.secondary === "string") {
       return cell.secondary;
@@ -19,7 +25,7 @@ const getters: GetterTree<State, RootState> = {
     }
   },
 
-  secondaryNumber: (_, getters: { [key: string]: any }) => (client: string, item: string) => {
+  secondaryNumber: (_, getters) => (client: string, item: string) => {
     const cell: Item = getters.cell(client, item);
 
     if (typeof cell.secondary === "string") {

@@ -1,4 +1,6 @@
 import Vue from "vue";
+import { ActionTree, MutationTree } from "vuex";
+import { RootState } from "../types";
 
 export enum IconStyle {
   CLASSIC = "Classic",
@@ -162,45 +164,58 @@ const state = {
 
 export type State = typeof state;
 
-const mutations = {
-  setSettings(state: State, payload: typeof state) {
+const actions: ActionTree<State, RootState> = {
+  async setGame({ commit, rootState }, game: Game) {
+    if (game !== Game.KH2_IC) {
+      if ((rootState as any).tracker.self[game] === undefined) {
+        const { items } = await import(`../tracker/items/${game}`);
+        commit("tracker/addGame", { client: "self", game, items }, { root: true });
+      }
+    }
+
+    commit("setGame", game);
+  },
+};
+
+const mutations: MutationTree<State> = {
+  setSettings(state, payload: State) {
     // Object.entries(payload).forEach(([key, value]) => Vue.set(state, key, value));
     Object.assign(state, payload);
   },
 
-  setImportantSettings(state: State, payload: typeof state.important) {
+  setImportantSettings(state, payload: typeof state.important) {
     Object.assign(state.important, payload);
   },
 
-  setKh1Settings(state: State, payload: typeof kh1Settings) {
+  setKh1Settings(state, payload: typeof kh1Settings) {
     Object.assign(state[Game.KH1], payload);
   },
 
-  setKh1Show(state: State, payload: typeof kh1Settings.show) {
+  setKh1Show(state, payload: typeof kh1Settings.show) {
     Object.assign(state[Game.KH1].show, payload);
   },
 
-  setNums(state: State, payload: { game: Game; nums: number[] }): void {
+  setNums(state, payload: { game: Game; nums: number[] }): void {
     Vue.set(state.itemNums2, payload.game, [...payload.nums]);
   },
 
-  resetNums(state: State, game: Game): void {
+  resetNums(state, game: Game): void {
     Vue.set(state.itemNums2, game, undefined);
   },
 
-  wipeOldNums(state: State): void {
+  wipeOldNums(state): void {
     Vue.set(state, "itemNums", undefined);
   },
 
-  setDefault(state: State, payload: { file: string; defaults: object }) {
+  setDefault(state, payload: { file: string; defaults: object }) {
     Vue.set(state.customDefaults, payload.file, payload.defaults);
   },
 
-  setGame(state: State, game: Game): void {
+  setGame(state, game: Game): void {
     state.game = game;
   },
 
-  setIconStyle(state: State, payload: { name: string; value: IconStyle }): void {
+  setIconStyle(state, payload: { name: string; value: IconStyle }): void {
     const setting = state.iconStyles[payload.name];
 
     if (typeof setting === "undefined" || !setting.options.includes(payload.value)) {
@@ -210,7 +225,7 @@ const mutations = {
     state.iconStyles[payload.name].value = payload.value;
   },
 
-  wipeOldIconSettings(state: State): void {
+  wipeOldIconSettings(state): void {
     Vue.set(state, "iconStyle", undefined);
   },
 };
@@ -218,5 +233,6 @@ const mutations = {
 export const settings = {
   namespaced: true,
   state,
+  actions,
   mutations,
 };

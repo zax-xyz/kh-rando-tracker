@@ -5,6 +5,11 @@
     section
       h2 Monday 14 Jun 2021
 
+      .changed
+        h3 Changed
+        ul
+          li An internal redesign of the underlying code structure. As a side effect, the page should load a bit faster on slow connections.
+
       .fixed
         h3 Fixed
         ul

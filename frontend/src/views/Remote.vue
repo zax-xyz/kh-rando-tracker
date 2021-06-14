@@ -1,6 +1,9 @@
 <template lang="pug">
   div
-    BaseGrid(clientId="self")
+    BaseGrid(
+      v-if="ready"
+      clientId="self"
+    )
 </template>
 
 <script lang="ts">
@@ -14,10 +17,13 @@ import BaseGrid from "@/components/BaseGrid.vue";
   },
 })
 export default class Remote extends Vue {
-  beforeMount() {
-    this.$store.commit("settings/setGame", this.$route.params.game);
+  ready = false;
+
+  async beforeMount() {
+    await this.$store.dispatch("settings/setGame", this.$route.params.game);
     this.$store.dispatch("reset");
     this.$store.dispatch("co_op/join", { room: this.$route.params.room });
+    this.ready = true;
   }
 }
 </script>

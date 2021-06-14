@@ -55,7 +55,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import SwitchSlider from "@/components/SwitchSlider.vue";
-import { Game, State } from "@/store/settings";
+import { State } from "@/store/settings";
 
 @Component({
   components: {
