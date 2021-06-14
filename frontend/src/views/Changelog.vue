@@ -8,6 +8,7 @@
       .fixed
         h3 Fixed
         ul
+          li #[strong Fixed bug involving remembering custom icon orders between different games] set through rearrange mode in Settings &gt; Normal. Legacy settings are moved into KH2. If this is not the desired result, press Reset in the settings with the game is set to KH2, and reorder the icons again with the correct game.
           li #[strong Fixed selecting DDD breaking the tracker] due to a typo that replaced BBS with DDD.
 
     section

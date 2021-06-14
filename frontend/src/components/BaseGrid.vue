@@ -68,16 +68,14 @@ export default class BaseGrid extends Vue {
   }
 
   get itemNums(): Array<number> {
-    if (!this.$store.state.settings.kh1fmMode) {
-      const itemNums = this.$store.state.settings.itemNums;
-      if (itemNums.length) return itemNums;
-    }
+    const itemNums = this.$store.state.settings.itemNums2[this.game];
+    if (itemNums && itemNums.length) return itemNums;
 
     return [...Array(Object.keys(this.items).length).keys()];
   }
 
   set itemNums(nums: Array<number>) {
-    this.$store.commit("settings/setNums", { nums: nums });
+    this.$store.commit("settings/setNums", { nums: nums, game: this.game });
   }
 
   get componentData(): object {

@@ -55,7 +55,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import SwitchSlider from "@/components/SwitchSlider.vue";
-import { State } from "@/store/settings";
+import { Game, State } from "@/store/settings";
 
 @Component({
   components: {
@@ -84,7 +84,7 @@ export default class SettingsNormal extends Vue {
   }
 
   reset() {
-    this.$store.commit("settings/resetNums");
+    this.$store.commit("settings/resetNums", this.$store.state.settings.game);
   }
 
   toggleEdit() {

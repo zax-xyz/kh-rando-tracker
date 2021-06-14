@@ -60,6 +60,12 @@ export default class extends Vue {
       this.$store.commit("settings/wipeOldIconSettings");
     }
 
+    const oldItemNums = this.$store.state.settings.itemNums;
+    if (oldItemNums) {
+      this.$store.commit("settings/setNums", { game: Game.KH2, nums: oldItemNums });
+      this.$store.commit("settings/wipeOldNums");
+    }
+
     ["size", "padding"].forEach(s => {
       const setting = this.$store.state.settings[s];
       if (setting && !isNaN(Number(setting))) {

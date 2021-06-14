@@ -141,7 +141,7 @@ const state = {
   columns: "",
   size: "",
   padding: "",
-  itemNums: [] as Array<number>,
+  itemNums2: {} as { [key: string]: number[] },
 
   important: {
     preselectWorld: true,
@@ -180,12 +180,16 @@ const mutations = {
     Object.assign(state[Game.KH1].show, payload);
   },
 
-  setNums(state: State, payload: { nums: Array<number> }): void {
-    state.itemNums = payload.nums;
+  setNums(state: State, payload: { game: Game; nums: number[] }): void {
+    Vue.set(state.itemNums2, payload.game, [...payload.nums]);
   },
 
-  resetNums(state: State): void {
-    state.itemNums = [];
+  resetNums(state: State, game: Game): void {
+    Vue.set(state.itemNums2, game, undefined);
+  },
+
+  wipeOldNums(state: State): void {
+    Vue.set(state, "itemNums", undefined);
   },
 
   setDefault(state: State, payload: { file: string; defaults: object }) {
