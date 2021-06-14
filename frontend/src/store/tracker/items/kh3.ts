@@ -45,3 +45,10 @@ export const items: Items = {
   ),
   "other/data_reports": item({ category: "reports" }),
 };
+
+// preload all the number images we use
+for (let i = 0; i <= 3; i++) {
+  // Apparently creating an image object like this loads it even if it's not added to the page
+  const image = new Image();
+  image.src = `/img/progression/${i + 1}.png`;
+}

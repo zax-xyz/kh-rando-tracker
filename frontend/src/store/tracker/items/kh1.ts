@@ -219,3 +219,16 @@ export const items: Items = {
     category: "navi",
   }),
 };
+
+// preload all the number images we use
+const nums: Set<number> = new Set();
+for (let i = 1; i <= 17; i++) nums.add(i);
+for (let i = 20; i <= 50; i += 5) nums.add(i);
+for (let i = 60; i <= 100; i += 10) nums.add(i);
+for (let i = 21; i < 100; i += 3) nums.add(i);
+
+nums.forEach(i => {
+  // Apparently creating an image object like this loads it even if it's not added to the page
+  const image = new Image();
+  image.src = `/img/progression/${i + 1}.png`;
+});
