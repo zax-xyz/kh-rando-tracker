@@ -24,6 +24,7 @@ const EditItem = () => import("@/views/EditItem.vue");
 const Remote = () => import("@/views/Remote.vue");
 
 import Reports from "@/views/Reports.vue";
+import ItemPopup from "@/views/ItemPopup.vue";
 
 Vue.use(VueRouter);
 
@@ -130,6 +131,11 @@ const routes: Array<RouteConfig> = [
     path: "/reports",
     meta: { title: "Select Report Found" },
     component: Reports,
+  },
+  {
+    path: "/item_popup/:item(.+)",
+    meta: { title: "Select Item" },
+    component: ItemPopup,
   },
   {
     path: "/remote/:game/:room",

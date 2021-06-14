@@ -29,6 +29,11 @@
               v-if="secondaryNumber"
               :src="`/img/progression/numbers/${secondaryNumber}.webp`"
             )
+      transition(name="fade-up")
+        img.corresponding(
+          v-if="corresponding"
+          :src="`/img/default/${corresponding}.webp`"
+        )
 
     transition(name="fade-cross")
       img.cross(v-if="cell.disabled", src="/img/minimal/other/cross.webp")
@@ -37,19 +42,20 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Game } from "@/store/settings";
+import { Item } from "@/store/tracker/state";
 
 @Component
 export default class BaseCell extends Vue {
   @Prop(String) client!: string;
   @Prop(String) file!: string;
 
-  cls: string = this.cell.cls ?? null;
+  cls: string | null = this.cell.cls ?? null;
 
   get game(): Game {
     return this.$store.state.settings.game;
   }
 
-  get cell(): { [key: string]: any } {
+  get cell(): Item {
     return this.$store.getters["tracker/cell"](this.client, this.file);
   }
 
@@ -62,9 +68,9 @@ export default class BaseCell extends Vue {
     return this.cell.numbers[level - 1];
   }
 
-  get dataFile(): string {
+  get dataFile(): string | undefined {
     if (typeof this.cell.data === "string") return this.cell.data;
-    return this.cell.data[this.cell.level - this.cell.total - 1];
+    return this.cell.data?.[this.cell.level - this.cell.total - 1];
   }
 
   get secondaryFile(): string {
@@ -73,6 +79,10 @@ export default class BaseCell extends Vue {
 
   get secondaryNumber(): string {
     return this.$store.getters["tracker/secondaryNumber"](this.client, this.file);
+  }
+
+  get corresponding(): string {
+    return this.cell.correspondingItem;
   }
 
   get customDefaults() {
@@ -214,7 +224,7 @@ img
     height 38%
     width auto
 
-    &[src='img/progression/numbers/max.webp']
+    &[src='/img/progression/numbers/max.webp']
       left 55%
 
   /.drive &
@@ -227,6 +237,12 @@ img
 
   /.levels &
     width 75%
+
+.corresponding
+  position absolute
+  bottom 0
+  left 0
+  width 40%
 
 .fade-up-enter-active
 .fade-up-leave-active

@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
 
     section
+      h2 Tuesday 15 Jun 2021
+
+      .added
+        h3 Added
+        ul
+          li #[strong Show corresponding magic spells that were replaced] when obtaining a spell. A popup is shown to select the replaced spell upon getting a spell for the first time. This can be disabled in the settings.
+
+    section
       h2 Monday 14 Jun 2021
 
       .changed

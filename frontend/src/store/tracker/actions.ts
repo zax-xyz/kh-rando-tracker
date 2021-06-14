@@ -1,8 +1,9 @@
 import { ActionTree } from "vuex";
 
-import { Items, State } from "./state";
+import { State } from "./state";
 import { RootState } from "../types";
 import { Game } from "../settings";
+import router from "../../router";
 
 const actions: ActionTree<State, RootState> = {
   primary(
@@ -61,6 +62,18 @@ const actions: ActionTree<State, RootState> = {
 
     for (const item of groupItems) {
       commit("setLevel", { client, game, cell: item, level });
+    }
+
+    if (
+      client === "self" &&
+      (rootState as any).settings.kh1.correspondingMagic &&
+      item.popupTitle !== undefined
+    ) {
+      if (level === 1 && offset > 0) {
+        router.push(`item_popup/${cell}`);
+      } else if (level === 0) {
+        commit("setCorrespondingItem", { client: "self", game, item: cell, other: "" });
+      }
     }
   },
 

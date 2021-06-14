@@ -7,6 +7,10 @@ export type Item = BaseItem & {
   data?: string[] | string;
   minimal?: string;
 
+  popupTitle?: string;
+  popupItems?: string[];
+  correspondingItem: string;
+
   // set in the loop below
   id?: number;
 };
@@ -23,6 +27,7 @@ export const item = (options: Partial<Item>): Item => ({
   secondaryLevel: 0,
   disabled: false,
   isMinimal: false,
+  correspondingItem: "",
   ...options,
 });
 

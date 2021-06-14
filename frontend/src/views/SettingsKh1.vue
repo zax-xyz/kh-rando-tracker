@@ -10,6 +10,12 @@
       p.name Expand Raft Supplies
 
     .row.grid
+      SwitchSlider(v-model="settings.correspondingMagic")
+      div
+        p.name Select corresponding replaced spells
+        BaseTooltip Every instance of a particular spell in KH1 rando will be replaced with the same spell. I.e., if Fire is replaced with Blizzard, every Fire check in the game will be Blizzard. These are unmoved from their original locations.
+
+    .row.grid
       SwitchSlider(v-model="show.worlds")
       p.name Show Worlds
 

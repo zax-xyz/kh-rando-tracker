@@ -35,6 +35,7 @@ const kh1Settings = {
     libraryBooks: true,
   },
   expandRaftSupplies: true,
+  correspondingMagic: true,
 };
 
 const state = {
