@@ -23,7 +23,6 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
-import isbot from "isbot";
 
 const BaseGrid = () => import("./components/BaseGrid.vue");
 const ImportantGrid = () => import("./components/ImportantGrid.vue");
@@ -123,11 +122,6 @@ export default class extends Vue {
         // Prevent autoscroll on middle click
         return false;
     };
-
-    if (isbot(navigator.userAgent)) {
-      // don't show changelog to bots/crawlers
-      return;
-    }
 
     const version = this.$store.state.version;
     if (version && version !== this.$store.state.currVersion) {
