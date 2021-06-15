@@ -14,6 +14,7 @@
         h3 Fixed
         ul
           li #[strong Postcards now goes up to 10]. This will require a press of Reset Tracker to update.
+          li #[strong Fix footer reappearing when opening a popup with footer hidden].
 
     section
       h2 Monday 14 Jun 2021

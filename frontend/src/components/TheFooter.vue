@@ -119,7 +119,7 @@ export default class TheFooter extends Vue {
   }
 
   hideFooter(): void {
-    this.$router.push({ query: { footer: "0" } });
+    this.$store.commit("toggleFooter");
   }
 
   reset(): void {

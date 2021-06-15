@@ -114,6 +114,10 @@ export default class extends Vue {
     ) {
       this.$store.dispatch("tracker/addClient", "self");
     }
+
+    if (this.$route.query.footer === "0") {
+      this.$store.commit("toggleFooter");
+    }
   }
 
   mounted() {
@@ -164,7 +168,7 @@ export default class extends Vue {
   }
 
   get footer(): boolean {
-    return this.$route.query.footer !== "0";
+    return this.$store.state.footer;
   }
 
   handleClick(): void {

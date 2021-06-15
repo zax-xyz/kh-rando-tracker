@@ -15,6 +15,7 @@ export default new Vuex.Store({
     edit: false,
     version: "",
     currVersion: process.env.PACKAGE_VER as string,
+    footer: true,
   },
   mutations: {
     toggleDrag(state) {
@@ -27,6 +28,10 @@ export default new Vuex.Store({
 
     updateVersion(state) {
       state.version = state.currVersion;
+    },
+
+    toggleFooter(state) {
+      state.footer = !state.footer;
     },
 
     deleteProperty(state, key: string) {
