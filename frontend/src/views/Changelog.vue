@@ -10,6 +10,11 @@
         ul
           li #[strong Show corresponding magic spells that were replaced] when obtaining a spell. A popup is shown to select the replaced spell upon getting a spell for the first time. This can be disabled in the settings.
 
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Postcards now goes up to 10]. This will require a press of Reset Tracker to update.
+
     section
       h2 Monday 14 Jun 2021
 

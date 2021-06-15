@@ -152,6 +152,7 @@ export const items: Items = {
   ),
 
   "other/postcards": item({
+    total: 10,
     category: "postcards",
   }),
 
