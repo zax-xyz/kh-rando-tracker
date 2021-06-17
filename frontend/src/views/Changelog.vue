@@ -3,6 +3,19 @@
     h1 Recent Update Changelog
 
     section
+      h2 Thursday 17 Jun 2021
+
+      p Reset Tracker is required for these updates to take effect.
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Fixed totals for KH1]. Library books should now go up to 2, navi pieces should go up to 2, and emblem pieces should go up to 4.
+          li #[strong Fixed progression icon order] for Deep Jungle and Monstro.
+          li #[strong Days now uses the correct Olympus Coliseum icon] (KH1 style rather than KH2).
+          li #[strong KH3 now has numbers for datas, levels, and reports].
+
+    section
       h2 Tuesday 15 Jun 2021
 
       .added
