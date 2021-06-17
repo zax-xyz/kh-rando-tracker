@@ -5,7 +5,7 @@
     section
       h2 Thursday 17 Jun 2021
 
-      p Reset Tracker is required for these updates to take effect.
+      p Reset Tracker is required for many of these updates to take effect.
 
       .fixed
         h3 Fixed
@@ -14,6 +14,8 @@
           li #[strong Fixed progression icon order] for Deep Jungle and Monstro.
           li #[strong Days now uses the correct Olympus Coliseum icon] (KH1 style rather than KH2).
           li #[strong KH3 now has numbers for datas, levels, and reports].
+          li #[strong Fixed preloading images for KH2 when not necessary].
+          li #[strong Properly preload number images for the current game].
 
     section
       h2 Tuesday 15 Jun 2021
