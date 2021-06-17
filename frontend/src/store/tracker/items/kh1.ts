@@ -33,7 +33,7 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/deep_jungle": item({
-    secondary: ["sabor", "clayton", "black_fruit"].map(i => `kh1/deep_jungle/${i}`),
+    secondary: ["sabor", "black_fruit", "clayton"].map(i => `kh1/deep_jungle/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -47,7 +47,7 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/monstro": item({
-    secondary: ["parasite_cage", "pinocchio_cage"].map(i => `kh1/monstro/${i}`),
+    secondary: ["pinocchio_cage", "parasite_cage"].map(i => `kh1/monstro/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -71,6 +71,7 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/hollow_bastion": item({
+    total: 2,
     data: "xemnas",
     secondary: ["riku", "maleficent", "riku_ansem", "behemoth"].map(i => `kh1/hollow_bastion/${i}`),
     minimal: "worlds/hollow_bastion",
@@ -226,13 +227,16 @@ export const items: Items = {
     category: "crystalTrident",
   }),
   "other/library_books": item({
+    total: 2,
     isMinimal: true,
     category: "libraryBooks",
   }),
   "other/navi_pieces": item({
+    total: 2,
     category: "navi",
   }),
   "other/emblem_pieces": item({
+    total: 4,
     category: "emblem_pieces",
   }),
   "other/navi_gummi": item({
