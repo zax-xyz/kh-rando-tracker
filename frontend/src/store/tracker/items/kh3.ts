@@ -27,8 +27,21 @@ export const items: Items = {
     minimal: "worlds/100_acre_wood",
     categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/replica_data": item({ category: "worlds" }),
-  "other/sora's_level": item({ category: "levels" }),
+  "worlds/replica_data": item({ total: 13, category: "data" }),
+  "other/sora's_level": item({
+    total: 27,
+    showFirst: true,
+    level: 1,
+    numbers: [
+      ...[...Array(15).keys()].map(i => i + 1),
+      ...[...Array(6).keys()].map(i => 20 + i * 5),
+      ...[...Array(5).keys()].map(i => 50 + i * 10),
+      99,
+    ],
+    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
+    cls: "levels",
+    category: "levels",
+  }),
   ...mapItems(
     ["fire", "blizzard", "thunder", "cure", "aero", "water"].map(i => `magic/${i}`),
     item({ total: 3, category: "magic", cls: "magic" }),
@@ -43,7 +56,7 @@ export const items: Items = {
     ],
     item({ category: "summons" }),
   ),
-  "other/data_reports": item({ category: "reports" }),
+  "other/data_reports": item({ total: 13, category: "reports" }),
 };
 
 // preload all the number images we use
