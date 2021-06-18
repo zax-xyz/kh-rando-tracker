@@ -4,7 +4,7 @@
     .grid
       img(
         v-for="item in items"
-        :src="`/img/default/${item}.webp`"
+        :src="`/img/${styledIcon(item)}.webp`"
         @click="select(item)"
       )
 </template>
@@ -35,6 +35,26 @@ export default class Reports extends Vue {
 
   get items(): string[] {
     return this.item.popupItems as string[];
+  }
+
+  styledIcon(file: string): string {
+    const cell = this.$store.getters["tracker/cell"]("self", file);
+    const style = cell.isMinimal
+      ? "Minimal"
+      : this.$store.state.settings.iconStyles[cell.category]?.value;
+
+    if (style === cell.categoryExclude) {
+      return `default/${file}`;
+    }
+
+    switch (style) {
+      case "Minimal":
+        return `minimal/${cell.minimal ?? file}`;
+      case "Classic":
+        return `legacy/${file}`;
+      default:
+        return `default/${file}`;
+    }
   }
 
   select(item: string) {

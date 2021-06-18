@@ -32,7 +32,7 @@
       transition(name="fade-up")
         img.corresponding(
           v-if="corresponding"
-          :src="`/img/default/${corresponding}.webp`"
+          :src="`/img/progression/${corresponding}.webp`"
         )
 
     transition(name="fade-cross")
@@ -230,7 +230,6 @@ img
   /.drive &
   /.hundred_acre &
   /.levels &
-  /.magic &
     left 0
     top 7.5%
     width 35%
@@ -238,9 +237,14 @@ img
   /.levels &
     width 75%
 
+  /.magic &
+    right 0
+    top 7.5%
+    width 35%
+
 .corresponding
   position absolute
-  bottom 0
+  top 0
   left 0
   width 40%
 

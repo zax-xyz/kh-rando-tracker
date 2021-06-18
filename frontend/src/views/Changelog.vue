@@ -3,6 +3,19 @@
     h1 Recent Update Changelog
 
     section
+      h2 Friday 18 Jun 2021
+
+      .changed
+        h3 Changed
+        ul
+          li #[strong Use outlined minimal icons for magic subicons] by #[router-link(to="thanks#televo") Televo] for indicating which spells are replaced in KH1 magic randomisation, and display subicon in top-left rather than bottom-left.
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Obey the chosen icon style for the magic icon popup] in KH1.
+
+    section
       h2 Thursday 17 Jun 2021
 
       p Reset Tracker is required for many of these updates to take effect.
