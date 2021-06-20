@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
 
     section
+      h2 Sunday 20 Jun 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Fixed KH1 magic not working properly in Co-op mode when 'Select corresponding replaced spells' is on].
+
+    section
       h2 Friday 18 Jun 2021
 
       .changed

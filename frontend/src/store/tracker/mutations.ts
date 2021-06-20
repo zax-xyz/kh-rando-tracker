@@ -33,9 +33,9 @@ const mutations: MutationTree<State> = {
 
   setCorrespondingItem(
     state,
-    payload: { client: string; game: Game; item: string; other: string },
+    payload: { client: string; game: Game; cell: string; other: string },
   ): void {
-    state[payload.client][payload.game][payload.item].correspondingItem = payload.other;
+    state[payload.client][payload.game][payload.cell].correspondingItem = payload.other;
   },
 
   disable(state, payload: { client: string; game: Game; cell: string }): void {

@@ -18,7 +18,7 @@ const actions: ActionTree<State, RootState> = {
     if (!remote) {
       dispatch(
         "co_op/sendClick",
-        { type: "user_primary", client, cell, offset, shift },
+        { type: "user_primary", client, item: cell, offset, shift },
         { root: true },
       );
     }
@@ -65,6 +65,7 @@ const actions: ActionTree<State, RootState> = {
     }
 
     if (
+      !remote &&
       client === "self" &&
       (rootState as any).settings.kh1.correspondingMagic &&
       item.popupTitle !== undefined
@@ -87,7 +88,11 @@ const actions: ActionTree<State, RootState> = {
     if (!secondary) return;
 
     if (!remote)
-      dispatch("co_op/sendClick", { type: "user_secondary", client, cell, offset }, { root: true });
+      dispatch(
+        "co_op/sendClick",
+        { type: "user_secondary", client, item: cell, offset },
+        { root: true },
+      );
 
     // Increment level with wrapping overflow based on total
     const length = Array.isArray(secondary) ? secondary.length : item.secondaryTotal;
@@ -102,11 +107,24 @@ const actions: ActionTree<State, RootState> = {
 
   disable({ commit, dispatch, rootState }, { client, cell, remote }) {
     if (!remote)
-      dispatch("co_op/sendClick", { type: "user_disable", client, cell }, { root: true });
+      dispatch("co_op/sendClick", { type: "user_disable", client, item: cell }, { root: true });
 
     const game: Game = (rootState as any).settings.game;
 
     commit("disable", { client, game, cell });
+  },
+
+  setCorrespondingItem({ commit, dispatch, rootState }, { client, cell, other, remote = false }) {
+    if (!remote)
+      dispatch(
+        "co_op/sendClick",
+        { type: "user_corresponding", client, item: cell, other },
+        { root: true },
+      );
+
+    const game: Game = (rootState as any).settings.game;
+
+    commit("setCorrespondingItem", { client, game, cell, other });
   },
 
   async addClient({ commit, rootState, state }, client: string) {

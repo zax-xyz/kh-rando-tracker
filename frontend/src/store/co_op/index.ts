@@ -54,20 +54,10 @@ const actions: ActionTree<State, RootState> = {
     });
   },
 
-  sendClick(
-    {},
-    payload: { type: string; client: string; cell: string; offset: number; shift: boolean },
-  ) {
+  sendClick({}, payload) {
     if (!socket || payload.client !== "self") return;
 
-    socket.send(
-      JSON.stringify({
-        type: payload.type,
-        item: payload.cell,
-        offset: payload.offset,
-        shift: payload.shift,
-      }),
-    );
+    socket.send(JSON.stringify(payload));
   },
 
   join({ dispatch }, payload: { room: string }) {
@@ -140,6 +130,19 @@ const actions: ActionTree<State, RootState> = {
 
       case "user_disable":
         dispatch(`tracker/disable`, { client, cell: msg.item, remote: true }, { root: true });
+        break;
+
+      case "user_corresponding":
+        dispatch(
+          "tracker/setCorrespondingItem",
+          {
+            client,
+            cell: msg.item,
+            other: msg.other,
+            remote: true,
+          },
+          { root: true },
+        );
         break;
     }
   },

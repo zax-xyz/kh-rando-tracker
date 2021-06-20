@@ -20,7 +20,7 @@ const tracker = namespace("tracker");
 const settings = namespace("settings");
 
 @Component
-export default class Reports extends Vue {
+export default class ItemPopup extends Vue {
   @settings.State game!: Game;
 
   name: string = this.$route.params.item;
@@ -58,10 +58,10 @@ export default class Reports extends Vue {
   }
 
   select(item: string) {
-    this.$store.commit("tracker/setCorrespondingItem", {
+    this.$store.dispatch("tracker/setCorrespondingItem", {
       client: "self",
       game: this.game,
-      item: this.name,
+      cell: this.name,
       other: item,
     });
     this.$router.push("/");
