@@ -236,5 +236,5 @@ for (let i = 60; i < 100; i += 10) nums.add(i);
 nums.forEach(i => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
-  image.src = `/img/progression/${i + 1}.webp`;
+  image.src = `/img/progression/numbers/${i + 1}.webp`;
 });

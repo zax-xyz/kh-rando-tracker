@@ -9,7 +9,7 @@ export const items: Items = {
   }),
   "worlds/kh1/traverse_town": item({
     total: 4,
-    secondary: ["leon", "guard_armor", "opposite_armor"].map(i => `kh1/traverse_town/${i}`),
+    secondary: ["leon", "guard_armor", "opposite_armor", "cid"].map(i => `kh1/traverse_town/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -53,7 +53,7 @@ export const items: Items = {
   }),
   "worlds/kh1/halloween_town": item({
     minimal: "worlds/halloween_town",
-    secondary: ["masked_children", "oogie_boogie", "oogie's_manor"].map(
+    secondary: ["tombstones", "masked_children", "oogie_boogie", "oogie's_manor"].map(
       i => `kh1/halloween_town/${i}`,
     ),
     category: "worlds",
@@ -220,7 +220,6 @@ export const items: Items = {
     show: "expandRaftSupplies",
   }),
   "other/jack_in_the_box": item({
-    isMinimal: true,
     category: "jackInTheBox",
   }),
   "other/crystal_trident": item({
@@ -228,7 +227,6 @@ export const items: Items = {
   }),
   "other/library_books": item({
     total: 2,
-    isMinimal: true,
     category: "libraryBooks",
   }),
   "other/navi_pieces": item({
@@ -254,5 +252,5 @@ for (let i = 21; i < 100; i += 3) nums.add(i);
 nums.forEach(i => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
-  image.src = `/img/progression/${i + 1}.webp`;
+  image.src = `/img/progression/numbers/${i + 1}.webp`;
 });

@@ -137,6 +137,18 @@ const state = {
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
+    jackInTheBox: {
+      title: "Jack In The Box",
+      games: [Game.KH1],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    libraryBooks: {
+      title: "Library Books",
+      games: [Game.KH1],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
   } as { [key: string]: { title: string; options: IconStyle[]; value: IconStyle } },
 
   // normal mode. kept outside in the root to remain backwards-compatible with old user settings

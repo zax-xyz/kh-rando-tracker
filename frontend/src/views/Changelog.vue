@@ -3,6 +3,20 @@
     h1 Recent Update Changelog
 
     section
+      h2 Monday 21 Jun 2021
+
+      .added
+        h3 Added
+        ul
+          li #[strong= '[KH1] Added tombstones progression icon to Halloween Town and Cid progression icon to Traverse Town']. Thanks to #[router-link(to="thanks#televo") Televo] for these.
+          li #[strong= '[KH1] Added new icons for Jack In The Box and Library Books']. The old styles are available through the minimal settings (Settings &gt; Icon Styles). Thanks again to #[router-link(to="thanks#televo") Televo] for these.
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[strong Fixed preloading numbers] (for real this time).
+
+    section
       h2 Sunday 20 Jun 2021
 
       .fixed
