@@ -4,6 +4,7 @@ import { item, Item, Items, mapItems } from "../state";
 export const items: Items = {
   // Worlds
   "worlds/kh1/destiny_islands": item({
+    secondary: ["day_one", "day_two", "darkside"].map(i => `kh1/destiny_islands/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -14,13 +15,14 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/wonderland": item({
-    secondary: ["card_soldiers", "trickmaster"].map(i => `kh1/wonderland/${i}`),
+    secondary: ["presents", "card_soldiers", "trickmaster"].map(i => `kh1/wonderland/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/olympus_coliseum": item({
     data: ["ice_titan", "sephiroth"],
     secondary: [
+      "barrels",
       "cerberus",
       "phil_cup",
       "pegasus_cup",
@@ -73,7 +75,9 @@ export const items: Items = {
   "worlds/kh1/hollow_bastion": item({
     total: 2,
     data: "xemnas",
-    secondary: ["riku", "maleficent", "riku_ansem", "behemoth"].map(i => `kh1/hollow_bastion/${i}`),
+    secondary: ["riku", "maleficent", "dragon_maleficent", "riku_ansem", "behemoth"].map(
+      i => `kh1/hollow_bastion/${i}`,
+    ),
     minimal: "worlds/hollow_bastion",
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
@@ -94,6 +98,10 @@ export const items: Items = {
   }),
   "worlds/kh1/olympus_cups": item({
     total: 4,
+    secondary: "kh1/olympus_coliseum/hades_cup",
+    secondaryTotal: 3,
+    secondaryNumbers: [40, 20, 10],
+    cls: "cups",
     category: "cups",
     categoryExclude: IconStyle.CLASSIC,
   }),
@@ -161,6 +169,10 @@ export const items: Items = {
     total: 33,
     showFirst: true,
     numbers: [...Array(33).keys()].map(i => (i + 1) * 3),
+    secondary: "kh1/wonderland/presents",
+    secondaryTotal: 11,
+    secondaryAuto: [12, 21, 30, 42, 51, 60, 72, 81, 90, 99].map(i => i / 3),
+    cls: "dalmations",
     category: "dalmatians",
   }),
 

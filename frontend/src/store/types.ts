@@ -12,6 +12,8 @@ export type Item = {
   secondary?: string | string[];
   secondaryTotal: number;
   secondaryMax: boolean;
+  secondaryNumbers?: number[];
+  secondaryAuto?: number[];
 
   disabled: boolean;
 

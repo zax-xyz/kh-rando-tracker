@@ -33,6 +33,10 @@ const getters: GetterTree<State, RootState> = {
         return "max";
       }
 
+      if (cell.secondaryNumbers !== undefined) {
+        return cell.secondaryNumbers[cell.secondaryLevel - 1];
+      }
+
       if (cell.secondaryLevel > 1) {
         return cell.secondaryLevel;
       }

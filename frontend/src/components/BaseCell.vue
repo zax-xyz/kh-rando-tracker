@@ -227,9 +227,19 @@ img
     &[src='/img/progression/numbers/max.webp']
       left 55%
 
+    /.cups &
+      top 25%
+      left 40%
+
+    /.dalmations &
+      top 25%
+      left 0%
+
   /.drive &
   /.hundred_acre &
   /.levels &
+  /.cups &
+  /.dalmations &
     left 0
     top 7.5%
     width 35%

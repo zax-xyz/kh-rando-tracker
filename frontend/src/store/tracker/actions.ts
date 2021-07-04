@@ -53,15 +53,40 @@ const actions: ActionTree<State, RootState> = {
 
     const group = item.group;
 
-    const groupItems = [];
+    const groupItems: string[] = [];
     if (group) {
       for (const key in items) if (items[key].group === group) groupItems.push(key);
     } else {
       groupItems.push(cell);
     }
 
-    for (const item of groupItems) {
-      commit("setLevel", { client, game, cell: item, level });
+    for (const gItem of groupItems) {
+      commit("setLevel", { client, game, cell: gItem, level });
+
+      if (
+        (offset > 0 && item.secondaryAuto?.includes(level)) ||
+        (offset < 0 && item.secondaryAuto?.includes(level - offset)) ||
+        (offset < 0 && level === total && item.secondaryAuto?.includes(level))
+      ) {
+        let newSecLevel = (items[gItem].secondaryLevel + offset) % items[gItem].secondaryTotal;
+        if (newSecLevel < 0) {
+          newSecLevel = items[gItem].secondaryTotal + newSecLevel;
+        }
+
+        commit("setSecondaryLevel", {
+          client,
+          game,
+          cell: gItem,
+          level: newSecLevel,
+        });
+      } else if (level === 0) {
+        commit("setSecondaryLevel", {
+          client,
+          game,
+          cell: gItem,
+          level: 0,
+        });
+      }
     }
 
     if (
