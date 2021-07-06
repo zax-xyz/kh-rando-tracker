@@ -35,7 +35,7 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh1/deep_jungle": item({
-    secondary: ["sabor", "clayton", "black_fruit"].map(i => `kh1/deep_jungle/${i}`),
+    secondary: ["sabor", "black_fruit", "clayton"].map(i => `kh1/deep_jungle/${i}`),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
   }),
