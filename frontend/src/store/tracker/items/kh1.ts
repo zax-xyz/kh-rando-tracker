@@ -98,9 +98,15 @@ export const items: Items = {
   }),
   "worlds/kh1/olympus_cups": item({
     total: 4,
-    secondary: "kh1/olympus_coliseum/hades_cup",
-    secondaryTotal: 3,
-    secondaryNumbers: [40, 20, 10],
+    secondary: [
+      "hades_seed_40",
+      "hades_seed_20",
+      "hades_seed_10",
+      "hades_seed_1",
+      "hades_solo",
+      "hades_timed",
+      "hades_complete",
+    ].map(i => `kh1/olympus_coliseum/${i}`),
     cls: "cups",
     category: "cups",
     categoryExclude: IconStyle.CLASSIC,

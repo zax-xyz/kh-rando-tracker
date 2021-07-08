@@ -227,10 +227,6 @@ img
     &[src='/img/progression/numbers/max.webp']
       left 55%
 
-    /.cups &
-      top 25%
-      left 40%
-
     /.dalmations &
       top 25%
       left 0%
@@ -251,6 +247,9 @@ img
     right 0
     top 7.5%
     width 35%
+
+  /.cups &
+    width 70%
 
 .corresponding
   position absolute
