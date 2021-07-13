@@ -149,6 +149,12 @@ const state = {
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
+    raftSupplies: {
+      title: "Raft Supplies",
+      games: [Game.KH1],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
   } as { [key: string]: { title: string; options: IconStyle[]; value: IconStyle } },
 
   // normal mode. kept outside in the root to remain backwards-compatible with old user settings

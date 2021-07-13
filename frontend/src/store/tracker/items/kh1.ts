@@ -202,39 +202,39 @@ export const items: Items = {
 
   "other/raft_supplies": item({
     total: 8,
-    category: "raft_supplies",
+    category: "raftSupplies",
     dontShow: "expandRaftSupplies",
   }),
   "other/logs": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/cloth": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/rope": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/seagull_egg": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/mushrooms": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/coconuts": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/fish": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/drinking_water": item({
-    category: "raft_supplies",
+    category: "raftSupplies",
     show: "expandRaftSupplies",
   }),
   "other/jack_in_the_box": item({
