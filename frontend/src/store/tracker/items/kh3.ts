@@ -27,7 +27,7 @@ export const items: Items = {
     minimal: "worlds/100_acre_wood",
     categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/replica_data": item({ total: 13, category: "data" }),
+  "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),
   "other/sora's_level": item({
     total: 27,
     showFirst: true,
@@ -57,6 +57,16 @@ export const items: Items = {
     item({ category: "summons" }),
   ),
   "other/data_reports": item({ total: 13, category: "reports" }),
+  "other/flantastic_seven": item({ total: 7, category: "flan" }),
+  "other/lucky_emblems": item({
+    total: 26,
+    numbers: [
+      ...[...Array(15).keys()].map(i => i + 1),
+      ...[...Array(6).keys()].map(i => 20 + i * 5),
+      ...[...Array(5).keys()].map(i => 50 + i * 10),
+    ],
+    category: "lucky_emblems",
+  }),
 };
 
 // preload all the number images we use
