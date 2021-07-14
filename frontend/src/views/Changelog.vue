@@ -3,13 +3,31 @@
     h1 Recent Update Changelog
 
     section
+      h2 Wednesday 14 July 2021
+
+      p Thanks to #[router-link(to="thanks#televo") Televo] for all the icons!
+
+      .added
+        h3 Added
+        ul
+          li [KH1] #[strong Destiny islands progression icons].
+          li [KH1] Add #[strong presents] to Wonderland progression.
+          li [KH1] Add #[strong barrels] to Olympus Coliseum progression.
+          li [KH1] #[strong Cups progression icons].
+          li [KH1] Add #[strong Dragon Malificent] for Hollow Bastion progression.
+          li [KH1] #[strong Progression icons for dalmations for each reward]. These will be #[strong automatically activated once you find the corresponding amount of dalmations].
+          li [KH1] #[strong Icon style settings] for #[strong Destiny Islands items] (Raft Supplies). This was meant to be added long ago but I forgot about them.
+          li [KH2] #[strong Atlantica progression icons].
+          li [KH3] #[strong New icon for data org] and added icons for #[strong flantastic seven] and #[strong lucky emblems].
+
+    section
       h2 Monday 21 Jun 2021
 
       .added
         h3 Added
         ul
-          li #[strong= '[KH1] Added tombstones progression icon to Halloween Town and Cid progression icon to Traverse Town']. Thanks to #[router-link(to="thanks#televo") Televo] for these.
-          li #[strong= '[KH1] Added new icons for Jack In The Box and Library Books']. The old styles are available through the minimal settings (Settings &gt; Icon Styles). Thanks again to #[router-link(to="thanks#televo") Televo] for these.
+          li [KH1] #[strong Added tombstones progression icon to Halloween Town and Cid progression icon to Traverse Town]. Thanks to #[router-link(to="thanks#televo") Televo] for these.
+          li [KH1] #[strong Added new icons for Jack In The Box and Library Books]. The old styles are available through the minimal settings (Settings &gt; Icon Styles). Thanks again to #[router-link(to="thanks#televo") Televo] for these.
 
       .fixed
         h3 Fixed
