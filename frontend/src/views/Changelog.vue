@@ -8,7 +8,7 @@
       .changed
         h3 Changed
         ul
-          li [KH1] #[strong Disbled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled.
+          li [KH1] #[strong Disabled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled.
           li [KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer.
 
     section
