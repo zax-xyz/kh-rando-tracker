@@ -247,17 +247,17 @@ export const items: Items = {
     total: 2,
     category: "libraryBooks",
   }),
-  "other/navi_pieces": item({
-    total: 2,
-    category: "navi",
-  }),
+  // "other/navi_pieces": item({
+  //   total: 2,
+  //   category: "navi",
+  // }),
   "other/emblem_pieces": item({
     total: 4,
     category: "emblem_pieces",
   }),
-  // "other/navi_gummi": item({
-  //   category: "navi",
-  // }),
+  "other/navi_gummi": item({
+    category: "navi",
+  }),
 };
 
 // preload all the number images we use
