@@ -2,6 +2,8 @@
   .item(
     :class="cls"
     :style="itemStyle"
+    @touchstart="handleTouchStart"
+    @touchend="handleTouchEnd"
     @mousedown="handleMouseDown"
     @wheel="handleWheel"
   )
@@ -41,6 +43,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+
 import { Game } from "@/store/settings";
 import { Item } from "@/store/tracker/state";
 
@@ -50,6 +53,7 @@ export default class BaseCell extends Vue {
   @Prop(String) file!: string;
 
   cls: string | null = this.cell.cls ?? null;
+  timer?: number;
 
   get game(): Game {
     return this.$store.state.settings.game;
@@ -129,6 +133,26 @@ export default class BaseCell extends Vue {
       offset,
       shift,
     });
+  }
+
+  handleTouchStart(): void {
+    this.timer = window.setTimeout(() => {
+      this.triggerSecondary();
+      this.timer = undefined;
+    }, this.$store.state.settings.longPressDelay);
+  }
+
+  handleTouchEnd(e: TouchEvent): void {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = undefined;
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  triggerSecondary(): void {
+    this.dispatch("secondary", 1);
   }
 
   handleMouseDown(event: MouseEvent): void {

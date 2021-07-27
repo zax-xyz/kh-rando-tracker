@@ -30,6 +30,15 @@
         BaseTooltip Pre-2.2 versions used 7.5px
 
     .row.grid
+      input(
+        placeholder="150"
+        v-model.number="settings.longPressDelay"
+      )
+      div
+        p.name Long Press Delay
+        BaseTooltip Delay in milliseconds for long-press on mobile to trigger a right-click
+
+    .row.grid
       button(
         :class="{ alt: drag }"
         style="grid-row: 1"

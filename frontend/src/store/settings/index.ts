@@ -163,6 +163,7 @@ const state = {
   size: "",
   padding: "",
   itemNums2: {} as { [key: string]: number[] },
+  longPressDelay: 150,
 
   important: {
     preselectWorld: true,

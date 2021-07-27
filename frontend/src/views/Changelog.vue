@@ -5,6 +5,11 @@
     section
       h2 Tuesday 27 July 2021
 
+      .added
+        h3 Added
+        ul
+          li #[strong Long-press to right-click on mobile]. The default delay for this is 150 milliseconds. You can configure it in Settings &gt; Normal.
+
       .changed
         h3 Changed
         ul
