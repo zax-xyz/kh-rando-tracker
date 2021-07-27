@@ -8,8 +8,8 @@
       .changed
         h3 Changed
         ul
-          li [KH1] #[strong Disabled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled.
-          li [KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer.
+          li [KH1] #[strong Disabled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled. (Settings &gt; KH1 &gt; Show Crystal Trident). You can also remove it manually in rearrange mode (Settings &gt; Normal).
+          li [KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer. If autosave is enabled, this will not come into effect until the tracker gets reset.
 
     section
       h2 Wednesday 14 July 2021
