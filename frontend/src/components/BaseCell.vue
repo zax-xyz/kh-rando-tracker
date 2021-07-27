@@ -152,6 +152,11 @@ export default class BaseCell extends Vue {
   }
 
   triggerSecondary(): void {
+    if (this.$store.state.drag) {
+      this.$emit("remove");
+      return;
+    }
+
     this.dispatch("secondary", 1);
   }
 
