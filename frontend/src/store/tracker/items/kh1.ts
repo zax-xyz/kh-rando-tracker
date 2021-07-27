@@ -43,7 +43,7 @@ export const items: Items = {
     minimal: "worlds/agrabah",
     data: "kurt_zisa",
     secondary: ["pot_centipede", "cave_of_wonders", "jafar", "kurt_zisa"].map(
-      i => `kh1/agrabah/${i}`,
+      i => `kh1/agrabah/${i}`
     ),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
@@ -56,7 +56,7 @@ export const items: Items = {
   "worlds/kh1/halloween_town": item({
     minimal: "worlds/halloween_town",
     secondary: ["tombstones", "masked_children", "oogie_boogie", "oogie's_manor"].map(
-      i => `kh1/halloween_town/${i}`,
+      i => `kh1/halloween_town/${i}`
     ),
     category: "worlds",
     categoryExclude: IconStyle.CLASSIC,
@@ -76,7 +76,7 @@ export const items: Items = {
     total: 2,
     data: "xemnas",
     secondary: ["riku", "maleficent", "dragon_maleficent", "riku_ansem", "behemoth"].map(
-      i => `kh1/hollow_bastion/${i}`,
+      i => `kh1/hollow_bastion/${i}`
     ),
     minimal: "worlds/hollow_bastion",
     category: "worlds",
@@ -148,9 +148,9 @@ export const items: Items = {
       category: "magic",
       popupTitle: "Select Spell Replaced",
       popupItems: ["fire", "blizzard", "thunder", "cure", "aero", "gravity", "stop"].map(
-        i => `magic/${i}`,
+        i => `magic/${i}`
       ),
-    }),
+    })
   ),
 
   // Summons
@@ -163,7 +163,7 @@ export const items: Items = {
       "summons/tinkerbell",
       "summons/mushu",
     ],
-    item({ category: "summons" }),
+    item({ category: "summons" })
   ),
 
   "other/postcards": item({
@@ -190,7 +190,7 @@ export const items: Items = {
       ["trinities/yellow", { total: 4 }],
       ["trinities/white", { total: 10 }],
     ],
-    item({ category: "trinities" }),
+    item({ category: "trinities" })
   ),
 
   // Other
@@ -255,9 +255,9 @@ export const items: Items = {
     total: 4,
     category: "emblem_pieces",
   }),
-  "other/navi_gummi": item({
-    category: "navi",
-  }),
+  // "other/navi_gummi": item({
+  //   category: "navi",
+  // }),
 };
 
 // preload all the number images we use

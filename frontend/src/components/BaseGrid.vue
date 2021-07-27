@@ -107,8 +107,12 @@ export default class BaseGrid extends Vue {
     return style;
   }
 
-  shouldShow(name: string) {
+  shouldShow(name: string): boolean {
     const item: Item = this.tracker[name];
+    if (item === undefined) {
+      return false;
+    }
+
     const { category, show, dontShow } = item;
     const settings = this.$store.state.settings?.[this.game];
 

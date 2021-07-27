@@ -31,7 +31,7 @@ const kh1Settings = {
     dalmations: true,
     trinities: true,
     jackInTheBox: true,
-    crystalTrident: true,
+    crystalTrident: false,
     libraryBooks: true,
   },
   expandRaftSupplies: true,
