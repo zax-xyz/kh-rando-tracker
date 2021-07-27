@@ -3,6 +3,15 @@
     h1 Recent Update Changelog
 
     section
+      h2 Tuesday 27 July 2021
+
+      .changed
+        h3 Changed
+        ul
+          li [KH1] #[strong Disbled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled.
+          li [KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer.
+
+    section
       h2 Wednesday 14 July 2021
 
       p Thanks to #[router-link(to="thanks#televo") Televo] for all the icons!
