@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
 
     section
+      h2 Wednesday 4 August 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li [KH2 Important Checks Mode] Fixed the checks popup (middle click) on locations not displaying the icons properly
+
+    section
       h2 Tuesday 27 July 2021
 
       .added
