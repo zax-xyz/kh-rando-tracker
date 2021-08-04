@@ -5,7 +5,7 @@
    )
     img(
       v-for="check in checks"
-      :src="`/img/${check}.webp`"
+      :src="`/img/${styledIcon(check)}.webp`"
     )
 </template>
 
@@ -18,6 +18,24 @@ export default class ChecksPopup extends Vue {
 
   get checks(): string[] {
     return this.$store.state.tracker_important.foundChecks[this.location];
+  }
+
+  styledIcon(file: string): string {
+    const cell = this.$store.getters["tracker_important/cell"](file);
+    const style = this.$store.state.settings.iconStyles[cell.category]?.value;
+
+    if (style === cell.categoryExclude) {
+      return `default/${file}`;
+    }
+
+    switch (style) {
+      case "Minimal":
+        return `minimal/${file}`;
+      case "Classic":
+        return `legacy/${file}`;
+      default:
+        return `default/${file}`;
+    }
   }
 }
 </script>
