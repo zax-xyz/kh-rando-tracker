@@ -6,25 +6,18 @@ The idea for this tracker came from [ViolinGamer](https://twitter.com/ViolinGame
 
 You can find it [here](https://tracker.zaxu.xyz).
 
-~~If you want to use the tracker locally offline, or change some of the images, you can find a pre-built zip on the [Releases](https://github.com/zaxutic/kh2fm-rando-tracker/releases/latest) page. To download the release, click the `tracker.zip` link. Note that the releases are automatically generated and there is no guarantee of proper code style if you wish to edit these files directly.~~ Releases haven't been set up for this version yet.
-
-The `gh-pages` branch of the repository contains built, compressed/minified files for the site. (Note: the branch is very large, as it holds multiple versions, and keeps old files for legacy)
-
 Beta Electron builds can be found [here](https://zaxu.xyz/tracker_builds)
 
 ## Building
 
 This is for people who want to help develop the tracker, or build it from source.
 
-### Frontend
+### Dependencies
 
-#### Dependencies
-
-- Node.js
 - npm
-- `npm install`
+- `npm i` or `npm install`
 
-#### Build
+### Build
 
 ```sh
 # Web
@@ -43,17 +36,3 @@ $ npm run electron:build -- --OS  # Replace OS with win, mac, or linux
 ## Build for windows, mac, and linux in parallel
 $ npm run electron:build -- -wml
 ```
-
-### Backend
-
-The Python websocket server can be run on localhost or on a public server.
-
-#### Dependencies
-
-- Python 3.6.1+
-- pip
-- `pip install -r requirements.txt`
-
-#### Run
-
-`python ws.py`
