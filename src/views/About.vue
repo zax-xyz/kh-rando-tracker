@@ -6,7 +6,7 @@
 
     p The majority of the images used in this tracker were designed by #[router-link(to="thanks#televo") Televo].
 
-    p The GitHub repository with the code for this site can be found #[a(href="https://github.com/zaxutic/kh2fm-rando-tracker" target="_blank") here].
+    p The GitHub repository with the code for this site can be found #[a(href="https://github.com/zaxutic/kh-rando-tracker" target="_blank") here].
 
     p If you have any questions/issues, you can find me in the #[a(href="https://discord.gg/KwfqM6GYzd" target="_blank") KH2FM Rando Discord] server (michael_#6969, nickname zax), #[a(href="https://twitter.com/z_ax__" target="_blank") Twitter], or GitHub.
 
