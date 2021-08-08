@@ -31,7 +31,7 @@ npm run electron:serve
 ```
 
 ### Compiles and minifies for production (Electron desktop app)
-Refer to [electron-build docs](https://www.electron.build/multi-platform-build.html) for more information
+Refer to [electron-builder docs](https://www.electron.build/multi-platform-build.html) for more information
 
 #### Build for current operating system
 ```sh
