@@ -8,6 +8,8 @@ You can find it [here](https://tracker.zaxu.xyz).
 
 Beta Electron builds can be found [here](https://zaxu.xyz/tracker_builds)
 
+This repository holds the frontend for the website, the [backend is in a separate repo](https://github.com/zaxutic/kh-rando-tracker-backend).
+
 ## Building
 
 This is for people who want to help develop the tracker, or build it from source.
