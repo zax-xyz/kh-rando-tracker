@@ -8,7 +8,7 @@
 
     p The GitHub repository with the code for this site can be found #[a(href="https://github.com/zaxutic/kh-rando-tracker" target="_blank") here].
 
-    p If you have any questions/issues, you can find me in the #[a(href="https://discord.gg/KwfqM6GYzd" target="_blank") KH2FM Rando Discord] server (michael_#6969, nickname zax), #[a(href="https://twitter.com/z_ax__" target="_blank") Twitter], or GitHub.
+    p If you have any questions/issues, you can find me in the #[a(href="https://discord.gg/KwfqM6GYzd" target="_blank") KH2FM Rando Discord] server or #[a(href="https://discord.gg/xPPCNDPdmG" target="_blank") KHFM Rando Discord] (michael_#6969, nickname zax), #[a(href="https://twitter.com/z_ax__" target="_blank") Twitter], or GitHub.
 
     p Please also check out the #[router-link(to="thanks") Thanks/Credit page] for a list of people who've contributed to or inspired this project in some way.
 </template>
