@@ -1,12 +1,12 @@
 {
-  "name": "kh2fm-rando-tracker",
+  "name": "kh-rando-tracker",
   "version": "2.8.2",
   "private": true,
   "author": {
     "name": "Michael Vo",
     "email": "zax@zaxu.xyz"
   },
-  "homepage": "https://github.com/zaxutic/kh2fm-rando-tracker",
+  "homepage": "https://github.com/zaxutic/kh-rando-tracker",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
