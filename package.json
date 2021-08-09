@@ -1,11 +1,12 @@
 {
   "name": "kh-rando-tracker",
-  "version": "2.8.4",
+  "version": "2.8.5",
   "private": true,
   "author": {
     "name": "Michael Vo",
     "email": "zax@zaxu.xyz"
   },
+  "description": "A tracker for the Kingdom Hearts 1 Final Mix (KH1FM) and Kingdom Hearts 2 Final Mix (KH2FM) Randomizers. Created by Z_ax, icons by Televo.",
   "homepage": "https://github.com/zaxutic/kh-rando-tracker",
   "scripts": {
     "serve": "vue-cli-service serve",
