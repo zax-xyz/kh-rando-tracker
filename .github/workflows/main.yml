@@ -32,6 +32,9 @@ jobs:
           # release the app after building
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
+          skip_build: true
+          use_vue_cli: true
+
       # - name: Deploy 🚀
       #   uses: JamesIves/github-pages-deploy-action@releases/v3
       #   with:
