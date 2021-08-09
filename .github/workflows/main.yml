@@ -45,7 +45,7 @@ jobs:
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
-        if: ! startsWith(matrix.os, 'ubuntu')
+        if: "!startsWith(matrix.os, 'ubuntu')"
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
