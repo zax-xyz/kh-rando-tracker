@@ -6,7 +6,7 @@ The idea for this tracker came from [ViolinGamer](https://twitter.com/ViolinGame
 
 You can find it [here](https://tracker.zaxu.xyz).
 
-Beta Electron builds can be found [here](https://zaxu.xyz/tracker_builds)
+Electron desktop application builds can be found [here](https://github.com/zaxutic/kh-rando-tracker/releases)
 
 This repository holds the frontend for the website, the [backend is in a separate repo](https://github.com/zaxutic/kh-rando-tracker-backend).
 
