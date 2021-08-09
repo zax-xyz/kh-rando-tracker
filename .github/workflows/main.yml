@@ -29,6 +29,12 @@ jobs:
       #     npm install
       #     npm run build
 
+      - name: Move icon into subdirectory
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          mkdir build/icons
+          mv build/icon.png build/icons/
+
       - name: Build/release Electron app (Linux)
         uses: samuelmeuli/action-electron-builder@v1
         if: startsWith(matrix.os, 'ubuntu')
