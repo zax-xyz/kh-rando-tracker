@@ -1,6 +1,14 @@
 <template lang="pug">
   div
     h1 Recent Update Changelog
+    
+    section
+      h2 Wednesday 11 August 2021
+
+      .added
+        h3 Added
+        ul
+          li #[.game KH1] Added summon gems on right-click for Simba, Bambi, Dumbo, and Mushu.
 
     section
       h2 Wednesday 4 August 2021
@@ -8,7 +16,7 @@
       .fixed
         h3 Fixed
         ul
-          li [KH2 Important Checks Mode] Fixed the checks popup (middle click) on locations not displaying the icons properly
+          li #[.game KH2 Important Checks Mode] Fixed the checks popup (middle click) on locations not displaying the icons properly
 
     section
       h2 Tuesday 27 July 2021
@@ -21,8 +29,8 @@
       .changed
         h3 Changed
         ul
-          li [KH1] #[strong Disabled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled. (Settings &gt; KH1 &gt; Show Crystal Trident). You can also remove it manually in rearrange mode (Settings &gt; Normal).
-          li [KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer. If autosave is enabled, this will not come into effect until the tracker gets reset.
+          li #[.game KH1] #[strong Disabled Crystal Trident] by default as it is not required for progression. Note that all existing saved settings will be respected, so if you had it enabled before, it will still be enabled. (Settings &gt; KH1 &gt; Show Crystal Trident). You can also remove it manually in rearrange mode (Settings &gt; Normal).
+          li #[.game KH1] #[strong Removed Navi-G pieces] as they are no longer required in the randomizer. If autosave is enabled, this will not come into effect until the tracker gets reset.
 
     section
       h2 Wednesday 14 July 2021
@@ -32,15 +40,15 @@
       .added
         h3 Added
         ul
-          li [KH1] #[strong Destiny islands progression icons].
-          li [KH1] Add #[strong presents] to Wonderland progression.
-          li [KH1] Add #[strong barrels] to Olympus Coliseum progression.
-          li [KH1] #[strong Cups progression icons].
-          li [KH1] Add #[strong Dragon Malificent] for Hollow Bastion progression.
-          li [KH1] #[strong Progression icons for dalmations for each reward]. These will be #[strong automatically activated once you find the corresponding amount of dalmations].
-          li [KH1] #[strong Icon style settings] for #[strong Destiny Islands items] (Raft Supplies). This was meant to be added long ago but I forgot about them.
-          li [KH2] #[strong Atlantica progression icons].
-          li [KH3] #[strong New icon for data org] and added icons for #[strong flantastic seven] and #[strong lucky emblems].
+          li #[.game KH1] #[strong Destiny islands progression icons].
+          li #[.game KH1] Add #[strong presents] to Wonderland progression.
+          li #[.game KH1] Add #[strong barrels] to Olympus Coliseum progression.
+          li #[.game KH1] #[strong Cups progression icons].
+          li #[.game KH1] Add #[strong Dragon Malificent] for Hollow Bastion progression.
+          li #[.game KH1] #[strong Progression icons for dalmations for each reward]. These will be #[strong automatically activated once you find the corresponding amount of dalmations].
+          li #[.game KH1] #[strong Icon style settings] for #[strong Destiny Islands items] (Raft Supplies). This was meant to be added long ago but I forgot about them.
+          li #[.game KH2] #[strong Atlantica progression icons].
+          li #[.game KH3] #[strong New icon for data org] and added icons for #[strong flantastic seven] and #[strong lucky emblems].
 
     section
       h2 Monday 21 Jun 2021
@@ -48,8 +56,8 @@
       .added
         h3 Added
         ul
-          li [KH1] #[strong Added tombstones progression icon to Halloween Town and Cid progression icon to Traverse Town]. Thanks to #[router-link(to="thanks#televo") Televo] for these.
-          li [KH1] #[strong Added new icons for Jack In The Box and Library Books]. The old styles are available through the minimal settings (Settings &gt; Icon Styles). Thanks again to #[router-link(to="thanks#televo") Televo] for these.
+          li #[.game KH1] #[strong Added tombstones progression icon to Halloween Town and Cid progression icon to Traverse Town]. Thanks to #[router-link(to="thanks#televo") Televo] for these.
+          li #[.game KH1] #[strong Added new icons for Jack In The Box and Library Books]. The old styles are available through the minimal settings (Settings &gt; Icon Styles). Thanks again to #[router-link(to="thanks#televo") Televo] for these.
 
       .fixed
         h3 Fixed
@@ -371,10 +379,13 @@ h3
 strong
   font-style italic
 
-highlight-colors(color)
+highlight-colors($color)
   h3
   strong
-    color color
+    color $color
+
+  .game
+    color $color
 
 .added
   highlight-colors hsl($green-hue, 60%, 75%)
@@ -384,4 +395,15 @@ highlight-colors(color)
 
 .fixed
   highlight-colors hsl($orange-hue, 90%, 65%)
+
+.game
+  display inline
+  margin-right .5ch
+  font-style italic
+
+  &::before
+    content '['
+
+  &::after
+    content ']'
 </style>
