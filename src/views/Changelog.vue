@@ -4,11 +4,13 @@
     
     section
       h2 Wednesday 11 August 2021
+      
+      p Reset Tracker required for these changes if autosave is enabled.
 
       .added
         h3 Added
         ul
-          li #[.game KH1] Added summon gems on right-click for Simba, Bambi, Dumbo, and Mushu.
+          li #[.game KH1] Added summon gems on right-click for Simba, Bambi, Dumbo, and Mushu. Thanks to #[router-link(to="thanks#televo") Televo] for the icons!
 
     section
       h2 Wednesday 4 August 2021
