@@ -46,7 +46,7 @@ export default class extends Vue {
     else document.title = "KH Item Tracker";
   }
 
-  async mounted() {
+  async created() {
     document.body.onmousedown = (event: MouseEvent) => {
       if (event.button === 1)
         // Prevent autoscroll on middle click
