@@ -47,7 +47,7 @@ export default class extends Vue {
 
   created() {
     if (!this.$store.state.settings.autosave) {
-      this.$store.commit("tracker/resetState");
+      this.$store.dispatch("tracker/resetState");
       this.$store.commit("tracker_important/resetState");
     }
 
