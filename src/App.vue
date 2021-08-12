@@ -46,7 +46,13 @@ export default class extends Vue {
     else document.title = "KH Item Tracker";
   }
 
-  async created() {
+  async mounted() {
+    document.body.onmousedown = (event: MouseEvent) => {
+      if (event.button === 1)
+        // Prevent autoscroll on middle click
+        return false;
+    };
+
     if (!this.$store.state.settings.autosave) {
       this.$store.dispatch("tracker/resetState");
       this.$store.commit("tracker_important/resetState");
@@ -68,14 +74,6 @@ export default class extends Vue {
     }
 
     this.$store.commit("updateVersion");
-  }
-
-  mounted() {
-    document.body.onmousedown = (event: MouseEvent) => {
-      if (event.button === 1)
-        // Prevent autoscroll on middle click
-        return false;
-    };
   }
 
   get route(): Route {
