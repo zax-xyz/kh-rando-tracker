@@ -143,6 +143,10 @@ const routes: Array<RouteConfig> = [
     meta: { title: "Remote View", full: true },
     component: Remote,
   },
+  {
+    path: "/(.+)",
+    redirect: "/",
+  },
 ];
 
 const router = new VueRouter({
