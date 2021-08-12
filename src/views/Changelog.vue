@@ -3,6 +3,14 @@
     h1 Recent Update Changelog
     
     section
+      h2 Thursday 12 August 2021
+
+      .fixed
+        h3 Fixed
+        ul
+          li Fixed #[strong disabling autosave not working] outside of KH2 Important Checks Mode.
+    
+    section
       h2 Wednesday 11 August 2021
       
       p Reset Tracker required for these changes if autosave is enabled.
