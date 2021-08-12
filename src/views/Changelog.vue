@@ -334,21 +334,6 @@
           li Typo in settings tooltip
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { State, Mutation } from "vuex-class";
-
-@Component
-export default class Changelog extends Vue {
-  @State currVersion!: string;
-  @Mutation updateVersion!: Function;
-
-  mounted() {
-    this.updateVersion();
-  }
-}
-</script>
-
 <style lang="stylus" scoped>
 h1
   font-size 2.2em

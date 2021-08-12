@@ -23,6 +23,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
+import semver from "semver";
 
 const BaseGrid = () => import("./components/BaseGrid.vue");
 const ImportantGrid = () => import("./components/ImportantGrid.vue");
@@ -45,79 +46,28 @@ export default class extends Vue {
     else document.title = "KH Item Tracker";
   }
 
-  created() {
+  async created() {
     if (!this.$store.state.settings.autosave) {
       this.$store.dispatch("tracker/resetState");
       this.$store.commit("tracker_important/resetState");
     }
 
-    // settings migrations
-    const oldIconSettings = this.$store.state.settings.iconStyle;
-    if (oldIconSettings) {
-      Object.entries(oldIconSettings).forEach(([key, value]) => {
-        this.$store.commit("settings/setIconStyle", { name: key, value });
-      });
-      this.$store.commit("settings/wipeOldIconSettings");
-    }
-
-    const oldItemNums = this.$store.state.settings.itemNums;
-    if (oldItemNums) {
-      this.$store.commit("settings/setNums", { game: Game.KH2, nums: oldItemNums });
-      this.$store.commit("settings/wipeOldNums");
-    }
-
-    ["size", "padding"].forEach(s => {
-      const setting = this.$store.state.settings[s];
-      if (setting && !isNaN(Number(setting))) {
-        // @ts-ignore
-        this.$store.commit("settings/setSettings", { [s]: setting + "px" });
-      }
-    });
-
-    // migration to 2.4.3 with single tracker module
-    let oldState = this.$store.state.tracker?.clients?.self;
-    if (oldState?.["worlds/simulated_twilight_town"] !== undefined) {
-      this.$store.commit("tracker/addClient", { client: "self" });
-      this.$store.commit("tracker/addGame", {
-        client: "self",
-        game: Game.KH2,
-        items: oldState,
-      });
-      this.$store.commit("tracker/removeClient", { client: "clients" });
-    }
-
-    oldState = this.$store.state.tracker_1fm?.clients?.self;
-    if (oldState !== undefined) {
-      this.$store.commit("tracker/addGame", {
-        client: "self",
-        game: Game.KH1,
-        items: oldState,
-      });
-      this.$store.commit("deleteProperty", "tracker_1fm");
-    }
-
-    oldState = this.$store.state.tracker_other?.clients?.self;
-    if (oldState !== undefined) {
-      for (const game in oldState) {
-        this.$store.commit("tracker/addGame", {
-          client: "self",
-          game,
-          items: oldState[game],
-        });
-      }
-      this.$store.commit("deleteProperty", "tracker_other");
-    }
-
-    if (
-      this.$store.state.settings.game !== Game.KH2_IC &&
-      this.$store.getters["tracker/items"]("self") === undefined
-    ) {
-      this.$store.dispatch("tracker/addClient", "self");
+    let version = this.$store.state.version;
+    if (semver.valid(version) && semver.lt(version, "2.4.3")) {
+      const { migrate } = await import("./migrations/2.4.3");
+      await migrate(this.$store);
     }
 
     if (this.$route.query.footer === "0") {
       this.$store.commit("toggleFooter");
     }
+
+    version = this.$store.state.version;
+    if (version && version !== this.$store.state.currVersion) {
+      this.$router.push("changelog");
+    }
+
+    this.$store.commit("updateVersion");
   }
 
   mounted() {
@@ -126,11 +76,6 @@ export default class extends Vue {
         // Prevent autoscroll on middle click
         return false;
     };
-
-    const version = this.$store.state.version;
-    if (version && version !== this.$store.state.currVersion) {
-      this.$router.push("changelog");
-    }
   }
 
   get route(): Route {
