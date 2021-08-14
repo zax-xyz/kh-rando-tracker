@@ -44,7 +44,7 @@ export const items: Items = {
   }),
   ...mapItems(
     ["fire", "blizzard", "thunder", "cure", "aero", "water"].map(i => `magic/${i}`),
-    item({ total: 3, category: "magic", cls: "magic" }),
+    item({ total: 3, category: "magic", cls: "magic" })
   ),
   ...mapItems(
     [
@@ -54,7 +54,7 @@ export const items: Items = {
       "summons/ariel",
       "summons/ohana",
     ],
-    item({ category: "summons" }),
+    item({ category: "summons" })
   ),
   "other/data_reports": item({ total: 13, category: "reports" }),
   "other/flantastic_seven": item({ total: 7, category: "flan" }),
@@ -70,8 +70,14 @@ export const items: Items = {
 };
 
 // preload all the number images we use
-for (let i = 0; i <= 3; i++) {
+const nums = [];
+for (let i = 1; i <= 15; i++) nums.push(i);
+for (let i = 25; i <= 50; i += 5) nums.push(i);
+for (let i = 60; i < 100; i += 10) nums.push(i);
+nums.push(99);
+
+nums.forEach(i => {
   // Apparently creating an image object like this loads it even if it's not added to the page
   const image = new Image();
-  image.src = `/img/progression/numbers/${i + 1}.webp`;
-}
+  image.src = `/img/progression/numbers/${i}.webp`;
+});

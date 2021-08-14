@@ -9,6 +9,8 @@
         h3 Fixed
         ul
           li Fixed #[strong disabling autosave not working] outside of KH2 Important Checks Mode.
+          li Fixed number image preloading (for real this time).
+          li Navigating to an invalid route (e.g. #[code /next/]) now redirects you to #[code /] instead of showing a darkened screen as if displaying a popup.
     
     section
       h2 Wednesday 11 August 2021
