@@ -41,7 +41,7 @@
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "electron": "^9.0.0",
+    "electron": "^11.5.0",
     "electron-devtools-installer": "^3.1.0",
     "prettier": "^2.2.1",
     "pug": "^3.0.1",
