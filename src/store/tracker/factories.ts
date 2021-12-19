@@ -41,7 +41,8 @@ export const magic = (options?: Partial<Item>): Item => ({
 export const levelNumbers = [
   ...[...Array(15).keys()].map(i => i + 1),
   ...[...Array(6).keys()].map(i => 20 + i * 5),
-  ...[...Array(6).keys()].map(i => 50 + i * 10),
+  ...[...Array(5).keys()].map(i => 50 + i * 10),
+  99,
 ];
 
 export const levels = (options?: Partial<Item>): Item => ({
