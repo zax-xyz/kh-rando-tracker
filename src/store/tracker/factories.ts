@@ -22,16 +22,18 @@ export const item = (options?: Partial<Item>): Item => ({
 });
 
 export const world = (options?: Partial<Item>): Item => ({
-  ...item(),
-  category: "worlds",
-  categoryExclude: IconStyle.CLASSIC,
-  ...parseOptions(options),
+  ...item({
+    category: "worlds",
+    categoryExclude: IconStyle.CLASSIC,
+    ...options,
+  }),
 });
 
 export const magic = (options?: Partial<Item>): Item => ({
-  ...item(),
-  total: 3,
-  category: "magic",
-  cls: "magic",
-  ...parseOptions(options),
+  ...item({
+    total: 3,
+    category: "magic",
+    cls: "magic",
+    ...options,
+  }),
 });
