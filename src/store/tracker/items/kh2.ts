@@ -1,6 +1,6 @@
-import { IconStyle } from "../../settings";
 import { CHEST, Items, mapItems } from "../state";
 import { item, levels, magic, proof, world } from "../factories";
+import { preloadNums } from "../util";
 
 export const items: Items = {
   // Worlds
@@ -208,14 +208,4 @@ export const items: Items = {
   ),
 };
 
-// preload all the number images we use
-const nums = [];
-for (let i = 1; i <= 15; i++) nums.push(i);
-for (let i = 25; i <= 50; i += 5) nums.push(i);
-for (let i = 60; i < 100; i += 10) nums.push(i);
-
-nums.forEach(i => {
-  // Apparently creating an image object like this loads it even if it's not added to the page
-  const image = new Image();
-  image.src = `/img/progression/numbers/${i}.webp`;
-});
+preloadNums(items);
