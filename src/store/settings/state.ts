@@ -119,7 +119,7 @@ export const state = {
     },
     proofs: {
       title: "Proofs",
-      games: [Game.KH2, Game.KH2_IC],
+      games: [Game.KH2, Game.KH2_IC, Game.KH3],
       options: [IconStyle.CLASSIC, IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
@@ -150,6 +150,18 @@ export const state = {
     raftSupplies: {
       title: "Raft Supplies",
       games: [Game.KH1],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    flan: {
+      title: "Flantastic Seven",
+      games: [Game.KH3],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    luckyEmblems: {
+      title: "Lucky Emblems",
+      games: [Game.KH3],
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },

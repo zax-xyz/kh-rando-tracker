@@ -11,4 +11,5 @@ export const migrate = async (store: Store<any>) => {
 
   // @ts-ignore
   store.state.settings.iconStyles.data.games = [Game.KH2, Game.KH3];
+  store.state.settings.iconStyles.proofs.games = [Game.KH2, Game.KH2_IC, Game.KH3];
 };

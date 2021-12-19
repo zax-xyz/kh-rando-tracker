@@ -81,7 +81,7 @@ export const items: Items = {
       ...[...Array(6).keys()].map(i => 20 + i * 5),
       ...[...Array(5).keys()].map(i => 50 + i * 10),
     ],
-    category: "lucky_emblems",
+    category: "luckyEmblems",
   }),
   ...mapItems(
     ["promises", "times_past", "fantasy"].map(i => `other/proof_of_${i}`),
