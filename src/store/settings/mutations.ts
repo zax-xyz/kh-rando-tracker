@@ -1,4 +1,4 @@
-import Vue from "vue/types/umd";
+import Vue from "vue";
 import { MutationTree } from "vuex";
 import { Game, IconStyle } from ".";
 import { kh1Settings, State } from "./state";
