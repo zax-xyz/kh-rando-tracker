@@ -55,9 +55,7 @@ export const items: Items = {
     ],
   }),
   "worlds/kh3/scala_ad_caelum": world(),
-  "worlds/kh3/100_acre_wood": world({
-    categoryExclude: IconStyle.CLASSIC,
-  }),
+  "worlds/kh3/100_acre_wood": world({ minimal: "worlds/100_acre_wood" }),
   "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),
   "other/sora's_level": levels(),
   ...mapItems(
