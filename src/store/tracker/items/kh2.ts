@@ -1,21 +1,20 @@
 import { IconStyle } from "../../settings";
-import { CHEST, item, Items, mapItems } from "../state";
+import { CHEST, Items, mapItems } from "../state";
+import { item, world } from "../factories";
 
 export const items: Items = {
   // Worlds
-  "worlds/simulated_twilight_town": item({
+  "worlds/simulated_twilight_town": world({
     data: "roxas",
     secondary: ["twilight_thorn", "struggle", "computer_room", "pod_room"].map(
-      i => `simulated_twilight_town/${i}`
+      i => `simulated_twilight_town/${i}`,
     ),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/twilight_town": item({
     total: 3,
     data: "axel",
     secondary: ["mysterious_tower", "berserkers", "mickey", "betwixt_and_between"].map(
-      i => `twilight_town/${i}`
+      i => `twilight_town/${i}`,
     ),
     category: "worlds",
   }),
@@ -25,17 +24,15 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["bailey", "ansem's_study", "dancers", "demyx_story", "1000_heartless", "sephiroth"].map(
-        i => `hollow_bastion/${i}`
+        i => `hollow_bastion/${i}`,
       ),
     ],
     category: "worlds",
   }),
-  "worlds/cavern_of_remembrance": item({
+  "worlds/cavern_of_remembrance": world({
     secondary: ["depths", "mining_area", "engine_chamber", "transport"].map(
-      i => `cavern_of_remembrance/${i}`
+      i => `cavern_of_remembrance/${i}`,
     ),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/land_of_dragons": item({
     total: 2,
@@ -43,7 +40,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["village_cave", "summit", "shan_yu", "snipers", "storm_rider"].map(
-        i => `land_of_dragons/${i}`
+        i => `land_of_dragons/${i}`,
       ),
     ],
     category: "worlds",
@@ -54,7 +51,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["thresholder", "beast", "dark_thorn", "dragoons", "xaldin_story"].map(
-        i => `beast's_castle/${i}`
+        i => `beast's_castle/${i}`,
       ),
     ],
     category: "worlds",
@@ -83,10 +80,8 @@ export const items: Items = {
     secondary: [CHEST, ...["minnie", "lingering_will"].map(i => `disney_castle/${i}`)],
     category: "worlds",
   }),
-  "worlds/timeless_river": item({
+  "worlds/timeless_river": world({
     secondary: [CHEST, ...["old_pete", "windows_of_time", "pete"].map(i => `timeless_river/${i}`)],
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/port_royal": item({
     total: 2,
@@ -94,7 +89,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["town", "isla_de_muerta", "barbossa", "gamblers", "grim_reaper"].map(
-        i => `port_royal/${i}`
+        i => `port_royal/${i}`,
       ),
     ],
     category: "worlds",
@@ -105,7 +100,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["abu", "chasm_of_challenges", "elemental_lords", "magic_switches", "jafar"].map(
-        i => `agrabah/${i}`
+        i => `agrabah/${i}`,
       ),
     ],
     category: "worlds",
@@ -116,7 +111,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["candy_cane_lane", "prison_keeper", "oogie_boogie", "presents", "experiment"].map(
-        i => `halloween_town/${i}`
+        i => `halloween_town/${i}`,
       ),
     ],
     category: "worlds",
@@ -133,7 +128,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["dataspace", "hostile_program", "solar_sailer", "master_control_program"].map(
-        i => `space_paranoids/${i}`
+        i => `space_paranoids/${i}`,
       ),
     ],
     category: "worlds",
@@ -143,7 +138,7 @@ export const items: Items = {
     secondary: [
       CHEST,
       ...["roxas", "xigbar", "luxord", "saix", "kingdom_hearts"].map(
-        i => `the_world_that_never_was/${i}`
+        i => `the_world_that_never_was/${i}`,
       ),
     ],
     category: "worlds",
@@ -164,7 +159,7 @@ export const items: Items = {
   "worlds/underdrome_cups": item({
     total: 5,
     secondary: ["pain_panic_cup", "cerberus_cup", "titan_cup", "goddess_cup", "hades_cup"].map(
-      c => `olympus_coliseum/${c}`
+      c => `olympus_coliseum/${c}`,
     ),
     category: "cups",
   }),
@@ -201,23 +196,23 @@ export const items: Items = {
       secondaryMax: true,
       cls: "drive",
       category: "forms",
-    })
+    }),
   ),
 
   // Magic
   ...mapItems(
     ["magic/fire", "magic/blizzard", "magic/thunder"],
-    item({ total: 3, category: "magic", secondary: "other/duck", cls: "magic" })
+    item({ total: 3, category: "magic", secondary: "other/duck", cls: "magic" }),
   ),
   ...mapItems(
     ["magic/cure", "magic/reflect", "magic/magnet"],
-    item({ total: 3, category: "magic" })
+    item({ total: 3, category: "magic" }),
   ),
 
   // Summons
   ...mapItems(
     ["summons/chicken_little", "summons/genie", "summons/stitch", "summons/peter_pan"],
-    item({ total: 7, group: "summon", category: "summons" })
+    item({ total: 7, group: "summon", category: "summons" }),
   ),
 
   // Other
@@ -228,7 +223,7 @@ export const items: Items = {
     item({
       secondary: ["bronze", "silver", "gold"].map(i => `other/${i}`),
       category: "proofs",
-    })
+    }),
   ),
 };
 

@@ -1,52 +1,37 @@
 import { IconStyle } from "../../settings";
-import { item, Items, mapItems } from "../state";
+import { item, world } from "../factories";
+import { Items, mapItems } from "../state";
 
 export const items: Items = {
-  "worlds/kh3/olympus": item({
-    category: "worlds",
+  "worlds/kh3/olympus": world({
     minimal: "worlds/kh1/olympus_coliseum",
-    categoryExclude: IconStyle.CLASSIC,
     secondary: ["flame_core", "giant_troll", "rock_titan", "tornado_titan"].map(
       i => `olympus_coliseum/${i}`,
     ),
   }),
-  "worlds/kh3/twilight_town": item({
-    category: "worlds",
+  "worlds/kh3/twilight_town": world({
     minimal: "worlds/twilight_town",
-    categoryExclude: IconStyle.CLASSIC,
     secondary: ["keyblade_graveyard/demon_tide", "twilight_town/grand_bistrot"],
   }),
-  "worlds/kh3/toy_box": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/toy_box": world({
     secondary: ["gigas_mechs", "angelic_amber", "cactuar", "king_of_toys"].map(i => `toy_box/${i}`),
   }),
-  "worlds/kh3/kingdom_of_corona": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/kingdom_of_corona": world({
     secondary: ["chaos_carriage", "reaper", "grim_guardianess"].map(i => `kingdom_of_corona/${i}`),
   }),
-  "worlds/kh3/monstropolis": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/monstropolis": world({
     secondary: ["door_vault", "laugh_station", "lump_of_horror"].map(i => `monstropolis/${i}`),
   }),
-  "worlds/kh3/arendelle": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/arendelle": world({
     secondary: [
       "olympus_coliseum/giant_troll",
       ...["ice_labyrinth", "frost_serpents", "marshmallow", "skoll"].map(i => `arendelle/${i}`),
     ],
   }),
-  "worlds/kh3/caribbean": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/caribbean": world({
     secondary: ["lightning_angler", "crabs", "davy_jones"].map(i => `port_royal/${i}`),
   }),
-  "worlds/kh3/san_fransokyo": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/san_fransokyo": world({
     secondary: [
       "olympus_coliseum/giant_troll",
       ...["flash_tracer", "catastrochorus", "darkubes", "dark_baymax"].map(
@@ -54,11 +39,9 @@ export const items: Items = {
       ),
     ],
   }),
-  "worlds/kh3/dark_world": item({ category: "worlds", categoryExclude: IconStyle.CLASSIC }),
-  "worlds/kh3/final_world": item({ category: "worlds", categoryExclude: IconStyle.CLASSIC }),
-  "worlds/kh3/keyblade_graveyard": item({
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
+  "worlds/kh3/dark_world": world(),
+  "worlds/kh3/final_world": world(),
+  "worlds/kh3/keyblade_graveyard": world({
     secondary: [
       "hollow_bastion/1000_heartless",
       ...[
@@ -70,10 +53,8 @@ export const items: Items = {
       ].map(i => `keyblade_graveyard/${i}`),
     ],
   }),
-  "worlds/kh3/scala_ad_caelum": item({ category: "worlds", categoryExclude: IconStyle.CLASSIC }),
-  "worlds/kh3/100_acre_wood": item({
-    category: "worlds",
-    minimal: "worlds/100_acre_wood",
+  "worlds/kh3/scala_ad_caelum": world(),
+  "worlds/kh3/100_acre_wood": world({
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),

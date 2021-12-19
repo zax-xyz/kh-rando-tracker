@@ -1,25 +1,20 @@
 import { IconStyle } from "../../settings";
-import { item, Item, Items, mapItems } from "../state";
+import { item, world } from "../factories";
+import { Item, Items, mapItems } from "../state";
 
 export const items: Items = {
   // Worlds
-  "worlds/kh1/destiny_islands": item({
+  "worlds/kh1/destiny_islands": world({
     secondary: ["day_one", "day_two", "darkside"].map(i => `kh1/destiny_islands/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/traverse_town": item({
+  "worlds/kh1/traverse_town": world({
     total: 4,
     secondary: ["leon", "guard_armor", "opposite_armor", "cid"].map(i => `kh1/traverse_town/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/wonderland": item({
+  "worlds/kh1/wonderland": world({
     secondary: ["presents", "card_soldiers", "trickmaster"].map(i => `kh1/wonderland/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/olympus_coliseum": item({
+  "worlds/kh1/olympus_coliseum": world({
     data: ["ice_titan", "sephiroth"],
     secondary: [
       "barrels",
@@ -31,72 +26,52 @@ export const items: Items = {
       "ice_titan",
       "sephiroth",
     ].map(i => `kh1/olympus_coliseum/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/deep_jungle": item({
+  "worlds/kh1/deep_jungle": world({
     secondary: ["sabor", "black_fruit", "clayton"].map(i => `kh1/deep_jungle/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/agrabah": item({
+  "worlds/kh1/agrabah": world({
     minimal: "worlds/agrabah",
     data: "kurt_zisa",
     secondary: ["pot_centipede", "cave_of_wonders", "jafar", "kurt_zisa"].map(
-      i => `kh1/agrabah/${i}`
+      i => `kh1/agrabah/${i}`,
     ),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/monstro": item({
+  "worlds/kh1/monstro": world({
     secondary: ["pinocchio_cage", "parasite_cage"].map(i => `kh1/monstro/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/halloween_town": item({
+  "worlds/kh1/halloween_town": world({
     minimal: "worlds/halloween_town",
     secondary: ["tombstones", "masked_children", "oogie_boogie", "oogie's_manor"].map(
-      i => `kh1/halloween_town/${i}`
+      i => `kh1/halloween_town/${i}`,
     ),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/atlantica": item({
+  "worlds/kh1/atlantica": world({
     secondary: ["shark", "ursula", "giant_ursula"].map(i => `kh1/atlantica/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/neverland": item({
+  "worlds/kh1/neverland": world({
     data: "phantom",
     secondary: ["anti_sora", "captain_hook", "phantom"].map(i => `kh1/neverland/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/hollow_bastion": item({
+  "worlds/kh1/hollow_bastion": world({
     total: 2,
     data: "xemnas",
     secondary: ["riku", "maleficent", "dragon_maleficent", "riku_ansem", "behemoth"].map(
-      i => `kh1/hollow_bastion/${i}`
+      i => `kh1/hollow_bastion/${i}`,
     ),
     minimal: "worlds/hollow_bastion",
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/end_of_the_world": item({
+  "worlds/kh1/end_of_the_world": world({
     secondary: ["behemoth", "chernabog", "final_rest"].map(i => `kh1/end_of_the_world/${i}`),
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/100_acre_wood": item({
+  "worlds/kh1/100_acre_wood": world({
     total: 6,
     minimal: "worlds/100_acre_wood",
     secondary: "100_acre_wood/torn_pages",
     secondaryTotal: 5,
     cls: "hundred_acre",
-    category: "worlds",
-    categoryExclude: IconStyle.CLASSIC,
   }),
-  "worlds/kh1/olympus_cups": item({
+  "worlds/kh1/olympus_cups": world({
     total: 4,
     secondary: [
       "hades_seed_40",
@@ -108,8 +83,6 @@ export const items: Items = {
       "hades_complete",
     ].map(i => `kh1/olympus_coliseum/${i}`),
     cls: "cups",
-    category: "cups",
-    categoryExclude: IconStyle.CLASSIC,
   }),
 
   // Level
@@ -148,9 +121,9 @@ export const items: Items = {
       category: "magic",
       popupTitle: "Select Spell Replaced",
       popupItems: ["fire", "blizzard", "thunder", "cure", "aero", "gravity", "stop"].map(
-        i => `magic/${i}`
+        i => `magic/${i}`,
       ),
-    })
+    }),
   ),
 
   // Summons
@@ -163,7 +136,7 @@ export const items: Items = {
       "summons/tinkerbell",
       ["summons/mushu", { secondary: ["kh1/summons/fireglow"] }],
     ],
-    item({ category: "summons" })
+    item({ category: "summons" }),
   ),
 
   "other/postcards": item({
@@ -190,7 +163,7 @@ export const items: Items = {
       ["trinities/yellow", { total: 4 }],
       ["trinities/white", { total: 10 }],
     ],
-    item({ category: "trinities" })
+    item({ category: "trinities" }),
   ),
 
   // Other
