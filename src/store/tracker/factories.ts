@@ -56,3 +56,11 @@ export const levels = (options?: Partial<Item>): Item => ({
     ...options,
   }),
 });
+
+export const proof = (options?: Partial<Item>): Item => ({
+  ...item({
+    secondary: ["bronze", "silver", "gold"].map(i => `other/${i}`),
+    category: "proofs",
+    ...options,
+  }),
+});

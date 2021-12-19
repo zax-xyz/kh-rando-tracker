@@ -1,5 +1,5 @@
 import { IconStyle } from "../../settings";
-import { item, levels, magic, world } from "../factories";
+import { item, levels, magic, proof, world } from "../factories";
 import { Items, mapItems } from "../state";
 
 export const items: Items = {
@@ -85,11 +85,8 @@ export const items: Items = {
     category: "lucky_emblems",
   }),
   ...mapItems(
-    ["other/proof_of_fantasy", "other/proof_of_promises", "other/proof_of_times_past"],
-    item({
-      secondary: ["bronze", "silver", "gold"].map(i => `other/${i}`),
-      category: "proofs",
-    }),
+    ["fantasy", "promises", "times_past"].map(i => `other/proof_of_${i}`),
+    proof(),
   ),
 };
 

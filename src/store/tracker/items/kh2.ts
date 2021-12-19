@@ -1,6 +1,6 @@
 import { IconStyle } from "../../settings";
 import { CHEST, Items, mapItems } from "../state";
-import { item, levels, magic, world } from "../factories";
+import { item, levels, magic, proof, world } from "../factories";
 
 export const items: Items = {
   // Worlds
@@ -203,11 +203,8 @@ export const items: Items = {
   "other/secret_reports": item({ total: 13, category: "reports" }),
   "other/promise_charm": item({ category: "charm" }),
   ...mapItems(
-    ["other/proof_of_nonexistence", "other/proof_of_connection", "other/proof_of_tranquility"],
-    item({
-      secondary: ["bronze", "silver", "gold"].map(i => `other/${i}`),
-      category: "proofs",
-    }),
+    ["nonexistence", "connection", "tranquility"].map(i => `other/proof_of_${i}`),
+    proof(),
   ),
 };
 
