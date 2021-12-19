@@ -59,7 +59,7 @@ export const state = {
     },
     data: {
       title: "Data Org",
-      games: [Game.KH2],
+      games: [Game.KH2, Game.KH3],
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
