@@ -59,8 +59,8 @@ export default class extends Vue {
     }
 
     let version = this.$store.state.version;
-    if (semver.valid(version) && semver.lt(version, "2.4.3")) {
-      const { migrate } = await import("./migrations/2.4.3");
+    if (semver.valid(version) && semver.lt(version, "2.10.0")) {
+      const { migrate } = await import("./migrations/2.10.0");
       await migrate(this.$store);
     }
 
