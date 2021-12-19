@@ -1,5 +1,5 @@
 import { IconStyle } from "../../settings";
-import { item, magic, world } from "../factories";
+import { item, levels, magic, world } from "../factories";
 import { Items, mapItems } from "../state";
 
 export const items: Items = {
@@ -58,20 +58,7 @@ export const items: Items = {
     categoryExclude: IconStyle.CLASSIC,
   }),
   "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),
-  "other/sora's_level": item({
-    total: 27,
-    showFirst: true,
-    level: 1,
-    numbers: [
-      ...[...Array(15).keys()].map(i => i + 1),
-      ...[...Array(6).keys()].map(i => 20 + i * 5),
-      ...[...Array(5).keys()].map(i => 50 + i * 10),
-      99,
-    ],
-    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
-    cls: "levels",
-    category: "levels",
-  }),
+  "other/sora's_level": levels(),
   ...mapItems(
     ["fire", "blizzard", "thunder", "cure", "aero", "water"].map(i => `magic/${i}`),
     magic(),

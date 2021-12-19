@@ -37,3 +37,22 @@ export const magic = (options?: Partial<Item>): Item => ({
     ...options,
   }),
 });
+
+export const levelNumbers = [
+  ...[...Array(15).keys()].map(i => i + 1),
+  ...[...Array(6).keys()].map(i => 20 + i * 5),
+  ...[...Array(6).keys()].map(i => 50 + i * 10),
+];
+
+export const levels = (options?: Partial<Item>): Item => ({
+  ...item({
+    total: 27,
+    level: 1,
+    showFirst: true,
+    numbers: levelNumbers,
+    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
+    cls: "levels",
+    category: "levels",
+    ...options,
+  }),
+});

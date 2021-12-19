@@ -1,5 +1,5 @@
 import { IconStyle } from "../../settings";
-import { item, magic, world } from "../factories";
+import { item, levelNumbers, levels, magic, world } from "../factories";
 import { Item, Items, mapItems } from "../state";
 
 export const items: Items = {
@@ -86,19 +86,7 @@ export const items: Items = {
   }),
 
   // Level
-  "other/sora's_level": item({
-    total: 27,
-    level: 1,
-    showFirst: true,
-    numbers: [
-      ...[...Array(15).keys()].map(i => i + 1),
-      ...[...Array(6).keys()].map(i => 20 + i * 5),
-      ...[...Array(6).keys()].map(i => 50 + i * 10),
-    ],
-    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
-    cls: "levels",
-    category: "levels",
-  }),
+  "other/sora's_level": levels({ numbers: levelNumbers.slice(0, -1).concat([100]) }),
 
   // Magic
   ...mapItems(

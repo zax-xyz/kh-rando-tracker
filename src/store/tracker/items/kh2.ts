@@ -1,6 +1,6 @@
 import { IconStyle } from "../../settings";
 import { CHEST, Items, mapItems } from "../state";
-import { item, magic, world } from "../factories";
+import { item, levels, magic, world } from "../factories";
 
 export const items: Items = {
   // Worlds
@@ -166,20 +166,7 @@ export const items: Items = {
   "worlds/replica_data": item({ total: 13, category: "data" }),
 
   // Level
-  "other/sora's_level": item({
-    total: 27,
-    showFirst: true,
-    level: 1,
-    numbers: [
-      ...[...Array(15).keys()].map(i => i + 1),
-      ...[...Array(6).keys()].map(i => 20 + i * 5),
-      ...[...Array(5).keys()].map(i => 50 + i * 10),
-      99,
-    ],
-    secondary: ["other/once_more", "other/second_chance", "other/survival_abilities"],
-    cls: "levels",
-    category: "levels",
-  }),
+  "other/sora's_level": levels(),
 
   // Drives
   ...mapItems(
