@@ -1,5 +1,6 @@
 import { Game } from "../settings";
 import type { Item as BaseItem } from "../types";
+import { parseOptions } from "./factories";
 
 export const CHEST = "other/chest";
 
@@ -22,7 +23,7 @@ export const mapItems = (keys: Array<string | [string, Partial<Item>]>, defaults
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
       // the key and options to add to the defaults, e.g. ["final", { category: "Final Form" }]
-      !Array.isArray(k) ? [k, { ...defaults }] : [k[0], { ...defaults, ...k[1] }],
+      !Array.isArray(k) ? [k, { ...defaults }] : [k[0], { ...defaults, ...parseOptions(k[1]) }],
     ),
   );
 

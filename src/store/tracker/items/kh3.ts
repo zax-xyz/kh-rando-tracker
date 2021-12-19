@@ -1,5 +1,5 @@
 import { IconStyle } from "../../settings";
-import { item, world } from "../factories";
+import { item, magic, world } from "../factories";
 import { Items, mapItems } from "../state";
 
 export const items: Items = {
@@ -74,7 +74,7 @@ export const items: Items = {
   }),
   ...mapItems(
     ["fire", "blizzard", "thunder", "cure", "aero", "water"].map(i => `magic/${i}`),
-    item({ total: 3, category: "magic", cls: "magic" }),
+    magic(),
   ),
   ...mapItems(
     [

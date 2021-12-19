@@ -1,5 +1,5 @@
 import { IconStyle } from "../../settings";
-import { item, world } from "../factories";
+import { item, magic, world } from "../factories";
 import { Item, Items, mapItems } from "../state";
 
 export const items: Items = {
@@ -105,20 +105,14 @@ export const items: Items = {
     [
       ...["fire", "blizzard", "thunder", "cure"].map((i): [string, Partial<Item>] => [
         `magic/${i}`,
-        {
-          secondary: "other/duck",
-          secondaryTotal: 1,
-          cls: "magic",
-        },
+        { secondary: "other/duck" },
       ]),
       ...["aero", "gravity", "stop"].map((i): [string, Partial<Item>] => [
         `magic/${i}`,
         { categoryExclude: IconStyle.CLASSIC },
       ]),
     ],
-    item({
-      total: 3,
-      category: "magic",
+    magic({
       popupTitle: "Select Spell Replaced",
       popupItems: ["fire", "blizzard", "thunder", "cure", "aero", "gravity", "stop"].map(
         i => `magic/${i}`,

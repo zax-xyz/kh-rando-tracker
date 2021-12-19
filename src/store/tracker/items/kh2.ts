@@ -1,6 +1,6 @@
 import { IconStyle } from "../../settings";
 import { CHEST, Items, mapItems } from "../state";
-import { item, world } from "../factories";
+import { item, magic, world } from "../factories";
 
 export const items: Items = {
   // Worlds
@@ -202,12 +202,9 @@ export const items: Items = {
   // Magic
   ...mapItems(
     ["magic/fire", "magic/blizzard", "magic/thunder"],
-    item({ total: 3, category: "magic", secondary: "other/duck", cls: "magic" }),
+    magic({ secondary: "other/duck" }),
   ),
-  ...mapItems(
-    ["magic/cure", "magic/reflect", "magic/magnet"],
-    item({ total: 3, category: "magic" }),
-  ),
+  ...mapItems(["magic/cure", "magic/reflect", "magic/magnet"], magic()),
 
   // Summons
   ...mapItems(

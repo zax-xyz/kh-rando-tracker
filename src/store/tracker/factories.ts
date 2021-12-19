@@ -1,6 +1,12 @@
 import { IconStyle } from "../settings";
 import type { Item } from "./state";
 
+export const parseOptions = (options?: Partial<Item>): Partial<Item> => ({
+  opaque: options?.level ? true : false,
+  secondaryTotal: options?.secondary ? 1 : 0,
+  ...options,
+});
+
 export const item = (options?: Partial<Item>): Item => ({
   total: 1,
   showFirst: false,
@@ -12,12 +18,20 @@ export const item = (options?: Partial<Item>): Item => ({
   disabled: false,
   isMinimal: false,
   correspondingItem: "",
-  ...options,
+  ...parseOptions(options),
 });
 
 export const world = (options?: Partial<Item>): Item => ({
   ...item(),
   category: "worlds",
   categoryExclude: IconStyle.CLASSIC,
-  ...options,
+  ...parseOptions(options),
+});
+
+export const magic = (options?: Partial<Item>): Item => ({
+  ...item(),
+  total: 3,
+  category: "magic",
+  cls: "magic",
+  ...parseOptions(options),
 });
