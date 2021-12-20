@@ -159,6 +159,12 @@ export const state = {
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
+    battlegates: {
+      title: "Battlegates",
+      games: [Game.KH3],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
     luckyEmblems: {
       title: "Lucky Emblems",
       games: [Game.KH3],

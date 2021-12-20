@@ -41,7 +41,7 @@ export const items: Items = {
     ],
   }),
   "worlds/kh3/dark_world": world(),
-  "worlds/kh3/final_world": world(),
+  "worlds/kh3/remind": world(),
   "worlds/kh3/keyblade_graveyard": world({
     secondary: [
       "hollow_bastion/1000_heartless",
@@ -74,6 +74,7 @@ export const items: Items = {
   ),
   "other/data_reports": item({ total: 13, category: "reports" }),
   "other/flantastic_seven": item({ total: 7, category: "flan" }),
+  "other/battlegates": item({ total: 14, category: "battlegates" }),
   "other/lucky_emblems": item({
     total: 26,
     numbers: [
