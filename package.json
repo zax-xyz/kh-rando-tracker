@@ -19,6 +19,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.6.5",
+    "eslint": "^8.5.0",
     "file-saver": "^2.0.2",
     "semver": "^6.3.0",
     "vue": "^2.6.11",
