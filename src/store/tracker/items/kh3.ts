@@ -41,7 +41,7 @@ export const items: Items = {
     ],
   }),
   "worlds/kh3/dark_world": world(),
-  "worlds/kh3/remind": world(),
+  "worlds/kh3/remind": world({ isMinimal: true }),
   "worlds/kh3/keyblade_graveyard": world({
     secondary: [
       "hollow_bastion/1000_heartless",
