@@ -43,7 +43,7 @@ export const state = {
   autosave: true,
 
   customDefaults: {} as { [key: string]: { [key: string]: any } },
-  game: Game.KH2_IC,
+  game: Game.KH3,
 
   iconStyles: {
     worlds: {
