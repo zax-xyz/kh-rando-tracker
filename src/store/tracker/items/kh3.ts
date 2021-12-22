@@ -41,7 +41,6 @@ export const items: Items = {
     ],
   }),
   "worlds/kh3/dark_world": world(),
-  "worlds/kh3/remind": world({ isMinimal: true }),
   "worlds/kh3/keyblade_graveyard": world({
     secondary: [
       "hollow_bastion/1000_heartless",
@@ -54,6 +53,7 @@ export const items: Items = {
       ].map(i => `keyblade_graveyard/${i}`),
     ],
   }),
+  "worlds/kh3/remind": world(),
   "worlds/kh3/scala_ad_caelum": world(),
   "worlds/kh3/100_acre_wood": world({ minimal: "worlds/100_acre_wood" }),
   "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),
