@@ -7,7 +7,12 @@
 
     h3 Right Click
     p Some items have icons that appear next to them upon right-click, cycling through these lists:
-    DefinitionsList(:definitions="definitions")
+    .defintions
+      Collapse(
+        v-for="(definitions, game) in gameDefinitions"
+        :name="game"
+      )
+        DefinitionsList(:definitions="definitions")
 
     h3 Middle Click
     p A red cross will be put over the item, for if a world/item is disabled in the seed. (Items can now be completely removed in rearrange mode.)
@@ -24,64 +29,101 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import BaseTooltip from "@/components/BaseTooltip.vue";
+import Collapse from "@/components/Collapse.vue";
 import DefinitionsList from "@/components/DefinitionsList.vue";
 
 @Component({
   components: {
     BaseTooltip,
+    Collapse,
     DefinitionsList,
   },
 })
 export default class HelpNormal extends Vue {
-  definitions: { [key: string]: string } = {
-    "Simulated Twilight Town":
-      "Defeated the Computer Room, Entered the Pod Room, Defeated Data Roxas",
+  gameDefinitions: { [key: string]: { [key: string]: string } } = {
+    KH2: {
+      "Simulated Twilight Town":
+        "Defeated the Computer Room, Entered the Pod Room, Defeated Data Roxas",
 
-    "Twilight Town":
-      "Cleared the First Visit, Cleared Sandlot Berserkers Fight, Cleared Old Mansion Nobodies Fight, Cleared Betwixt and Between Assassins Fight, Defeated Data Axel",
+      "Twilight Town":
+        "Cleared the First Visit, Cleared Sandlot Berserkers Fight, Cleared Old Mansion Nobodies Fight, Cleared Betwixt and Between Assassins Fight, Defeated Data Axel",
 
-    "Hollow Bastion":
-      "Cleared Bailey Samurai Fight, Activated Ansem’s Study Computer, Cleared Restoration Site Dancers Fight, Defeated Demyx, Cleared 1000 Heartless Fight, Defeated Sephiroth, Defeated Data Demyx",
+      "Hollow Bastion":
+        "Cleared Bailey Samurai Fight, Activated Ansem’s Study Computer, Cleared Restoration Site Dancers Fight, Defeated Demyx, Cleared 1000 Heartless Fight, Defeated Sephiroth, Defeated Data Demyx",
 
-    "Cavern of Remembrance":
-      "Opened Chests Before First Fight, Opened Chests Before Second Fight, Opened Remaining Chests, Cleared Transport to Remembrance Nobodies Fights",
+      "Cavern of Remembrance":
+        "Opened Chests Before First Fight, Opened Chests Before Second Fight, Opened Remaining Chests, Cleared Transport to Remembrance Nobodies Fights",
 
-    "Land of Dragons":
-      "Opened Starting Chests, Cleared Village Cave Fight, Cleared Timed Summit Fight, Defeated Shan Yu, Cleared Antechamber Snipers Fight, Defeated Storm Rider, Defeated Data Xigbar",
+      "Land of Dragons":
+        "Opened Starting Chests, Cleared Village Cave Fight, Cleared Timed Summit Fight, Defeated Shan Yu, Cleared Antechamber Snipers Fight, Defeated Storm Rider, Defeated Data Xigbar",
 
-    "Beast’s Castle":
-      "Opened Starting Chests, Defeated Thresholder and Possessor, Defeated The Beast, Defeated Dark Thorn, Cleared Entrance Hall Dragoon Fight, Defeated Xaldin, Defeated Data Xaldin",
+      "Beast’s Castle":
+        "Opened Starting Chests, Defeated Thresholder and Possessor, Defeated The Beast, Defeated Dark Thorn, Cleared Entrance Hall Dragoon Fight, Defeated Xaldin, Defeated Data Xaldin",
 
-    "Olympus Coliseum":
-      "Opened Starting Chests, Defeated Cerberus, Freed Meg at the Lock, Defeated Hydra, Defeated Hades, Defeated Zexion’s Absent Silhouette",
+      "Olympus Coliseum":
+        "Opened Starting Chests, Defeated Cerberus, Freed Meg at the Lock, Defeated Hydra, Defeated Hades, Defeated Zexion’s Absent Silhouette",
 
-    "Disney Castle/Timeless River":
-      "Opened Starting Chests, Cleared Minnie Escort Fights, Defeated Old Pete, Cleared Windows of Time Fights, Defeated Pete, Defeated Marluxia’s Absent Silhouette, Defeated Lingering Will",
+      "Disney Castle/Timeless River":
+        "Opened Starting Chests, Cleared Minnie Escort Fights, Defeated Old Pete, Cleared Windows of Time Fights, Defeated Pete, Defeated Marluxia’s Absent Silhouette, Defeated Lingering Will",
 
-    Agrabah:
-      "Opened Starting Chests, Cleared Abu Escort Minigame, Cleared Chasm of Challenges Fights, Defeated Volcano and Blizzard Lords, Activated Magic Switches, Defeated Genie Jafar, Defeated Lexaeus’ Absent Silhouette",
+      Agrabah:
+        "Opened Starting Chests, Cleared Abu Escort Minigame, Cleared Chasm of Challenges Fights, Defeated Volcano and Blizzard Lords, Activated Magic Switches, Defeated Genie Jafar, Defeated Lexaeus’ Absent Silhouette",
 
-    "Port Royal":
-      "Opened Starting Chests, Cleared Town Fight, Cleared Isla de Muerta Pirates Fight, Defeated Barbossa, Cleared Seadrift Keep Gamblers Fight, Defeated Grim Reaper, Defeated Data Luxord",
+      "Port Royal":
+        "Opened Starting Chests, Cleared Town Fight, Cleared Isla de Muerta Pirates Fight, Defeated Barbossa, Cleared Seadrift Keep Gamblers Fight, Defeated Grim Reaper, Defeated Data Luxord",
 
-    "Halloween Town":
-      "Opened Starting Chests, Cleared Candy Cane Lane Fight, Defeated Prison Keeper, Defeated Oogie Boogie, Cleared Presents Minigame, Defeated The Experiment, Defeated Vexen’s Absent Silhouette",
+      "Halloween Town":
+        "Opened Starting Chests, Cleared Candy Cane Lane Fight, Defeated Prison Keeper, Defeated Oogie Boogie, Cleared Presents Minigame, Defeated The Experiment, Defeated Vexen’s Absent Silhouette",
 
-    "Pride Lands":
-      "Opened Starting Chests, Talked to Simba at the Oasis, Defeated Scar, Defeated Groundshaker, Defeated Data Saix",
+      "Pride Lands":
+        "Opened Starting Chests, Talked to Simba at the Oasis, Defeated Scar, Defeated Groundshaker, Defeated Data Saix",
 
-    "Space Paranoids":
-      "Opened Starting Chests, Cleared Dataspace Fight, Defeated Hostile Program, Cleared Solar Sailer Fight, Defeated MCP, Defeated Larxene’s Absent Silhouette",
+      "Space Paranoids":
+        "Opened Starting Chests, Cleared Dataspace Fight, Defeated Hostile Program, Cleared Solar Sailer Fight, Defeated MCP, Defeated Larxene’s Absent Silhouette",
 
-    "The World That Never Was":
-      "Opened Starting Chests, Defeated Roxas, Defeated Xigbar, Defeated Luxord, Defeated Saix, Reached the Door to Kingdom Hearts, Defeated Data Xemnas",
+      "The World That Never Was":
+        "Opened Starting Chests, Defeated Roxas, Defeated Xigbar, Defeated Luxord, Defeated Saix, Reached the Door to Kingdom Hearts, Defeated Data Xemnas",
 
-    "100 Acre Wood":
-      "Opened Starting Chests, Cleared Blustery Rescue Minigame, Cleared Hunny Slider Minigame, Cleared Balloon Bounce Minigame, Cleared The Expotition Minigame, Cleared Hunny Pot Minigame",
+      "100 Acre Wood":
+        "Opened Starting Chests, Cleared Blustery Rescue Minigame, Cleared Hunny Slider Minigame, Cleared Balloon Bounce Minigame, Cleared The Expotition Minigame, Cleared Hunny Pot Minigame",
 
-    "Sora's level": "Obtained Second Chance, Once More, Second Chance and Once More",
-    "Drive Forms": "Growth Ability Counter (High Jump, Quick Run, Dodge Roll, Aerial Dodge, Glide)",
-    "The Three Proofs": "Obtained Bronze Crown, Silver Crown, Gold Crown",
+      "Sora's level": "Obtained Second Chance, Once More, Second Chance and Once More",
+      "Drive Forms":
+        "Growth Ability Counter (High Jump, Quick Run, Dodge Roll, Aerial Dodge, Glide)",
+      "The Three Proofs": "Obtained Bronze Crown, Silver Crown, Gold Crown",
+    },
+    KH3: {
+      Olympus:
+        "Cleared Flame Core Building Fight, Defeated Rock Troll, Defeated Rock Titan, Defeated Ice, Lava and Tornado Titans",
+
+      "Twilight Town": "Defeated Demon Tide, Collected Grand Bistrot Ingredients",
+
+      "Toy Box":
+        "Cleared Gigas Ground Floor Fight, Defeated Angelic Amber, Completed the Cactaur, Defeated King of Toys",
+
+      "Kingdom of Corona":
+        "Defeated Chaos Carriage, Cleared Night Reapers Fight, Defeated Grim Guardianess ",
+
+      Monstropolis: "Enter the Factory, Enter the Power Plant, Defeated Lump of Horror",
+
+      Arendelle:
+        "Defeated Rock Troll, Escaped the Ice Labyrinth, Cleared the Frost Serpents, Defeated Marshmallow, Defeated Skoll",
+
+      Caribbean: "Defeated Lightning Angler, Collected 300 Crabs, Defeated Davey Jones",
+
+      "San Fransokyo":
+        "Defeated Metal Troll, Cleared the Flash Tracer Course, Defeated Catastrochorus, Defeated Darkubes, Defeated Dark Baymax",
+
+      "Keyblade Graveyard":
+        "Cleared Infinite Heartless Fight, Escaped the Final World, Defeated Demon Tide, Defeated Xigbar, Riku Replica, Marluxia and Larxene, Defeated Terra-Xehanort, Vanitas, Saix and Xion, Reached the Portal to Scala ad Caelum",
+
+      ReMind:
+        "Defeated Dark Inferno, Defeated Terra-Xehanort, Cleared the Keyblade Graveyard, Defeated Darkside, Defeated Remind Armoured Xehanort",
+
+      "Sora's Level": "Obtained Second Chance, Once More, Second Chance and Once More",
+
+      "The Three Proofs": "Obtained Bronze Crown, Silver Crown, Gold Crown",
+    },
   };
 }
 </script>
