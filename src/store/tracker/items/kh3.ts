@@ -53,7 +53,15 @@ export const items: Items = {
       ].map(i => `keyblade_graveyard/${i}`),
     ],
   }),
-  "worlds/kh3/remind": world(),
+  "worlds/kh3/remind": world({
+    secondary: [
+      "kh3_superbosses/dark_inferno",
+      "kh3_superbosses/terra_xehanort",
+      "keyblade_graveyard/true_kingdom_hearts",
+      "kh1/destiny_islands/darkside",
+      "kh3_superbosses/armored_xehanort",
+    ],
+  }),
   "worlds/kh3/scala_ad_caelum": world(),
   "worlds/kh3/100_acre_wood": world({ minimal: "worlds/100_acre_wood" }),
   "worlds/kh3/data_seekers": item({ total: 13, category: "data" }),
