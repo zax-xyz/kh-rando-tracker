@@ -74,6 +74,13 @@ export default class extends Vue {
     }
 
     this.$store.commit("updateVersion");
+
+    if (
+      this.$store.state.settings.game !== Game.KH2_IC &&
+      this.$store.getters["tracker/items"]("self") === undefined
+    ) {
+      await this.$store.dispatch("tracker/addClient", "self");
+    }
   }
 
   get route(): Route {
