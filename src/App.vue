@@ -1,21 +1,10 @@
 <template lang="pug">
-#app(
-  @click.self="handleClick"
-  :class="{ transparent: route.name === 'remote' }"
-)
+#app(@click.self="handleClick" :class="{ transparent: route.name === 'remote' }")
   router-view(v-if="route.meta.full")
   template(v-else)
-    main(
-      @contextmenu="(e) => e.preventDefault()"
-      :style="mainStyle"
-    )
+    main(@contextmenu="e => e.preventDefault()" :style="mainStyle")
       ImportantGrid(v-if="game === Game.KH2_IC")
-      BaseGrid(
-        v-else
-        v-for="(_, client) in clients"
-        :key="client"
-        :clientId="client"
-      )
+      BaseGrid(v-else v-for="(_, client) in clients" :key="client" :clientId="client")
     TheFooter(v-if="footer")
     ModalView
 </template>
@@ -25,10 +14,10 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import semver from "semver";
 
-const BaseGrid = () => import("./components/BaseGrid.vue");
-const ImportantGrid = () => import("./components/ImportantGrid.vue");
+const BaseGrid = () => import("./components/tracker/normal/BaseGrid.vue");
+const ImportantGrid = () => import("./components/tracker/important/ImportantGrid.vue");
 import TheFooter from "./components/TheFooter.vue";
-import ModalView from "./components/ModalView.vue";
+import ModalView from "./components/menu/ModalView.vue";
 import { Game } from "@/store/settings";
 
 @Component({

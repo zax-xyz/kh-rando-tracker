@@ -44,7 +44,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import DefinitionsList from "@/components/DefinitionsList.vue";
+import DefinitionsList from "@/components/menu/DefinitionsList.vue";
 
 @Component({
   components: {

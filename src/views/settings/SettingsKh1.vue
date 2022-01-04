@@ -63,8 +63,8 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 
-import BaseTooltip from "@/components/BaseTooltip.vue";
-import SwitchSlider from "@/components/SwitchSlider.vue";
+import BaseTooltip from "@/components/menu/BaseTooltip.vue";
+import SwitchSlider from "@/components/menu/SwitchSlider.vue";
 import { Game, State } from "@/store/settings";
 
 @Component({

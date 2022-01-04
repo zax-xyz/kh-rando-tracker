@@ -49,8 +49,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 
-import BaseTooltip from "./BaseTooltip.vue";
-import SwitchSlider from "./SwitchSlider.vue";
+import BaseTooltip from "@/components/menu/BaseTooltip.vue";
+import SwitchSlider from "@/components/menu/SwitchSlider.vue";
 import { Game } from "@/store/settings";
 
 const tracker = namespace("tracker_important");

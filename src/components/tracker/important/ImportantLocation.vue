@@ -1,39 +1,29 @@
 <template lang="pug">
-  ImportantCell(
-    :class="{ active: settings.preselectWorld && selectedLocation === file }"
-    :width="settings.worldSize"
-    :file="file"
-    :hinted="hinted"
-    @click.left.exact.native="handleClick"
-    @click.left.ctrl.exact.native="removeCheck"
-    @click.left.shift.exact.native="showOther"
-    @click.middle.exact.native="showChecks = !showChecks"
-    @click.middle.shift.exact.native="disable({ cell: file })"
-   )
-    span.checksNumber(
-      v-if="cell.checks || cell.totalChecks > -1"
-      key="number"
-    ) {{ cell.checks }}
-      template(v-if="cell.totalChecks !== -1")
-        span(style="color: #fdbd8a")  / 
-        span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
-      template(v-else-if="willBeHinted")
-        span(style="color: #fdbd8a")  / 
-        span(style="color: hsl(0, 100%, 75%); opacity: .45") ?
+ImportantCell(
+  :class="{ active: settings.preselectWorld && selectedLocation === file }"
+  :width="settings.worldSize"
+  :file="file"
+  :hinted="hinted"
+  @click.left.exact.native="handleClick"
+  @click.left.ctrl.exact.native="removeCheck"
+  @click.left.shift.exact.native="showOther"
+  @click.middle.exact.native="showChecks = !showChecks"
+  @click.middle.shift.exact.native="disable({ cell: file })"
+)
+  span.checksNumber(v-if="cell.checks || cell.totalChecks > -1" key="number") {{ cell.checks }}
+    template(v-if="cell.totalChecks !== -1")
+      span(style="color: #fdbd8a") /
+      span(style="color: hsl(0, 100%, 75%)") {{ cell.totalChecks }}
+    template(v-else-if="willBeHinted")
+      span(style="color: #fdbd8a") /
+      span(style="color: hsl(0, 100%, 75%); opacity: 0.45") ?
 
-    .other(
-      v-if="cell.otherLevel"
-      key="other"
-    )
-      img(:src="`/img/progression/${otherFile}.webp`")
+  .other(v-if="cell.otherLevel" key="other")
+    img(:src="`/img/progression/${otherFile}.webp`")
 
-    template(v-slot:after)
-      transition(name="fade-in")
-        ChecksPopup(
-          v-if="showChecks"
-          :location="file"
-          key="checkPopup"
-        )
+  template(v-slot:after)
+    transition(name="fade-in")
+      ChecksPopup(v-if="showChecks" :location="file" key="checkPopup")
 </template>
 
 <script lang="ts">
@@ -166,7 +156,7 @@ export default class ImportantLocation extends Vue {
   width 100%
   padding-bottom 100%
   border-radius 50%
-  transform scale(0.75)
+  transform scale(.75)
   transition background .2s, border-radius .2s, transform .2s, box-shadow .2s
 
 .active >>> .item::before
@@ -204,5 +194,5 @@ export default class ImportantLocation extends Vue {
 .fade-in-leave-to
   opacity 0
   transform-origin top
-  transform translateX(-50%) translateY(-10px) scale(0.8)
+  transform translateX(-50%) translateY(-10px) scale(.8)
 </style>

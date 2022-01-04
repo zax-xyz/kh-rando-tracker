@@ -28,9 +28,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import BaseTooltip from "@/components/BaseTooltip.vue";
-import Collapse from "@/components/Collapse.vue";
-import DefinitionsList from "@/components/DefinitionsList.vue";
+import BaseTooltip from "@/components/menu/BaseTooltip.vue";
+import Collapse from "@/components/menu/Collapse.vue";
+import DefinitionsList from "@/components/menu/DefinitionsList.vue";
 
 @Component({
   components: {

@@ -1,12 +1,12 @@
 <template lang="pug">
-  SliderMulti(:ticks="options" v-model="value" width="200px")
+SliderMulti(:ticks="options" v-model="value" width="200px")
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import { IconStyle } from "@/store/settings";
-import SliderMulti from "@/components/SliderMulti.vue";
+import SliderMulti from "./SliderMulti.vue";
 
 @Component({
   components: {

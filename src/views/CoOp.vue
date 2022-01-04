@@ -1,49 +1,43 @@
 <template lang="pug">
-  div
-    p.footnote [Does not yet work with important checks mode]
+div
+  p.footnote [Does not yet work with important checks mode]
 
-    h1 Co-Op
+  h1 Co-Op
 
-    h2 Join Room
-    form(@submit.prevent="join")
-      .row.grid
-        input.long(
-          placeholder="Room ID"
-          v-model="joinRoomId"
-        )
-        div
-          button(type="submit") Join Room
-
-    h2 Create Room
-    form(@submit.prevent="create")
-      .row.grid
-        input.long(
-          placeholder="Room Size"
-          v-model.number="roomSize"
-        )
-        div
-          button(type="submit") Create Room
-
-    .row(v-if="message")
-      p {{ message }}
-
+  h2 Join Room
+  form(@submit.prevent="join")
     .row.grid
-      SwitchSlider(v-model="singleMode")
-      p.name Single Mode
+      input.long(placeholder="Room ID" v-model="joinRoomId")
+      div
+        button(type="submit") Join Room
 
-    template(v-if="link")
-      h3 OBS Browser Source Link
-      p
-        a(:href="link") {{ link }}
+  h2 Create Room
+  form(@submit.prevent="create")
+    .row.grid
+      input.long(placeholder="Room Size" v-model.number="roomSize")
+      div
+        button(type="submit") Create Room
 
-    .row
-      p.footnote Note: Everyone should join the room BEFORE doing anything on the tracker as the server doesn't save anyone's state, it only tells others what you add to it.
+  .row(v-if="message")
+    p {{ message }}
+
+  .row.grid
+    SwitchSlider(v-model="singleMode")
+    p.name Single Mode
+
+  template(v-if="link")
+    h3 OBS Browser Source Link
+    p
+      a(:href="link") {{ link }}
+
+  .row
+    p.footnote Note: Everyone should join the room BEFORE doing anything on the tracker as the server doesn't save anyone's state, it only tells others what you add to it.
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import SwitchSlider from "@/components/SwitchSlider.vue";
+import SwitchSlider from "@/components/menu/SwitchSlider.vue";
 
 @Component({
   components: {

@@ -79,7 +79,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import Collapse from "@/components/Collapse.vue";
+import Collapse from "@/components/menu/Collapse.vue";
 
 const trim = (str: string) => (str[0] === "#" ? str.substr(1) : str);
 

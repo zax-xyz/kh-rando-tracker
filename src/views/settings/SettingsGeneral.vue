@@ -56,8 +56,8 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { saveAs } from "file-saver";
 
-import BaseTooltip from "@/components/BaseTooltip.vue";
-import SwitchSlider from "@/components/SwitchSlider.vue";
+import BaseTooltip from "@/components/menu/BaseTooltip.vue";
+import SwitchSlider from "@/components/menu/SwitchSlider.vue";
 import { IconStyle, State } from "@/store/settings";
 
 @Component({

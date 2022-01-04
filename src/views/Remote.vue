@@ -1,15 +1,12 @@
 <template lang="pug">
-  div
-    BaseGrid(
-      v-if="ready"
-      clientId="self"
-    )
+div
+  BaseGrid(v-if="ready" clientId="self")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import BaseGrid from "@/components/BaseGrid.vue";
+import BaseGrid from "@/components/tracker/normal/BaseGrid.vue";
 
 @Component({
   components: {
