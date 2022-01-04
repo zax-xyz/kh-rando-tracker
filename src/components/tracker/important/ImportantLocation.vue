@@ -33,7 +33,6 @@ import { namespace } from "vuex-class";
 import ChecksPopup from "./ChecksPopup.vue";
 import ImportantCell from "./ImportantCell.vue";
 import type { Hint, Items, Location } from "@/store/tracker_important/state";
-import type { Item } from "@/store/types";
 import { formatItem } from "@/util";
 
 const tracker = namespace("tracker_important");
