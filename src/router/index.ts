@@ -1,24 +1,23 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
-const Info = () => import("@/views/Info.vue");
-const About = () => import("@/views/About.vue");
-const Help = () => import("@/views/Help.vue");
-const Changelog = () => import("@/views/Changelog.vue");
+const Info = () => import("@/views/info/Info.vue");
+const About = () => import("@/views/info/About.vue");
+const Help = () => import("@/views/info/Help.vue");
+const HelpNormal = () => import("@/views/info/HelpNormal.vue");
+const HelpImportant = () => import("@/views/info/HelpImportant.vue");
+const Thanks = () => import("@/views/info/Thanks.vue");
+const Changelog = () => import("@/views/info/Changelog.vue");
 
 const CoOp = () => import("@/views/CoOp.vue");
-const Settings = () => import("@/views/Settings.vue");
-const Thanks = () => import("@/views/Thanks.vue");
 
-const HelpNormal = () => import("@/views/HelpNormal.vue");
-const HelpImportant = () => import("@/views/HelpImportant.vue");
+const Settings = () => import("@/views/settings/Settings.vue");
+const SettingsGeneral = () => import("@/views/settings/SettingsGeneral.vue");
+const SettingsNormal = () => import("@/views/settings/SettingsNormal.vue");
+const SettingsImportant = () => import("@/views/settings/SettingsImportant.vue");
+const SettingsKh1 = () => import("@/views/settings/SettingsKh1.vue");
 
-const SettingsGeneral = () => import("@/views/SettingsGeneral.vue");
-const SettingsNormal = () => import("@/views/SettingsNormal.vue");
-const SettingsImportant = () => import("@/views/SettingsImportant.vue");
-const SettingsKh1 = () => import("@/views/SettingsKh1.vue");
-
-const IconStyles = () => import("@/views/IconStyles.vue");
+const IconStyles = () => import("@/views/settings/IconStyles.vue");
 const EditItem = () => import("@/views/EditItem.vue");
 
 const Remote = () => import("@/views/Remote.vue");
