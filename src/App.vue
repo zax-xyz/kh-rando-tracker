@@ -30,7 +30,7 @@ import { Game } from "@/store/settings";
 })
 export default class extends Vue {
   @Watch("$route", { immediate: true })
-  onRouteChange(to: Route, from: Route): void {
+  onRouteChange(to: Route, _from: Route): void {
     if (to.meta.title) document.title = `${to.meta.title} | KH Item Tracker`;
     else document.title = "KH Item Tracker";
   }

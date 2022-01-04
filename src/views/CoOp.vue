@@ -68,11 +68,11 @@ export default class Settings extends Vue {
     }
   }
 
-  join(event: Event): void {
+  join(_event: Event): void {
     this.$store.dispatch("co_op/join", { room: this.joinRoomId });
   }
 
-  create(event: Event): void {
+  create(_event: Event): void {
     this.$store.dispatch("co_op/create", { size: this.roomSize || 2, single: this.singleMode });
   }
 }
