@@ -32,7 +32,7 @@ module.exports = {
     camelcase: "error",
     "capitalized-comments": "off",
     "class-methods-use-this": "off",
-    "comma-dangle": "off",
+    "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": [
       "error",
       {
@@ -58,7 +58,7 @@ module.exports = {
     "func-names": "error",
     "func-style": ["error", "expression"],
     "function-call-argument-newline": ["error", "consistent"],
-    "function-paren-newline": "error",
+    "function-paren-newline": ["error", "multiline-arguments"],
     "generator-star-spacing": "error",
     "grouped-accessor-pairs": "error",
     "guard-for-in": "error",
