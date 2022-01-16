@@ -9,7 +9,7 @@ import tracker_important from "./tracker_important";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     drag: false,
     edit: false,
@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     reset({ commit, dispatch, rootState }) {
-      if ((rootState as any).settings.game === Game.KH2_IC) {
+      if (rootState.settings!.game === Game.KH2_IC) {
         commit("tracker_important/resetState");
       } else {
         dispatch("tracker/resetState");
@@ -60,3 +60,6 @@ export default new Vuex.Store({
     }),
   ],
 });
+
+export default store;
+export type Store = typeof store;
