@@ -8,7 +8,7 @@ div
   h3 Right Click
   p Some items have icons that appear next to them upon right-click, cycling through these lists:
   .defintions
-    Collapse(v-for="(definitions, game) in gameDefinitions" :name="game")
+    Collapse(v-for="(definitions, game) in gameDefinitions" :name="game" :key="game")
       DefinitionsList(:definitions="definitions")
 
   h3 Middle Click
