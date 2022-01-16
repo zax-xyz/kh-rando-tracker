@@ -1,48 +1,32 @@
 <template lang="pug">
-  footer
-    .container
-      .info KH Item Tracker - Version {{ version }}
+footer
+  .container
+    .info KH Item Tracker - Version {{ version }}
 
-      .buttons
-        router-link(
-          v-for="route in routes"
-          :to="route"
-          :key="route"
-          tag="button"
-        ) {{ title(route) }}
-        button(@click="reset") Reset Tracker
+    .buttons
+      router-link(v-for="route in routes" :to="route" :key="route" tag="button") {{ title(route) }}
+      button(@click="reset") Reset Tracker
 
-      .buttons
-        label(for="game") Game
-        select(name="game" v-model="game")
-          option(:value="Game.KH2" selected) KH2
-          option(:value="Game.KH2_IC") KH2 (Important Checks Mode)
-          option(:value="Game.KH1") KH1
-          option(:value="Game.COM") CoM
-          option(:value="Game.DAYS") Days
-          option(:value="Game.BBS") BBS
-          option(:value="Game.CODED") Coded
-          option(:value="Game.DDD") DDD
-          option(:value="Game.KH3") KH3
+    .buttons
+      label(for="game") Game
+      select(name="game" v-model="game")
+        option(:value="Game.KH2" selected) KH2
+        option(:value="Game.KH2_IC") KH2 (Important Checks Mode)
+        option(:value="Game.KH1") KH1
+        option(:value="Game.COM") CoM
+        option(:value="Game.DAYS") Days
+        option(:value="Game.BBS") BBS
+        option(:value="Game.CODED") Coded
+        option(:value="Game.DDD") DDD
+        option(:value="Game.KH3") KH3
 
-      .buttons(
-        v-if="game === Game.KH2_IC"
-      )
-        button(
-          :class="{ success: hintsLoaded }"
-          @click="selectHints"
-        ) Upload Hints
-        input(
-          ref="file"
-          type="file"
-          accept=".txt,.hint"
-          hidden
-          @change="loadHints"
-        )
+    .buttons(v-if="game === Game.KH2_IC")
+      button(:class="{ success: hintsLoaded }" @click="selectHints") Upload Hints
+      input(ref="file" type="file" accept=".txt,.hint" hidden @change="loadHints")
 
-      .buttons
-        button(@click="popout") Popout window
-        button(@click="hideFooter") Hide Footer
+    .buttons
+      button(@click="popout") Popout window
+      button(@click="hideFooter") Hide Footer
 </template>
 
 <script lang="ts">
@@ -65,6 +49,7 @@ export default class TheFooter extends Vue {
   @tracker.State hintsLoaded!: boolean;
 
   routes: Array<string> = ["info", "co-op", "settings"];
+  // eslint-disable-next-line no-undef
   version = process.env.PACKAGE_VER;
 
   title(route: string): string {
@@ -160,9 +145,9 @@ select
   color white
   text-align center
   border 0
-  border-radius 3px;
-  box-shadow 0 2px 4px rgba(0, 0, 0, 0.2)
-  transition background-color 0.2s
+  border-radius 3px
+  box-shadow 0 2px 4px rgba(0, 0, 0, .2)
+  transition background-color .2s
 
   &:hover
     background #333

@@ -1,23 +1,23 @@
 <template lang="pug">
-  draggable.grid(
-    tag="transition-group"
-    :componentData="componentData"
-    :style="gridStyle"
-    :class="{ disableShadows: disableShadows }"
-    v-model="itemNums"
-    animation="250"
-    :disabled="!drag"
-    @start="dragging = true"
-    @end="dragging = false"
+draggable.grid(
+  tag="transition-group"
+  :componentData="componentData"
+  :style="gridStyle"
+  :class="{ disableShadows: disableShadows }"
+  v-model="itemNums"
+  animation="250"
+  :disabled="!drag"
+  @start="dragging = true"
+  @end="dragging = false"
+)
+  BaseCell(
+    v-for="i in itemNums"
+    v-if="shouldShow(items[i])"
+    :key="game + items[i]"
+    :client="clientId"
+    :file="items[i]"
+    @remove="remove(i)"
   )
-    BaseCell(
-      v-for="i in itemNums"
-      v-if="shouldShow(items[i])"
-      :key="game + items[i]"
-      :client="clientId"
-      :file="items[i]"
-      @remove="remove(i)"
-    )
 </template>
 
 <script lang="ts">
@@ -37,7 +37,7 @@ import { Game } from "@/store/settings";
 export default class BaseGrid extends Vue {
   @Prop({ type: String, required: false, default: "self" }) clientId!: string;
 
-  dragging: boolean = false;
+  dragging = false;
 
   get disableShadows(): boolean {
     return this.$store.state.settings.disableShadows;

@@ -1,52 +1,37 @@
 <template lang="pug">
-  div(
-    style="display: inline-flex; flex: 1; justify-content: center"
-    @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1: 1 })"
-   )
-    .item(
-      :class="cls"
-      :style="{ width: width }"
-     )
-      img.icon(
-        :src="`/img/${styledIcon(file)}.webp`"
-        :class="{ opaque: cell.opaque, disabled: cell.disabled }"
-      )
+div(
+  style="display: inline-flex; flex: 1; justify-content: center"
+  @click.right="secondary({ cell: file, offset: $event.ctrlKey ? -1 : 1 })"
+)
+  .item(:class="cls" :style="{ width: width }")
+    img.icon(
+      :src="`/img/${styledIcon(file)}.webp`"
+      :class="{ opaque: cell.opaque, disabled: cell.disabled }"
+    )
 
-      transition-group(
-        name="fade-up"
-        v-if="!cell.disabled"
-      )
-        slot
+    transition-group(name="fade-up" v-if="!cell.disabled")
+      slot
 
-        .secondary(
-          v-if="cell.secondaryLevel"
-          key="secondary"
-        )
-          img(:src="`/img/progression/${secondaryFile}.webp`")
-          transition(name="fade-up")
-            img.number(
-              v-if="secondaryNumber"
-              :src="`/img/progression/numbers/${secondaryNumber}.webp`"
-            )
-
-        .report(
-          v-if="hinted"
-          :class="{ dim: hinted < 0 }"
-          key="report"
-        )
-          img.icon(
-            :src="`/img/progression/other/secret_reports.webp`"
+      .secondary(v-if="cell.secondaryLevel" key="secondary")
+        img(:src="`/img/progression/${secondaryFile}.webp`")
+        transition(name="fade-up")
+          img.number(
+            v-if="secondaryNumber"
+            :src="`/img/progression/numbers/${secondaryNumber}.webp`"
           )
-          transition(name="fade-up")
-            img.number(
-              v-if="Math.abs(hinted) > 1"
-              :src="`/img/progression/numbers/${Math.abs(hinted)}.webp`"
-            )
 
-      transition(name="fade-cross")
-        img.cross(v-if="cell.disabled", src="/img/minimal/other/cross.webp")
+      .report(v-if="hinted" :class="{ dim: hinted < 0 }" key="report")
+        img.icon(:src="`/img/progression/other/secret_reports.webp`")
+        transition(name="fade-up")
+          img.number(
+            v-if="Math.abs(hinted) > 1"
+            :src="`/img/progression/numbers/${Math.abs(hinted)}.webp`"
+          )
 
-      slot(name="after")
+    transition(name="fade-cross")
+      img.cross(v-if="cell.disabled" src="/img/minimal/other/cross.webp")
+
+    slot(name="after")
 </template>
 
 <script lang="ts">
@@ -63,9 +48,7 @@ export default class ImportantCell extends Vue {
   @Prop(Number) hinted!: number;
   @Prop(String) width!: string;
 
-  @tracker.Action primary!: Function;
-  @tracker.Action secondary!: Function;
-  @tracker.Action disable!: Function;
+  @tracker.Action secondary!: (cell: string, offset: number) => void;
 
   cls: string = this.cell.cls ?? "";
 

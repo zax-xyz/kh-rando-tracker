@@ -1,6 +1,5 @@
 import { ActionTree, MutationTree } from "vuex";
 import { RootState } from "../types";
-import { Game } from "../settings";
 
 let socket: WebSocket;
 
@@ -11,7 +10,7 @@ const state = {
   single: false,
 };
 
-type State = typeof state;
+export type State = typeof state;
 
 const mutations: MutationTree<State> = {
   setRoom(state: State, room: string) {
@@ -54,7 +53,7 @@ const actions: ActionTree<State, RootState> = {
     });
   },
 
-  sendClick({}, payload) {
+  sendClick(_, payload) {
     if (!socket || payload.client !== "self") return;
 
     socket.send(JSON.stringify(payload));
@@ -90,11 +89,11 @@ const actions: ActionTree<State, RootState> = {
         break;
 
       case "user_joined":
-        dispatch(`tracker/addClient`, msg.id, { root: true });
+        dispatch("tracker/addClient", msg.id, { root: true });
         break;
 
       case "user_left":
-        commit(`tracker/removeClient`, { client: msg.id }, { root: true });
+        commit("tracker/removeClient", { client: msg.id }, { root: true });
         break;
 
       case "error":
@@ -103,7 +102,7 @@ const actions: ActionTree<State, RootState> = {
 
       case "user_primary":
         dispatch(
-          `tracker/primary`,
+          "tracker/primary",
           {
             client,
             cell: msg.item,
@@ -117,7 +116,7 @@ const actions: ActionTree<State, RootState> = {
 
       case "user_secondary":
         dispatch(
-          `tracker/secondary`,
+          "tracker/secondary",
           {
             client,
             cell: msg.item,
@@ -129,7 +128,7 @@ const actions: ActionTree<State, RootState> = {
         break;
 
       case "user_disable":
-        dispatch(`tracker/disable`, { client, cell: msg.item, remote: true }, { root: true });
+        dispatch("tracker/disable", { client, cell: msg.item, remote: true }, { root: true });
         break;
 
       case "user_corresponding":

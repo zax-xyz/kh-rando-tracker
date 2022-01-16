@@ -1,10 +1,10 @@
 <template lang="pug">
-  div
-    NavBar(:links="links")
+div
+  NavBar(:links="links")
 
-    router-view.content
-    .row
-      p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions
+  router-view.content
+  .row
+    p.footnote Note: In some browsers, using the tracker as a local file may not allow settings to persist across sessions
 </template>
 
 <script lang="ts">

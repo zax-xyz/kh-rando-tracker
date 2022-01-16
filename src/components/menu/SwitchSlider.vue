@@ -1,11 +1,7 @@
 <template lang="pug">
-  label.switch
-    input(
-      type="checkbox"
-      :checked="value"
-      @change="$emit('input', $event.target.checked)"
-    )
-    span.slider
+label.switch
+  input(type="checkbox" :checked="value" @change="$emit('input', $event.target.checked)")
+  span.slider
 </template>
 
 <script lang="ts">

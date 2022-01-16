@@ -1,4 +1,7 @@
-import type { IconStyle } from "./settings";
+import type { State as coOpState } from "./co_op";
+import type { IconStyle, State as settingsState } from "./settings";
+import type { State as trackerState } from "./tracker";
+import type { State as trackerImportantState } from "./tracker_important";
 
 export type Item = {
   total: number;
@@ -41,4 +44,9 @@ export interface RootState {
   edit: boolean;
   version: string;
   currVersion: string;
+  footer: boolean;
+  co_op?: coOpState;
+  settings?: settingsState;
+  tracker?: trackerState;
+  tracker_important?: trackerImportantState;
 }

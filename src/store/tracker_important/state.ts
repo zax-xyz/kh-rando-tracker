@@ -14,7 +14,7 @@ const item = (options: Partial<Item>): Item => ({
   total: 1,
   showFirst: false,
   level: 0,
-  opaque: options.level ? true : false,
+  opaque: !!options.level,
   secondaryTotal: options.secondary ? 1 : 0,
   secondaryMax: false,
   secondaryLevel: 0,
@@ -200,8 +200,7 @@ const mapChecks = (keys: Array<string | [string, Partial<Check>]>, defaults: Che
     keys.map(k =>
       // each element is either a string to be used as a key and given the defaults, or an array of
       // the key and options to add to the defaults, e.g. ["final", { category: "Final Form" }]
-      !Array.isArray(k) ? [k, { ...defaults }] : [k[0], { ...defaults, ...k[1] }],
-    ),
+      (!Array.isArray(k) ? [k, { ...defaults }] : [k[0], { ...defaults, ...k[1] }])),
   );
 
 const checks = (): Array<{ [key: string]: Check }> => [
@@ -335,8 +334,9 @@ const hintSettings = (): { [key: string]: HintSetting } => ({
 
 const mapItems = (key: "locations" | "checks"): { [key: string]: string[] } =>
   Object.fromEntries(
-    items()
-      [key].flat()
+    // prettier-ignore
+    items()[key]
+      .flat()
       .map(i => [i, []]),
   );
 

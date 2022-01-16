@@ -1,7 +1,7 @@
 <template lang="pug">
-  .note
-    p
-      slot
+.note
+  p
+    slot
 </template>
 
 <style lang="stylus" scoped>

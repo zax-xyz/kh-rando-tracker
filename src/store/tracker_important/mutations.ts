@@ -31,12 +31,14 @@ export const mutations: MutationTree<State> = {
 
   setHintSettings(state, settings: { [key: string]: boolean }) {
     for (const key in state.hintSettings) {
-      state.hintSettings[key].enabled = settings[key] ?? false;
+      if (Object.prototype.hasOwnProperty.call(state.hintSettings, key)) {
+        state.hintSettings[key].enabled = settings[key] ?? false;
 
-      if (!settings[key] && state.hintSettings[key].disable) {
-        state.hintSettings[key].items.forEach(i => {
-          state.items.all[i].disabled = true;
-        });
+        if (!settings[key] && state.hintSettings[key].disable) {
+          state.hintSettings[key].items.forEach(i => {
+            state.items.all[i].disabled = true;
+          });
+        }
       }
     }
   },
@@ -59,7 +61,7 @@ export const mutations: MutationTree<State> = {
     locationState.checks += offset;
   },
 
-  incrementChecks(state, offset: number = 1): void {
+  incrementChecks(state, offset = 1): void {
     state.checks += offset;
   },
 

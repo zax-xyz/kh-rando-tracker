@@ -34,8 +34,6 @@ export const kh1Settings = {
   correspondingMagic: true,
 };
 
-export type State = typeof state;
-
 export const state = {
   bgColor: "",
   bgImg: "",
@@ -171,7 +169,7 @@ export const state = {
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
-  } as { [key: string]: { title: string; options: IconStyle[]; value: IconStyle } },
+  } as { [key: string]: { title: string; games?: Game[]; options: IconStyle[]; value: IconStyle } },
 
   // normal mode. kept outside in the root to remain backwards-compatible with old user settings
   scroll: false,
@@ -197,3 +195,5 @@ export const state = {
 
   [Game.KH1]: kh1Settings,
 };
+
+export type State = typeof state;

@@ -45,8 +45,8 @@ import SwitchSlider from "@/components/menu/SwitchSlider.vue";
   },
 })
 export default class Settings extends Vue {
-  joinRoomId: string = "";
-  createRoomId: string = "";
+  joinRoomId = "";
+  createRoomId = "";
   roomSize: number | null = null;
   singleMode: boolean = this.$store.state.co_op.single;
 
@@ -61,11 +61,14 @@ export default class Settings extends Vue {
 
   get link(): string | undefined {
     if (this.$store.state.co_op.joined && this.$store.state.co_op.single) {
+      // eslint-disable-next-line no-undef
       const base = process.env.VUE_APP_DOMAIN;
       const game = this.$store.state.settings.game;
       const room = this.$store.state.co_op.room;
       return `${base}/remote/${game}/${room}`;
     }
+
+    return undefined;
   }
 
   join(_event: Event): void {

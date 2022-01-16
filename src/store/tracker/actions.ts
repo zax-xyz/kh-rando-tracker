@@ -10,7 +10,7 @@ const actions: ActionTree<State, RootState> = {
     { commit, dispatch, state, rootState },
     { client, cell, offset = 1, shift = false, remote = false },
   ) {
-    const game: Game = (rootState as any).settings.game;
+    const game: Game = rootState.settings!.game;
     const items = state[client][game];
     const item = items[cell];
     if (item.disabled) return;
@@ -23,7 +23,7 @@ const actions: ActionTree<State, RootState> = {
       );
     }
 
-    var level = item.level;
+    let level = item.level;
     const total = item.total + (typeof item.data === "string" ? 1 : item.data?.length ?? 0);
     const end = total + 1;
 
@@ -64,9 +64,9 @@ const actions: ActionTree<State, RootState> = {
       commit("setLevel", { client, game, cell: gItem, level });
 
       if (
-        (offset > 0 && item.secondaryAuto?.includes(level)) ||
-        (offset < 0 && item.secondaryAuto?.includes(level - offset)) ||
-        (offset < 0 && level === total && item.secondaryAuto?.includes(level))
+        (offset > 0 && item.secondaryAuto?.includes(level))
+        || (offset < 0 && item.secondaryAuto?.includes(level - offset))
+        || (offset < 0 && level === total && item.secondaryAuto?.includes(level))
       ) {
         let newSecLevel = (items[gItem].secondaryLevel + offset) % items[gItem].secondaryTotal;
         if (newSecLevel < 0) {
@@ -90,10 +90,10 @@ const actions: ActionTree<State, RootState> = {
     }
 
     if (
-      !remote &&
-      client === "self" &&
-      (rootState as any).settings.kh1.correspondingMagic &&
-      item.popupTitle !== undefined
+      !remote
+      && client === "self"
+      && rootState.settings!.kh1.correspondingMagic
+      && item.popupTitle !== undefined
     ) {
       if (level === 1 && offset > 0) {
         router.push(`item_popup/${cell}`);
@@ -104,7 +104,7 @@ const actions: ActionTree<State, RootState> = {
   },
 
   secondary({ commit, dispatch, state, rootState }, { client, cell, offset = 1, remote = false }) {
-    const game: Game = (rootState as any).settings.game;
+    const game: Game = rootState.settings!.game;
     const items = state[client][game];
     const item = items[cell];
     if (item.disabled) return;
@@ -134,7 +134,7 @@ const actions: ActionTree<State, RootState> = {
     if (!remote)
       dispatch("co_op/sendClick", { type: "user_disable", client, item: cell }, { root: true });
 
-    const game: Game = (rootState as any).settings.game;
+    const game = rootState.settings!.game;
 
     commit("disable", { client, game, cell });
   },
@@ -147,13 +147,13 @@ const actions: ActionTree<State, RootState> = {
         { root: true },
       );
 
-    const game: Game = (rootState as any).settings.game;
+    const game = rootState.settings!.game;
 
     commit("setCorrespondingItem", { client, game, cell, other });
   },
 
   async addClient({ commit, rootState, state }, client: string) {
-    const game: Game = (rootState as any).settings.game;
+    const game = rootState.settings!.game;
     const { items } = await import(`./items/${game}`);
 
     if (state[client] === undefined) {
@@ -164,10 +164,12 @@ const actions: ActionTree<State, RootState> = {
   },
 
   async resetState({ commit, rootState, state }) {
-    const game: Game = (rootState as any).settings.game;
+    const game = rootState.settings!.game;
     const { items } = await import(`./items/${game}`);
     for (const client in state) {
-      commit("addGame", { client, game, items });
+      if (Object.prototype.hasOwnProperty.call(state, client)) {
+        commit("addGame", { client, game, items });
+      }
     }
   },
 };

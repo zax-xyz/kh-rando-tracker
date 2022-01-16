@@ -1,15 +1,10 @@
 <template lang="pug">
-  .collapse(
-    :class="{ active: show }"
-  )
-    .title(
-      :class="{ active: show }"
-      @click="toggle"
-    )
-      span {{ name }}
-    .expand(v-if="show")
-      .content
-        slot
+.collapse(:class="{ active: show }")
+  .title(:class="{ active: show }" @click="toggle")
+    span {{ name }}
+  .expand(v-if="show")
+    .content
+      slot
 </template>
 
 <script lang="ts">
@@ -29,8 +24,7 @@ export default class Collapse extends Vue {
   }
 
   mounted() {
-    // @ts-ignore
-    this.$smoothReflow({
+    this.$smoothReflow?.({
       transition: "height .25s",
     });
   }

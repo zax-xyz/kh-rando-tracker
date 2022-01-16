@@ -1,12 +1,8 @@
 <template lang="pug">
-  div
-    h2 {{ title }}
-    .grid
-      img(
-        v-for="item in items"
-        :src="`/img/${styledIcon(item)}.webp`"
-        @click="select(item)"
-      )
+div
+  h2 {{ title }}
+  .grid
+    img(v-for="item in items" :src="`/img/${styledIcon(item)}.webp`" @click="select(item)")
 </template>
 
 <script lang="ts">
@@ -16,7 +12,6 @@ import { namespace } from "vuex-class";
 import { Game } from "@/store/settings";
 import { Item } from "@/store/tracker/state";
 
-const tracker = namespace("tracker");
 const settings = namespace("settings");
 
 @Component

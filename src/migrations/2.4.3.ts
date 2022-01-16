@@ -1,16 +1,17 @@
 import semver from "semver";
 
 import { Game } from "@/store/settings";
-import { Store } from "vuex";
+import type { Store } from "@/store";
 
-export const migrate = async (store: Store<any>) => {
+export const migrate = async (store: Store) => {
   if (semver.lt(store.state.version, "2.4.2")) {
     const { migrate } = await import("./2.4.2");
-    await migrate(store);
+    migrate(store);
   }
 
   let oldState;
 
+  // @ts-ignore: this is based on a previous version of the store
   if (undefined !== (oldState = store.state.tracker?.clients?.self)) {
     store.commit("tracker/addClient", { client: "self" });
     store.commit("tracker/addGame", {
@@ -21,6 +22,7 @@ export const migrate = async (store: Store<any>) => {
     store.commit("tracker/removeClient", { client: "clients" });
   }
 
+  // @ts-ignore: this is based on a previous version of the store
   if (undefined !== (oldState = store.state.tracker_1fm?.clients?.self)) {
     store.commit("tracker/addGame", {
       client: "self",
@@ -30,20 +32,23 @@ export const migrate = async (store: Store<any>) => {
     store.commit("deleteProperty", "tracker_1fm");
   }
 
+  // @ts-ignore: this is based on a previous version of the store
   if (undefined !== (oldState = store.state.tracker_other?.clients?.self)) {
     for (const game in oldState) {
-      store.commit("tracker/addGame", {
-        client: "self",
-        game,
-        items: oldState[game],
-      });
+      if (Object.hasOwnProperty.call(oldState, game)) {
+        store.commit("tracker/addGame", {
+          client: "self",
+          game,
+          items: oldState[game],
+        });
+      }
     }
     store.commit("deleteProperty", "tracker_other");
   }
 
   if (
-    store.state.settings.game !== Game.KH2_IC &&
-    store.getters["tracker/items"]("self") === undefined
+    store.state.settings!.game !== Game.KH2_IC
+    && store.getters["tracker/items"]("self") === undefined
   ) {
     store.dispatch("tracker/addClient", "self");
   }

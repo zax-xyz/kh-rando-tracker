@@ -1,11 +1,8 @@
 <template lang="pug">
-  transition(name="fade-up")
-    .outer(
-      v-if="show"
-      @mousedown.self="gotoRoot"
-    )
-      .inner
-        router-view.modal-content
+transition(name="fade-up")
+  .outer(v-if="show" @mousedown.self="gotoRoot")
+    .inner
+      router-view.modal-content
 </template>
 
 <script lang="ts">
@@ -105,7 +102,7 @@ export default class ModalView extends Vue {
         width 100%
         text-align left
 
-      @media screen and (max-width: 480px)
+      @media screen and (max-width 480px)
         &
           grid-template-columns none
           grid-gap .5em

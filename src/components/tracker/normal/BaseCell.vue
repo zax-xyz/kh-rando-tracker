@@ -1,44 +1,41 @@
 <template lang="pug">
-  .item(
-    :class="cls"
-    :style="itemStyle"
-    @touchstart="handleTouchStart"
-    @touchend="handleTouchEnd"
-    @mousedown="handleMouseDown"
-    @wheel="handleWheel"
+.item(
+  :class="cls"
+  :style="itemStyle"
+  @touchstart="handleTouchStart"
+  @touchend="handleTouchEnd"
+  @mousedown="handleMouseDown"
+  @wheel="handleWheel"
+)
+  img.icon(
+    :src="`/img/${styledIcon(file)}.webp`"
+    :class="{ opaque: cell.opaque, disabled: cell.disabled }"
   )
-    img.icon(
-      :src="`/img/${styledIcon(file)}.webp`"
-      :class="{ opaque: cell.opaque, disabled: cell.disabled }"
-    )
 
-    template(v-if="!cell.disabled")
-      transition(name="fade-up")
-        img.number(
-          v-if="cell.total > 1 && cell.level > 1 || (cell.showFirst && cell.level)"
-          :src="`/img/progression/numbers/${number}.webp`"
-        )
-      transition(name="fade-up")
-        img.nobody(
-          v-if="cell.data && cell.level > cell.total"
-          :src="`/img/progression/${file.split('/').slice(-1)[0]}/${dataFile}.webp`"
-        )
-      transition(name="fade-up")
-        .secondary(v-if="cell.secondaryLevel")
-          img(:src="`/img/progression/${secondaryFile}.webp`")
-          transition(name="fade-up")
-            img.number(
-              v-if="secondaryNumber"
-              :src="`/img/progression/numbers/${secondaryNumber}.webp`"
-            )
-      transition(name="fade-up")
-        img.corresponding(
-          v-if="corresponding"
-          :src="`/img/progression/${corresponding}.webp`"
-        )
+  template(v-if="!cell.disabled")
+    transition(name="fade-up")
+      img.number(
+        v-if="(cell.total > 1 && cell.level > 1) || (cell.showFirst && cell.level)"
+        :src="`/img/progression/numbers/${number}.webp`"
+      )
+    transition(name="fade-up")
+      img.nobody(
+        v-if="cell.data && cell.level > cell.total"
+        :src="`/img/progression/${file.split('/').slice(-1)[0]}/${dataFile}.webp`"
+      )
+    transition(name="fade-up")
+      .secondary(v-if="cell.secondaryLevel")
+        img(:src="`/img/progression/${secondaryFile}.webp`")
+        transition(name="fade-up")
+          img.number(
+            v-if="secondaryNumber"
+            :src="`/img/progression/numbers/${secondaryNumber}.webp`"
+          )
+    transition(name="fade-up")
+      img.corresponding(v-if="corresponding" :src="`/img/progression/${corresponding}.webp`")
 
-    transition(name="fade-cross")
-      img.cross(v-if="cell.disabled", src="/img/minimal/other/cross.webp")
+  transition(name="fade-cross")
+    img.cross(v-if="cell.disabled" src="/img/minimal/other/cross.webp")
 </template>
 
 <script lang="ts">
@@ -126,7 +123,7 @@ export default class BaseCell extends Vue {
     };
   }
 
-  dispatch(mutation: string, offset: number = 1, shift: boolean = false): void {
+  dispatch(mutation: string, offset = 1, shift = false): void {
     this.$store.dispatch(`tracker/${mutation}`, {
       client: this.client,
       cell: this.file,

@@ -1,8 +1,8 @@
 <template lang="pug">
-  div
-    NavBar(:links="links")
+div
+  NavBar(:links="links")
 
-    router-view.content
+  router-view.content
 </template>
 
 <script lang="ts">

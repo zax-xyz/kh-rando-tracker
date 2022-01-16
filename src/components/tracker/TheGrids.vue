@@ -1,7 +1,7 @@
 <template lang="pug">
-  div
-    .grid
-      .item(v-for="item in items")
+div
+  .grid
+    .item(v-for="item in items")
 </template>
 
 <script lang="ts">

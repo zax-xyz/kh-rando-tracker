@@ -1,37 +1,27 @@
 <template lang="pug">
-  div
-    h2 Edit Item
-    h4 File: {{ file }}
+div
+  h2 Edit Item
+  h4 File: {{ file }}
 
-    .row.grid
-      p Image
-      input.long(
-        :placeholder="file"
-      )
+  .row.grid
+    p Image
+    input.long(:placeholder="file")
 
-    .row.grid
-      p Total
-      input(
-        :placeholder="settings.total"
-      )
+  .row.grid
+    p Total
+    input(:placeholder="settings.total")
 
-    .row.grid
-      p Default Level
-      input(
-        :placeholder="settings.level"
-      )
+  .row.grid
+    p Default Level
+    input(:placeholder="settings.level")
 
-    .row.grid
-      p Group
-      input.long(
-        :placeholder="settings.group"
-      )
+  .row.grid
+    p Group
+    input.long(:placeholder="settings.group")
 
-    .row.grid
-      p Secondary (right click)
-      input.long(
-        :placeholder="JSON.stringify(settings.secondary)"
-      )
+  .row.grid
+    p Secondary (right click)
+    input.long(:placeholder="JSON.stringify(settings.secondary)")
 </template>
 
 <script lang="ts">

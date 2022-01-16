@@ -5,6 +5,14 @@ import { defaultLocations, locations } from "./codes";
 import { formatItem } from "@/util";
 import type { Item, RootState } from "../types";
 
+const getWorldByAddress = (address: string): string => {
+  const location = Object.entries(locations).find(([_, addresses]) => addresses.includes(address));
+
+  if (typeof location === "undefined") return "";
+
+  return location[0];
+};
+
 export const actions: ActionTree<State, RootState> = {
   primary(
     { commit, dispatch, getters, state },
@@ -36,9 +44,9 @@ export const actions: ActionTree<State, RootState> = {
     }
 
     if (
-      !getters.isLocation(cell) &&
-      ((item as Check).levelsImportant ||
-        (!shift && ((offset === 1 && !item.opaque) || (offset < 0 && level === 0))))
+      !getters.isLocation(cell)
+      && ((item as Check).levelsImportant
+        || (!shift && ((offset === 1 && !item.opaque) || (offset < 0 && level === 0))))
     ) {
       // Don't increment check count if levels aren't important and we are levelling, but
       // increment if we are going down to 0
@@ -186,9 +194,8 @@ export const actions: ActionTree<State, RootState> = {
 
     const locationCell = getters.cell(location);
     if (
-      // @ts-ignore ts doesn't seem to be aware of store modules in rootState
-      rootState.settings.important.preselectWorld &&
-      locationCell.checks < locationCell.totalChecks
+      rootState.settings!.important.preselectWorld
+      && locationCell.checks < locationCell.totalChecks
     ) {
       commit("setOpaque", { item: locationCell, opaque: false });
     }
@@ -208,8 +215,7 @@ export const actions: ActionTree<State, RootState> = {
       const hints: Hints = [];
 
       const [reportValues, reportLocationAddresses] = [0, 1].map(i =>
-        lines[i].slice(0, -1).split("."),
-      );
+        lines[i].slice(0, -1).split("."));
 
       reportValues.forEach((value, index) => {
         const [location, checks] = value.split(",");
@@ -237,13 +243,3 @@ export const actions: ActionTree<State, RootState> = {
     commit("foundHint", index);
   },
 };
-
-function getWorldByAddress(address: string): string {
-  const location = Object.entries(locations).find(([_, addresses]) => {
-    return addresses.includes(address);
-  });
-
-  if (typeof location === "undefined") return "";
-
-  return location[0];
-}

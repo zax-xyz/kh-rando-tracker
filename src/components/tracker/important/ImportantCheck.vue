@@ -1,22 +1,19 @@
 <template lang="pug">
-  ImportantCell(
-    :width="settings.checkSize"
-    :file="file"
-    :hinted="hinted"
-    @click.left.native="handleClick"
-    @click.middle.native="disable({ cell: file })"
-   )
-    img.number(
-      v-if="cell.total > 1 && cell.level > 1"
-      :src="`/img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
-      key="number"
-    )
+ImportantCell(
+  :width="settings.checkSize"
+  :file="file"
+  :hinted="hinted"
+  @click.left.native="handleClick"
+  @click.middle.native="disable({ cell: file })"
+)
+  img.number(
+    v-if="cell.total > 1 && cell.level > 1"
+    :src="`/img/progression/numbers/${Math.min(cell.total, cell.level)}.webp`"
+    key="number"
+  )
 
-    .location(
-      v-if="showLocation"
-      key="location"
-    )
-      img(:src="`/img/progression/worlds/${location}.webp`")
+  .location(v-if="showLocation" key="location")
+    img(:src="`/img/progression/worlds/${location}.webp`")
 </template>
 
 <script lang="ts">
@@ -41,10 +38,20 @@ export default class ImportantCheck extends Vue {
   @tracker.State items!: Items;
   @tracker.State foundChecks!: { [key: string]: string[] };
   @tracker.State checkLocations!: { [key: string]: string[] };
-  @tracker.Getter hasProof!: Function;
-  @tracker.Action foundCheck!: Function;
-  @tracker.Action undoCheck!: Function;
-  @tracker.Action disable!: Function;
+  @tracker.Getter hasProof!: (item: string) => boolean;
+  @tracker.Action foundCheck!: (payload: {
+    check: string;
+    location: string;
+    shift: boolean;
+  }) => void;
+
+  @tracker.Action undoCheck!: (payload: {
+    check: string;
+    location: string;
+    shift: boolean;
+  }) => void;
+
+  @tracker.Action disable!: (payload: { cell: string }) => void;
 
   @settings.State("important") settings!: { [key: string]: any };
 
@@ -59,9 +66,9 @@ export default class ImportantCheck extends Vue {
     }
 
     if (
-      this.items.all[this.file].cls === "drive" &&
-      !this.checkLocations.length &&
-      this.hasProof("other/drive_form")
+      this.items.all[this.file].cls === "drive"
+      && !this.checkLocations.length
+      && this.hasProof("other/drive_form")
     ) {
       // if a proof is on a drive level then all forms must be hinted
       return -1;
@@ -89,8 +96,8 @@ export default class ImportantCheck extends Vue {
 
   get showLocation(): boolean {
     return (
-      (this.file.startsWith("other/proof_") || this.file === "other/promise_charm") &&
-      this.locations.length > 0
+      (this.file.startsWith("other/proof_") || this.file === "other/promise_charm")
+      && this.locations.length > 0
     );
   }
 

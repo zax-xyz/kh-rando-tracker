@@ -1,27 +1,17 @@
 <template lang="pug">
-  .slider(
-    tabindex="0"
-    ref="slider"
-    :style="{ width: width }"
-    @keydown="handleKey"
+.slider(tabindex="0" ref="slider" :style="{ width: width }" @keydown="handleKey")
+  .bar
+  .track(:style="{ width: posPercent(selected) }")
+  .tick(
+    v-for="(tick, index) in ticks"
+    :key="index"
+    :class="{ active: index <= selected }"
+    :style="{ left: posPercent(index) }"
+    @mousedown="setValue(index)"
+    @mouseover="handleMouseOver(index, $event)"
   )
-    .bar
-    .track(
-      :style="{ width: posPercent(selected) }"
-    )
-    .tick(
-      v-for="(tick, index) in ticks"
-      :key="index"
-      :class="{ active: index <= selected }"
-      :style="{ left: posPercent(index) }"
-      @mousedown="setValue(index)"
-      @mouseover="handleMouseOver(index, $event)"
-    )
-      span {{ tick }}
-    .handle(
-      :style="{ left: posPercent(selected) }"
-      ref="handle"
-    )
+    span {{ tick }}
+  .handle(:style="{ left: posPercent(selected) }" ref="handle")
 </template>
 
 <script lang="ts">

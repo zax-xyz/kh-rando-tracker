@@ -1,17 +1,14 @@
 <template lang="pug">
-  div
-    h2 Select a Report
-    .grid(v-if="!msg")
-      button(
-        :class="{ incorrect: incorrectReports.includes(i), found: hints[i - 1].found }"
-        v-for="i in 13"
-        @click="() => checkReport(i)"
-        :disabled="hints[i - 1].incorrectCounter === 3"
-      ) {{ i }}
-    p(
-      v-else
-      style="text-align: center; font-size: 1.1em"
-    ) {{ msg }}
+div
+  h2 Select a Report
+  .grid(v-if="!msg")
+    button(
+      :class="{ incorrect: incorrectReports.includes(i), found: hints[i - 1].found }"
+      v-for="i in 13"
+      @click="() => checkReport(i)"
+      :disabled="hints[i - 1].incorrectCounter === 3"
+    ) {{ i }}
+  p(v-else style="text-align: center; font-size: 1.1em") {{ msg }}
 </template>
 
 <script lang="ts">
@@ -29,9 +26,9 @@ export default class Reports extends Vue {
   @tracker.State("currentLocation") location!: string;
 
   incorrectReports: number[] = [];
-  msg: string = "";
+  msg = "";
   hintsAtBottom: boolean = this.$store.state.settings.important.hintsAtBottom;
-  timer: number = -1;
+  timer = -1;
 
   checkReport(i: number): void {
     const hint = this.hints[i - 1];
@@ -41,9 +38,9 @@ export default class Reports extends Vue {
       return;
     }
 
-    const msg =
-      formatItem(hint.location) +
-      (hint.checks === 0
+    const msg
+      = formatItem(hint.location)
+      + (hint.checks === 0
         ? " is a heartless choice"
         : ` has ${hint.checks} important check${hint.checks !== 1 ? "s" : ""}`);
 

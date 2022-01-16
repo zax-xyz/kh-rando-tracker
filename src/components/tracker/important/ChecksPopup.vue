@@ -1,12 +1,6 @@
 <template lang="pug">
-  div(
-    @click.stop=""
-    @click.right.stop.prevent=""
-   )
-    img(
-      v-for="check in checks"
-      :src="`/img/${styledIcon(check)}.webp`"
-    )
+div(@click.stop @click.right.stop.prevent)
+  img(v-for="check in checks" :src="`/img/${styledIcon(check)}.webp`")
 </template>
 
 <script lang="ts">

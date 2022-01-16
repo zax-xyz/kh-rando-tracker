@@ -35,13 +35,13 @@ const SimulatedTwilightTown = [
   "21D11278",
   "11CE0636",
   "11CE0606",
-  "11CE0612", //champion belt
-  "11CE061E", //medal
+  "11CE0612", // champion belt
+  "11CE061E", // medal
   "11CE062A",
   "11CE0642",
   "11CE064E",
 
-  "11CE0B0A", //data roxas
+  "11CE0B0A", // data roxas
 ];
 
 const TwilightTown = [
@@ -96,7 +96,7 @@ const TwilightTown = [
   "11CE09AE",
   "11CE0A0E",
 
-  "11CE0ACE", //data axel
+  "11CE0ACE", // data axel
 ];
 
 const HollowBastion = [
@@ -137,10 +137,10 @@ const HollowBastion = [
   "11CE0942",
   "11CE09A2",
   "11CE09EA",
-  "11CE0B3A", //shroom
-  "11CE0B2E", //shroom
+  "11CE0B3A", // shroom
+  "11CE0B2E", // shroom
 
-  "11CE04E6", //cor
+  "11CE04E6", // cor
   "11CE04F2",
   "11CE04FE",
   "11CE050A",
@@ -162,7 +162,7 @@ const HollowBastion = [
   "11CE05CA",
   "11CE05D6",
 
-  "11CE0AB6", //data demyx
+  "11CE0AB6", // data demyx
 ];
 
 const LandOfDragons = [
@@ -195,7 +195,7 @@ const LandOfDragons = [
   "11CE06DE",
   "11CE06EA",
 
-  "11CE0AE6", //data xigbar
+  "11CE0AE6", // data xigbar
 ];
 
 const BeastsCastle = [
@@ -228,7 +228,7 @@ const BeastsCastle = [
   "11CE085E",
   "11CE09C6",
 
-  "11CE0AC2", //data xaldin
+  "11CE0AC2", // data xaldin
 ];
 
 const OlympusColiseum = [
@@ -264,7 +264,7 @@ const OlympusColiseum = [
   "11CE0882",
   "11CE088E",
 
-  "11CE073E", //cups
+  "11CE073E", // cups
   "11CE074A",
   "11CE07CE",
   "11CE07DA",
@@ -272,10 +272,10 @@ const OlympusColiseum = [
   "11CE08A6",
   "11CE094E",
   "11CE095A",
-  "11CE0996", //hades cup
+  "11CE0996", // hades cup
 
-  "11CE0A56", //AS zexion
-  "11CE0A92", //data zexion
+  "11CE0A56", // AS zexion
+  "11CE0A92", // data zexion
 ];
 
 const DisneyCastle = [
@@ -289,10 +289,10 @@ const DisneyCastle = [
   "11CDFA06",
   "21D10D28",
   "11CE0756",
-  "11CE0B16", //terra
-  "11CE0B22", //terra
+  "11CE0B16", // terra
+  "11CE0B22", // terra
 
-  "11CDF95E", //timeless river
+  "11CDF95E", // timeless river
   "11CDF96A",
   "11CDF976",
   "11CDF982",
@@ -305,8 +305,8 @@ const DisneyCastle = [
   "11CE0732",
   "11CE0762",
 
-  "11CE0A6E", //AS marluxia
-  "11CE0AAA", //data marluxia
+  "11CE0A6E", // AS marluxia
+  "11CE0AAA", // data marluxia
 ];
 
 const PortRoyal = [
@@ -341,7 +341,7 @@ const PortRoyal = [
   "11CE0876",
   "11CE09DE",
 
-  "11CE0AFE", //data luxord
+  "11CE0AFE", // data luxord
 ];
 
 const Agrabah = [
@@ -378,8 +378,8 @@ const Agrabah = [
   "11CE079E",
   "11CE08B2",
 
-  "11CE0A4A", //AS lexaeus
-  "11CE0A86", //data lexaeus
+  "11CE0A4A", // AS lexaeus
+  "11CE0A86", // data lexaeus
 ];
 
 const HalloweenTown = [
@@ -403,8 +403,8 @@ const HalloweenTown = [
   "11CE08CA",
   "11CE08D6",
 
-  "11CE0A3E", //AS vexen
-  "11CE0A7A", //data vexen
+  "11CE0A3E", // AS vexen
+  "11CE0A7A", // data vexen
 ];
 
 const PrideLands = [
@@ -437,7 +437,7 @@ const PrideLands = [
   "11CE07B6",
   "11CE07C2",
 
-  "11CE0AF2", //data saix
+  "11CE0AF2", // data saix
 ];
 
 const Atlantica = ["11CE0846", "11CE08E2", "11CE08EE", "11CE08FA"];
@@ -488,8 +488,8 @@ const SpaceParanoids = [
   "21D11078",
   "21D10C78",
   "11CE0816",
-  "11CE0A62", //AS larxene
-  "11CE0A9E", //data larxene
+  "11CE0A62", // AS larxene
+  "11CE0A9E", // data larxene
 ];
 
 const TheWorldThatNeverWas = [
@@ -524,35 +524,35 @@ const TheWorldThatNeverWas = [
   "11CE0A26",
   "11CE0A32",
 
-  "11CE0ADA", //data xemnas
+  "11CE0ADA", // data xemnas
 ];
 
 const Forms = [
-  "11D1A22E", //valor
+  "11D1A22E", // valor
   "11D1A236",
   "11D1A23E",
   "11D1A246",
   "11D1A24E",
   "11D1A256",
-  "11D1A266", //wisdom
+  "11D1A266", // wisdom
   "11D1A26E",
   "11D1A276",
   "11D1A27E",
   "11D1A286",
   "11D1A28E",
-  "11D1A29E", //limit
+  "11D1A29E", // limit
   "11D1A2A6",
   "11D1A2AE",
   "11D1A2B6",
   "11D1A2BE",
   "11D1A2C6",
-  "11D1A2D6", //master
+  "11D1A2D6", // master
   "11D1A2DE",
   "11D1A2E6",
   "11D1A2EE",
   "11D1A2F6",
   "11D1A2FE",
-  "11D1A30E", //Final
+  "11D1A30E", // Final
   "11D1A316",
   "11D1A31E",
   "11D1A326",
@@ -561,57 +561,57 @@ const Forms = [
 ];
 
 const Levels = [
-  "11D0B6C0", //Lvl 2
-  "11D0B6E0", //Lvl 4
-  "11D0B710", //Lvl 7
-  "11D0B730", //Lvl 9
-  "11D0B740", //Lvl 10
-  "11D0B760", //Lvl 12
-  "11D0B780", //Lvl 14
-  "11D0B790", //Lvl 15
-  "11D0B7B0", //Lvl 17
-  "11D0B7E0", //Lvl 20
-  "11D0B810", //Lvl 23
-  "11D0B830", //Lvl 25
-  "11D0B860", //Lvl 28
-  "11D0B880", //Lvl 30
-  "11D0B8A0", //Lvl 32
-  "11D0B8C0", //Lvl 34
-  "11D0B8E0", //Lvl 36
-  "11D0B910", //Lvl 39
-  "11D0B930", //Lvl 41
-  "11D0B960", //Lvl 44
-  "11D0B980", //Lvl 46
-  "11D0B9A0", //Lvl 48
-  "11D0B9C0", //Lvl 50
+  "11D0B6C0", // Lvl 2
+  "11D0B6E0", // Lvl 4
+  "11D0B710", // Lvl 7
+  "11D0B730", // Lvl 9
+  "11D0B740", // Lvl 10
+  "11D0B760", // Lvl 12
+  "11D0B780", // Lvl 14
+  "11D0B790", // Lvl 15
+  "11D0B7B0", // Lvl 17
+  "11D0B7E0", // Lvl 20
+  "11D0B810", // Lvl 23
+  "11D0B830", // Lvl 25
+  "11D0B860", // Lvl 28
+  "11D0B880", // Lvl 30
+  "11D0B8A0", // Lvl 32
+  "11D0B8C0", // Lvl 34
+  "11D0B8E0", // Lvl 36
+  "11D0B910", // Lvl 39
+  "11D0B930", // Lvl 41
+  "11D0B960", // Lvl 44
+  "11D0B980", // Lvl 46
+  "11D0B9A0", // Lvl 48
+  "11D0B9C0", // Lvl 50
 
-  "11D0B6D0", //Lvl 3
-  "11D0B6F0", //Lvl 5
-  "11D0B700", //Lvl 6
-  "11D0B720", //Lvl 8
-  "11D0B750", //Lvl 11
-  "11D0B770", //Lvl 13
-  "11D0B7A0", //Lvl 16
-  "11D0B7C0", //Lvl 18
-  "11D0B7D0", //Lvl 19
-  "11D0B7F0", //Lvl 21
-  "11D0B800", //Lvl 22
-  "11D0B820", //Lvl 24
-  "11D0B840", //Lvl 26
-  "11D0B850", //Lvl 27
-  "11D0B870", //Lvl 29
-  "11D0B890", //Lvl 31
-  "11D0B8B0", //Lvl 33
-  "11D0B8D0", //Lvl 35
-  "11D0B8F0", //Lvl 37
-  "11D0B920", //Lvl 40
-  "11D0B940", //Lvl 42
-  "11D0B950", //Lvl 43
-  "11D0B970", //Lvl 45
-  "11D0B990", //Lvl 47
-  "11D0B9B0", //Lvl 49
+  "11D0B6D0", // Lvl 3
+  "11D0B6F0", // Lvl 5
+  "11D0B700", // Lvl 6
+  "11D0B720", // Lvl 8
+  "11D0B750", // Lvl 11
+  "11D0B770", // Lvl 13
+  "11D0B7A0", // Lvl 16
+  "11D0B7C0", // Lvl 18
+  "11D0B7D0", // Lvl 19
+  "11D0B7F0", // Lvl 21
+  "11D0B800", // Lvl 22
+  "11D0B820", // Lvl 24
+  "11D0B840", // Lvl 26
+  "11D0B850", // Lvl 27
+  "11D0B870", // Lvl 29
+  "11D0B890", // Lvl 31
+  "11D0B8B0", // Lvl 33
+  "11D0B8D0", // Lvl 35
+  "11D0B8F0", // Lvl 37
+  "11D0B920", // Lvl 40
+  "11D0B940", // Lvl 42
+  "11D0B950", // Lvl 43
+  "11D0B970", // Lvl 45
+  "11D0B990", // Lvl 47
+  "11D0B9B0", // Lvl 49
 
-  "11D0B9D0", //Lvl 51-99
+  "11D0B9D0", // Lvl 51-99
   "11D0B9E0",
   "11D0B9F0",
   "11D0BA00",

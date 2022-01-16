@@ -1,10 +1,10 @@
 <template lang="pug">
   div
     h1 Recent Update Changelog
-    
+
     section
       h2 Wednesday 22 December 2021
-      
+
       p Reset Tracker may be required for the KH3 changes to take effect.
       p Thanks to #[router-link(to="thanks#televo") Televo] for all the new icons!
 
@@ -15,19 +15,19 @@
           li #[.game KH3] Added #[strong progression icons] for worlds.
           li #[.game KH3] Added #[strong battlegates] and #[strong remind].
           li #[.game KH3] Added #[strong new minimal icons] for #[strong Lucky Emblems].
-          
+
       .changed
         h3 Changed
         ul
           li #[.game KH3] Final World has been merged with Keyblade Graveyard.
-          
+
       .fixed
         h3 Fixed
         ul
           li #[.game KH3] Added options to switch to the minimal styles for all of the icons.
-          
+
       p ... and some internal changes to clean up the code a bit
-    
+
     section
       h2 Thursday 12 August 2021
 
@@ -37,10 +37,10 @@
           li Fixed #[strong disabling autosave not working] outside of KH2 Important Checks Mode.
           li Fixed number image preloading (for real this time).
           li Navigating to an invalid route (e.g. #[code /next/]) now redirects you to #[code /] instead of showing a darkened screen as if displaying a popup.
-    
+
     section
       h2 Wednesday 11 August 2021
-      
+
       p Reset Tracker required for these changes if autosave is enabled.
 
       .added

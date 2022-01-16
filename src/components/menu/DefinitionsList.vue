@@ -1,8 +1,8 @@
 <template lang="pug">
-  ul.definitions
-    li(v-for="(definition, name) in definitions")
-      .name {{ name }}
-      .definition {{ definition }}
+ul.definitions
+  li(v-for="(definition, name) in definitions")
+    .name {{ name }}
+    .definition {{ definition }}
 </template>
 
 <script lang="ts">

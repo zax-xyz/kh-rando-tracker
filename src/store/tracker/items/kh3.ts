@@ -1,4 +1,3 @@
-import { IconStyle } from "../../settings";
 import { item, levels, magic, proof, world } from "../factories";
 import { Items, mapItems } from "../state";
 import { preloadNums } from "../util";

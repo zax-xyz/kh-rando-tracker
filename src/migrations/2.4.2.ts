@@ -1,8 +1,9 @@
 import { Game } from "@/store/settings";
-import { Store } from "vuex";
+import type { Store } from "@/store";
 
-export const migrate = (store: Store<any>) => {
-  const oldIconSettings = store.state.settings.iconStyle;
+export const migrate = (store: Store) => {
+  // @ts-ignore: this is based on a previous version of the store
+  const oldIconSettings = store.state.settings!.iconStyle;
   if (oldIconSettings) {
     Object.entries(oldIconSettings).forEach(([key, value]) => {
       store.commit("settings/setIconStyle", { name: key, value });
@@ -10,15 +11,15 @@ export const migrate = (store: Store<any>) => {
     store.commit("settings/wipeOldIconSettings");
   }
 
-  ["size", "padding"].forEach(s => {
-    const setting = store.state.settings[s];
+  (["size", "padding"] as ("size" | "padding")[]).forEach(s => {
+    const setting = store.state.settings![s];
     if (setting && !isNaN(Number(setting))) {
-      // @ts-ignore
       store.commit("settings/setSettings", { [s]: setting + "px" });
     }
   });
 
-  const oldItemNums = store.state.settings.itemNums;
+  // @ts-ignore: this is based on a previous version of the store
+  const oldItemNums = store.state.settings!.itemNums;
   if (oldItemNums) {
     store.commit("settings/setNums", { game: Game.KH2, nums: oldItemNums });
     store.commit("settings/wipeOldNums");

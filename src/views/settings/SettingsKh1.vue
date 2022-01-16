@@ -1,63 +1,64 @@
 <template lang="pug">
-  div
-    .row
-      p Note:
-        | 
-        span.footnote You can also use #[code Toggle Rearrange] under #[code Normal] settings and remove icons by right-clicking on them (or rearrange them by dragging).
+div
+  .row
+    p Note:
+      |
+      |
+      span.footnote You can also use #[code Toggle Rearrange] under #[code Normal] settings and remove icons by right-clicking on them (or rearrange them by dragging).
 
-    .row.grid
-      SwitchSlider(v-model="settings.expandRaftSupplies")
-      p.name Expand Raft Supplies
+  .row.grid
+    SwitchSlider(v-model="settings.expandRaftSupplies")
+    p.name Expand Raft Supplies
 
-    .row.grid
-      SwitchSlider(v-model="settings.correspondingMagic")
-      div
-        p.name Select corresponding replaced spells
-        BaseTooltip Every instance of a particular spell in KH1 rando will be replaced with the same spell. I.e., if Fire is replaced with Blizzard, every Fire check in the game will be Blizzard. These are unmoved from their original locations.
+  .row.grid
+    SwitchSlider(v-model="settings.correspondingMagic")
+    div
+      p.name Select corresponding replaced spells
+      BaseTooltip Every instance of a particular spell in KH1 rando will be replaced with the same spell. I.e., if Fire is replaced with Blizzard, every Fire check in the game will be Blizzard. These are unmoved from their original locations.
 
-    .row.grid
-      SwitchSlider(v-model="show.worlds")
-      p.name Show Worlds
+  .row.grid
+    SwitchSlider(v-model="show.worlds")
+    p.name Show Worlds
 
-    .row.grid
-      SwitchSlider(v-model="show.cups")
-      p.name Show Cups
+  .row.grid
+    SwitchSlider(v-model="show.cups")
+    p.name Show Cups
 
-    .row.grid
-      SwitchSlider(v-model="show.levels")
-      p.name Show Levels
+  .row.grid
+    SwitchSlider(v-model="show.levels")
+    p.name Show Levels
 
-    .row.grid
-      SwitchSlider(v-model="show.magic")
-      p.name Show Magic
+  .row.grid
+    SwitchSlider(v-model="show.magic")
+    p.name Show Magic
 
-    .row.grid
-      SwitchSlider(v-model="show.summons")
-      p.name Show Summons
+  .row.grid
+    SwitchSlider(v-model="show.summons")
+    p.name Show Summons
 
-    .row.grid
-      SwitchSlider(v-model="show.reports")
-      p.name Show Reports
+  .row.grid
+    SwitchSlider(v-model="show.reports")
+    p.name Show Reports
 
-    .row.grid
-      SwitchSlider(v-model="show.dalmations")
-      p.name Show Dalmations
+  .row.grid
+    SwitchSlider(v-model="show.dalmations")
+    p.name Show Dalmations
 
-    .row.grid
-      SwitchSlider(v-model="show.trinities")
-      p.name Show Trinities
+  .row.grid
+    SwitchSlider(v-model="show.trinities")
+    p.name Show Trinities
 
-    .row.grid
-      SwitchSlider(v-model="show.jackInTheBox")
-      p.name Show Jack-in-the-box
+  .row.grid
+    SwitchSlider(v-model="show.jackInTheBox")
+    p.name Show Jack-in-the-box
 
-    .row.grid
-      SwitchSlider(v-model="show.crystalTrident")
-      p.name Show Crystal Trident
+  .row.grid
+    SwitchSlider(v-model="show.crystalTrident")
+    p.name Show Crystal Trident
 
-    .row.grid
-      SwitchSlider(v-model="show.libraryBooks")
-      p.name Show Library Books
+  .row.grid
+    SwitchSlider(v-model="show.libraryBooks")
+    p.name Show Library Books
 </template>
 
 <script lang="ts">

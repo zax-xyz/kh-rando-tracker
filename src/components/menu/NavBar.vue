@@ -1,13 +1,13 @@
 <template lang="pug">
-  nav
-    .links(ref="links")
-      router-link(
-        v-for="(name, to, index) in links"
-        :to="to"
-        :style="{ minWidth: minWidth }"
-        :key="index"
-        @click.native="scroll(index)"
-      ) {{ name }}
+nav
+  .links(ref="links")
+    router-link(
+      v-for="(name, to, index) in links"
+      :to="to"
+      :style="{ minWidth: minWidth }"
+      :key="index"
+      @click.native="scroll(index)"
+    ) {{ name }}
 </template>
 
 <script lang="ts">

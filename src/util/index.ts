@@ -1,4 +1,4 @@
-export function formatItem(item: string): string {
+export const formatItem = (item: string): string => {
   if (item === "Free") {
     return "GoA/Critical Extra";
   }
@@ -8,4 +8,4 @@ export function formatItem(item: string): string {
     .split("_")
     .map(p => p[0].toUpperCase() + p.slice(1))
     .join(" ");
-}
+};
