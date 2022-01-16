@@ -1,0 +1,6 @@
+# vim:ft=yaml
+trailingComma: "all"
+printWidth: 100
+arrowParens: "avoid"
+pugAttributeSeparator: "none"
+pugEmptyAttributes: "none"
