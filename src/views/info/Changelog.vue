@@ -3,6 +3,17 @@
     h1 Recent Update Changelog
 
     section
+      h2 Wednesday 23 March 2022
+
+      p Reset Tracker may be required for changes to take effect.
+
+      .fixed
+        h3 Fixed
+        ul
+          li #[.game KH1] Fix minimal style for Genie not working
+          li #[.game KH1] Disable 'classic' icon style for summons (fallback to default)
+
+    section
       h2 Wednesday 22 December 2021
 
       p Reset Tracker may be required for the KH3 changes to take effect.
