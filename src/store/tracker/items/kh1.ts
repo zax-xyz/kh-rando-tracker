@@ -112,12 +112,24 @@ export const items: Items = {
   // Summons
   ...mapItems(
     [
-      ["summons/simba", { secondary: ["kh1/summons/earthshine"] }],
-      ["summons/genie_kh1", { minimal: "summons/genie" }],
-      ["summons/bambi", { secondary: ["kh1/summons/naturespark"] }],
-      ["summons/dumbo", { secondary: ["kh1/summons/watergleam"] }],
-      "summons/tinkerbell",
-      ["summons/mushu", { secondary: ["kh1/summons/fireglow"] }],
+      [
+        "summons/simba",
+        { secondary: ["kh1/summons/earthshine"], categoryExclude: IconStyle.CLASSIC },
+      ],
+      ["summons/genie_kh1", { minimal: "summons/genie", categoryExclude: IconStyle.CLASSIC }],
+      [
+        "summons/bambi",
+        { secondary: ["kh1/summons/naturespark"], categoryExclude: IconStyle.CLASSIC },
+      ],
+      [
+        "summons/dumbo",
+        { secondary: ["kh1/summons/watergleam"], categoryExclude: IconStyle.CLASSIC },
+      ],
+      ["summons/tinkerbell", { categoryExclude: IconStyle.CLASSIC }],
+      [
+        "summons/mushu",
+        { secondary: ["kh1/summons/fireglow"], categoryExclude: IconStyle.CLASSIC },
+      ],
     ],
     item({ category: "summons" }),
   ),
