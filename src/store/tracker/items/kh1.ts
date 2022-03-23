@@ -113,7 +113,7 @@ export const items: Items = {
   ...mapItems(
     [
       ["summons/simba", { secondary: ["kh1/summons/earthshine"] }],
-      ["summons/genie_kh1", { minimal: "kh1/summons/genie" }],
+      ["summons/genie_kh1", { minimal: "summons/genie" }],
       ["summons/bambi", { secondary: ["kh1/summons/naturespark"] }],
       ["summons/dumbo", { secondary: ["kh1/summons/watergleam"] }],
       "summons/tinkerbell",
