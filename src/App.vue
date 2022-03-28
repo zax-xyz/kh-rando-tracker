@@ -154,7 +154,7 @@ input
   line-height 1.6
   background #333 no-repeat fixed center / cover
   $over = rgba(0, 0, 0, .5)
-  background-image linear-gradient($over, $over), url('/img/bg.webp')
+  background-image linear-gradient($over, $over), url('/img/20th.webp')
 
   &.transparent
     background transparent
