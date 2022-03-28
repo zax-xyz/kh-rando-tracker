@@ -3,6 +3,16 @@
     h1 Recent Update Changelog
 
     section
+      h2 Monday 28 March 2022
+
+      p This is the 20th anniversary update! Happy Birthday to Kingdom Hearts!
+
+      .changed
+        h3 Changed
+        ul
+          li The background image has been changed to a 20th anniversary style background. Thanks to #[router-link(to="thanks#televo") Televo] for the design!
+
+    section
       h2 Wednesday 23 March 2022
 
       p Reset Tracker may be required for changes to take effect.
