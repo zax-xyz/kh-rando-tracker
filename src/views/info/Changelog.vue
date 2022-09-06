@@ -3,6 +3,17 @@
     h1 Recent Update Changelog
 
     section
+      h2 Tuesday 6 September 2022
+
+      p Reset Tracker is required for some changes to take effect.
+
+      .added
+        h3 Added
+        ul
+          li #[.game BBS] Added #[strong puzzle pieces], #[strong levels], #[strong reports], and #[strong wayfinders]
+          li #[.game KH3] Added #[strong Guardian Hearts]
+
+    section
       h2 Monday 28 March 2022
 
       p This is the 20th anniversary update! Happy Birthday to Kingdom Hearts!

@@ -69,7 +69,7 @@ export const state = {
     },
     levels: {
       title: "Levels",
-      games: [Game.KH1, Game.KH2, Game.KH2_IC, Game.KH3],
+      games: [Game.KH1, Game.KH2, Game.KH2_IC, Game.KH3, Game.BBS],
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
@@ -93,7 +93,7 @@ export const state = {
     },
     reports: {
       title: "Reports",
-      games: [Game.KH1, Game.KH2, Game.KH2_IC, Game.KH3],
+      games: [Game.KH1, Game.KH2, Game.KH2_IC, Game.KH3, Game.BBS],
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,
     },
@@ -165,6 +165,24 @@ export const state = {
     },
     luckyEmblems: {
       title: "Lucky Emblems",
+      games: [Game.KH3],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    puzzle: {
+      title: "Puzzle Pieces",
+      games: [Game.BBS],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    wayfinders: {
+      title: "Wayfinders",
+      games: [Game.BBS],
+      options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
+      value: IconStyle.DEFAULT,
+    },
+    guardianHearts: {
+      title: "Guardian Hearts",
       games: [Game.KH3],
       options: [IconStyle.DEFAULT, IconStyle.MINIMAL],
       value: IconStyle.DEFAULT,

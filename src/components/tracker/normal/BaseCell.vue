@@ -262,6 +262,7 @@ img
   /.levels &
   /.cups &
   /.dalmations &
+  /.lucky-emblems &
     left 0
     top 7.5%
     width 35%

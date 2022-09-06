@@ -1,4 +1,4 @@
-import { world } from "../factories";
+import { world, item, levels, wayfinder } from "../factories";
 import { Items } from "../state";
 
 export const items: Items = {
@@ -15,4 +15,10 @@ export const items: Items = {
   "worlds/bbs/keyblade_graveyard": world(),
   "worlds/bbs/mirage_arena": world(),
   "worlds/bbs/dark_world": world(),
+  "other/bbs/puzzle": item({ total: 20, category: "puzzle" }),
+  "other/sora's_level": levels(),
+  "other/secret_reports": item({ total: 13, category: "reports" }),
+  "other/bbs/terra's_wayfinder": wayfinder(),
+  "other/bbs/ventus's_wayfinder": wayfinder(),
+  "other/bbs/aqua's_wayfinder": wayfinder(),
 };

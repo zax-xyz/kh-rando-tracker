@@ -90,6 +90,13 @@ export const items: Items = {
       ...[...Array(5).keys()].map(i => 50 + i * 10),
     ],
     category: "luckyEmblems",
+    secondary: "other/photo_mission",
+    secondaryTotal: 20,
+    cls: "lucky-emblems",
+  }),
+  "other/kh3/guardian_hearts": item({
+    total: 7,
+    category: "guardianHearts",
   }),
   ...mapItems(
     ["promises", "times_past", "fantasy"].map(i => `other/proof_of_${i}`),
